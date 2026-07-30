@@ -1,0 +1,11 @@
+{
+  "src/main.tsx": {
+    "file": "assets/main-Nhed1id6.js",
+    "name": "main",
+    "src": "src/main.tsx",
+    "isEntry": true,
+    "css": [
+      "assets/main-Cbbb_sux.css"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+@font-face {
+    font-family: "pixels-icons";
+    src: url("../dist/pixels-icons.woff2?3fc3b3418836a9dac9bc91f3af9c4001") format("woff2"),
+url("../dist/pixels-icons.woff?3fc3b3418836a9dac9bc91f3af9c4001") format("woff");
+}
+
+.pixels-icon:before {
+    font-family: pixels-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.pixels-icon.pixels-icon-tabs:before {
+    content: "\f101";
+}
+.pixels-icon.pixels-icon-site-logo:before {
+    content: "\f102";
+}
+.pixels-icon.pixels-icon-rotator-text:before {
+    content: "\f103";
+}
+.pixels-icon.pixels-icon-progress-bar:before {
+    content: "\f104";
+}
+.pixels-icon.pixels-icon-orbit-circle:before {
+    content: "\f105";
+}
+.pixels-icon.pixels-icon-menu:before {
+    content: "\f106";
+}
+.pixels-icon.pixels-icon-live-copy-paste:before {
+    content: "\f107";
+}
+.pixels-icon.pixels-icon-heading:before {
+    content: "\f108";
+}
+.pixels-icon.pixels-icon-custom-js:before {
+    content: "\f109";
+}
+.pixels-icon.pixels-icon-custom-css:before {
+    content: "\f10a";
+}
+.pixels-icon.pixels-icon-counter:before {
+    content: "\f10b";
+}
+.pixels-icon.pixels-icon-countdown-timer:before {
+    content: "\f10c";
+}
+.pixels-icon.pixels-icon-carousel:before {
+    content: "\f10d";
+}
+.pixels-icon.pixels-icon-button:before {
+    content: "\f10e";
+}
+.pixels-icon.pixels-icon-accordion:before {
+    content: "\f10f";
+}

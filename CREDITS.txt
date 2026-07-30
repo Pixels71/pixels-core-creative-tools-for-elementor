@@ -1,0 +1,22 @@
+Credits and Third-Party Licenses
+================================
+
+This plugin is licensed under the GNU General Public License v2 or later.
+See LICENSE for the full license text.
+
+Bundled libraries
+-----------------
+
+* Select2 4.0.5
+  Location: assets/theme-builder/js/select2.js, assets/theme-builder/css/select2.css
+  License: MIT
+
+* Number Flow
+  Location: assets/js/vendor/number-flow.js (+ helpers)
+  License: MIT
+
+Trademark note
+--------------
+
+Elementor is a trademark of Elementor Ltd. This plugin is not affiliated with
+or endorsed by Elementor Ltd.

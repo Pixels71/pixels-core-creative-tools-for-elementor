@@ -1,0 +1,267 @@
+/* Pixels Addons for Elementor Admin Styles */
+
+/* General */
+.pixels-core-admin__intro {
+	max-width: 720px;
+	font-size: 14px;
+	color: #50575e;
+}
+
+.pixels-core-admin__stats {
+	margin: 16px 0;
+	padding: 10px 14px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	display: inline-block;
+	font-weight: 600;
+}
+
+.pixels-core-admin__section-title {
+	margin-top: 24px;
+	margin-bottom: 8px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.pixels-core-admin__section-desc {
+	max-width: 720px;
+	font-size: 14px;
+	color: #50575e;
+	margin-bottom: 16px;
+}
+
+/* Tables */
+.pixels-core-admin__table {
+	margin-top: 8px;
+	max-width: 960px;
+}
+
+.pixels-core-admin__col-status {
+	width: 90px;
+}
+
+.pixels-core-admin__widget-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.pixels-core-admin__widget-icon {
+	color: #2271b1;
+}
+
+.pixels-core-admin__widget-meta {
+	margin-top: 6px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.pixels-core-admin__widget-meta code {
+	font-size: 12px;
+	background: #f0f0f1;
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
+.pixels-core-admin__badge {
+	display: inline-block;
+	padding: 2px 8px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.6;
+	border-radius: 999px;
+	background: #e7f3ff;
+	color: #135e96;
+}
+
+.pixels-core-admin__badge--warning {
+	background: #fcf0f1;
+	color: #b32d2e;
+}
+
+/* Toggle Switch */
+.pixels-core-admin__toggle {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	width: 44px;
+	height: 24px;
+	cursor: pointer;
+}
+
+.pixels-core-admin__toggle input {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.pixels-core-admin__toggle-slider {
+	position: absolute;
+	inset: 0;
+	background: #c3c4c7;
+	border-radius: 999px;
+	transition: background-color 0.2s ease;
+}
+
+.pixels-core-admin__toggle-slider::before {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	border-radius: 50%;
+	transition: transform 0.2s ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.pixels-core-admin__toggle input:checked + .pixels-core-admin__toggle-slider {
+	background: #2271b1;
+}
+
+.pixels-core-admin__toggle input:checked + .pixels-core-admin__toggle-slider::before {
+	transform: translateX(20px);
+}
+
+.pixels-core-admin__toggle input:disabled + .pixels-core-admin__toggle-slider {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+/* Form Settings */
+.pixels-core-admin__form-settings {
+	max-width: 720px;
+}
+
+.pixels-core-admin__form-settings th {
+	width: 280px;
+	font-weight: 600;
+}
+
+/* Submissions */
+.pixels-core-submissions__table {
+	max-width: 100%;
+}
+
+.pixels-core-submissions__actions a {
+	text-decoration: none;
+}
+
+.pixels-core-submissions__delete {
+	color: #b32d2e;
+}
+
+.pixels-core-submissions__detail {
+	max-width: 960px;
+	margin-top: 12px;
+}
+
+.pixels-core-submissions__detail th {
+	width: 220px;
+	font-weight: 600;
+}
+
+/* License Tab Styles */
+.pixels-core-license {
+	max-width: 720px;
+}
+
+.pixels-core-admin__license-table {
+	max-width: 600px;
+}
+
+.pixels-core-admin__license-table th {
+	width: 180px;
+	font-weight: 600;
+}
+
+.pixels-core-license-key-input--locked {
+	background: #f6f7f7;
+	color: #646970;
+	letter-spacing: 0.08em;
+	cursor: not-allowed;
+}
+
+.pixels-core-license-change-notice {
+	margin: 0 0 16px;
+}
+
+.pixels-core-license-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.pixels-core-license-status .dashicons {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.pixels-core-license-status--valid {
+	background: #d1f5d6;
+	color: #1e7e34;
+}
+
+.pixels-core-license-status--expired {
+	background: #fff3cd;
+	color: #856404;
+}
+
+.pixels-core-license-status--invalid {
+	background: #f8d7da;
+	color: #721c24;
+}
+
+.pixels-core-license-status--update {
+	background: #e7f3ff;
+	color: #135e96;
+}
+
+.pixels-core-license-benefits {
+	margin: 16px 0;
+	padding: 16px 20px;
+	background: #f0f7ff;
+	border: 1px solid #c3d9f7;
+	border-radius: 4px;
+}
+
+.pixels-core-license-benefits li {
+	margin-bottom: 8px;
+	color: #1d3c6e;
+}
+
+.pixels-core-license-benefits li:last-child {
+	margin-bottom: 0;
+}
+
+.pixels-core-license-notice .notice-dismiss {
+	right: 16px;
+	top: 8px;
+}
+
+@media screen and (max-width: 782px) {
+	.pixels-core-admin__license-table th,
+	.pixels-core-admin__license-table td {
+		display: block;
+		width: 100%;
+	}
+
+	.pixels-core-admin__license-table th {
+		margin-bottom: 4px;
+		font-weight: 600;
+	}
+
+	.pixels-core-admin__license-table td {
+		margin-bottom: 16px;
+	}
+}

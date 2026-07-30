@@ -1,0 +1,322 @@
+<?php
+namespace PixelsElementorAddons\Widgets;
+
+use Elementor\Controls_Manager;
+use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Typography;
+use Elementor\Utils;
+use Elementor\Widget_Base;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class Heading_Widget extends Widget_Base {
+
+	use Widget_Assets_Trait;
+
+	public function get_name(): string {
+		return 'pixels-heading';
+	}
+
+	public function get_title(): string {
+		return esc_html__( 'Heading', 'pixels-elementor-addons' );
+	}
+
+	public function get_icon(): string {
+		return 'pixels-icon pixels-icon-heading';
+	}
+
+	public function get_categories(): array {
+		return [ 'pixels-core' ];
+	}
+
+	public function get_keywords(): array {
+		return [ 'heading', 'title', 'headline', 'pixels' ];
+	}
+
+	protected function get_assets_slug(): string {
+		return 'heading';
+	}
+
+	public function get_script_depends(): array {
+		return [];
+	}
+
+	protected function register_controls(): void {
+		$this->register_content_controls();
+		$this->register_style_controls();
+	}
+
+	private function register_content_controls(): void {
+		$this->start_controls_section(
+			'section_content',
+			[
+				'label' => esc_html__( 'Heading', 'pixels-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'title',
+			[
+				'label'       => esc_html__( 'Title', 'pixels-elementor-addons' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => esc_html__( 'Add Your Heading Text Here', 'pixels-elementor-addons' ),
+				'placeholder' => esc_html__( 'Enter your title', 'pixels-elementor-addons' ),
+				'dynamic'     => [
+					'active' => true,
+				],
+			]
+		);
+
+		$this->add_control(
+			'link',
+			[
+				'label'       => esc_html__( 'Link', 'pixels-elementor-addons' ),
+				'type'        => Controls_Manager::URL,
+				'placeholder' => esc_html__( 'https://your-link.com', 'pixels-elementor-addons' ),
+				'dynamic'     => [
+					'active' => true,
+				],
+			]
+		);
+
+		$this->add_control(
+			'show_subheading',
+			[
+				'label'        => esc_html__( 'Subheading', 'pixels-elementor-addons' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'pixels-elementor-addons' ),
+				'label_off'    => esc_html__( 'Hide', 'pixels-elementor-addons' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		$this->add_control(
+			'subheading',
+			[
+				'label'       => esc_html__( 'Subheading Text', 'pixels-elementor-addons' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'default'     => esc_html__( 'Optional subheading text goes here.', 'pixels-elementor-addons' ),
+				'placeholder' => esc_html__( 'Enter subheading', 'pixels-elementor-addons' ),
+				'dynamic'     => [
+					'active' => true,
+				],
+				'condition'   => [
+					'show_subheading' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_tag',
+			[
+				'label'   => esc_html__( 'HTML Tag', 'pixels-elementor-addons' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
+					'h1'   => 'H1',
+					'h2'   => 'H2',
+					'h3'   => 'H3',
+					'h4'   => 'H4',
+					'h5'   => 'H5',
+					'h6'   => 'H6',
+					'div'  => 'div',
+					'span' => 'span',
+					'p'    => 'p',
+				],
+				'default' => 'h2',
+			]
+		);
+
+		$this->add_responsive_control(
+			'align',
+			[
+				'label'     => esc_html__( 'Alignment', 'pixels-elementor-addons' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'left'    => [
+						'title' => esc_html__( 'Left', 'pixels-elementor-addons' ),
+						'icon'  => 'eicon-text-align-left',
+					],
+					'center'  => [
+						'title' => esc_html__( 'Center', 'pixels-elementor-addons' ),
+						'icon'  => 'eicon-text-align-center',
+					],
+					'right'   => [
+						'title' => esc_html__( 'Right', 'pixels-elementor-addons' ),
+						'icon'  => 'eicon-text-align-right',
+					],
+					'justify' => [
+						'title' => esc_html__( 'Justified', 'pixels-elementor-addons' ),
+						'icon'  => 'eicon-text-align-justify',
+					],
+				],
+				'default'   => 'left',
+				'selectors' => [
+					'{{WRAPPER}} .pixels-core-heading' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	private function register_style_controls(): void {
+		$this->start_controls_section(
+			'section_style_title',
+			[
+				'label' => esc_html__( 'Title', 'pixels-elementor-addons' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'title_color',
+			[
+				'label'     => esc_html__( 'Color', 'pixels-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .pixels-core-heading__title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'title_typography',
+				'selector' => '{{WRAPPER}} .pixels-core-heading__title',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[
+				'name'     => 'title_text_shadow',
+				'selector' => '{{WRAPPER}} .pixels-core-heading__title',
+			]
+		);
+
+		$this->add_responsive_control(
+			'title_spacing',
+			[
+				'label'      => esc_html__( 'Spacing', 'pixels-elementor-addons' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .pixels-core-heading__title' => 'margin: 0 0 {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_subheading',
+			[
+				'label'     => esc_html__( 'Subheading', 'pixels-elementor-addons' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'show_subheading' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'subheading_color',
+			[
+				'label'     => esc_html__( 'Color', 'pixels-elementor-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .pixels-core-heading__subheading' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'subheading_typography',
+				'selector' => '{{WRAPPER}} .pixels-core-heading__subheading',
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+	protected function render(): void {
+		$settings = $this->get_settings_for_display();
+
+		if ( empty( $settings['title'] ) && ( empty( $settings['show_subheading'] ) || empty( $settings['subheading'] ) ) ) {
+			return;
+		}
+
+		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-heading' );
+
+		$title_tag = Utils::validate_html_tag( $settings['title_tag'] );
+
+		$this->add_render_attribute( 'title', 'class', 'pixels-core-heading__title' );
+
+		if ( ! empty( $settings['link']['url'] ) ) {
+			$this->add_link_attributes( 'title', $settings['link'] );
+		}
+
+		?>
+		<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
+			<?php if ( ! empty( $settings['title'] ) ) : ?>
+				<?php if ( ! empty( $settings['link']['url'] ) ) : ?>
+					<a <?php $this->print_render_attribute_string( 'title' ); ?>>
+						<?php echo wp_kses_post( $settings['title'] ); ?>
+					</a>
+				<?php else : ?>
+					<?php
+					printf(
+						'<%1$s %2$s>%3$s</%1$s>',
+						$title_tag, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						$this->get_render_attribute_string( 'title' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						wp_kses_post( $settings['title'] )
+					);
+					?>
+				<?php endif; ?>
+			<?php endif; ?>
+
+			<?php if ( 'yes' === $settings['show_subheading'] && ! empty( $settings['subheading'] ) ) : ?>
+				<p class="pixels-core-heading__subheading"><?php echo wp_kses_post( $settings['subheading'] ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+
+	protected function content_template(): void {
+		?>
+		<#
+		const titleTag = elementor.helpers.validateHTMLTag( settings.title_tag ),
+			hasLink = settings.link && settings.link.url,
+			hasTitle = settings.title,
+			hasSubheading = 'yes' === settings.show_subheading && settings.subheading;
+		#>
+		<# if ( hasTitle || hasSubheading ) { #>
+			<div class="pixels-core-heading">
+				<# if ( hasTitle ) { #>
+					<# if ( hasLink ) { #>
+						<a href="{{ settings.link.url }}" class="pixels-core-heading__title elementor-heading-title">{{{ settings.title }}}</a>
+					<# } else { #>
+						<{{ titleTag }} class="pixels-core-heading__title elementor-heading-title">{{{ settings.title }}}</{{ titleTag }}>
+					<# } #>
+				<# } #>
+				<# if ( hasSubheading ) { #>
+					<p class="pixels-core-heading__subheading">{{{ settings.subheading }}}</p>
+				<# } #>
+			</div>
+		<# } #>
+		<?php
+	}
+}
