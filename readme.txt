@@ -108,7 +108,7 @@ Go to **Theme Builder**, create a Header or Footer template, design it with Elem
 
 = 1.0.0 =
 * Initial release.
-* Free Elementor widgets, Live Copy Paste, and Header/Footer theme builder.
+* Free Elementor widgets, Live Copy Paste and Header/Footer theme builder.
 * Admin dashboard for widget and extension management.
 * Translation-ready.
 * Redirect to dashboard on plugin activation.
