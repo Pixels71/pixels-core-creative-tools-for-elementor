@@ -1,0 +1,121 @@
+.pixels-core-orbit-circle {
+  position: relative;
+  width: 100%;
+}
+
+.pixels-core-orbit-circle__layout {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.pixels-core-orbit-circle__orbit {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1 / 1;
+  visibility: hidden;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.pixels-core-orbit-circle__orbit--no-border {
+  border: none;
+}
+
+.pixels-core-orbit-circle__center {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+}
+
+.pixels-core-orbit-circle__pivot,
+.orbit-pivot-outer {
+  position: absolute;
+  top: calc(var(--orbit-size, 400px) * -0.5);
+  left: 0;
+}
+
+.pixels-core-orbit-circle__basket,
+.orbit-basket {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.pixels-core-orbit-circle__basket--image,
+.pixels-core-orbit-circle__basket--icon {
+  overflow: hidden;
+}
+
+.pixels-core-orbit-circle__basket--text {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.pixels-core-orbit-circle__basket img,
+.orbit-basket img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pixels-core-orbit-circle__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.pixels-core-orbit-circle__icon svg {
+  display: block;
+}
+
+.pixels-core-orbit-circle__text {
+  display: block;
+  line-height: 1.2;
+}
+
+.pixels-core-orbit-circle__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pixels-core-orbit-circle__basket--text .pixels-core-orbit-circle__link {
+  width: auto;
+  height: auto;
+  line-height: inherit;
+}
+
+@keyframes pixels-orbit-spin-cw {
+  from {
+    transform: rotate(calc(var(--pixels-orbit-base, 0deg) + 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--pixels-orbit-base, 0deg) + 360deg));
+  }
+}
+
+@keyframes pixels-orbit-spin-ccw {
+  from {
+    transform: rotate(calc(var(--pixels-orbit-base, 0deg) + 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--pixels-orbit-base, 0deg) - 360deg));
+  }
+}

@@ -1,0 +1,37 @@
+.pixels-core-site-logo {
+	width: 100%;
+}
+
+.pixels-core-site-logo__link {
+	display: inline-block;
+	line-height: 0;
+	text-decoration: none;
+}
+
+.pixels-core-site-logo__image {
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+.pixels-core-site-logo__caption {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.4;
+	color: #1a1a1a;
+}
+
+.pixels-core-site-logo__title {
+	display: inline-block;
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #1a1a1a;
+	text-decoration: none;
+}
+
+.pixels-core-site-logo__link .pixels-core-site-logo__title:hover,
+.pixels-core-site-logo__link .pixels-core-site-logo__title:focus {
+	color: #2271b1;
+}

@@ -1,0 +1,18 @@
+Credits and Third-Party Licenses
+================================
+
+This plugin is licensed under the GNU General Public License v2 or later.
+See LICENSE for the full license text.
+
+Bundled libraries
+-----------------
+
+* Select2 4.1.0
+  Location: assets/theme-builder/js/select2.js, assets/theme-builder/css/select2.css
+  License: MIT
+  Homepage: https://select2.org/
+  Source: https://github.com/select2/select2
+
+* Number Flow
+  Location: assets/js/vendor/number-flow.js (+ helpers)
+  License: MIT

@@ -1,0 +1,242 @@
+.pixels-theme-popup {
+	position: fixed;
+	inset: 0;
+	z-index: 99999;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+}
+
+.pixels-theme-popup.is-open {
+	display: flex;
+}
+
+.pixels-theme-popup-editor-preview {
+	display: flex;
+}
+
+.pixels-theme-popup-h-left {
+	justify-content: flex-start;
+}
+
+.pixels-theme-popup-h-center {
+	justify-content: center;
+}
+
+.pixels-theme-popup-h-right {
+	justify-content: flex-end;
+}
+
+.pixels-theme-popup-v-top {
+	align-items: flex-start;
+}
+
+.pixels-theme-popup-v-center {
+	align-items: center;
+}
+
+.pixels-theme-popup-v-bottom {
+	align-items: flex-end;
+}
+
+.pixels-theme-popup__overlay {
+	position: absolute;
+	inset: 0;
+	background: var(--pixels-popup-overlay-color, rgba(0, 0, 0, 0.78));
+}
+
+.pixels-theme-popup__dialog {
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	width: min(100%, var(--pixels-popup-width, 420px));
+	height: var(--pixels-popup-height, auto);
+	max-height: calc(100vh - 48px);
+	margin: var(--pixels-popup-margin, 0);
+	padding: 0;
+	overflow: visible;
+	/* background: #fff; */
+	/* box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28); */
+	animation-duration: 0.35s;
+	animation-fill-mode: both;
+}
+
+.pixels-theme-popup__close {
+	position: absolute;
+	top: 11px;
+	right: 11px;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	padding: 0;
+	border: 0 solid transparent;
+	border-radius: 0;
+	background: transparent;
+	color: #303030;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.pixels-theme-popup__close:hover,
+.pixels-theme-popup__close:focus {
+	color: #000;
+	background: transparent;
+	outline: none;
+}
+
+.pixels-theme-popup__close span {
+	display: block;
+	width: 1em;
+	height: 1em;
+	background-color: currentColor;
+	-webkit-mask: url("../../images/x.svg") center / contain no-repeat;
+	mask: url("../../images/x.svg") center / contain no-repeat;
+}
+
+.pixels-theme-popup__content {
+	position: relative;
+	/* min-height: 88px; */
+	height: 100%;
+	padding: var(--pixels-popup-padding, 0);
+	/* overflow: auto; */
+	background: var(--pixels-popup-content-background-color, #fff);
+	border-color: var(--pixels-popup-content-border-color, #dcdcdc);
+	border-style: var(--pixels-popup-content-border-style, dashed);
+	border-width: var(--pixels-popup-content-border-width, 1px);
+	border-radius: var(--pixels-popup-content-border-radius, 0);
+	box-shadow: var(--pixels-popup-content-box-shadow, none);
+}
+
+.pixels-theme-popup__content:empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pixels-theme-popup__content:empty::before {
+	content: "+";
+	color: #9a9a9a;
+	font-size: 26px;
+	font-weight: 300;
+	line-height: 1;
+}
+
+body.pixels-theme-popup-open {
+	overflow: hidden;
+}
+
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-fade .pixels-theme-popup__dialog,
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-default .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-fade-in;
+}
+
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-zoom .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-zoom-in;
+}
+
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-slide-up .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-up-in;
+}
+
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-slide-down .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-down-in;
+}
+
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-slide-left .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-left-in;
+}
+
+.pixels-theme-popup.is-open.pixels-theme-popup-enter-slide-right .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-right-in;
+}
+
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-fade .pixels-theme-popup__dialog,
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-default .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-fade-out;
+}
+
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-zoom .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-zoom-out;
+}
+
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-slide-up .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-up-out;
+}
+
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-slide-down .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-down-out;
+}
+
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-slide-left .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-left-out;
+}
+
+.pixels-theme-popup.is-closing.pixels-theme-popup-exit-slide-right .pixels-theme-popup__dialog {
+	animation-name: pixels-popup-slide-right-out;
+}
+
+@keyframes pixels-popup-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes pixels-popup-fade-out {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes pixels-popup-zoom-in {
+	from { opacity: 0; transform: scale(0.9); }
+	to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pixels-popup-zoom-out {
+	from { opacity: 1; transform: scale(1); }
+	to { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes pixels-popup-slide-up-in {
+	from { opacity: 0; transform: translateY(40px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pixels-popup-slide-up-out {
+	from { opacity: 1; transform: translateY(0); }
+	to { opacity: 0; transform: translateY(-40px); }
+}
+
+@keyframes pixels-popup-slide-down-in {
+	from { opacity: 0; transform: translateY(-40px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pixels-popup-slide-down-out {
+	from { opacity: 1; transform: translateY(0); }
+	to { opacity: 0; transform: translateY(40px); }
+}
+
+@keyframes pixels-popup-slide-left-in {
+	from { opacity: 0; transform: translateX(40px); }
+	to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pixels-popup-slide-left-out {
+	from { opacity: 1; transform: translateX(0); }
+	to { opacity: 0; transform: translateX(-40px); }
+}
+
+@keyframes pixels-popup-slide-right-in {
+	from { opacity: 0; transform: translateX(-40px); }
+	to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pixels-popup-slide-right-out {
+	from { opacity: 1; transform: translateX(0); }
+	to { opacity: 0; transform: translateX(40px); }
+}

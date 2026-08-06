@@ -1,0 +1,26 @@
+/**
+ * Elementor editor panel branding for Pixels widgets.
+ */
+
+.elementor-panel .elementor-element .icon .pixels-icon {
+  display: inline-block;
+  line-height: 1;
+}
+
+.elementor-panel .elementor-element .icon .pixels-icon:before {
+  display: inline-block;
+  font-size: inherit;
+}
+
+.elementor-panel
+  .elementor-element[data-library-element-type^="pixels-"]::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 5px;
+  inset-inline-end: 5px;
+  width: 18px;
+  height: 18px;
+  background: url("../images/pixels-logo.svg") center / contain no-repeat;
+  opacity: 0.85;
+  pointer-events: none;
+}
