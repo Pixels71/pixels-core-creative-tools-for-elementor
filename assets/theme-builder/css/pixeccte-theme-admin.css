@@ -1,4 +1,4 @@
-span.pixels-theme-shortcode-col-wrap > input {
+span.pixeccte-theme-shortcode-col-wrap > input {
     background: inherit;
     color: inherit;
     font-size: 12px;
@@ -8,18 +8,18 @@ span.pixels-theme-shortcode-col-wrap > input {
     margin: 0;
 }
 
-input.pixels-theme-large-text{
+input.pixeccte-theme-large-text{
     width: 99%;
 }
 
-.pixels-theme-options-row-heading {
+.pixeccte-theme-options-row-heading {
     border-right: 1px solid #E1E1E1;
     padding: 15px;
     width: 45%;
     vertical-align: middle;
 }
 
-.pixels-theme-options-row td {
+.pixeccte-theme-options-row td {
     padding-left: 12px;
     padding-right: 12px;
     border-bottom: 1px solid #f0f0f0;
@@ -27,22 +27,22 @@ input.pixels-theme-large-text{
     vertical-align: middle;
 }
 
-.pixels-theme-options-table .pixels-theme-options-row-content {
+.pixeccte-theme-options-table .pixeccte-theme-options-row-content {
     padding: 15px 10px;
     position: relative;
     width: 55%;
 }
 
-.pixels-theme-options-table.widefat{
+.pixeccte-theme-options-table.widefat{
 	border-width: 0;
 }
 
-#pixels-theme-meta-box .inside {
+#pixeccte-theme-meta-box .inside {
     margin: 0;
     padding: 0;
 }
 
-.pixels-theme-options-row-heading label {
+.pixeccte-theme-options-row-heading label {
     display: inline-block;
     font-size: 13px;
     line-height: 1.4em;
@@ -52,11 +52,11 @@ input.pixels-theme-large-text{
     color: #333;
 }
 
-.pixels-theme-options-row-content select {
+.pixeccte-theme-options-row-content select {
     width: 95%;
 }
 
-.pixels_hf_radio_options {
+.pixeccte_hf_radio_options {
     display: inline-block;
 }
 
@@ -64,16 +64,16 @@ li#toplevel_page_Settings-page {
     display: none;
 }
 
-.wp-admin #adminmenu .wp-submenu a[href="themes.php?page=pixels-theme-settings"] {
+.wp-admin #adminmenu .wp-submenu a[href="themes.php?page=pixeccte-theme-settings"] {
     display:none;
 }
 
-.appearance_page_pixels-theme-settings #adminmenu .wp-submenu a[href ="edit.php?post_type=pixels-theme" ] {
+.appearance_page_pixeccte-theme-settings #adminmenu .wp-submenu a[href ="edit.php?post_type=pixeccte-theme" ] {
     color: white;
     font-weight: 600;
 }
 
-.pixels-theme-heading-inline{
+.pixeccte-theme-heading-inline{
     font-size: 23px;
     font-weight: 400;
     margin: 0;
@@ -81,16 +81,16 @@ li#toplevel_page_Settings-page {
     line-height: 1.3;
 }
 
-.pixels-theme-selected-template-type-custom .pixels-theme-target-rules-row,
-.pixels-theme-selected-template-type-custom .enable-for-canvas {
+.pixeccte-theme-selected-template-type-custom .pixeccte-theme-target-rules-row,
+.pixeccte-theme-selected-template-type-custom .enable-for-canvas {
     display: none;
 }
 
-.pixels-theme-selected-template-type-none .pixels-theme-target-rules-row,
-.pixels-theme-selected-template-type-none .enable-for-canvas {
+.pixeccte-theme-selected-template-type-none .pixeccte-theme-target-rules-row,
+.pixeccte-theme-selected-template-type-none .enable-for-canvas {
     display: none;
 }
 
-input.pixels-theme-large-text.code {
+input.pixeccte-theme-large-text.code {
     width: 100%;
 }

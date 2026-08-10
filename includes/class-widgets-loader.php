@@ -1,8 +1,8 @@
 <?php
-namespace PixelsCore;
+namespace PixelsCoreCreativeToolsForElementor;
 
 use Elementor\Widgets_Manager;
-use PixelsCore\Admin\Widget_Settings;
+use PixelsCoreCreativeToolsForElementor\Admin\Widget_Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -24,7 +24,7 @@ final class Widgets_Loader {
 		add_action( 'elementor/elements/categories_registered', [ $this, 'register_category' ] );
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 
-		require_once PIXELS_CORE_PATH . 'includes/class-assets-manager.php';
+		require_once PIXECCTE_PATH . 'includes/class-assets-manager.php';
 
 		$active_slugs = Widget_Settings::instance()->get_active_slugs();
 		$definitions  = Widget_Registry::instance()->get_asset_definitions( $active_slugs );
@@ -38,14 +38,14 @@ final class Widgets_Loader {
 		}
 
 		$category = [
-			'pixels-core' => [
-				'title' => esc_html__( 'Pixels Core', 'pixels-core-creative-tools-for-elementor' ),
+			'pixeccte' => [
+				'title' => esc_html__( 'Pixels Core Creative Tools', 'pixels-core-creative-tools-for-elementor' ),
 				'icon'  => 'eicon-plug',
 			],
 		];
 
 		$existing = $elements_manager->get_categories();
-		unset( $existing['pixels-core'] );
+		unset( $existing['pixeccte'] );
 
 		$categories = array_merge( $category, $existing );
 
@@ -56,7 +56,7 @@ final class Widgets_Loader {
 	}
 
 	public function register_widgets( Widgets_Manager $widgets_manager ): void {
-		require_once PIXELS_CORE_PATH . 'widgets/trait-widget-assets.php';
+		require_once PIXECCTE_PATH . 'widgets/trait-widget-assets.php';
 
 		$registry = Widget_Registry::instance();
 		$active   = Widget_Settings::instance()->get_active_slugs();
@@ -68,7 +68,7 @@ final class Widgets_Loader {
 				continue;
 			}
 
-			$base = $config['base_path'] ?? PIXELS_CORE_PATH;
+			$base = $config['base_path'] ?? PIXECCTE_PATH;
 			$path = $base . $config['file'];
 
 			if ( ! file_exists( $path ) ) {

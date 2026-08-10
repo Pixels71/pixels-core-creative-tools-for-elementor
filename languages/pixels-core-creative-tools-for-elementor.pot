@@ -18,7 +18,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-admin.php:66, includes/class-pixels-core.php:116, includes/class-pixels-core.php:131, includes/class-pixels-core.php:147
+#: admin/class-admin.php:66, includes/class-pixeccte.php:116, includes/class-pixeccte.php:131, includes/class-pixeccte.php:147
 msgid "Pixels Core Creative Tools for Elementor"
 msgstr ""
 
@@ -375,7 +375,7 @@ msgstr ""
 msgid "Requirements"
 msgstr ""
 
-#: admin/class-dashboard-i18n.php:132, includes/class-pixels-core.php:117, includes/class-pixels-core.php:132
+#: admin/class-dashboard-i18n.php:132, includes/class-pixeccte.php:117, includes/class-pixeccte.php:132
 msgid "Elementor"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgstr ""
 msgid "Not active — install and activate Elementor to use widgets."
 msgstr ""
 
-#: admin/class-dashboard-i18n.php:135, includes/class-pixels-core.php:148
+#: admin/class-dashboard-i18n.php:135, includes/class-pixeccte.php:148
 msgid "Nested Elements"
 msgstr ""
 
@@ -531,26 +531,26 @@ msgstr ""
 msgid "Scroll pin and header sticky for containers and sections."
 msgstr ""
 
-#: includes/class-pixels-core.php:82, includes/theme-builder/class-pixels-theme-admin.php:495
+#: includes/class-pixeccte.php:82, includes/theme-builder/class-pixeccte-theme-admin.php:495
 msgid "Header"
 msgstr ""
 
-#: includes/class-pixels-core.php:83, includes/theme-builder/class-pixels-theme-admin.php:496
+#: includes/class-pixeccte.php:83, includes/theme-builder/class-pixeccte-theme-admin.php:496
 msgid "Footer"
 msgstr ""
 
 #. translators: 1: Plugin name, 2: Elementor
-#: includes/class-pixels-core.php:115
+#: includes/class-pixeccte.php:115
 msgid "%1$s requires %2$s to be installed and activated."
 msgstr ""
 
 #. translators: 1: Plugin name, 2: Elementor, 3: Required version
-#: includes/class-pixels-core.php:130
+#: includes/class-pixeccte.php:130
 msgid "%1$s requires %2$s version %3$s or greater."
 msgstr ""
 
 #. translators: 1: Plugin name, 2: Elementor feature name
-#: includes/class-pixels-core.php:146
+#: includes/class-pixeccte.php:146
 msgid "%1$s nested widgets require the %2$s experiment to be enabled in Elementor → Settings → Features."
 msgstr ""
 
@@ -786,595 +786,595 @@ msgstr ""
 msgid "Auto-generated table of contents from post headings."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:96, includes/theme-builder/class-pixels-theme-admin.php:372
+#: includes/theme-builder/class-pixeccte-theme-admin.php:96, includes/theme-builder/class-pixeccte-theme-admin.php:372
 msgid "Display Rules"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:97
+#: includes/theme-builder/class-pixeccte-theme-admin.php:97
 msgid "Date"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:112
+#: includes/theme-builder/class-pixeccte-theme-admin.php:112
 msgid "Display:"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:120
+#: includes/theme-builder/class-pixeccte-theme-admin.php:120
 msgid "Exclusion:"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:168, includes/theme-builder/class-pixels-theme-admin.php:169, includes/theme-builder/class-pixels-theme-admin.php:170, includes/theme-builder/class-pixels-theme-admin.php:171, includes/theme-builder/class-pixels-theme-admin.php:206, includes/theme-builder/class-pixels-theme-admin.php:207
+#: includes/theme-builder/class-pixeccte-theme-admin.php:168, includes/theme-builder/class-pixeccte-theme-admin.php:169, includes/theme-builder/class-pixeccte-theme-admin.php:170, includes/theme-builder/class-pixeccte-theme-admin.php:171, includes/theme-builder/class-pixeccte-theme-admin.php:206, includes/theme-builder/class-pixeccte-theme-admin.php:207
 msgid "Theme Builder"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:172
+#: includes/theme-builder/class-pixeccte-theme-admin.php:172
 msgid "Add New"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:173
+#: includes/theme-builder/class-pixeccte-theme-admin.php:173
 msgid "Add New Template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:174
+#: includes/theme-builder/class-pixeccte-theme-admin.php:174
 msgid "New Template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:175
+#: includes/theme-builder/class-pixeccte-theme-admin.php:175
 msgid "Edit Template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:176
+#: includes/theme-builder/class-pixeccte-theme-admin.php:176
 msgid "View Template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:177
+#: includes/theme-builder/class-pixeccte-theme-admin.php:177
 msgid "All Templates"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:178
+#: includes/theme-builder/class-pixeccte-theme-admin.php:178
 msgid "Search Templates"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:179
+#: includes/theme-builder/class-pixeccte-theme-admin.php:179
 msgid "Parent Template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:180
+#: includes/theme-builder/class-pixeccte-theme-admin.php:180
 msgid "No Templates found."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:181
+#: includes/theme-builder/class-pixeccte-theme-admin.php:181
 msgid "No Templates found in Trash."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:222, includes/theme-builder/class-pixels-theme-admin.php:501
+#: includes/theme-builder/class-pixeccte-theme-admin.php:222, includes/theme-builder/class-pixeccte-theme-admin.php:501
 msgid "Mega Menu"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:248
+#: includes/theme-builder/class-pixeccte-theme-admin.php:248
 msgid "No published Mega Menu templates found."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:251
+#: includes/theme-builder/class-pixeccte-theme-admin.php:251
 msgid "Create a Mega Menu template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:291
+#: includes/theme-builder/class-pixeccte-theme-admin.php:291
 msgid "Select All"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:294
+#: includes/theme-builder/class-pixeccte-theme-admin.php:294
 msgid "Add to Menu"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:308
+#: includes/theme-builder/class-pixeccte-theme-admin.php:308
 msgid "Pixels Theme Builder"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:333
+#: includes/theme-builder/class-pixeccte-theme-admin.php:333
 msgid "Type of Template"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:337
+#: includes/theme-builder/class-pixeccte-theme-admin.php:337
 msgid "Select Option"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:363
+#: includes/theme-builder/class-pixeccte-theme-admin.php:363
 msgid "Display On"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:365
+#: includes/theme-builder/class-pixeccte-theme-admin.php:365
 msgid "Add locations for where this template should appear."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:376
+#: includes/theme-builder/class-pixeccte-theme-admin.php:376
 msgid "Add Display Rule"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:385
+#: includes/theme-builder/class-pixeccte-theme-admin.php:385
 msgid "Do Not Display On"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:387
+#: includes/theme-builder/class-pixeccte-theme-admin.php:387
 msgid "Add locations for where this template should not appear."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:394
+#: includes/theme-builder/class-pixeccte-theme-admin.php:394
 msgid "Exclude On"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:397, includes/theme-builder/class-pixels-theme-target-rules-fields.php:561
+#: includes/theme-builder/class-pixeccte-theme-admin.php:397, includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:561
 msgid "Add Exclusion Rule"
 msgstr ""
 
 #. translators: 1: Post title, 2: Template location
-#: includes/theme-builder/class-pixels-theme-admin.php:480
+#: includes/theme-builder/class-pixeccte-theme-admin.php:480
 msgid "Template \"%1$s\" is already assigned to the location \"%2$s\"."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:497
+#: includes/theme-builder/class-pixeccte-theme-admin.php:497
 msgid "Archive Post"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:498
+#: includes/theme-builder/class-pixeccte-theme-admin.php:498
 msgid "404"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:499
+#: includes/theme-builder/class-pixeccte-theme-admin.php:499
 msgid "Single Post"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:500
+#: includes/theme-builder/class-pixeccte-theme-admin.php:500
 msgid "Popup"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:532
+#: includes/theme-builder/class-pixeccte-theme-admin.php:532
 msgid "Shortcode"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:533, widgets/class-orbit-circle-widget.php:79, widgets/class-progress-bar-widget.php:90
+#: includes/theme-builder/class-pixeccte-theme-admin.php:533, widgets/class-orbit-circle-widget.php:79, widgets/class-progress-bar-widget.php:90
 msgid "Type"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:606
+#: includes/theme-builder/class-pixeccte-theme-admin.php:606
 msgid "All"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:632
+#: includes/theme-builder/class-pixeccte-theme-admin.php:632
 msgid "Preview Settings"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:659
+#: includes/theme-builder/class-pixeccte-theme-admin.php:659
 msgid "Choose a post to determine which archive page is used for preview."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:657
+#: includes/theme-builder/class-pixeccte-theme-admin.php:657
 msgid "Choose a post to preview dynamic widgets and the Elementor live preview."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:663
+#: includes/theme-builder/class-pixeccte-theme-admin.php:663
 msgid "Preview with post:"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-admin.php:665, includes/theme-builder/pixels-theme-functions.php:255
+#: includes/theme-builder/class-pixeccte-theme-admin.php:665, includes/theme-builder/pixeccte-theme-functions.php:255
 msgid "Select a post"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:139
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:139
 msgid "Pixels Popup Layout"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:147, includes/theme-builder/class-pixels-theme-elementor.php:628, widgets/class-carousel-widget.php:1176, widgets/class-carousel-widget.php:1232, widgets/class-carousel-widget.php:1298, widgets/class-countdown-timer.php:249, widgets/class-countdown-timer.php:472, widgets/class-countdown-timer.php:804, widgets/class-countdown-timer.php:915, widgets/class-countdown-timer.php:1084, widgets/class-menu-widget.php:481, widgets/class-progress-bar-widget.php:278, widgets/class-site-logo-widget.php:219
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:147, includes/theme-builder/class-pixeccte-theme-elementor.php:628, widgets/class-carousel-widget.php:1176, widgets/class-carousel-widget.php:1232, widgets/class-carousel-widget.php:1298, widgets/class-countdown-timer.php:249, widgets/class-countdown-timer.php:472, widgets/class-countdown-timer.php:804, widgets/class-countdown-timer.php:915, widgets/class-countdown-timer.php:1084, widgets/class-menu-widget.php:481, widgets/class-progress-bar-widget.php:278, widgets/class-site-logo-widget.php:219
 msgid "Width"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:165, widgets/class-carousel-widget.php:1194, widgets/class-carousel-widget.php:1250, widgets/class-carousel-widget.php:1324, widgets/class-countdown-timer.php:497, widgets/class-countdown-timer.php:829, widgets/class-countdown-timer.php:1106, widgets/class-progress-bar-widget.php:300, widgets/class-progress-bar-widget.php:256, widgets/class-site-logo-widget.php:263
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:165, widgets/class-carousel-widget.php:1194, widgets/class-carousel-widget.php:1250, widgets/class-carousel-widget.php:1324, widgets/class-countdown-timer.php:497, widgets/class-countdown-timer.php:829, widgets/class-countdown-timer.php:1106, widgets/class-progress-bar-widget.php:300, widgets/class-progress-bar-widget.php:256, widgets/class-site-logo-widget.php:263
 msgid "Height"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:169
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:169
 msgid "Fit To Content"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:170
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:170
 msgid "Custom"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:179
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:179
 msgid "Custom Height"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:197, includes/theme-builder/class-pixels-theme-elementor.php:356, widgets/class-carousel-widget.php:1008
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:197, includes/theme-builder/class-pixeccte-theme-elementor.php:356, widgets/class-carousel-widget.php:1008
 msgid "Horizontal Position"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:201, includes/theme-builder/class-pixels-theme-elementor.php:360, widgets/class-button-widget.php:654, widgets/class-carousel-widget.php:475, widgets/class-carousel-widget.php:1012, widgets/class-counter-widget.php:201, widgets/class-heading-widget.php:140, widgets/class-menu-widget.php:88, widgets/class-menu-widget.php:187, widgets/class-orbit-circle-widget.php:381, widgets/class-site-logo-widget.php:185, widgets/class-tabs-widget.php:203
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:201, includes/theme-builder/class-pixeccte-theme-elementor.php:360, widgets/class-button-widget.php:654, widgets/class-carousel-widget.php:475, widgets/class-carousel-widget.php:1012, widgets/class-counter-widget.php:201, widgets/class-heading-widget.php:140, widgets/class-menu-widget.php:88, widgets/class-menu-widget.php:187, widgets/class-orbit-circle-widget.php:381, widgets/class-site-logo-widget.php:185, widgets/class-tabs-widget.php:203
 msgid "Left"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:202, includes/theme-builder/class-pixels-theme-elementor.php:217, widgets/class-button-widget.php:658, widgets/class-carousel-widget.php:605, widgets/class-carousel-widget.php:720, widgets/class-carousel-widget.php:901, widgets/class-carousel-widget.php:1013, widgets/class-counter-widget.php:205, widgets/class-heading-widget.php:144, widgets/class-menu-widget.php:92, widgets/class-orbit-circle-widget.php:385, widgets/class-site-logo-widget.php:189, widgets/class-tabs-widget.php:285, widgets/class-tabs-widget.php:352
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:202, includes/theme-builder/class-pixeccte-theme-elementor.php:217, widgets/class-button-widget.php:658, widgets/class-carousel-widget.php:605, widgets/class-carousel-widget.php:720, widgets/class-carousel-widget.php:901, widgets/class-carousel-widget.php:1013, widgets/class-counter-widget.php:205, widgets/class-heading-widget.php:144, widgets/class-menu-widget.php:92, widgets/class-orbit-circle-widget.php:385, widgets/class-site-logo-widget.php:189, widgets/class-tabs-widget.php:285, widgets/class-tabs-widget.php:352
 msgid "Center"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:203, includes/theme-builder/class-pixels-theme-elementor.php:361, widgets/class-button-widget.php:662, widgets/class-carousel-widget.php:476, widgets/class-carousel-widget.php:1014, widgets/class-counter-widget.php:209, widgets/class-heading-widget.php:148, widgets/class-menu-widget.php:96, widgets/class-menu-widget.php:191, widgets/class-orbit-circle-widget.php:389, widgets/class-site-logo-widget.php:193, widgets/class-tabs-widget.php:207
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:203, includes/theme-builder/class-pixeccte-theme-elementor.php:361, widgets/class-button-widget.php:662, widgets/class-carousel-widget.php:476, widgets/class-carousel-widget.php:1014, widgets/class-counter-widget.php:209, widgets/class-heading-widget.php:148, widgets/class-menu-widget.php:96, widgets/class-menu-widget.php:191, widgets/class-orbit-circle-widget.php:389, widgets/class-site-logo-widget.php:193, widgets/class-tabs-widget.php:207
 msgid "Right"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:212, includes/theme-builder/class-pixels-theme-elementor.php:371, widgets/class-carousel-widget.php:601, widgets/class-carousel-widget.php:716, widgets/class-carousel-widget.php:896
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:212, includes/theme-builder/class-pixeccte-theme-elementor.php:371, widgets/class-carousel-widget.php:601, widgets/class-carousel-widget.php:716, widgets/class-carousel-widget.php:896
 msgid "Vertical Position"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:216, includes/theme-builder/class-pixels-theme-elementor.php:375, widgets/class-carousel-widget.php:474, widgets/class-carousel-widget.php:606, widgets/class-carousel-widget.php:721, widgets/class-carousel-widget.php:900, widgets/class-countdown-timer.php:618, widgets/class-countdown-timer.php:635, widgets/class-counter-widget.php:232, widgets/class-tabs-widget.php:314
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:216, includes/theme-builder/class-pixeccte-theme-elementor.php:375, widgets/class-carousel-widget.php:474, widgets/class-carousel-widget.php:606, widgets/class-carousel-widget.php:721, widgets/class-carousel-widget.php:900, widgets/class-countdown-timer.php:618, widgets/class-countdown-timer.php:635, widgets/class-counter-widget.php:232, widgets/class-tabs-widget.php:314
 msgid "Top"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:218, includes/theme-builder/class-pixels-theme-elementor.php:376, widgets/class-carousel-widget.php:473, widgets/class-carousel-widget.php:607, widgets/class-carousel-widget.php:722, widgets/class-carousel-widget.php:902, widgets/class-countdown-timer.php:619, widgets/class-countdown-timer.php:636, widgets/class-counter-widget.php:240, widgets/class-tabs-widget.php:322
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:218, includes/theme-builder/class-pixeccte-theme-elementor.php:376, widgets/class-carousel-widget.php:473, widgets/class-carousel-widget.php:607, widgets/class-carousel-widget.php:722, widgets/class-carousel-widget.php:902, widgets/class-countdown-timer.php:619, widgets/class-countdown-timer.php:636, widgets/class-counter-widget.php:240, widgets/class-tabs-widget.php:322
 msgid "Bottom"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:229
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:229
 msgid "Pixels Popup Settings"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:240, includes/theme-builder/class-pixels-theme-elementor.php:459, widgets/class-accordion-widget.php:185, widgets/class-button-widget.php:637, widgets/class-button-widget.php:1493, widgets/class-carousel-widget.php:425, widgets/class-carousel-widget.php:457, widgets/class-countdown-timer.php:462, widgets/class-countdown-timer.php:1070, widgets/class-menu-widget.php:130, widgets/class-menu-widget.php:144, widgets/class-menu-widget.php:207, widgets/class-menu-widget.php:232, widgets/class-menu-widget.php:245, widgets/class-orbit-circle-widget.php:245, widgets/class-orbit-circle-widget.php:332, widgets/class-progress-bar-widget.php:215, widgets/class-site-logo-widget.php:127
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:240, includes/theme-builder/class-pixeccte-theme-elementor.php:459, widgets/class-accordion-widget.php:185, widgets/class-button-widget.php:637, widgets/class-button-widget.php:1493, widgets/class-carousel-widget.php:425, widgets/class-carousel-widget.php:457, widgets/class-countdown-timer.php:462, widgets/class-countdown-timer.php:1070, widgets/class-menu-widget.php:130, widgets/class-menu-widget.php:144, widgets/class-menu-widget.php:207, widgets/class-menu-widget.php:232, widgets/class-menu-widget.php:245, widgets/class-orbit-circle-widget.php:245, widgets/class-orbit-circle-widget.php:332, widgets/class-progress-bar-widget.php:215, widgets/class-site-logo-widget.php:127
 msgid "Yes"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:241, includes/theme-builder/class-pixels-theme-elementor.php:460, widgets/class-accordion-widget.php:186, widgets/class-button-widget.php:638, widgets/class-button-widget.php:1494, widgets/class-carousel-widget.php:426, widgets/class-carousel-widget.php:458, widgets/class-countdown-timer.php:463, widgets/class-countdown-timer.php:1071, widgets/class-menu-widget.php:131, widgets/class-menu-widget.php:145, widgets/class-menu-widget.php:208, widgets/class-menu-widget.php:233, widgets/class-menu-widget.php:246, widgets/class-orbit-circle-widget.php:246, widgets/class-orbit-circle-widget.php:333, widgets/class-progress-bar-widget.php:216, widgets/class-site-logo-widget.php:128
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:241, includes/theme-builder/class-pixeccte-theme-elementor.php:460, widgets/class-accordion-widget.php:186, widgets/class-button-widget.php:638, widgets/class-button-widget.php:1494, widgets/class-carousel-widget.php:426, widgets/class-carousel-widget.php:458, widgets/class-countdown-timer.php:463, widgets/class-countdown-timer.php:1071, widgets/class-menu-widget.php:131, widgets/class-menu-widget.php:145, widgets/class-menu-widget.php:208, widgets/class-menu-widget.php:233, widgets/class-menu-widget.php:246, widgets/class-orbit-circle-widget.php:246, widgets/class-orbit-circle-widget.php:333, widgets/class-progress-bar-widget.php:216, widgets/class-site-logo-widget.php:128
 msgid "No"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:266
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:266
 msgid "Overlay"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:268, includes/theme-builder/class-pixels-theme-elementor.php:295, widgets/class-countdown-timer.php:69, widgets/class-countdown-timer.php:78, widgets/class-countdown-timer.php:87, widgets/class-countdown-timer.php:96, widgets/class-countdown-timer.php:105, widgets/class-countdown-timer.php:116, widgets/class-counter-widget.php:121, widgets/class-heading-widget.php:90, widgets/class-menu-widget.php:700, widgets/class-progress-bar-widget.php:162, widgets/class-progress-bar-widget.php:174, widgets/class-progress-bar-widget.php:186, widgets/class-site-logo-widget.php:154
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:268, includes/theme-builder/class-pixeccte-theme-elementor.php:295, widgets/class-countdown-timer.php:69, widgets/class-countdown-timer.php:78, widgets/class-countdown-timer.php:87, widgets/class-countdown-timer.php:96, widgets/class-countdown-timer.php:105, widgets/class-countdown-timer.php:116, widgets/class-counter-widget.php:121, widgets/class-heading-widget.php:90, widgets/class-menu-widget.php:700, widgets/class-progress-bar-widget.php:162, widgets/class-progress-bar-widget.php:174, widgets/class-progress-bar-widget.php:186, widgets/class-site-logo-widget.php:154
 msgid "Show"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:269, includes/theme-builder/class-pixels-theme-elementor.php:296, widgets/class-countdown-timer.php:70, widgets/class-countdown-timer.php:79, widgets/class-countdown-timer.php:88, widgets/class-countdown-timer.php:97, widgets/class-countdown-timer.php:106, widgets/class-countdown-timer.php:117, widgets/class-counter-widget.php:122, widgets/class-heading-widget.php:91, widgets/class-menu-widget.php:701, widgets/class-progress-bar-widget.php:163, widgets/class-progress-bar-widget.php:175, widgets/class-progress-bar-widget.php:187, widgets/class-site-logo-widget.php:155
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:269, includes/theme-builder/class-pixeccte-theme-elementor.php:296, widgets/class-countdown-timer.php:70, widgets/class-countdown-timer.php:79, widgets/class-countdown-timer.php:88, widgets/class-countdown-timer.php:97, widgets/class-countdown-timer.php:106, widgets/class-countdown-timer.php:117, widgets/class-counter-widget.php:122, widgets/class-heading-widget.php:91, widgets/class-menu-widget.php:701, widgets/class-progress-bar-widget.php:163, widgets/class-progress-bar-widget.php:175, widgets/class-progress-bar-widget.php:187, widgets/class-site-logo-widget.php:155
 msgid "Hide"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:279, widgets/class-menu-widget.php:1012
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:279, widgets/class-menu-widget.php:1012
 msgid "Overlay Color"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:293
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:293
 msgid "Close Button"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:319
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:319
 msgid "Automatically Close After (sec)"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:333
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:333
 msgid "Pixels Popup Close Button"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:341, widgets/class-carousel-widget.php:882
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:341, widgets/class-carousel-widget.php:882
 msgid "Placement"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:345
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:345
 msgid "Inside Dialog"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:346
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:346
 msgid "Outside Dialog"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:386
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:386
 msgid "Show After (sec)"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:442
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:442
 msgid "Pixels Popup Advanced"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:471
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:471
 msgid "Open By Selector"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:475
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:475
 msgid "Clicking this selector opens the popup."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:485, widgets/class-button-widget.php:696, widgets/class-progress-bar-widget.php:593, widgets/class-progress-bar-widget.php:653, widgets/class-progress-bar-widget.php:713, widgets/class-rotator-text-widget.php:344
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:485, widgets/class-button-widget.php:696, widgets/class-progress-bar-widget.php:593, widgets/class-progress-bar-widget.php:653, widgets/class-progress-bar-widget.php:713, widgets/class-rotator-text-widget.php:344
 msgid "Margin"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:498
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:498
 msgid "Content Padding"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:529
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:529
 msgid "Content Border Style"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:533, widgets/class-carousel-widget.php:371, widgets/class-menu-widget.php:467
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:533, widgets/class-carousel-widget.php:371, widgets/class-menu-widget.php:467
 msgid "None"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:534, widgets/class-menu-widget.php:468, widgets/class-progress-bar-widget.php:104
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:534, widgets/class-menu-widget.php:468, widgets/class-progress-bar-widget.php:104
 msgid "Solid"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:535, widgets/class-menu-widget.php:469
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:535, widgets/class-menu-widget.php:469
 msgid "Dashed"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:536, widgets/class-menu-widget.php:470
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:536, widgets/class-menu-widget.php:470
 msgid "Dotted"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:537
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:537
 msgid "Double"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:572
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:572
 msgid "Content Box Shadow"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:580
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:580
 msgid "CSS Classes"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:606
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:606
 msgid "Pixels Mega Menu Layout"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:614
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:614
 msgid "Width Type"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:618
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:618
 msgid "Custom Width"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:619, includes/theme-builder/class-pixels-theme-elementor.php:646
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:619, includes/theme-builder/class-pixeccte-theme-elementor.php:646
 msgid "Container Width"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:620
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:620
 msgid "Full Screen Width"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:720
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:720
 msgid "Preview"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:728
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:728
 msgid "Preview with Post"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:732
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:732
 msgid "Choose a post to preview dynamic widgets. The editor preview stays on this template."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1397, includes/theme-builder/class-pixels-theme-elementor.php:1441, includes/theme-builder/class-pixels-theme-elementor.php:1479
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1397, includes/theme-builder/class-pixeccte-theme-elementor.php:1441, includes/theme-builder/class-pixeccte-theme-elementor.php:1479
 msgid "Close popup"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1766
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1766
 msgid "On Page Load"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1769, includes/theme-builder/class-pixels-theme-elementor.php:1831, includes/theme-builder/class-pixels-theme-elementor.php:1846
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1769, includes/theme-builder/class-pixeccte-theme-elementor.php:1831, includes/theme-builder/class-pixeccte-theme-elementor.php:1846
 msgid "Within (sec)"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1777
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1777
 msgid "On Scroll"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1780, widgets/class-carousel-widget.php:246, widgets/class-orbit-circle-widget.php:230
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1780, widgets/class-carousel-widget.php:246, widgets/class-orbit-circle-widget.php:230
 msgid "Direction"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1783
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1783
 msgid "Down"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1784
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1784
 msgid "Up"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1788
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1788
 msgid "Within (%)"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1797
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1797
 msgid "On Scroll To Element"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1800
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1800
 msgid "Selector"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1807
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1807
 msgid "On Class Click"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1810
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1810
 msgid "Class / Selector"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1817
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1817
 msgid "On Click"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1820
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1820
 msgid "Clicks"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1828
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1828
 msgid "After Inactivity"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1839
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1839
 msgid "On Page Exit Intent"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1843
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1843
 msgid "AdBlock Detection"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1870, widgets/class-site-logo-widget.php:285
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1870, widgets/class-site-logo-widget.php:285
 msgid "Default"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1871, widgets/class-carousel-widget.php:276
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1871, widgets/class-carousel-widget.php:276
 msgid "Fade"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1872
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1872
 msgid "Zoom"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1873
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1873
 msgid "Slide Up"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1874
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1874
 msgid "Slide Down"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1875
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1875
 msgid "Slide Left"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-elementor.php:1876
+#: includes/theme-builder/class-pixeccte-theme-elementor.php:1876
 msgid "Slide Right"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:55
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:55
 msgid "404 Page"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:56
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:56
 msgid "Search Page"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:57
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:57
 msgid "Blog / Posts Page"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:58
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:58
 msgid "Front Page"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:59
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:59
 msgid "Date Archive"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:60
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:60
 msgid "Author Archive"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:64
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:64
 msgid "WooCommerce Shop Page"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:69
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:69
 msgid "Basic"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:71
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:71
 msgid "Entire Website"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:72
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:72
 msgid "All Singulars"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:73
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:73
 msgid "All Archives"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:78
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:78
 msgid "Special Pages"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:119
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:119
 msgid "Specific Target"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:121
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:121
 msgid "Specific Pages / Posts / Taxonomies, etc."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:180
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:180
 msgid "You do not have permission to search posts."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:343
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:343
 msgid "Please enter"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:344
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:344
 msgid "Please delete"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:345
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:345
 msgid "or more characters"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:346
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:346
 msgid "character"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:347
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:347
 msgid "Loading more results…"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:348
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:348
 msgid "You can only select"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:349
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:349
 msgid "item"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:350
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:350
 msgid "s"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:351
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:351
 msgid "No results found"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:352
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:352
 msgid "Searching…"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:353
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:353
 msgid "The results could not be loaded."
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:354
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:354
 msgid "Search pages / post / categories"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:373
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:373
 msgid "Add Rule"
 msgstr ""
 
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:389, includes/theme-builder/class-pixels-theme-target-rules-fields.php:490
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:389, includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:490
 msgid "Select"
 msgstr ""
 
 #. translators: %s post label
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:436
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:436
 msgid "All %s"
 msgstr ""
 
 #. translators: %s post label
 #. translators: %s taxonomy label
-#: includes/theme-builder/class-pixels-theme-target-rules-fields.php:441, includes/theme-builder/class-pixels-theme-target-rules-fields.php:450
+#: includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:441, includes/theme-builder/class-pixeccte-theme-target-rules-fields.php:450
 msgid "All %s Archive"
 msgstr ""
 
-#: includes/theme-builder/pixels-theme-functions.php:478
+#: includes/theme-builder/pixeccte-theme-functions.php:478
 msgid "Sample Post Title"
 msgstr ""
 

@@ -10,7 +10,7 @@
 			return;
 		}
 
-		const flowNode = digitNode.querySelector('.pixels-timer-digit-flow');
+		const flowNode = digitNode.querySelector('.pixeccte-timer-digit-flow');
 		if (flowNode && typeof flowNode.update === 'function') {
 			flowNode.update(Number.parseInt(charValue, 10) || 0);
 			return;
@@ -26,8 +26,8 @@
 
 	function updateUnit(node, value) {
 		const paddedValue = pad2(value);
-		const tens = node.querySelector('.pixels-timer-digit-tens');
-		const ones = node.querySelector('.pixels-timer-digit-ones');
+		const tens = node.querySelector('.pixeccte-timer-digit-tens');
+		const ones = node.querySelector('.pixeccte-timer-digit-ones');
 
 		updateDigit(tens, paddedValue.charAt(0));
 		updateDigit(ones, paddedValue.charAt(1));
@@ -35,7 +35,7 @@
 	}
 
 	function updateRing(unitNode, value) {
-		const ring = unitNode?.querySelector('.pixels-timer-ring__progress');
+		const ring = unitNode?.querySelector('.pixeccte-timer-ring__progress');
 		if (!ring) {
 			return;
 		}
@@ -52,9 +52,9 @@
 
 	function setExpired(timerNode) {
 		const action = timerNode.dataset.expiryAction || 'show_message';
-		const containerNode = timerNode.closest('.pixels-core-countdown-timer');
+		const containerNode = timerNode.closest('.pixeccte-countdown-timer');
 		const messageNode = containerNode
-			? containerNode.querySelector('.pixels-timer-expired-message')
+			? containerNode.querySelector('.pixeccte-timer-expired-message')
 			: null;
 
 		if (action === 'hide') {
@@ -156,7 +156,7 @@
 		onInit() {
 			elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 
-			const timerNodes = this.$element.find('.pixels-timer[data-end-time]');
+			const timerNodes = this.$element.find('.pixeccte-timer[data-end-time]');
 			if (!timerNodes.length) {
 				return;
 			}
@@ -167,7 +167,7 @@
 		},
 
 		onDestroy() {
-			this.$element.find('.pixels-timer[data-end-time]').each(function () {
+			this.$element.find('.pixeccte-timer[data-end-time]').each(function () {
 				const intervalId = Number.parseInt(this.dataset.timerIntervalId, 10);
 				if (intervalId) {
 					clearInterval(intervalId);
@@ -179,6 +179,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-countdown-timer', CountdownTimerHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixeccte-countdown-timer', CountdownTimerHandler);
 	});
 })(jQuery);

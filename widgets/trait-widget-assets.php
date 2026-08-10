@@ -1,7 +1,7 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
-use PixelsCore\Assets_Manager;
+use PixelsCoreCreativeToolsForElementor\Assets_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

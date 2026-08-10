@@ -3,10 +3,10 @@
  * Default_Compat setup
  */
 
-namespace PixelsCore\Theme_Builder;
+namespace PixelsCoreCreativeToolsForElementor\Theme_Builder;
 defined('ABSPATH') || exit; // Abort, if called directly.
 /**
- * pixels theme compatibility.
+ * pixeccte theme compatibility.
  */
 class Default_Compat {
 
@@ -21,20 +21,20 @@ class Default_Compat {
 	 * Run all the Actions / Filters.
 	 */
 	public function hooks() {
-		if ( pixels_header_enabled() ) :
+		if ( pixeccte_header_enabled() ) :
 			// Replace header.php template.
 			add_action( 'get_header', [ $this, 'override_header' ] );
 
-			// Display pixels_HF's header in the replaced header.
-			add_action( 'pixels_hf_header', 'pixels_render_header' );
+			// Display pixeccte_HF's header in the replaced header.
+			add_action( 'pixeccte_hf_header', 'pixeccte_render_header' );
 		endif;
 
-		if ( pixels_footer_enabled() ) :
+		if ( pixeccte_footer_enabled() ) :
 			// Replace header.php template.
 			add_action( 'get_footer', [ $this, 'override_footer' ] );
 
-			// Display pixels_HF's footer in the replaced header.
-			add_action( 'pixels_hf_footer', 'pixels_render_footer' );
+			// Display pixeccte_HF's footer in the replaced header.
+			add_action( 'pixeccte_hf_footer', 'pixeccte_render_footer' );
 		endif;
 	}
 
@@ -44,7 +44,7 @@ class Default_Compat {
 	 * @return void
 	 */
 	public function override_header() {
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/themes/default/pixels-header.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/themes/default/pixeccte-header.php';
 		$templates   = [];
 		$templates[] = 'header.php';
 		// Avoid running wp_head hooks again.
@@ -60,7 +60,7 @@ class Default_Compat {
 	 * @return void
 	 */
 	public function override_footer() {
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/themes/default/pixels-footer.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/themes/default/pixeccte-footer.php';
 		$templates   = [];
 		$templates[] = 'footer.php';
 		// Avoid running wp_footer hooks again.

@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
@@ -20,7 +20,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-orbit-circle';
+		return 'pixeccte-orbit-circle';
 	}
 
 	public function get_title(): string {
@@ -28,15 +28,15 @@ class Orbit_Circle_Widget extends Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-orbit-circle';
+		return 'pixeccte-icon pixeccte-icon-orbit-circle';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'orbit', 'circle', 'wheel', 'rotation', 'integration', 'logo', 'ring', 'pixels' ];
+		return [ 'orbit', 'circle', 'wheel', 'rotation', 'integration', 'logo', 'ring', 'pixeccte' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -297,7 +297,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 					'size' => 400,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__orbit' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__orbit' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -319,7 +319,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__layout' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__layout' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -340,7 +340,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'orbit_border',
-				'selector'  => '{{WRAPPER}} .pixels-core-orbit-circle__orbit',
+				'selector'  => '{{WRAPPER}} .pixeccte-orbit-circle__orbit',
 				'condition' => [
 					'show_border' => 'yes',
 				],
@@ -358,7 +358,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 					'size' => 50,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__orbit' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__orbit' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -367,7 +367,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'orbit_box_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-orbit-circle__orbit',
+				'selector' => '{{WRAPPER}} .pixeccte-orbit-circle__orbit',
 			]
 		);
 
@@ -392,7 +392,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 				],
 				'default'   => 'center',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-orbit-circle' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -426,9 +426,9 @@ class Orbit_Circle_Widget extends Widget_Base {
 					'size' => 64,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket--image' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket--icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket--text' => 'min-width: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket--image' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket--icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket--text' => 'min-width: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -450,7 +450,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 					'size' => -20,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket' => 'top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket' => 'top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -461,7 +461,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -473,7 +473,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', 'rem', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -493,7 +493,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__text' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__text' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -502,7 +502,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'items_text_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-orbit-circle__text',
+				'selector' => '{{WRAPPER}} .pixeccte-orbit-circle__text',
 			]
 		);
 
@@ -521,8 +521,8 @@ class Orbit_Circle_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__icon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-orbit-circle__icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__icon svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -540,8 +540,8 @@ class Orbit_Circle_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__icon' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .pixels-core-orbit-circle__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-orbit-circle__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -550,7 +550,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'item_border',
-				'selector' => '{{WRAPPER}} .pixels-core-orbit-circle__basket',
+				'selector' => '{{WRAPPER}} .pixeccte-orbit-circle__basket',
 			]
 		);
 
@@ -568,7 +568,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 					'unit'   => 'px',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-orbit-circle__basket' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .pixeccte-orbit-circle__basket' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
 			]
 		);
@@ -577,7 +577,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'item_box_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-orbit-circle__basket',
+				'selector' => '{{WRAPPER}} .pixeccte-orbit-circle__basket',
 			]
 		);
 
@@ -617,7 +617,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 				return;
 			}
 
-			echo '<span class="pixels-core-orbit-circle__icon">';
+			echo '<span class="pixeccte-orbit-circle__icon">';
 			Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
 			echo '</span>';
 
@@ -631,7 +631,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 				return;
 			}
 
-			echo '<span class="pixels-core-orbit-circle__text">' . esc_html( $text ) . '</span>';
+			echo '<span class="pixeccte-orbit-circle__text">' . esc_html( $text ) . '</span>';
 
 			return;
 		}
@@ -649,8 +649,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor image HTML.
-		echo $image_html;
+		echo wp_kses_post( $image_html );
 	}
 
 	protected function render(): void {
@@ -672,26 +671,26 @@ class Orbit_Circle_Widget extends Widget_Base {
 		$fade_in  = ( $settings['fade_in'] ?? 'yes' ) === 'yes' ? 'yes' : 'no';
 		$fade_duration = isset( $settings['fade_in_duration'] ) ? (float) $settings['fade_in_duration'] : 1;
 
-		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-orbit-circle' );
+		$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-orbit-circle' );
 		$this->add_render_attribute( 'wrapper', 'data-orbit-speed', (string) $speed );
 		$this->add_render_attribute( 'wrapper', 'data-orbit-duration', (string) $duration );
 		$this->add_render_attribute( 'wrapper', 'data-orbit-direction', $direction );
 		$this->add_render_attribute( 'wrapper', 'data-orbit-fade-in', $fade_in );
 		$this->add_render_attribute( 'wrapper', 'data-orbit-fade-duration', (string) $fade_duration );
 
-		$this->add_render_attribute( 'layout', 'class', 'pixels-core-orbit-circle__layout' );
+		$this->add_render_attribute( 'layout', 'class', 'pixeccte-orbit-circle__layout' );
 		$this->add_render_attribute( 'layout', 'data-orbit-layout', '' );
 
-		$orbit_classes = [ 'pixels-core-orbit-circle__orbit' ];
+		$orbit_classes = [ 'pixeccte-orbit-circle__orbit' ];
 
 		if ( 'yes' !== ( $settings['show_border'] ?? 'yes' ) ) {
-			$orbit_classes[] = 'pixels-core-orbit-circle__orbit--no-border';
+			$orbit_classes[] = 'pixeccte-orbit-circle__orbit--no-border';
 		}
 
 		$this->add_render_attribute( 'orbit', 'class', $orbit_classes );
 		$this->add_render_attribute( 'orbit', 'data-orbit', '' );
 
-		$this->add_render_attribute( 'center', 'class', 'pixels-core-orbit-circle__center' );
+		$this->add_render_attribute( 'center', 'class', 'pixeccte-orbit-circle__center' );
 		$this->add_render_attribute( 'center', 'data-orbit-center', '' );
 		?>
 		<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
@@ -710,16 +709,16 @@ class Orbit_Circle_Widget extends Widget_Base {
 							$link_url  = $link['url'] ?? '';
 
 							$this->add_render_attribute( $item_key, 'class', [
-								'pixels-core-orbit-circle__pivot',
+								'pixeccte-orbit-circle__pivot',
 								'orbit-pivot-outer',
 								'elementor-repeater-item-' . $item['_id'],
 							] );
 
 							$basket_key = 'basket_' . $index;
 							$this->add_render_attribute( $basket_key, 'class', [
-								'pixels-core-orbit-circle__basket',
+								'pixeccte-orbit-circle__basket',
 								'orbit-basket',
-								'pixels-core-orbit-circle__basket--' . $item_type,
+								'pixeccte-orbit-circle__basket--' . $item_type,
 								'elementor-repeater-item-' . $item['_id'],
 							] );
 							?>
@@ -729,7 +728,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 										<?php
 										$link_key = 'link_' . $index;
 										$this->add_link_attributes( $link_key, $link );
-										$this->add_render_attribute( $link_key, 'class', 'pixels-core-orbit-circle__link' );
+										$this->add_render_attribute( $link_key, 'class', 'pixeccte-orbit-circle__link' );
 										?>
 										<a <?php $this->print_render_attribute_string( $link_key ); ?>>
 											<?php $this->render_item_content( $item ); ?>

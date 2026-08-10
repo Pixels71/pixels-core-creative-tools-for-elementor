@@ -21,4 +21,4 @@ do_action( 'wp_body_open' );
 ?>
 <div id="page" class="hfeed site">
 
-<?php do_action( 'pixels_hf_header' ); ?>
+<?php do_action( 'pixeccte_hf_header' ); ?>

@@ -34,7 +34,7 @@
 	}
 
 	function fitRingText(ring) {
-		const textEl = ring.querySelector('.pixels-core-rotator-text__ring-text');
+		const textEl = ring.querySelector('.pixeccte-rotator-text__ring-text');
 		const textPath = ring.querySelector('textPath');
 
 		if (!textEl || !textPath || '' === textPath.textContent.trim()) {
@@ -65,10 +65,10 @@
 			this.rotationSpeed = parseNumber(root.dataset.rotationSpeed, 20);
 			this.scrollSensitivity = parseNumber(root.dataset.scrollSensitivity, 1);
 
-			this.rings = Array.from(root.querySelectorAll('.pixels-core-rotator-text__ring'));
-			this.innerRing = root.querySelector('.pixels-core-rotator-text__ring--inner');
-			this.outerRing = root.querySelector('.pixels-core-rotator-text__ring--outer');
-			this.svg = root.querySelector('.pixels-core-rotator-text__svg');
+			this.rings = Array.from(root.querySelectorAll('.pixeccte-rotator-text__ring'));
+			this.innerRing = root.querySelector('.pixeccte-rotator-text__ring--inner');
+			this.outerRing = root.querySelector('.pixeccte-rotator-text__ring--outer');
+			this.svg = root.querySelector('.pixeccte-rotator-text__svg');
 
 			this.scrollRotation = 0;
 			this.lastScrollY = window.scrollY;
@@ -83,7 +83,7 @@
 		}
 
 		applyCssVariables() {
-			this.root.style.setProperty('--pixels-rotator-speed', this.rotationSpeed + 's');
+			this.root.style.setProperty('--pixeccte-rotator-speed', this.rotationSpeed + 's');
 		}
 
 		init() {
@@ -169,7 +169,7 @@
 	const instances = new WeakMap();
 
 	function initScope($scope) {
-		$scope.find('.pixels-core-rotator-text').each(function () {
+		$scope.find('.pixeccte-rotator-text').each(function () {
 			const root = this;
 
 			if (instances.has(root)) {
@@ -182,7 +182,7 @@
 	}
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-rotator-text.default', function ($scope) {
+		elementorFrontend.hooks.addAction('frontend/element_ready/pixeccte-rotator-text.default', function ($scope) {
 			initScope($scope);
 		});
 	});

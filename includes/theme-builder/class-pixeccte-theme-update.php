@@ -3,7 +3,7 @@
  * Theme Update
  */
 
-namespace PixelsCore\Theme_Builder;
+namespace PixelsCoreCreativeToolsForElementor\Theme_Builder;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -19,7 +19,7 @@ if ( ! class_exists( 'Update' ) ) :
 		 *
 		 * @var string
 		 */
-		private $db_option_key = '_pixels_hf_db_version';
+		private $db_option_key = '_pixeccte_hf_db_version';
 
 		/**
 		 *  Constructor
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Update' ) ) :
 		 *
 		 */
 		public function init() {
-			do_action( 'pixels_hf_update_before' );
+			do_action( 'pixeccte_hf_update_before' );
 
 			if ( ! $this->needs_db_update() ) :
 				return;
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Update' ) ) :
 
 			$this->update_db_version();
 
-			do_action( 'pixels_hf_update_after' );
+			do_action( 'pixeccte_hf_update_after' );
 		}
 
 		/**
@@ -76,12 +76,12 @@ if ( ! class_exists( 'Update' ) ) :
 
 			// Header.
 			if ( ! empty( $header_id ) ) :
-				update_post_meta( $header_id, 'pixels_hf_target_include_locations', $default_include_locations );
+				update_post_meta( $header_id, 'pixeccte_hf_target_include_locations', $default_include_locations );
 			endif;
 
 			// Footer.
 			if ( ! empty( $footer_id ) ) :
-				update_post_meta( $footer_id, 'pixels_hf_target_include_locations', $default_include_locations );
+				update_post_meta( $footer_id, 'pixeccte_hf_target_include_locations', $default_include_locations );
 			endif;
 		}
 
@@ -94,7 +94,7 @@ if ( ! class_exists( 'Update' ) ) :
 		 */
 		public function get_legacy_template_id( $type ) {
 			$type_sanitized = sanitize_text_field( $type );
-			$cache_key      = 'pixels_legacy_template_' . md5( $type_sanitized );
+			$cache_key      = 'pixeccte_legacy_template_' . md5( $type_sanitized );
 
 			static $local_cache = [];
 			if ( isset( $local_cache[ $type_sanitized ] ) ) {
@@ -108,20 +108,20 @@ if ( ! class_exists( 'Update' ) ) :
 			}
 
 			$args = [
-				'post_type'      => 'pixels-theme',
+				'post_type'      => 'pixeccte-theme',
 				'posts_per_page' => 1,
 				'orderby'        => 'meta_value',
 				'order'          => 'ASC',
 				'meta_query'     => [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					[
-						'key'     => pixels_get_theme_template_type_meta_key(),
+						'key'     => pixeccte_get_theme_template_type_meta_key(),
 						'value'   => $type_sanitized,
 						'compare' => '=',
 					],
 				],
 			];
 
-			$args     = apply_filters( 'pixels_hf_get_template_id_args', $args );
+			$args     = apply_filters( 'pixeccte_hf_get_template_id_args', $args );
 			$template = new \WP_Query( $args );
 
 			if ( $template->have_posts() ) {
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Update' ) ) :
 		private function needs_db_update() {
 			$db_version = get_option( $this->db_option_key, false );
 
-			if ( false === $db_version || version_compare( $db_version, PIXELS_CORE_VERSION ) ) :
+			if ( false === $db_version || version_compare( $db_version, PIXECCTE_VERSION ) ) :
 				return true;
 			endif;
 
@@ -157,7 +157,7 @@ if ( ! class_exists( 'Update' ) ) :
 		 * @return void
 		 */
 		private function update_db_version() {
-			update_option( $this->db_option_key, PIXELS_CORE_VERSION );
+			update_option( $this->db_option_key, PIXECCTE_VERSION );
 		}
 	}
 endif;

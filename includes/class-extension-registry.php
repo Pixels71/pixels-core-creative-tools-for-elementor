@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore;
+namespace PixelsCoreCreativeToolsForElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,7 +18,7 @@ final class Extension_Registry {
 	private array $extensions = [
 		'live_copy_paste' => [
 			'file'        => 'extensions/class-live-copy-paste.php',
-			'class'       => 'PixelsCore\\Extensions\\Live_Copy_Paste',
+			'class'       => 'PixelsCoreCreativeToolsForElementor\\Extensions\\Live_Copy_Paste',
 			'title'       => 'Live Copy Paste',
 			'description' => 'Paste Elementor sections, containers, and widgets from the clipboard in the editor.',
 			'tier'        => 'free',
@@ -48,7 +48,7 @@ final class Extension_Registry {
 		 *
 		 * @param array<string, array<string, mixed>> $extensions
 		 */
-		return apply_filters( 'pixels_core_extensions', $extensions );
+		return apply_filters( 'pixeccte_extensions', $extensions );
 	}
 
 	/**

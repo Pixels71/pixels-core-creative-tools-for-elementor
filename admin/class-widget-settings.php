@@ -1,8 +1,8 @@
 <?php
-namespace PixelsCore\Admin;
+namespace PixelsCoreCreativeToolsForElementor\Admin;
 
-use PixelsCore\Plugin;
-use PixelsCore\Widget_Registry;
+use PixelsCoreCreativeToolsForElementor\Plugin;
+use PixelsCoreCreativeToolsForElementor\Widget_Registry;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Widget_Settings {
 
-	public const OPTION_KEY       = 'pixels_core_active_widgets';
-	public const SYNCED_SLUGS_KEY = 'pixels_core_widgets_synced_slugs';
+	public const OPTION_KEY       = 'pixeccte_active_widgets';
+	public const SYNCED_SLUGS_KEY = 'pixeccte_widgets_synced_slugs';
 
 	private static ?Widget_Settings $instance = null;
 
@@ -111,7 +111,7 @@ final class Widget_Settings {
 		$registry     = Widget_Registry::instance();
 		$active_slugs = $this->get_active_slugs();
 		$widgets      = [];
-		$upgrade_url  = defined( 'PIXELS_CORE_UPGRADE_URL' ) ? PIXELS_CORE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
+		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
 
 		foreach ( $registry->get_all() as $slug => $config ) {
 			$requires_nested = ! empty( $config['requires_nested'] );
@@ -120,7 +120,7 @@ final class Widget_Settings {
 
 			$widgets[] = [
 				'slug'            => $slug,
-				'name'            => $config['name'] ?? 'pixels-' . $slug,
+				'name'            => $config['name'] ?? 'pixeccte-' . $slug,
 				'title'           => $config['title'],
 				'description'     => $config['description'],
 				'icon'            => $config['icon'] ?? 'eicon-plug',

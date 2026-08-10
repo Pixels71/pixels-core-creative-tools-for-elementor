@@ -5,9 +5,9 @@
 		getDefaultSettings() {
 			return {
 				selectors: {
-					widget: '.pixels-core-tabs',
-					tabTitle: '.pixels-core-tabs__title',
-					tabPanel: '.pixels-core-tabs__panels > .e-con',
+					widget: '.pixeccte-tabs',
+					tabTitle: '.pixeccte-tabs__title',
+					tabPanel: '.pixeccte-tabs__panels > .e-con',
 				},
 			};
 		},
@@ -46,7 +46,7 @@
 
 			if (!elementorFrontend.isEditMode()) {
 				this.elements.$tabPanels.removeAttr('hidden');
-				this.elements.$widget.addClass('pixels-core-tabs--animated');
+				this.elements.$widget.addClass('pixeccte-tabs--animated');
 			}
 
 			this.activateTab(this.getDefaultTabIndex(), false);
@@ -63,7 +63,7 @@
 
 		activateTab(tabIndex, animate = true) {
 			const isEditMode = elementorFrontend.isEditMode();
-			const shouldAnimate = animate && ! isEditMode && this.elements.$widget.hasClass( 'pixels-core-tabs--animated' );
+			const shouldAnimate = animate && ! isEditMode && this.elements.$widget.hasClass( 'pixeccte-tabs--animated' );
 
 			this.elements.$tabTitles.each(function () {
 				const $title = $(this);
@@ -117,7 +117,7 @@
 		},
 
 		isVerticalLayout() {
-			return this.$element.hasClass('pixels-core-tabs--vertical');
+			return this.$element.hasClass('pixeccte-tabs--vertical');
 		},
 
 		onTabKeydown(event) {
@@ -161,14 +161,14 @@
 
 			this.elements.$tabTitles.each((index, element) => {
 				const newIndex = index + 1;
-				const tabTitleId = `pixels-tab-title-${widgetNumber}${newIndex}`;
-				const contentId = `pixels-tab-content-${widgetNumber}${newIndex}`;
+				const tabTitleId = `pixeccte-tab-title-${widgetNumber}${newIndex}`;
+				const contentId = `pixeccte-tab-content-${widgetNumber}${newIndex}`;
 
 				element.setAttribute('id', tabTitleId);
 				element.setAttribute('data-tab', newIndex);
 				element.setAttribute('aria-controls', contentId);
 
-				const $label = $(element).find('.pixels-core-tabs__label');
+				const $label = $(element).find('.pixeccte-tabs__label');
 				if ($label.length) {
 					$label.attr('data-binding-index', newIndex);
 				}
@@ -180,7 +180,7 @@
 					panel.setAttribute('data-tab', newIndex);
 					panel.setAttribute('data-tab-index', newIndex);
 					panel.setAttribute('aria-labelledby', tabTitleId);
-					panel.classList.add('pixels-core-tabs__panel');
+					panel.classList.add('pixeccte-tabs__panel');
 				}
 			});
 		},
@@ -214,6 +214,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-tabs', PixelsTabsHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixeccte-tabs', PixelsTabsHandler);
 	});
 })(jQuery);

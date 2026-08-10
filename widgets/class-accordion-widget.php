@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
@@ -21,7 +21,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-accordion';
+		return 'pixeccte-accordion';
 	}
 
 	public function get_title(): string {
@@ -29,15 +29,15 @@ class Accordion_Widget extends Widget_Nested_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-accordion';
+		return 'pixeccte-icon pixeccte-icon-accordion';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'accordion', 'toggle', 'collapse', 'faq', 'pixels', 'nested' ];
+		return [ 'accordion', 'toggle', 'collapse', 'faq', 'pixeccte', 'nested' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -45,7 +45,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 	}
 
 	public function show_in_panel(): bool {
-		return \PixelsCore\Plugin::is_nested_elements_active();
+		return \PixelsCoreCreativeToolsForElementor\Plugin::is_nested_elements_active();
 	}
 
 	protected function item_content_container( int $index ): array {
@@ -80,17 +80,17 @@ class Accordion_Widget extends Widget_Nested_Base {
 	}
 
 	protected function get_default_children_placeholder_selector(): string {
-		return '.pixels-core-accordion';
+		return '.pixeccte-accordion';
 	}
 
 	protected function get_default_children_container_placeholder_selector(): string {
-		return '.pixels-core-accordion__item';
+		return '.pixeccte-accordion__item';
 	}
 
 	protected function get_initial_config(): array {
 		return array_merge( parent::get_initial_config(), [
 			'support_improved_repeaters' => true,
-			'target_container'           => [ '.pixels-core-accordion' ],
+			'target_container'           => [ '.pixeccte-accordion' ],
 			'node'                       => 'details',
 			'is_interlaced'              => true,
 		] );
@@ -250,7 +250,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 					'start' => esc_html__( 'Before Title', 'pixels-core-creative-tools-for-elementor' ),
 					'end'   => esc_html__( 'After Title', 'pixels-core-creative-tools-for-elementor' ),
 				],
-				'prefix_class' => 'pixels-core-accordion--icon-',
+				'prefix_class' => 'pixeccte-accordion--icon-',
 			]
 		);
 
@@ -270,7 +270,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'title_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-accordion__label',
+				'selector' => '{{WRAPPER}} .pixeccte-accordion__label',
 			]
 		);
 
@@ -289,7 +289,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__label' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -300,7 +300,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__title' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -320,7 +320,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__label' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -331,7 +331,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__title' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -346,7 +346,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion__title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator'  => 'before',
 			]
@@ -377,9 +377,9 @@ class Accordion_Widget extends Widget_Nested_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__icon'     => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .pixels-core-accordion__icon svg' => 'width: 1em; height: 1em;',
-					'{{WRAPPER}} .pixels-core-accordion__icons'    => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion__icon'     => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion__icon svg' => 'width: 1em; height: 1em;',
+					'{{WRAPPER}} .pixeccte-accordion__icons'    => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -397,7 +397,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__icons' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion__icons' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -417,9 +417,9 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__icon'       => 'color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__icon svg'   => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__icon svg *' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -430,7 +430,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__icons' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__icons' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -441,7 +441,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Border Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__icons' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__icons' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -461,12 +461,12 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__icon'       => 'color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__icon svg'   => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__icon svg *' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item.is-expanded .pixels-core-accordion__icon'       => 'color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item.is-expanded .pixels-core-accordion__icon svg'   => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item.is-expanded .pixels-core-accordion__icon svg *' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -477,8 +477,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__icons'       => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item.is-expanded .pixels-core-accordion__icons' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icons'       => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icons' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -489,8 +489,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Border Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-accordion__item[open] .pixels-core-accordion__icons'       => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-accordion__item.is-expanded .pixels-core-accordion__icons' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icons'       => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icons' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -502,7 +502,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'icon_border',
-				'selector'  => '{{WRAPPER}} .pixels-core-accordion__icons',
+				'selector'  => '{{WRAPPER}} .pixeccte-accordion__icons',
 				'separator' => 'before',
 			]
 		);
@@ -514,7 +514,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__icons' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion__icons' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -526,7 +526,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__icons' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; box-sizing: content-box;',
+					'{{WRAPPER}} .pixeccte-accordion__icons' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; box-sizing: content-box;',
 				],
 			]
 		);
@@ -547,7 +547,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'content_background',
-				'selector' => '{{WRAPPER}} .pixels-core-accordion__item > .e-con',
+				'selector' => '{{WRAPPER}} .pixeccte-accordion__item > .e-con',
 			]
 		);
 
@@ -558,7 +558,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__item > .e-con' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion__item > .e-con' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -588,7 +588,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-accordion' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -597,7 +597,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'item_border',
-				'selector' => '{{WRAPPER}} .pixels-core-accordion__item',
+				'selector' => '{{WRAPPER}} .pixeccte-accordion__item',
 			]
 		);
 
@@ -605,7 +605,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'item_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-accordion__item',
+				'selector' => '{{WRAPPER}} .pixeccte-accordion__item',
 			]
 		);
 
@@ -616,7 +616,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-accordion__item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .pixeccte-accordion__item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
 			]
 		);
@@ -624,15 +624,13 @@ class Accordion_Widget extends Widget_Nested_Base {
 		$this->end_controls_section();
 	}
 
-	private function render_toggle_icons(): string {
+	private function print_toggle_icons(): void {
 		$settings = $this->get_settings_for_display();
-
-		ob_start();
 		?>
-		<span class="pixels-core-accordion__icon pixels-core-accordion__icon--collapsed">
+		<span class="pixeccte-accordion__icon pixeccte-accordion__icon--collapsed">
 			<?php Icons_Manager::render_icon( $settings['icon_collapsed'], [ 'aria-hidden' => 'true' ] ); ?>
 		</span>
-		<span class="pixels-core-accordion__icon pixels-core-accordion__icon--expanded">
+		<span class="pixeccte-accordion__icon pixeccte-accordion__icon--expanded">
 			<?php
 			$expanded_icon = ! empty( $settings['icon_expanded']['value'] )
 				? $settings['icon_expanded']
@@ -641,7 +639,6 @@ class Accordion_Widget extends Widget_Nested_Base {
 			?>
 		</span>
 		<?php
-		return ob_get_clean();
 	}
 
 	public function print_child( $index, $item_id = null ): void {
@@ -658,7 +655,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 					[
 						'role'              => 'region',
 						'aria-labelledby'   => $item_id,
-						'class'             => 'pixels-core-accordion__panel',
+						'class'             => 'pixeccte-accordion__panel',
 					]
 				);
 			}
@@ -678,7 +675,6 @@ class Accordion_Widget extends Widget_Nested_Base {
 		$title_tag      = Utils::validate_html_tag( $settings['title_tag'] ?? 'div' );
 		$default_state  = $settings['default_state'] ?? 'expanded';
 		$allow_multiple = ( $settings['allow_multiple'] ?? '' ) === 'yes';
-		$icons_html     = $this->render_toggle_icons();
 
 		if ( empty( $items ) ) {
 			return;
@@ -687,7 +683,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 		$this->add_render_attribute(
 			'accordion',
 			[
-				'class'                   => 'pixels-core-accordion',
+				'class'                   => 'pixeccte-accordion',
 				'data-allow-multiple'     => $allow_multiple ? 'true' : 'false',
 				'aria-label'              => esc_attr__( 'Accordion. Open items with Enter or Space, close with Escape and navigate using Arrow Keys.', 'pixels-core-creative-tools-for-elementor' ),
 			]
@@ -699,8 +695,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 				$item_count   = $index + 1;
 				$item_id      = ! empty( $item['element_id'] )
 					? $item['element_id']
-					: 'pixels-accordion-item-' . $id_int . $index;
-				$title_id     = 'pixels-accordion-title-' . $id_int . $index;
+					: 'pixeccte-accordion-item-' . $id_int . $index;
+				$title_id     = 'pixeccte-accordion-title-' . $id_int . $index;
 				$is_open      = 'expanded' === $default_state && 0 === $index;
 				$summary_key  = 'summary-' . $index;
 				$details_key  = 'details-' . $index;
@@ -709,7 +705,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 					$details_key,
 					[
 						'id'    => $item_id,
-						'class' => 'pixels-core-accordion__item',
+						'class' => 'pixeccte-accordion__item',
 					]
 				);
 
@@ -721,7 +717,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 					$summary_key,
 					[
 						'id'               => $title_id,
-						'class'            => 'pixels-core-accordion__title',
+						'class'            => 'pixeccte-accordion__title',
 						'role'             => 'button',
 						'data-item-index'  => (string) $item_count,
 						'aria-expanded'    => $is_open ? 'true' : 'false',
@@ -732,16 +728,16 @@ class Accordion_Widget extends Widget_Nested_Base {
 				?>
 				<details <?php $this->print_render_attribute_string( $details_key ); ?>>
 					<summary <?php $this->print_render_attribute_string( $summary_key ); ?>>
-						<span class="pixels-core-accordion__label-wrap">
+						<span class="pixeccte-accordion__label-wrap">
 							<?php
 							printf(
-								'<%1$s class="pixels-core-accordion__label">%2$s</%1$s>',
-								$title_tag, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								'<%1$s class="pixeccte-accordion__label">%2$s</%1$s>',
+								tag_escape( $title_tag ),
 								esc_html( $item['item_title'] )
 							);
 							?>
 						</span>
-						<span class="pixels-core-accordion__icons"><?php echo $icons_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<span class="pixeccte-accordion__icons"><?php $this->print_toggle_icons(); ?></span>
 					</summary>
 					<?php $this->print_child( $index, $title_id ); ?>
 				</details>
@@ -766,7 +762,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 	protected function content_template(): void {
 		?>
 		<# const elementUid = view.getIDInt().toString().substr( 0, 3 ); #>
-		<div class="pixels-core-accordion" data-allow-multiple="{{ settings.allow_multiple === 'yes' ? 'true' : 'false' }}">
+		<div class="pixeccte-accordion" data-allow-multiple="{{ settings.allow_multiple === 'yes' ? 'true' : 'false' }}">
 			<# if ( settings.items && settings.items.length ) { #>
 				<# _.each( settings.items, function( item, index ) {
 					const itemIndex = index;
@@ -786,8 +782,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 			itemUid = isRepeaterInsert
 				? view.getIDInt().toString().substr( 0, 3 ) + itemIndex
 				: elementUid + itemIndex,
-			itemId = item.element_id ? item.element_id : 'pixels-accordion-item-' + itemUid,
-			titleId = 'pixels-accordion-title-' + itemUid,
+			itemId = item.element_id ? item.element_id : 'pixeccte-accordion-item-' + itemUid,
+			titleId = 'pixeccte-accordion-title-' + itemUid,
 			defaultState = settings.default_state || 'expanded',
 			isOpen = ! isRepeaterInsert && 'expanded' === defaultState && 0 === itemIndex,
 			titleTag = elementor.helpers.validateHTMLTag( settings.title_tag || 'div' ),
@@ -801,7 +797,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 
 		view.addRenderAttribute( detailsKey, {
 			id: itemId,
-			class: [ 'pixels-core-accordion__item' ],
+			class: [ 'pixeccte-accordion__item' ],
 		}, null, true );
 
 		if ( isOpen ) {
@@ -810,7 +806,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 
 		view.addRenderAttribute( summaryKey, {
 			id: titleId,
-			class: [ 'pixels-core-accordion__title' ],
+			class: [ 'pixeccte-accordion__title' ],
 			role: 'button',
 			'data-item-index': itemCount,
 			'aria-expanded': isOpen ? 'true' : 'false',
@@ -819,7 +815,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 		}, null, true );
 
 		view.addRenderAttribute( labelKey, {
-			class: [ 'pixels-core-accordion__label' ],
+			class: [ 'pixeccte-accordion__label' ],
 			'data-binding-type': 'repeater-item',
 			'data-binding-repeater-name': 'items',
 			'data-binding-setting': [ 'item_title', 'element_id' ],
@@ -838,14 +834,14 @@ class Accordion_Widget extends Widget_Nested_Base {
 		#>
 		<details {{{ view.getRenderAttributeString( detailsKey ) }}}>
 			<summary {{{ view.getRenderAttributeString( summaryKey ) }}}>
-				<span class="pixels-core-accordion__label-wrap">
+				<span class="pixeccte-accordion__label-wrap">
 					<{{ titleTag }} {{{ view.getRenderAttributeString( labelKey ) }}}>{{{ item.item_title }}}</{{ titleTag }}>
 				</span>
-				<span class="pixels-core-accordion__icons">
-					<span class="pixels-core-accordion__icon pixels-core-accordion__icon--collapsed">
+				<span class="pixeccte-accordion__icons">
+					<span class="pixeccte-accordion__icon pixeccte-accordion__icon--collapsed">
 						<# if ( collapsedIcon && collapsedIcon.rendered ) { #>{{{ collapsedIcon.value }}}<# } #>
 					</span>
-					<span class="pixels-core-accordion__icon pixels-core-accordion__icon--expanded">
+					<span class="pixeccte-accordion__icon pixeccte-accordion__icon--expanded">
 						<# if ( expandedIcon && expandedIcon.rendered ) { #>{{{ expandedIcon.value }}}<# } #>
 					</span>
 				</span>

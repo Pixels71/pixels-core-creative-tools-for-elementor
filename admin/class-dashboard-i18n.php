@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Admin;
+namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -151,6 +151,6 @@ final class Dashboard_I18n {
 		 *
 		 * @param array<string, string> $strings
 		 */
-		return apply_filters( 'pixels_core_dashboard_i18n', $strings );
+		return apply_filters( 'pixeccte_dashboard_i18n', $strings );
 	}
 }

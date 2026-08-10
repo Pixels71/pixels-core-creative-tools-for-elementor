@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
@@ -23,7 +23,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 	private array $tab_item_settings = [];
 
 	public function get_name(): string {
-		return 'pixels-tabs';
+		return 'pixeccte-tabs';
 	}
 
 	public function get_title(): string {
@@ -31,15 +31,15 @@ class Tabs_Widget extends Widget_Nested_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-tabs';
+		return 'pixeccte-icon pixeccte-icon-tabs';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'tabs', 'toggle', 'accordion', 'pixels', 'nested' ];
+		return [ 'tabs', 'toggle', 'accordion', 'pixeccte', 'nested' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -47,7 +47,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 	}
 
 	public function show_in_panel(): bool {
-		return \PixelsCore\Plugin::is_nested_elements_active();
+		return \PixelsCoreCreativeToolsForElementor\Plugin::is_nested_elements_active();
 	}
 
 	protected function tab_content_container( int $index ): array {
@@ -82,13 +82,13 @@ class Tabs_Widget extends Widget_Nested_Base {
 	}
 
 	protected function get_default_children_placeholder_selector(): string {
-		return '.pixels-core-tabs__panels';
+		return '.pixeccte-tabs__panels';
 	}
 
 	protected function get_initial_config(): array {
 		return array_merge( parent::get_initial_config(), [
 			'support_improved_repeaters' => true,
-			'target_container'           => [ '.pixels-core-tabs__nav' ],
+			'target_container'           => [ '.pixeccte-tabs__nav' ],
 			'node'                       => 'button',
 		] );
 	}
@@ -189,7 +189,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 					'horizontal' => esc_html__( 'Horizontal', 'pixels-core-creative-tools-for-elementor' ),
 					'vertical'   => esc_html__( 'Vertical', 'pixels-core-creative-tools-for-elementor' ),
 				],
-				'prefix_class' => 'pixels-core-tabs--',
+				'prefix_class' => 'pixeccte-tabs--',
 			]
 		);
 
@@ -210,7 +210,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				],
 				'default'      => 'start',
 				'toggle'       => false,
-				'prefix_class' => 'pixels-core-tabs--vertical-pos-',
+				'prefix_class' => 'pixeccte-tabs--vertical-pos-',
 				'condition'    => [
 					'layout' => 'vertical',
 				],
@@ -238,7 +238,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 					'size' => 220,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-tabs__nav' => 'width: {{SIZE}}{{UNIT}}; min-width: {{SIZE}}{{UNIT}}; flex: 0 0 {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-tabs__nav' => 'width: {{SIZE}}{{UNIT}}; min-width: {{SIZE}}{{UNIT}}; flex: 0 0 {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout' => 'vertical',
@@ -263,7 +263,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 					'size' => 0,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-tabs' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-tabs' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout' => 'vertical',
@@ -296,7 +296,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				],
 				'default'   => 'flex-start',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__nav' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__nav' => 'justify-content: {{VALUE}};',
 				],
 				'condition' => [
 					'layout' => 'vertical',
@@ -329,8 +329,8 @@ class Tabs_Widget extends Widget_Nested_Base {
 				],
 				'default'   => 'stretch',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs' => 'align-items: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-tabs__panels' => 'align-self: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs' => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__panels' => 'align-self: {{VALUE}};',
 				],
 				'condition' => [
 					'layout' => 'vertical',
@@ -363,7 +363,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				],
 				'default'   => 'flex-start',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__nav' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__nav' => 'justify-content: {{VALUE}};',
 				],
 				'condition' => [
 					'layout' => 'horizontal',
@@ -387,7 +387,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'tab_title_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-tabs__title',
+				'selector' => '{{WRAPPER}} .pixeccte-tabs__title',
 			]
 		);
 
@@ -406,7 +406,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -417,7 +417,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title .pixels-core-tabs__icon, {{WRAPPER}} .pixels-core-tabs__title .pixels-core-tabs__icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title .pixeccte-tabs__icon, {{WRAPPER}} .pixeccte-tabs__title .pixeccte-tabs__icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
 				],
 			]
 		);
@@ -428,7 +428,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -448,7 +448,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title.is-active' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title.is-active' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -459,7 +459,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title.is-active .pixels-core-tabs__icon, {{WRAPPER}} .pixels-core-tabs__title.is-active .pixels-core-tabs__icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title.is-active .pixeccte-tabs__icon, {{WRAPPER}} .pixeccte-tabs__title.is-active .pixeccte-tabs__icon svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
 				],
 			]
 		);
@@ -470,7 +470,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title.is-active' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title.is-active' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -481,7 +481,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Border Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__title.is-active' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__title.is-active' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -496,7 +496,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-tabs__title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-tabs__title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator'  => 'before',
 			]
@@ -506,7 +506,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'tab_title_border',
-				'selector' => '{{WRAPPER}} .pixels-core-tabs__title',
+				'selector' => '{{WRAPPER}} .pixeccte-tabs__title',
 			]
 		);
 
@@ -523,7 +523,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-tabs__nav' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-tabs__nav' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -546,7 +546,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-tabs__panels > .e-con' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-tabs__panels > .e-con' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -555,7 +555,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'content_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-tabs__panels > .e-con',
+				'selector' => '{{WRAPPER}} .pixeccte-tabs__panels > .e-con',
 			]
 		);
 
@@ -563,7 +563,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'content_background',
-				'selector' => '{{WRAPPER}} .pixels-core-tabs__panels > .e-con',
+				'selector' => '{{WRAPPER}} .pixeccte-tabs__panels > .e-con',
 			]
 		);
 
@@ -574,7 +574,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-tabs__panels > .e-con' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-tabs__panels > .e-con' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -583,7 +583,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'content_border',
-				'selector' => '{{WRAPPER}} .pixels-core-tabs__panels > .e-con',
+				'selector' => '{{WRAPPER}} .pixeccte-tabs__panels > .e-con',
 			]
 		);
 
@@ -591,7 +591,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'content_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-tabs__panels > .e-con',
+				'selector' => '{{WRAPPER}} .pixeccte-tabs__panels > .e-con',
 			]
 		);
 
@@ -613,7 +613,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 			[
 				'id'            => $tab_id,
 				'class'         => [
-					'pixels-core-tabs__title',
+					'pixeccte-tabs__title',
 					$is_active ? 'is-active' : '',
 				],
 				'role'          => 'tab',
@@ -626,11 +626,11 @@ class Tabs_Widget extends Widget_Nested_Base {
 		?>
 		<button type="button" <?php $this->print_render_attribute_string( $title_key ); ?>>
 			<?php if ( ! empty( $item['tab_icon']['value'] ) ) : ?>
-				<span class="pixels-core-tabs__icon">
+				<span class="pixeccte-tabs__icon">
 					<?php Icons_Manager::render_icon( $item['tab_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 				</span>
 			<?php endif; ?>
-			<span class="pixels-core-tabs__label"><?php echo esc_html( $item['tab_title'] ); ?></span>
+			<span class="pixeccte-tabs__label"><?php echo esc_html( $item['tab_title'] ); ?></span>
 		</button>
 		<?php
 	}
@@ -662,7 +662,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				$attributes = [
 					'id'                => $item_settings['container_id'],
 					'class'             => array_filter( [
-						'pixels-core-tabs__panel',
+						'pixeccte-tabs__panel',
 						$is_active ? 'is-active' : '',
 					] ),
 					'role'              => 'tabpanel',
@@ -704,18 +704,18 @@ class Tabs_Widget extends Widget_Nested_Base {
 		$this->add_render_attribute(
 			'wrapper',
 			[
-				'class'            => 'pixels-core-tabs',
+				'class'            => 'pixeccte-tabs',
 				'data-default-tab' => (string) $default_active,
 				'data-widget-number' => (string) $widget_number,
 			]
 		);
 		?>
 		<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
-			<div class="pixels-core-tabs__nav" role="tablist">
+			<div class="pixeccte-tabs__nav" role="tablist">
 				<?php
 				foreach ( $tabs as $index => $item ) {
 					$tab_count   = $index + 1;
-					$tab_title_id = 'pixels-tab-title-' . $widget_number . $tab_count;
+					$tab_title_id = 'pixeccte-tab-title-' . $widget_number . $tab_count;
 					$tab_id      = ! empty( $item['element_id'] ) ? $item['element_id'] : $tab_title_id;
 
 					$item_settings = [
@@ -723,7 +723,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 						'tab_count'    => $tab_count,
 						'tab_id'       => $tab_id,
 						'tab_title_id' => $tab_title_id,
-						'container_id' => 'pixels-tab-content-' . $widget_number . $tab_count,
+						'container_id' => 'pixeccte-tab-content-' . $widget_number . $tab_count,
 						'item'         => $item,
 						'settings'     => $settings,
 					];
@@ -733,7 +733,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 				}
 				?>
 			</div>
-			<div class="pixels-core-tabs__panels">
+			<div class="pixeccte-tabs__panels">
 				<?php $this->render_tab_panels_html( $settings ); ?>
 			</div>
 		</div>
@@ -754,16 +754,16 @@ class Tabs_Widget extends Widget_Nested_Base {
 	protected function content_template(): void {
 		?>
 		<# const elementUid = view.getIDInt().toString(); #>
-		<div class="pixels-core-tabs" data-widget-number="{{ elementUid }}" data-default-tab="{{ settings.default_active || 1 }}">
+		<div class="pixeccte-tabs" data-widget-number="{{ elementUid }}" data-default-tab="{{ settings.default_active || 1 }}">
 			<# if ( settings.tabs && settings.tabs.length ) { #>
-				<div class="pixels-core-tabs__nav" role="tablist">
+				<div class="pixeccte-tabs__nav" role="tablist">
 					<# _.each( settings.tabs, function( item, index ) {
 						const tabIndex = index;
 					#>
 						<?php $this->content_template_single_item( false ); ?>
 					<# } ); #>
 				</div>
-				<div class="pixels-core-tabs__panels"></div>
+				<div class="pixeccte-tabs__panels"></div>
 			<# } #>
 		</div>
 		<?php
@@ -778,16 +778,16 @@ class Tabs_Widget extends Widget_Nested_Base {
 				? parseInt( settings.default_active, 10 )
 				: 1,
 			isActive = ! isRepeaterInsert && tabCount === defaultActive,
-			tabTitleId = 'pixels-tab-title-' + elementUid + tabCount,
+			tabTitleId = 'pixeccte-tab-title-' + elementUid + tabCount,
 			tabId = item.element_id ? item.element_id : tabTitleId,
-			contentId = 'pixels-tab-content-' + elementUid + tabCount,
+			contentId = 'pixeccte-tab-content-' + elementUid + tabCount,
 			iconHTML = elementor.helpers.renderIcon( view, item.tab_icon, { 'aria-hidden': true }, 'i' , 'object' ),
 			titleKey = isRepeaterInsert ? 'tab-title' : 'tab-title-' + tabIndex,
 			labelKey = isRepeaterInsert ? 'tab-label' : 'tab-label-' + tabIndex;
 
 		view.addRenderAttribute( titleKey, {
 			id: tabId,
-			class: [ 'pixels-core-tabs__title', isActive ? 'is-active' : '' ],
+			class: [ 'pixeccte-tabs__title', isActive ? 'is-active' : '' ],
 			role: 'tab',
 			'aria-selected': isActive ? 'true' : 'false',
 			'aria-controls': contentId,
@@ -796,7 +796,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 		}, null, true );
 
 		view.addRenderAttribute( labelKey, {
-			class: [ 'pixels-core-tabs__label' ],
+			class: [ 'pixeccte-tabs__label' ],
 			'data-binding-type': 'repeater-item',
 			'data-binding-repeater-name': 'tabs',
 			'data-binding-setting': [ 'tab_title', 'element_id' ],
@@ -815,7 +815,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 		#>
 		<button {{{ view.getRenderAttributeString( titleKey ) }}}>
 			<# if ( iconHTML && iconHTML.rendered ) { #>
-				<span class="pixels-core-tabs__icon">{{{ iconHTML.value }}}</span>
+				<span class="pixeccte-tabs__icon">{{{ iconHTML.value }}}</span>
 			<# } #>
 			<span {{{ view.getRenderAttributeString( labelKey ) }}}>{{{ item.tab_title }}}</span>
 		</button>

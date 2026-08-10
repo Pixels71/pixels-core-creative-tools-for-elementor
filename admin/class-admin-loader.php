@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Admin;
+namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Admin_Loader {
 
 	public static function init(): void {
-		require_once PIXELS_CORE_PATH . 'includes/class-widget-registry.php';
-		require_once PIXELS_CORE_PATH . 'includes/class-extension-registry.php';
+		require_once PIXECCTE_PATH . 'includes/class-widget-registry.php';
+		require_once PIXECCTE_PATH . 'includes/class-extension-registry.php';
 
 		self::require_files();
 
@@ -26,8 +26,8 @@ final class Admin_Loader {
 	}
 
 	public static function load_settings(): void {
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-widget-settings.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-extension-settings.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-widget-settings.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-extension-settings.php';
 	}
 
 	/**
@@ -41,9 +41,9 @@ final class Admin_Loader {
 
 	private static function require_files(): void {
 		self::load_settings();
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-dashboard-i18n.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-dashboard-assets.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-rest-api.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-admin.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-dashboard-i18n.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-dashboard-assets.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-rest-api.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-admin.php';
 	}
 }

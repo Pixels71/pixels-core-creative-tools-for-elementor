@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Admin;
+namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -21,19 +21,22 @@ final class Admin {
 		add_action( 'admin_menu', [ $this, 'register_menu' ] );
 		add_action( 'admin_init', [ $this, 'maybe_redirect_after_activation' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
-		add_filter( 'plugin_action_links_' . plugin_basename( PIXELS_CORE_FILE ), [ $this, 'add_settings_link' ] );
+		add_filter( 'plugin_action_links_' . plugin_basename( PIXECCTE_FILE ), [ $this, 'add_settings_link' ] );
 		add_filter( 'admin_body_class', [ $this, 'add_body_class' ] );
 	}
 
 	public function maybe_redirect_after_activation(): void {
-		if ( ! get_transient( 'pixels_core_activation_redirect' ) ) {
+		if ( ! get_transient( 'pixeccte_activation_redirect' ) ) {
 			return;
 		}
 
-		delete_transient( 'pixels_core_activation_redirect' );
+		delete_transient( 'pixeccte_activation_redirect' );
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Activation redirect guard; read-only GET flag from WP core.
-		if ( wp_doing_ajax() || is_network_admin() || isset( $_GET['activate-multi'] ) ) {
+		// Core bulk-activation flag: presence-only check (value unused).
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Activation redirect guard; read-only GET flag from WP core.
+		$is_bulk_activate = isset( $_GET['activate-multi'] );
+
+		if ( wp_doing_ajax() || is_network_admin() || $is_bulk_activate ) {
 			return;
 		}
 
@@ -41,7 +44,7 @@ final class Admin {
 			return;
 		}
 
-		wp_safe_redirect( admin_url( 'admin.php?page=pixels-core' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=pixeccte' ) );
 		exit;
 	}
 
@@ -52,7 +55,7 @@ final class Admin {
 	public function add_settings_link( array $links ): array {
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
-			esc_url( admin_url( 'admin.php?page=pixels-core' ) ),
+			esc_url( admin_url( 'admin.php?page=pixeccte' ) ),
 			esc_html__( 'Settings', 'pixels-core-creative-tools-for-elementor' )
 		);
 
@@ -66,32 +69,34 @@ final class Admin {
 			esc_html__( 'Pixels Core Creative Tools for Elementor', 'pixels-core-creative-tools-for-elementor' ),
 			esc_html__( 'Pixels Core', 'pixels-core-creative-tools-for-elementor' ),
 			'manage_options',
-			'pixels-core',
+			'pixeccte',
 			[ $this, 'render_page' ],
-			PIXELS_CORE_URL . 'assets/images/pixels-logo.svg',
+			PIXECCTE_URL . 'assets/images/pixeccte-logo.svg',
 			58
 		);
 	}
 
 	public function enqueue_assets( string $hook ): void {
+		$menu_css = PIXECCTE_ADMIN_PATH . 'assets/css/admin-menu.css';
+
 		wp_enqueue_style(
-			'pixels-core-admin-menu',
-			PIXELS_CORE_ADMIN_URL . 'assets/css/admin-menu.css',
+			'pixeccte-admin-menu',
+			PIXECCTE_ADMIN_URL . 'assets/css/admin-menu.css',
 			[],
-			PIXELS_CORE_VERSION
+			file_exists( $menu_css ) ? (string) filemtime( $menu_css ) : PIXECCTE_VERSION
 		);
 
-		if ( 'toplevel_page_pixels-core' === $hook ) {
+		if ( 'toplevel_page_pixeccte' === $hook ) {
 			Dashboard_Assets::enqueue( $hook );
 			return;
 		}
 
-		if ( 'pixels-core_page_pixels-core-submissions' === $hook ) {
+		if ( 'pixeccte_page_pixeccte-submissions' === $hook ) {
 			wp_enqueue_style(
-				'pixels-core-admin',
-				PIXELS_CORE_ADMIN_URL . 'assets/css/admin.css',
+				'pixeccte-admin',
+				PIXECCTE_ADMIN_URL . 'assets/css/admin.css',
 				[],
-				PIXELS_CORE_VERSION
+				PIXECCTE_VERSION
 			);
 		}
 	}
@@ -102,11 +107,11 @@ final class Admin {
 	 */
 	public function add_body_class( string $classes ): string {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin page check for body class.
-		if ( ! isset( $_GET['page'] ) || 'pixels-core' !== sanitize_key( wp_unslash( $_GET['page'] ) ) ) {
+		if ( ! isset( $_GET['page'] ) || 'pixeccte' !== sanitize_key( wp_unslash( $_GET['page'] ) ) ) {
 			return $classes;
 		}
 
-		return $classes . ' pixels-core-dashboard-page';
+		return $classes . ' pixeccte-dashboard-page';
 	}
 
 	public function render_page(): void {
@@ -114,6 +119,6 @@ final class Admin {
 			return;
 		}
 
-		echo '<div id="pixels-dashboard-root"></div>';
+		echo '<div id="pixeccte-dashboard-root"></div>';
 	}
 }

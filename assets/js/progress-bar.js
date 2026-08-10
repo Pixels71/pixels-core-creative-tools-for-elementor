@@ -12,32 +12,32 @@
 
 	function isRingWrapper(wrapper) {
 		return RING_TYPES.some(function (type) {
-			return wrapper.classList.contains('pixels-core-progress-bar--' + type);
+			return wrapper.classList.contains('pixeccte-progress-bar--' + type);
 		});
 	}
 
 	function animateLinearItem(item, wrapper) {
-		const fill = item.querySelector('.pixels-core-progress-bar__fill');
+		const fill = item.querySelector('.pixeccte-progress-bar__fill');
 		if (!fill) {
 			return;
 		}
 
 		const percent = Math.max(0, Math.min(100, Number.parseInt(item.dataset.percent, 10) || 0));
 		const duration = parseDuration(wrapper);
-		const isVertical = wrapper.classList.contains('pixels-core-progress-bar--vertical');
+		const isVertical = wrapper.classList.contains('pixeccte-progress-bar--vertical');
 
 		fill.style.transitionDuration = duration + 'ms';
 
 		if (isVertical) {
-			fill.style.setProperty('--pixels-target-height', percent + '%');
+			fill.style.setProperty('--pixeccte-target-height', percent + '%');
 		} else {
-			fill.style.setProperty('--pixels-target-width', percent + '%');
+			fill.style.setProperty('--pixeccte-target-width', percent + '%');
 		}
 	}
 
 	function animateRingItem(item, wrapper) {
-		const ring = item.querySelector('.pixels-core-progress-bar__ring');
-		const progress = item.querySelector('.pixels-core-progress-bar__ring-progress');
+		const ring = item.querySelector('.pixeccte-progress-bar__ring');
+		const progress = item.querySelector('.pixeccte-progress-bar__ring-progress');
 
 		if (!ring || !progress) {
 			return;
@@ -52,8 +52,8 @@
 			return;
 		}
 
-		wrapper.style.setProperty('--pixels-progress-duration', duration + 'ms');
-		progress.style.setProperty('--pixels-ring-circumference', String(circumference));
+		wrapper.style.setProperty('--pixeccte-progress-duration', duration + 'ms');
+		progress.style.setProperty('--pixeccte-ring-circumference', String(circumference));
 		progress.setAttribute('stroke-dasharray', String(circumference));
 		progress.setAttribute('stroke-dashoffset', String(circumference));
 		progress.style.strokeDashoffset = String(circumference);
@@ -78,7 +78,7 @@
 			return;
 		}
 
-		const items = wrapper.querySelectorAll('.pixels-core-progress-bar__item');
+		const items = wrapper.querySelectorAll('.pixeccte-progress-bar__item');
 
 		items.forEach(function (item) {
 			animateItem(item, wrapper);
@@ -88,7 +88,7 @@
 	}
 
 	function initStaticBars(wrapper) {
-		if (!wrapper.classList.contains('pixels-core-progress-bar--animate')) {
+		if (!wrapper.classList.contains('pixeccte-progress-bar--animate')) {
 			return;
 		}
 
@@ -96,7 +96,7 @@
 	}
 
 	function initAnimatedBars(wrapper) {
-		if (!wrapper.classList.contains('pixels-core-progress-bar--animate')) {
+		if (!wrapper.classList.contains('pixeccte-progress-bar--animate')) {
 			return;
 		}
 
@@ -125,7 +125,7 @@
 	}
 
 	function initScope($scope) {
-		$scope.find('.pixels-core-progress-bar').each(function () {
+		$scope.find('.pixeccte-progress-bar').each(function () {
 			const wrapper = this;
 			const isEditor = typeof elementor !== 'undefined' && elementor.previewView;
 
@@ -138,7 +138,7 @@
 	}
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-progress-bar.default', function ($scope) {
+		elementorFrontend.hooks.addAction('frontend/element_ready/pixeccte-progress-bar.default', function ($scope) {
 			initScope($scope);
 		});
 	});

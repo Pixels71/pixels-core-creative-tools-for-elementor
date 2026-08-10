@@ -1,35 +1,35 @@
 /* Select2 */
 .post-type-astra_adv_header span.select2.select2-container.select2-container--default,
-.post-type-pixels-advanced-hook span.select2.select2-container.select2-container--default {
+.post-type-pixeccte-theme span.select2.select2-container.select2-container--default {
     margin-top: 0;
 }
 
 .post-type-astra_adv_header li.select2-results__option.select2-results__message,
-.post-type-pixels-advanced-hook li.select2-results__option.select2-results__message {
+.post-type-pixeccte-theme li.select2-results__option.select2-results__message {
     background: #ecebeb;
     margin-bottom: 0;
 }
-.pixels-target-rule-wrapper  .select2-container {
+.pixeccte-target-rule-wrapper  .select2-container {
     display: inline-block;
     position: relative;
     vertical-align: middle;
     width: 100% !important;
 }
 
-.pixels-target-rule-wrapper .select2-container--default.select2-container--focus .select2-selection--multiple,
-.pixels-target-rule-wrapper .select2-container--default .select2-selection--multiple {
+.pixeccte-target-rule-wrapper .select2-container--default.select2-container--focus .select2-selection--multiple,
+.pixeccte-target-rule-wrapper .select2-container--default .select2-selection--multiple {
     border: 1px solid #ddd;
     margin-top: 10px;
 }
 
-.pixels-target-rule-wrapper .select2-container .select2-search--inline,
-.pixels-target-rule-wrapper .select2-container--default .select2-search--inline .select2-search__field {
+.pixeccte-target-rule-wrapper .select2-container .select2-search--inline,
+.pixeccte-target-rule-wrapper .select2-container--default .select2-search--inline .select2-search__field {
     width: 100% !important;
 }
 
 /* Target Rule field */
-.pixels-target-rule-condition,
-.pixels-user-role-condition {
+.pixeccte-target-rule-condition,
+.pixeccte-user-role-condition {
     position: relative;
     margin-top: 10px;
 }
@@ -46,8 +46,8 @@
     margin-top: 15px;
 }
 
-.pixels-target-rule-display-on,
-.pixels-target-rule-exclude-on {
+.pixeccte-target-rule-display-on,
+.pixeccte-target-rule-exclude-on {
     margin-bottom: 10px;
 }
 
@@ -85,8 +85,8 @@
     padding-bottom: 0;
 }
 
-.configure-content .pixels-allow-specific-posts input, 
-.configure-content .pixels-post-types {
+.configure-content .pixeccte-allow-specific-posts input, 
+.configure-content .pixeccte-post-types {
     margin-right: 3px;
 }
 
@@ -99,6 +99,6 @@
     cursor: pointer;
 }
 
-.pixels-hidden {
+.pixeccte-hidden {
     display: none !important;
 }

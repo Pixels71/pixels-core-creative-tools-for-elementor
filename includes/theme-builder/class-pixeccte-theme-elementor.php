@@ -2,9 +2,9 @@
 /**
  * Entry point for the plugin. Checks if Elementor is installed and activated and loads it's own files and actions.
  */
-namespace PixelsCore\Theme_Builder;
+namespace PixelsCoreCreativeToolsForElementor\Theme_Builder;
 
-use PixelsCore\Theme_Builder\Target_Rules_Fields;
+use PixelsCoreCreativeToolsForElementor\Theme_Builder\Target_Rules_Fields;
 defined('ABSPATH') || exit; // Abort, if called directly.
 
 /**
@@ -55,7 +55,7 @@ class Theme_Elementor {
 			self::$elementor_instance = \Elementor\Plugin::instance();
 
 			$this->includes();
-			add_action( 'init', 'pixels_maybe_migrate_theme_template_type_meta', 5 );
+			add_action( 'init', 'pixeccte_maybe_migrate_theme_template_type_meta', 5 );
 
 			add_action( 'init', [ $this, 'setup_unsupported_theme' ] );
 			add_action( 'elementor/documents/register_controls', [ $this, 'register_popup_document_controls' ] );
@@ -77,7 +77,7 @@ class Theme_Elementor {
 			add_action( 'elementor/page_templates/canvas/before_content', [ $this, 'open_popup_editor_wrapper' ], 1 );
 			add_action( 'elementor/page_templates/canvas/after_content', [ $this, 'close_popup_editor_wrapper' ], 99 );
 
-			add_shortcode( 'pixels_hf_template', [ $this, 'render_template' ] );
+			add_shortcode( 'pixeccte_hf_template', [ $this, 'render_template' ] );
 			add_filter( 'nav_menu_css_class', [ $this, 'add_mega_menu_item_classes' ], 10, 4 );
 			add_filter( 'nav_menu_link_attributes', [ $this, 'add_mega_menu_link_attributes' ], 10, 4 );
 			add_filter( 'walker_nav_menu_start_el', [ $this, 'render_mega_menu_panel' ], 10, 4 );
@@ -107,16 +107,16 @@ class Theme_Elementor {
 
 		// Load WPML & Polylang Compatibility if WPML is installed and activated.
 		// if ( defined( 'ICL_SITEPRESS_VERSION' ) || defined( 'POLYLANG_BASENAME' ) ) {
-		// 	require_once PIXELS_CORE_PATH . '/inc/multilang-compatibility/class-multilang-compatibility.php';
+		// 	require_once PIXECCTE_PATH . '/inc/multilang-compatibility/class-multilang-compatibility.php';
 		// }
 
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/pixels-theme-functions.php';
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/class-pixels-theme-admin.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/pixeccte-theme-functions.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/class-pixeccte-theme-admin.php';
 
 		// Load Target rules.
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/class-pixels-theme-target-rules-fields.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/class-pixeccte-theme-target-rules-fields.php';
 		// Setup upgrade routines.
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/class-pixels-theme-update.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/class-pixeccte-theme-update.php';
 	}
 
 	public function register_popup_document_controls( $document ) {
@@ -126,14 +126,14 @@ class Theme_Elementor {
 
 		$post = $document->get_main_post();
 
-		if ( ! $post || 'pixels-theme' !== $post->post_type || 'type_popup' !== pixels_get_theme_template_type( $post->ID ) ) {
+		if ( ! $post || 'pixeccte-theme' !== $post->post_type || 'type_popup' !== pixeccte_get_theme_template_type( $post->ID ) ) {
 			return;
 		}
 
 		$options = $this->get_popup_options( $post->ID );
 
 		$document->start_controls_section(
-			'pixels_popup_layout_section',
+			'pixeccte_popup_layout_section',
 			[
 				'label' => esc_html__( 'Pixels Popup Layout', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -141,7 +141,7 @@ class Theme_Elementor {
 		);
 
 		$document->add_responsive_control(
-			'pixels_popup_width',
+			'pixeccte_popup_width',
 			[
 				'label'      => esc_html__( 'Width', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
@@ -153,13 +153,13 @@ class Theme_Elementor {
 				],
 				'default'    => $this->popup_css_size_to_dimension( $options['width'], 420, 'px' ),
 				'selectors'  => [
-					'.pixels-theme-popup-editor-preview .pixels-theme-popup__dialog' => '--pixels-popup-width: {{SIZE}}{{UNIT}};',
+					'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__dialog' => '--pixeccte-popup-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_height_type',
+			'pixeccte_popup_height_type',
 			[
 				'label'   => esc_html__( 'Height', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
@@ -173,7 +173,7 @@ class Theme_Elementor {
 		);
 
 		$document->add_control(
-			'pixels_popup_height',
+			'pixeccte_popup_height',
 			[
 				'label'      => esc_html__( 'Custom Height', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
@@ -183,15 +183,15 @@ class Theme_Elementor {
 					'vh' => [ 'min' => 10, 'max' => 100 ],
 				],
 				'default'    => [ 'size' => $options['height'] ? (int) $options['height'] : 500, 'unit' => 'px' ],
-				'condition'  => [ 'pixels_popup_height_type' => 'custom' ],
+				'condition'  => [ 'pixeccte_popup_height_type' => 'custom' ],
 				'selectors'  => [
-					'.pixels-theme-popup-editor-preview .pixels-theme-popup__dialog' => '--pixels-popup-height: {{SIZE}}{{UNIT}};',
+					'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__dialog' => '--pixeccte-popup-height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
 		$document->add_responsive_control(
-			'pixels_popup_horizontal_position',
+			'pixeccte_popup_horizontal_position',
 			[
 				'label'   => esc_html__( 'Horizontal Position', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
@@ -206,7 +206,7 @@ class Theme_Elementor {
 		);
 
 		$document->add_responsive_control(
-			'pixels_popup_vertical_position',
+			'pixeccte_popup_vertical_position',
 			[
 				'label'   => esc_html__( 'Vertical Position', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
@@ -223,7 +223,7 @@ class Theme_Elementor {
 		$document->end_controls_section();
 
 		$document->start_controls_section(
-			'pixels_popup_settings_section',
+			'pixeccte_popup_settings_section',
 			[
 				'label' => esc_html__( 'Pixels Popup Settings', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -232,7 +232,7 @@ class Theme_Elementor {
 
 		foreach ( $this->get_popup_trigger_options() as $key => $trigger_options ) {
 			$document->add_control(
-				'pixels_popup_trigger_' . $key,
+				'pixeccte_popup_trigger_' . $key,
 				[
 					'label'        => $trigger_options['label'],
 					'type'         => \Elementor\Controls_Manager::SWITCHER,
@@ -246,12 +246,12 @@ class Theme_Elementor {
 
 			foreach ( $trigger_options['controls'] as $control_key => $control_options ) {
 				$document->add_control(
-					'pixels_popup_' . $control_key,
+					'pixeccte_popup_' . $control_key,
 					array_merge(
 						$control_options,
 						[
 							'default'     => $options[ $control_key ],
-							'condition'   => [ 'pixels_popup_trigger_' . $key => 'yes' ],
+							'condition'   => [ 'pixeccte_popup_trigger_' . $key => 'yes' ],
 							'render_type' => 'template',
 						]
 					)
@@ -260,7 +260,7 @@ class Theme_Elementor {
 		}
 
 		$document->add_control(
-			'pixels_popup_show_overlay',
+			'pixeccte_popup_show_overlay',
 			[
 				'label'        => esc_html__( 'Overlay', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
@@ -273,21 +273,21 @@ class Theme_Elementor {
 		);
 
 		$document->add_control(
-			'pixels_popup_overlay_color',
+			'pixeccte_popup_overlay_color',
 			[
 				'label'       => esc_html__( 'Overlay Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::COLOR,
 				'default'     => $options['overlay_color'],
-				'condition'   => [ 'pixels_popup_show_overlay' => 'yes' ],
+				'condition'   => [ 'pixeccte_popup_show_overlay' => 'yes' ],
 				'selectors'   => [
-					'.pixels-theme-popup-editor-preview .pixels-theme-popup__overlay' => '--pixels-popup-overlay-color: {{VALUE}};',
+					'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__overlay' => '--pixeccte-popup-overlay-color: {{VALUE}};',
 				],
 				'render_type' => 'template',
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_show_close_button',
+			'pixeccte_popup_show_close_button',
 			[
 				'label'        => esc_html__( 'Close Button', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
@@ -301,7 +301,7 @@ class Theme_Elementor {
 
 		foreach ( [ 'entrance' => esc_html__( 'Entrance Animation', 'pixels-core-creative-tools-for-elementor' ), 'exit' => esc_html__( 'Exit Animation', 'pixels-core-creative-tools-for-elementor' ) ] as $key => $label ) {
 			$document->add_control(
-				'pixels_popup_' . $key . '_animation',
+				'pixeccte_popup_' . $key . '_animation',
 				[
 					'label'   => $label,
 					'type'    => \Elementor\Controls_Manager::SELECT,
@@ -313,7 +313,7 @@ class Theme_Elementor {
 		}
 
 		$document->add_control(
-			'pixels_popup_auto_close_after',
+			'pixeccte_popup_auto_close_after',
 			[
 				'label'   => esc_html__( 'Automatically Close After (sec)', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
@@ -327,7 +327,7 @@ class Theme_Elementor {
 		$document->end_controls_section();
 
 		$document->start_controls_section(
-			'pixels_popup_close_button_style_section',
+			'pixeccte_popup_close_button_style_section',
 			[
 				'label' => esc_html__( 'Pixels Popup Close Button', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -335,7 +335,7 @@ class Theme_Elementor {
 		);
 
 		$document->add_control(
-			'pixels_popup_close_button_placement',
+			'pixeccte_popup_close_button_placement',
 			[
 				'label'       => esc_html__( 'Placement', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
@@ -344,13 +344,13 @@ class Theme_Elementor {
 					'inside'  => esc_html__( 'Inside Dialog', 'pixels-core-creative-tools-for-elementor' ),
 					'outside' => esc_html__( 'Outside Dialog', 'pixels-core-creative-tools-for-elementor' ),
 				],
-				'condition'   => [ 'pixels_popup_show_close_button' => 'yes' ],
+				'condition'   => [ 'pixeccte_popup_show_close_button' => 'yes' ],
 				'render_type' => 'template',
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_close_button_horizontal_position',
+			'pixeccte_popup_close_button_horizontal_position',
 			[
 				'label'       => esc_html__( 'Horizontal Position', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::CHOOSE,
@@ -359,13 +359,13 @@ class Theme_Elementor {
 					'left'  => [ 'title' => esc_html__( 'Left', 'pixels-core-creative-tools-for-elementor' ), 'icon' => 'eicon-h-align-left' ],
 					'right' => [ 'title' => esc_html__( 'Right', 'pixels-core-creative-tools-for-elementor' ), 'icon' => 'eicon-h-align-right' ],
 				],
-				'condition'   => [ 'pixels_popup_show_close_button' => 'yes' ],
+				'condition'   => [ 'pixeccte_popup_show_close_button' => 'yes' ],
 				'render_type' => 'template',
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_close_button_vertical_position',
+			'pixeccte_popup_close_button_vertical_position',
 			[
 				'label'       => esc_html__( 'Vertical Position', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::CHOOSE,
@@ -374,20 +374,20 @@ class Theme_Elementor {
 					'top'    => [ 'title' => esc_html__( 'Top', 'pixels-core-creative-tools-for-elementor' ), 'icon' => 'eicon-v-align-top' ],
 					'bottom' => [ 'title' => esc_html__( 'Bottom', 'pixels-core-creative-tools-for-elementor' ), 'icon' => 'eicon-v-align-bottom' ],
 				],
-				'condition'   => [ 'pixels_popup_show_close_button' => 'yes' ],
+				'condition'   => [ 'pixeccte_popup_show_close_button' => 'yes' ],
 				'render_type' => 'template',
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_close_button_delay',
+			'pixeccte_popup_close_button_delay',
 			[
 				'label'       => esc_html__( 'Show After (sec)', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
 				'min'         => 0,
 				'step'        => 0.1,
 				'default'     => $options['close_button_delay'],
-				'condition'   => [ 'pixels_popup_show_close_button' => 'yes' ],
+				'condition'   => [ 'pixeccte_popup_show_close_button' => 'yes' ],
 				'render_type' => 'template',
 			]
 		);
@@ -401,7 +401,7 @@ class Theme_Elementor {
 			'close_button_border_radius' => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 		] as $key => $label ) {
 			$document->add_control(
-				'pixels_popup_' . $key,
+				'pixeccte_popup_' . $key,
 				[
 					'label'       => $label,
 					'type'        => \Elementor\Controls_Manager::SLIDER,
@@ -410,7 +410,7 @@ class Theme_Elementor {
 						'px' => [ 'min' => 0, 'max' => in_array( $key, [ 'close_button_offset_x', 'close_button_offset_y' ], true ) ? 100 : 200 ],
 					],
 					'default'     => $this->popup_css_size_to_dimension( $options[ $key ], (int) $options[ $key ], 'px' ),
-					'condition'   => [ 'pixels_popup_show_close_button' => 'yes' ],
+					'condition'   => [ 'pixeccte_popup_show_close_button' => 'yes' ],
 					'render_type' => 'template',
 				]
 			);
@@ -422,12 +422,12 @@ class Theme_Elementor {
 			'close_button_border_color'     => esc_html__( 'Border Color', 'pixels-core-creative-tools-for-elementor' ),
 		] as $key => $label ) {
 			$document->add_control(
-				'pixels_popup_' . $key,
+				'pixeccte_popup_' . $key,
 				[
 					'label'       => $label,
 					'type'        => \Elementor\Controls_Manager::COLOR,
 					'default'     => $options[ $key ],
-					'condition'   => [ 'pixels_popup_show_close_button' => 'yes' ],
+					'condition'   => [ 'pixeccte_popup_show_close_button' => 'yes' ],
 					'render_type' => 'template',
 				]
 			);
@@ -436,7 +436,7 @@ class Theme_Elementor {
 		$document->end_controls_section();
 
 		$document->start_controls_section(
-			'pixels_popup_advanced_section',
+			'pixeccte_popup_advanced_section',
 			[
 				'label' => esc_html__( 'Pixels Popup Advanced', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -451,7 +451,7 @@ class Theme_Elementor {
 			'accessible_navigation' => esc_html__( 'Accessible Navigation', 'pixels-core-creative-tools-for-elementor' ),
 		] as $key => $label ) {
 			$document->add_control(
-				'pixels_popup_' . $key,
+				'pixeccte_popup_' . $key,
 				[
 					'label'        => $label,
 					'type'         => \Elementor\Controls_Manager::SWITCHER,
@@ -465,7 +465,7 @@ class Theme_Elementor {
 		}
 
 		$document->add_control(
-			'pixels_popup_open_selector',
+			'pixeccte_popup_open_selector',
 			[
 				'label'       => esc_html__( 'Open By Selector', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
@@ -479,27 +479,27 @@ class Theme_Elementor {
 		
 
 		$document->add_control(
-			'pixels_popup_margin',
+			'pixeccte_popup_margin',
 			[
 				'label'      => esc_html__( 'Margin', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem' ],
 				'default'    => $this->popup_spacing_to_dimensions( $options['margin'] ),
 				'selectors'  => [
-					'.pixels-theme-popup-editor-preview .pixels-theme-popup__dialog' => '--pixels-popup-margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__dialog' => '--pixeccte-popup-margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_padding',
+			'pixeccte_popup_padding',
 			[
 				'label'      => esc_html__( 'Content Padding', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem' ],
 				'default'    => $this->popup_spacing_to_dimensions( $options['padding'] ),
 				'selectors'  => [
-					'.pixels-theme-popup-editor-preview .pixels-theme-popup__content' => '--pixels-popup-padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__content' => '--pixeccte-popup-padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -509,13 +509,13 @@ class Theme_Elementor {
 			'content_border_color'     => esc_html__( 'Content Border Color', 'pixels-core-creative-tools-for-elementor' ),
 		] as $key => $label ) {
 			$document->add_control(
-				'pixels_popup_' . $key,
+				'pixeccte_popup_' . $key,
 				[
 					'label'       => $label,
 					'type'        => \Elementor\Controls_Manager::COLOR,
 					'default'     => $options[ $key ],
 					'selectors'   => [
-						'.pixels-theme-popup-editor-preview .pixels-theme-popup__content' => ( 'content_background_color' === $key ? '--pixels-popup-content-background-color' : '--pixels-popup-content-border-color' ) . ': {{VALUE}};',
+						'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__content' => ( 'content_background_color' === $key ? '--pixeccte-popup-content-background-color' : '--pixeccte-popup-content-border-color' ) . ': {{VALUE}};',
 					],
 					'render_type' => 'template',
 				]
@@ -523,7 +523,7 @@ class Theme_Elementor {
 		}
 
 		$document->add_control(
-			'pixels_popup_content_border_style',
+			'pixeccte_popup_content_border_style',
 			[
 				'label'       => esc_html__( 'Content Border Style', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
@@ -536,7 +536,7 @@ class Theme_Elementor {
 					'double' => esc_html__( 'Double', 'pixels-core-creative-tools-for-elementor' ),
 				],
 				'selectors'   => [
-					'.pixels-theme-popup-editor-preview .pixels-theme-popup__content' => '--pixels-popup-content-border-style: {{VALUE}};',
+					'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__content' => '--pixeccte-popup-content-border-style: {{VALUE}};',
 				],
 				'render_type' => 'template',
 			]
@@ -547,7 +547,7 @@ class Theme_Elementor {
 			'content_border_radius' => esc_html__( 'Content Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 		] as $key => $label ) {
 			$document->add_control(
-				'pixels_popup_' . $key,
+				'pixeccte_popup_' . $key,
 				[
 					'label'       => $label,
 					'type'        => \Elementor\Controls_Manager::SLIDER,
@@ -557,7 +557,7 @@ class Theme_Elementor {
 					],
 					'default'     => $this->popup_css_size_to_dimension( $options[ $key ], (int) $options[ $key ], 'px' ),
 					'selectors'   => [
-						'.pixels-theme-popup-editor-preview .pixels-theme-popup__content' => ( 'content_border_width' === $key ? '--pixels-popup-content-border-width' : '--pixels-popup-content-border-radius' ) . ': {{SIZE}}{{UNIT}};',
+						'.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__content' => ( 'content_border_width' === $key ? '--pixeccte-popup-content-border-width' : '--pixeccte-popup-content-border-radius' ) . ': {{SIZE}}{{UNIT}};',
 					],
 					'render_type' => 'template',
 				]
@@ -567,14 +567,14 @@ class Theme_Elementor {
 		$document->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
-				'name'     => 'pixels_popup_content_box_shadow',
+				'name'     => 'pixeccte_popup_content_box_shadow',
 				'label'    => esc_html__( 'Content Box Shadow', 'pixels-core-creative-tools-for-elementor' ),
-				'selector' => '.pixels-theme-popup-editor-preview .pixels-theme-popup__content',
+				'selector' => '.pixeccte-theme-popup-editor-preview .pixeccte-theme-popup__content',
 			]
 		);
 
 		$document->add_control(
-			'pixels_popup_css_classes',
+			'pixeccte_popup_css_classes',
 			[
 				'label'   => esc_html__( 'CSS Classes', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
@@ -593,14 +593,14 @@ class Theme_Elementor {
 
 		$post = $document->get_main_post();
 
-		if ( ! $post || 'pixels-theme' !== $post->post_type || 'type_mega_menu' !== pixels_get_theme_template_type( $post->ID ) ) {
+		if ( ! $post || 'pixeccte-theme' !== $post->post_type || 'type_mega_menu' !== pixeccte_get_theme_template_type( $post->ID ) ) {
 			return;
 		}
 
 		$options = $this->get_mega_menu_options( $post->ID );
 
 		$document->start_controls_section(
-			'pixels_mega_menu_layout_section',
+			'pixeccte_mega_menu_layout_section',
 			[
 				'label' => esc_html__( 'Pixels Mega Menu Layout', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -608,7 +608,7 @@ class Theme_Elementor {
 		);
 
 		$document->add_control(
-			'pixels_mega_menu_width_type',
+			'pixeccte_mega_menu_width_type',
 			[
 				'label'   => esc_html__( 'Width Type', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
@@ -622,7 +622,7 @@ class Theme_Elementor {
 		);
 
 		$document->add_responsive_control(
-			'pixels_mega_menu_width',
+			'pixeccte_mega_menu_width',
 			[
 				'label'      => esc_html__( 'Width', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
@@ -634,13 +634,13 @@ class Theme_Elementor {
 				],
 				'default'    => $options['width'],
 				'condition'  => [
-					'pixels_mega_menu_width_type' => 'custom',
+					'pixeccte_mega_menu_width_type' => 'custom',
 				],
 			]
 		);
 
 		$document->add_responsive_control(
-			'pixels_mega_menu_container_width',
+			'pixeccte_mega_menu_container_width',
 			[
 				'label'      => esc_html__( 'Container Width', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
@@ -651,7 +651,7 @@ class Theme_Elementor {
 				],
 				'default'    => $options['container_width'],
 				'condition'  => [
-					'pixels_mega_menu_width_type' => 'container',
+					'pixeccte_mega_menu_width_type' => 'container',
 				],
 			]
 		);
@@ -666,7 +666,7 @@ class Theme_Elementor {
 
 		$post_id = (int) $document->get_main_id();
 
-		if ( ! $post_id || 'pixels-theme' !== get_post_type( $post_id ) || 'type_popup' !== pixels_get_theme_template_type( $post_id ) ) {
+		if ( ! $post_id || 'pixeccte-theme' !== get_post_type( $post_id ) || 'type_popup' !== pixeccte_get_theme_template_type( $post_id ) ) {
 			return $data;
 		}
 
@@ -678,7 +678,7 @@ class Theme_Elementor {
 		$old_settings = is_array( $old_settings ) ? $old_settings : [];
 
 		foreach ( $old_settings as $key => $value ) {
-			if ( 0 !== strpos( $key, 'pixels_popup_' ) ) {
+			if ( 0 !== strpos( $key, 'pixeccte_popup_' ) ) {
 				continue;
 			}
 
@@ -702,19 +702,19 @@ class Theme_Elementor {
 
 		$post = $document->get_main_post();
 
-		if ( ! $post || 'pixels-theme' !== $post->post_type || 'type_single_post' !== pixels_get_theme_template_type( $post->ID ) ) {
+		if ( ! $post || 'pixeccte-theme' !== $post->post_type || 'type_single_post' !== pixeccte_get_theme_template_type( $post->ID ) ) {
 			return;
 		}
 
-		$preview_post_id = (int) pixels_get_theme_builder_preview_post_id( $post->ID );
+		$preview_post_id = (int) pixeccte_get_theme_builder_preview_post_id( $post->ID );
 		$page_settings   = get_post_meta( $post->ID, '_elementor_page_settings', true );
 
-		if ( is_array( $page_settings ) && ! empty( $page_settings['pixels_preview_post_id'] ) ) {
-			$preview_post_id = (int) $page_settings['pixels_preview_post_id'];
+		if ( is_array( $page_settings ) && ! empty( $page_settings['pixeccte_preview_post_id'] ) ) {
+			$preview_post_id = (int) $page_settings['pixeccte_preview_post_id'];
 		}
 
 		$document->start_controls_section(
-			'pixels_single_post_preview_section',
+			'pixeccte_single_post_preview_section',
 			[
 				'label' => esc_html__( 'Preview', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_SETTINGS,
@@ -722,12 +722,12 @@ class Theme_Elementor {
 		);
 
 		$document->add_control(
-			'pixels_preview_post_id',
+			'pixeccte_preview_post_id',
 			[
 				'label'       => esc_html__( 'Preview with Post', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
 				'default'     => $preview_post_id ? (string) $preview_post_id : '',
-				'options'     => pixels_get_theme_builder_preview_post_select_options(),
+				'options'     => pixeccte_get_theme_builder_preview_post_select_options(),
 				'description' => esc_html__( 'Choose a post to preview dynamic widgets. The editor preview stays on this template.', 'pixels-core-creative-tools-for-elementor' ),
 			]
 		);
@@ -749,26 +749,26 @@ class Theme_Elementor {
 
 		$post_id = (int) $document->get_main_id();
 
-		if ( ! $post_id || 'pixels-theme' !== get_post_type( $post_id ) ) {
+		if ( ! $post_id || 'pixeccte-theme' !== get_post_type( $post_id ) ) {
 			return $data;
 		}
 
-		$template_type = pixels_get_theme_template_type( $post_id );
+		$template_type = pixeccte_get_theme_template_type( $post_id );
 
 		if ( ! in_array( $template_type, [ 'type_single_post', 'type_archive_post' ], true ) ) {
 			return $data;
 		}
 
-		if ( empty( $data['settings'] ) || ! is_array( $data['settings'] ) || ! array_key_exists( 'pixels_preview_post_id', $data['settings'] ) ) {
+		if ( empty( $data['settings'] ) || ! is_array( $data['settings'] ) || ! array_key_exists( 'pixeccte_preview_post_id', $data['settings'] ) ) {
 			return $data;
 		}
 
-		$preview_post_id = absint( $data['settings']['pixels_preview_post_id'] );
+		$preview_post_id = absint( $data['settings']['pixeccte_preview_post_id'] );
 
 		if ( $preview_post_id > 0 ) {
-			update_post_meta( $post_id, '_pixels_preview_post_id', $preview_post_id );
+			update_post_meta( $post_id, '_pixeccte_preview_post_id', $preview_post_id );
 		} else {
-			delete_post_meta( $post_id, '_pixels_preview_post_id' );
+			delete_post_meta( $post_id, '_pixeccte_preview_post_id' );
 		}
 
 		return $data;
@@ -778,8 +778,8 @@ class Theme_Elementor {
 	 * Enqueue styles and scripts.
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'pixels-theme-style', PIXELS_CORE_URL . 'assets/css/pixels-header-footer.css', [], PIXELS_CORE_VERSION );
-		wp_enqueue_script( 'pixels-mega-menu', PIXELS_CORE_URL . 'assets/js/pixels-mega-menu.js', [], PIXELS_CORE_VERSION, true );
+		wp_enqueue_style( 'pixeccte-theme-style', PIXECCTE_URL . 'assets/css/pixeccte-header-footer.css', [], PIXECCTE_VERSION );
+		wp_enqueue_script( 'pixeccte-mega-menu', PIXECCTE_URL . 'assets/js/pixeccte-mega-menu.js', [], PIXECCTE_VERSION, true );
 
 		if ( class_exists( '\Elementor\Plugin' ) ) :
 			$elementor = \Elementor\Plugin::instance();
@@ -792,25 +792,25 @@ class Theme_Elementor {
 			$elementor_pro->enqueue_styles();
 		endif;
 
-		if ( is_singular( 'pixels-theme' ) && 'type_popup' === pixels_get_theme_template_type( get_the_ID() ) ) :
-			wp_enqueue_style( 'pixels-theme-popup', PIXELS_CORE_URL . 'assets/theme-builder/css/pixels-theme-popup.css', [], PIXELS_CORE_VERSION );
+		if ( is_singular( 'pixeccte-theme' ) && 'type_popup' === pixeccte_get_theme_template_type( get_the_ID() ) ) :
+			wp_enqueue_style( 'pixeccte-theme-popup', PIXECCTE_URL . 'assets/theme-builder/css/pixeccte-theme-popup.css', [], PIXECCTE_VERSION );
 		endif;
 
-		if ( pixels_header_enabled() ) :
+		if ( pixeccte_header_enabled() ) :
 			if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) :
-				$css_file = new \Elementor\Core\Files\CSS\Post( pixels_get_header_id() );
+				$css_file = new \Elementor\Core\Files\CSS\Post( pixeccte_get_header_id() );
 			elseif ( class_exists( '\Elementor\Post_CSS_File' ) ) :
-				$css_file = new \Elementor\Post_CSS_File( pixels_get_header_id() );
+				$css_file = new \Elementor\Post_CSS_File( pixeccte_get_header_id() );
 			endif;
 
 			$css_file->enqueue();
 		endif;
 
-		if ( pixels_footer_enabled() ) :
+		if ( pixeccte_footer_enabled() ) :
 			if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) :
-				$css_file = new \Elementor\Core\Files\CSS\Post( pixels_get_footer_id() );
+				$css_file = new \Elementor\Core\Files\CSS\Post( pixeccte_get_footer_id() );
 			elseif ( class_exists( '\Elementor\Post_CSS_File' ) ) :
-				$css_file = new \Elementor\Post_CSS_File( pixels_get_footer_id() );
+				$css_file = new \Elementor\Post_CSS_File( pixeccte_get_footer_id() );
 			endif;
 
 			$css_file->enqueue();
@@ -826,8 +826,8 @@ class Theme_Elementor {
 		$popup_ids = self::get_template_ids( 'type_popup' );
 
 		if ( ! empty( $popup_ids ) ) :
-			wp_enqueue_style( 'pixels-theme-popup', PIXELS_CORE_URL . 'assets/theme-builder/css/pixels-theme-popup.css', [], PIXELS_CORE_VERSION );
-			wp_enqueue_script( 'pixels-theme-popup', PIXELS_CORE_URL . 'assets/theme-builder/js/pixels-theme-popup.js', [], PIXELS_CORE_VERSION, true );
+			wp_enqueue_style( 'pixeccte-theme-popup', PIXECCTE_URL . 'assets/theme-builder/css/pixeccte-theme-popup.css', [], PIXECCTE_VERSION );
+			wp_enqueue_script( 'pixeccte-theme-popup', PIXECCTE_URL . 'assets/theme-builder/js/pixeccte-theme-popup.js', [], PIXECCTE_VERSION, true );
 
 			foreach ( $popup_ids as $popup_id ) :
 				if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) :
@@ -854,9 +854,9 @@ class Theme_Elementor {
 		global $pagenow;
 		$screen = get_current_screen();
 
-		if ( ( 'pixels-theme' == $screen->id && ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) ) || ( 'edit.php' == $pagenow && 'edit-pixels-theme' == $screen->id ) ) :
-			wp_enqueue_style( 'pixels-theme-admin-style', PIXELS_CORE_URL . 'assets/theme-builder/css/pixels-theme-admin.css', [], PIXELS_CORE_VERSION );
-			wp_enqueue_script( 'pixels-theme-admin-script', PIXELS_CORE_URL . 'assets/theme-builder/js/pixels-theme-admin.js', [], PIXELS_CORE_VERSION, true );
+		if ( ( 'pixeccte-theme' == $screen->id && ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) ) || ( 'edit.php' == $pagenow && 'edit-pixeccte-theme' == $screen->id ) ) :
+			wp_enqueue_style( 'pixeccte-theme-admin-style', PIXECCTE_URL . 'assets/theme-builder/css/pixeccte-theme-admin.css', [], PIXECCTE_VERSION );
+			wp_enqueue_script( 'pixeccte-theme-admin-script', PIXECCTE_URL . 'assets/theme-builder/js/pixeccte-theme-admin.js', [], PIXECCTE_VERSION, true );
 		endif;
 
 		$this->enqueue_popup_editor_live_preview();
@@ -866,12 +866,12 @@ class Theme_Elementor {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only check to decide which editor assets to enqueue.
 		$post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : 0;
 
-		if ( $post_id && 'pixels-theme' === get_post_type( $post_id ) && 'type_popup' === pixels_get_theme_template_type( $post_id ) ) :
+		if ( $post_id && 'pixeccte-theme' === get_post_type( $post_id ) && 'type_popup' === pixeccte_get_theme_template_type( $post_id ) ) :
 			wp_enqueue_script(
-				'pixels-theme-popup-editor',
-				PIXELS_CORE_URL . 'assets/theme-builder/js/pixels-theme-popup-editor.js',
+				'pixeccte-theme-popup-editor',
+				PIXECCTE_URL . 'assets/theme-builder/js/pixeccte-theme-popup-editor.js',
 				[ 'jquery' ],
-				PIXELS_CORE_VERSION,
+				PIXECCTE_VERSION,
 				true
 			);
 		endif;
@@ -884,15 +884,15 @@ class Theme_Elementor {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only check to decide which editor assets to enqueue.
 		$post_id = isset( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : 0;
 
-		if ( ! $post_id || 'pixels-theme' !== get_post_type( $post_id ) || 'type_single_post' !== pixels_get_theme_template_type( $post_id ) ) {
+		if ( ! $post_id || 'pixeccte-theme' !== get_post_type( $post_id ) || 'type_single_post' !== pixeccte_get_theme_template_type( $post_id ) ) {
 			return;
 		}
 
 		wp_enqueue_script(
-			'pixels-theme-single-preview',
-			PIXELS_CORE_URL . 'assets/theme-builder/js/pixels-theme-single-preview.js',
+			'pixeccte-theme-single-preview',
+			PIXECCTE_URL . 'assets/theme-builder/js/pixeccte-theme-single-preview.js',
 			[ 'jquery' ],
-			PIXELS_CORE_VERSION,
+			PIXECCTE_VERSION,
 			true
 		);
 	}
@@ -905,27 +905,27 @@ class Theme_Elementor {
 	 * @return Array          array with class names for the body tag.
 	 */
 	public function body_class( $classes ) {
-		if ( pixels_header_enabled() ) :
-			$classes[] = 'pixels-theme-header';
+		if ( pixeccte_header_enabled() ) :
+			$classes[] = 'pixeccte-theme-header';
 		endif;
 
-		if ( pixels_footer_enabled() ) :
-			$classes[] = 'pixels-theme-footer';
+		if ( pixeccte_footer_enabled() ) :
+			$classes[] = 'pixeccte-theme-footer';
 		endif;
 
-		$classes[] = 'pixels-theme-template-' . $this->template;
-		$classes[] = 'pixels-theme-stylesheet-' . get_stylesheet();
+		$classes[] = 'pixeccte-theme-template-' . $this->template;
+		$classes[] = 'pixeccte-theme-stylesheet-' . get_stylesheet();
 
 		return $classes;
 	}
 
 	/**
-	 * Display Unsupported theme notice if the current theme does add support for 'pixels-core'
+	 * Display Unsupported theme notice if the current theme does add support for 'pixeccte'
 	 *
 	 */
 	public function setup_unsupported_theme() {
-		if ( ! current_theme_supports( 'pixels-core' ) ) :
-			require_once PIXELS_CORE_PATH . 'includes/theme-builder/themes/default/class-pixels-default-compat.php';
+		if ( ! current_theme_supports( 'pixeccte' ) ) :
+			require_once PIXECCTE_PATH . 'includes/theme-builder/themes/default/class-pixeccte-default-compat.php';
 		endif;
 	}
 
@@ -933,12 +933,10 @@ class Theme_Elementor {
 	 * Prints the Header content.
 	 */
 	public static function get_header_content() {
-		$header_content = self::$elementor_instance->frontend->get_builder_content_for_display( pixels_get_header_id() );
+		$header_content = self::$elementor_instance->frontend->get_builder_content_for_display( pixeccte_get_header_id() );
 
 		if ( ! empty( $header_content ) ) {
-			// Elementor output is already sanitized
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $header_content;
+			echo wp_kses( $header_content, pixeccte_get_builder_allowed_html() );
 		}
 	}
 
@@ -946,12 +944,10 @@ class Theme_Elementor {
 	 * Prints the Footer content.
 	 */
 	public static function get_footer_content() {
-		$footer_content = self::$elementor_instance->frontend->get_builder_content_for_display( pixels_get_footer_id() );
+		$footer_content = self::$elementor_instance->frontend->get_builder_content_for_display( pixeccte_get_footer_id() );
 
 		if ( ! empty( $footer_content ) ) {
-			// Elementor output is already sanitized
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $footer_content;
+			echo wp_kses( $footer_content, pixeccte_get_builder_allowed_html() );
 		}
 	}
 
@@ -965,11 +961,11 @@ class Theme_Elementor {
 			'absint',
 			get_posts(
 				[
-					'post_type'      => 'pixels-theme',
+					'post_type'      => 'pixeccte-theme',
 					'post_status'    => 'publish',
 					'posts_per_page' => -1,
 					'fields'         => 'ids',
-					'meta_key'       => pixels_get_theme_template_type_meta_key(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+					'meta_key'       => pixeccte_get_theme_template_type_meta_key(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 					'meta_value'     => 'type_mega_menu', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 				]
 			)
@@ -1009,13 +1005,13 @@ class Theme_Elementor {
 	 * @return int
 	 */
 	private function get_mega_menu_template_id_from_item( $item ) {
-		if ( ! is_object( $item ) || 'post_type' !== $item->type || 'pixels-theme' !== $item->object ) :
+		if ( ! is_object( $item ) || 'post_type' !== $item->type || 'pixeccte-theme' !== $item->object ) :
 			return 0;
 		endif;
 
 		$template_id = absint( $item->object_id );
 
-		if ( ! $template_id || 'type_mega_menu' !== pixels_get_theme_template_type( $template_id ) ) :
+		if ( ! $template_id || 'type_mega_menu' !== pixeccte_get_theme_template_type( $template_id ) ) :
 			return 0;
 		endif;
 
@@ -1032,7 +1028,7 @@ class Theme_Elementor {
 	private function get_mega_menu_options( $template_id ) {
 		$settings = get_post_meta( absint( $template_id ), '_elementor_page_settings', true );
 		$settings = is_array( $settings ) ? $settings : [];
-		$width_type = isset( $settings['pixels_mega_menu_width_type'] ) ? sanitize_key( $settings['pixels_mega_menu_width_type'] ) : 'custom';
+		$width_type = isset( $settings['pixeccte_mega_menu_width_type'] ) ? sanitize_key( $settings['pixeccte_mega_menu_width_type'] ) : 'custom';
 
 		if ( ! in_array( $width_type, [ 'custom', 'container', 'full_width' ], true ) ) :
 			$width_type = 'custom';
@@ -1042,7 +1038,7 @@ class Theme_Elementor {
 			'width_type'      => $width_type,
 			'width'           => $this->normalize_mega_menu_responsive_width(
 				$settings,
-				'pixels_mega_menu_width',
+				'pixeccte_mega_menu_width',
 				[
 					'size' => 100,
 					'unit' => '%',
@@ -1056,7 +1052,7 @@ class Theme_Elementor {
 			),
 			'container_width' => $this->normalize_mega_menu_responsive_width(
 				$settings,
-				'pixels_mega_menu_container_width',
+				'pixeccte_mega_menu_container_width',
 				[
 					'size' => 1140,
 					'unit' => 'px',
@@ -1154,7 +1150,7 @@ class Theme_Elementor {
 		];
 
 		return sprintf(
-			'--pixels-mega-menu-width:%1$s;--pixels-mega-menu-width-tablet:%2$s;--pixels-mega-menu-width-mobile:%3$s;--pixels-mega-menu-container-width:%4$s;--pixels-mega-menu-container-width-tablet:%5$s;--pixels-mega-menu-container-width-mobile:%6$s;',
+			'--pixeccte-mega-menu-width:%1$s;--pixeccte-mega-menu-width-tablet:%2$s;--pixeccte-mega-menu-width-mobile:%3$s;--pixeccte-mega-menu-container-width:%4$s;--pixeccte-mega-menu-container-width-tablet:%5$s;--pixeccte-mega-menu-container-width-mobile:%6$s;',
 			esc_attr( $width['desktop'] ),
 			esc_attr( $width['tablet'] ),
 			esc_attr( $width['mobile'] ),
@@ -1174,7 +1170,7 @@ class Theme_Elementor {
 	private function get_mega_menu_layout_class( $template_id ) {
 		$options = $this->get_mega_menu_options( $template_id );
 
-		return 'pixels-mega-menu-layout-' . sanitize_html_class( $options['width_type'] );
+		return 'pixeccte-mega-menu-layout-' . sanitize_html_class( $options['width_type'] );
 	}
 
 	/**
@@ -1187,12 +1183,12 @@ class Theme_Elementor {
 	 */
 	public function add_mega_menu_item_classes( $classes, $item, $args = null, $depth = 0 ) {
 		if ( $this->get_mega_menu_template_id_from_item( $item ) ) :
-			$classes[] = 'pixels-mega-menu-item';
+			$classes[] = 'pixeccte-mega-menu-item';
 
 			if ( 0 === (int) $depth ) :
 				$classes[] = 'menu-item-has-children';
 			else :
-				$classes[] = 'pixels-mega-menu-content-item';
+				$classes[] = 'pixeccte-mega-menu-content-item';
 			endif;
 		endif;
 
@@ -1214,7 +1210,7 @@ class Theme_Elementor {
 			return $atts;
 		endif;
 
-		$panel_id = 'pixels-mega-menu-panel-' . absint( $item->ID );
+		$panel_id = 'pixeccte-mega-menu-panel-' . absint( $item->ID );
 
 		$atts['href']          = '#' . $panel_id;
 		$atts['aria-haspopup'] = 'true';
@@ -1245,13 +1241,15 @@ class Theme_Elementor {
 			return $item_output;
 		endif;
 
-		$panel_id = 'pixels-mega-menu-panel-' . absint( $item->ID );
+		$panel_id = 'pixeccte-mega-menu-panel-' . absint( $item->ID );
 		$style    = $this->get_mega_menu_wrapper_style( $template_id );
 		$layout_class = $this->get_mega_menu_layout_class( $template_id );
 
+		$mega_menu_content = wp_kses( $mega_menu_content, pixeccte_get_builder_allowed_html() );
+
 		if ( 0 < (int) $depth ) :
 			return sprintf(
-				'<div id="%1$s" class="pixels-mega-menu-content %2$s" role="region" aria-label="%3$s" style="%4$s">%5$s</div>',
+				'<div id="%1$s" class="pixeccte-mega-menu-content %2$s" role="region" aria-label="%3$s" style="%4$s">%5$s</div>',
 				esc_attr( $panel_id ),
 				esc_attr( $layout_class ),
 				esc_attr( get_the_title( $template_id ) ),
@@ -1261,7 +1259,7 @@ class Theme_Elementor {
 		endif;
 
 		$item_output .= sprintf(
-			'<div id="%1$s" class="pixels-mega-menu-panel %2$s" role="region" aria-label="%3$s" style="%4$s">%5$s</div>',
+			'<div id="%1$s" class="pixeccte-mega-menu-panel %2$s" role="region" aria-label="%3$s" style="%4$s">%5$s</div>',
 			esc_attr( $panel_id ),
 			esc_attr( $layout_class ),
 			esc_attr( get_the_title( $template_id ) ),
@@ -1286,7 +1284,7 @@ class Theme_Elementor {
 
 			$template = ! is_array( $templates ) ? $templates : $templates[0];
 
-			$template = apply_filters( "pixels_hf_get_settings_{$setting}", $template );
+			$template = apply_filters( "pixeccte_hf_get_settings_{$setting}", $template );
 
 			return $template;
 		endif;
@@ -1314,15 +1312,15 @@ class Theme_Elementor {
 	 */
 	public static function get_template_ids( $type ) {
 		$option = [
-			'location'  => 'pixels_hf_target_include_locations',
-			'exclusion' => 'pixels_hf_target_exclude_locations'
+			'location'  => 'pixeccte_hf_target_include_locations',
+			'exclusion' => 'pixeccte_hf_target_exclude_locations'
 		];
 
-		$pixels_hf_templates = Target_Rules_Fields::get_instance()->get_posts_by_conditions( 'pixels-theme', $option );
+		$pixeccte_hf_templates = Target_Rules_Fields::get_instance()->get_posts_by_conditions( 'pixeccte-theme', $option );
 		$template_ids        = [];
 
-		foreach ( $pixels_hf_templates as $template ) :
-			if ( pixels_get_theme_template_type( absint( $template['id'] ) ) === $type ) :
+		foreach ( $pixeccte_hf_templates as $template ) :
+			if ( pixeccte_get_theme_template_type( absint( $template['id'] ) ) === $type ) :
 				$template_ids[] = absint( $template['id'] );
 			endif;
 		endforeach;
@@ -1334,7 +1332,7 @@ class Theme_Elementor {
 	 * Render matching popup templates at the end of the page.
 	 */
 	public function render_popups() {
-		if ( is_singular( 'pixels-theme' ) && 'type_popup' === pixels_get_theme_template_type( get_the_ID() ) ) :
+		if ( is_singular( 'pixeccte-theme' ) && 'type_popup' === pixeccte_get_theme_template_type( get_the_ID() ) ) :
 			return;
 		endif;
 
@@ -1345,11 +1343,11 @@ class Theme_Elementor {
 			$triggers = $this->get_enabled_popup_triggers( $options );
 
 			$classes = [
-				'pixels-theme-popup',
-				'pixels-theme-popup-h-' . $options['horizontal_position'],
-				'pixels-theme-popup-v-' . $options['vertical_position'],
-				'pixels-theme-popup-enter-' . $options['entrance_animation'],
-				'pixels-theme-popup-exit-' . $options['exit_animation'],
+				'pixeccte-theme-popup',
+				'pixeccte-theme-popup-h-' . $options['horizontal_position'],
+				'pixeccte-theme-popup-v-' . $options['vertical_position'],
+				'pixeccte-theme-popup-enter-' . $options['entrance_animation'],
+				'pixeccte-theme-popup-exit-' . $options['exit_animation'],
 			];
 
 			if ( ! empty( $options['css_classes'] ) ) :
@@ -1361,11 +1359,11 @@ class Theme_Elementor {
 			$content_style      = $this->get_popup_content_style( $options );
 			$close_button_style = $this->get_popup_close_button_style( $options );
 			?>
-			<?php $this->enqueue_popup_responsive_css( '#pixels-theme-popup-' . absint( $popup_id ), $popup_id, $options ); ?>
+			<?php $this->enqueue_popup_responsive_css( '#pixeccte-theme-popup-' . absint( $popup_id ), $popup_id, $options ); ?>
 			<div
 				class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
-				id="pixels-theme-popup-<?php echo esc_attr( (string) $popup_id ); ?>"
-				data-pixels-popup
+				id="pixeccte-theme-popup-<?php echo esc_attr( (string) $popup_id ); ?>"
+				data-pixeccte-popup
 				data-popup-id="<?php echo esc_attr( (string) $popup_id ); ?>"
 				data-triggers="<?php echo esc_attr( implode( ',', $triggers ) ); ?>"
 				data-trigger="<?php echo esc_attr( in_array( 'page_load', $triggers, true ) ? 'page_load' : 'manual' ); ?>"
@@ -1389,22 +1387,20 @@ class Theme_Elementor {
 				aria-hidden="true"
 			>
 				<?php if ( 'yes' === $options['show_overlay'] ) : ?>
-					<div class="pixels-theme-popup__overlay" <?php echo 'yes' === $options['prevent_overlay_close'] ? '' : 'data-pixels-popup-close'; ?> style="<?php echo esc_attr( $overlay_style ); ?>"></div>
+					<div class="pixeccte-theme-popup__overlay" <?php echo 'yes' === $options['prevent_overlay_close'] ? '' : 'data-pixeccte-popup-close'; ?> style="<?php echo esc_attr( $overlay_style ); ?>"></div>
 				<?php endif; ?>
-				<div class="pixels-theme-popup__dialog" role="dialog" aria-modal="true" tabindex="-1" style="<?php echo esc_attr( $dialog_style ); ?>">
+				<div class="pixeccte-theme-popup__dialog" role="dialog" aria-modal="true" tabindex="-1" style="<?php echo esc_attr( $dialog_style ); ?>">
 					<?php if ( 'yes' === $options['show_close_button'] ) : ?>
-						<button type="button" class="pixels-theme-popup__close" data-pixels-popup-close aria-label="<?php esc_attr_e( 'Close popup', 'pixels-core-creative-tools-for-elementor' ); ?>" style="<?php echo esc_attr( $close_button_style ); ?>">
+						<button type="button" class="pixeccte-theme-popup__close" data-pixeccte-popup-close aria-label="<?php esc_attr_e( 'Close popup', 'pixels-core-creative-tools-for-elementor' ); ?>" style="<?php echo esc_attr( $close_button_style ); ?>">
 							<span aria-hidden="true"></span>
 						</button>
 					<?php endif; ?>
-					<div class="pixels-theme-popup__content" style="<?php echo esc_attr( $content_style ); ?>">
+					<div class="pixeccte-theme-popup__content" style="<?php echo esc_attr( $content_style ); ?>">
 						<?php
 						$popup_content = self::$elementor_instance->frontend->get_builder_content_for_display( $popup_id );
 
 						if ( ! empty( $popup_content ) ) :
-							// Elementor output is already sanitized.
-							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							echo $popup_content;
+							echo wp_kses( $popup_content, pixeccte_get_builder_allowed_html() );
 						endif;
 						?>
 					</div>
@@ -1423,10 +1419,10 @@ class Theme_Elementor {
 
 		$options = $this->get_popup_options( $popup_id );
 		$classes = [
-			'pixels-theme-popup',
-			'pixels-theme-popup-editor-preview',
-			'pixels-theme-popup-h-' . $options['horizontal_position'],
-			'pixels-theme-popup-v-' . $options['vertical_position'],
+			'pixeccte-theme-popup',
+			'pixeccte-theme-popup-editor-preview',
+			'pixeccte-theme-popup-h-' . $options['horizontal_position'],
+			'pixeccte-theme-popup-v-' . $options['vertical_position'],
 			'is-open',
 		];
 
@@ -1435,14 +1431,14 @@ class Theme_Elementor {
 		$content_style      = $this->get_popup_content_style( $options );
 		$close_button_style = $this->get_popup_close_button_style( $options );
 		?>
-		<?php $this->enqueue_popup_responsive_css( '#pixels-theme-popup-editor-preview-' . absint( $popup_id ), $popup_id, $options ); ?>
-		<div id="pixels-theme-popup-editor-preview-<?php echo esc_attr( (string) $popup_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" aria-hidden="false">
-			<div class="pixels-theme-popup__overlay" style="<?php echo esc_attr( $overlay_style . ( 'yes' === $options['show_overlay'] ? '' : 'display:none;' ) ); ?>"></div>
-			<div class="pixels-theme-popup__dialog" role="dialog" aria-modal="true" tabindex="-1" style="<?php echo esc_attr( $dialog_style ); ?>">
-				<button type="button" class="pixels-theme-popup__close" aria-label="<?php esc_attr_e( 'Close popup', 'pixels-core-creative-tools-for-elementor' ); ?>" style="<?php echo esc_attr( $close_button_style . ( 'yes' === $options['show_close_button'] ? '' : 'display:none;' ) ); ?>">
+		<?php $this->enqueue_popup_responsive_css( '#pixeccte-theme-popup-editor-preview-' . absint( $popup_id ), $popup_id, $options ); ?>
+		<div id="pixeccte-theme-popup-editor-preview-<?php echo esc_attr( (string) $popup_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" aria-hidden="false">
+			<div class="pixeccte-theme-popup__overlay" style="<?php echo esc_attr( $overlay_style . ( 'yes' === $options['show_overlay'] ? '' : 'display:none;' ) ); ?>"></div>
+			<div class="pixeccte-theme-popup__dialog" role="dialog" aria-modal="true" tabindex="-1" style="<?php echo esc_attr( $dialog_style ); ?>">
+				<button type="button" class="pixeccte-theme-popup__close" aria-label="<?php esc_attr_e( 'Close popup', 'pixels-core-creative-tools-for-elementor' ); ?>" style="<?php echo esc_attr( $close_button_style . ( 'yes' === $options['show_close_button'] ? '' : 'display:none;' ) ); ?>">
 					<span aria-hidden="true"></span>
 				</button>
-				<div class="pixels-theme-popup__content" style="<?php echo esc_attr( $content_style ); ?>">
+				<div class="pixeccte-theme-popup__content" style="<?php echo esc_attr( $content_style ); ?>">
 					<?php
 					$module = apply_filters( 'elementor/render_mode/module', 'page-templates' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Elementor core hook.
 					\Elementor\Plugin::$instance->modules_manager->get_modules( $module )->print_content();
@@ -1456,16 +1452,16 @@ class Theme_Elementor {
 	public function open_popup_editor_wrapper() {
 		$popup_id = get_the_ID();
 
-		if ( ! $popup_id || 'pixels-theme' !== get_post_type( $popup_id ) || 'type_popup' !== pixels_get_theme_template_type( $popup_id ) ) :
+		if ( ! $popup_id || 'pixeccte-theme' !== get_post_type( $popup_id ) || 'type_popup' !== pixeccte_get_theme_template_type( $popup_id ) ) :
 			return;
 		endif;
 
 		$options = $this->get_popup_options( $popup_id );
 		$classes = [
-			'pixels-theme-popup',
-			'pixels-theme-popup-editor-preview',
-			'pixels-theme-popup-h-' . $options['horizontal_position'],
-			'pixels-theme-popup-v-' . $options['vertical_position'],
+			'pixeccte-theme-popup',
+			'pixeccte-theme-popup-editor-preview',
+			'pixeccte-theme-popup-h-' . $options['horizontal_position'],
+			'pixeccte-theme-popup-v-' . $options['vertical_position'],
 			'is-open',
 		];
 		$dialog_style       = $this->get_popup_dialog_style( $options );
@@ -1473,21 +1469,21 @@ class Theme_Elementor {
 		$content_style      = $this->get_popup_content_style( $options );
 		$close_button_style = $this->get_popup_close_button_style( $options );
 		?>
-		<?php $this->enqueue_popup_responsive_css( '#pixels-theme-popup-editor-preview-' . absint( $popup_id ), $popup_id, $options ); ?>
-		<div id="pixels-theme-popup-editor-preview-<?php echo esc_attr( (string) $popup_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" aria-hidden="false">
-			<div class="pixels-theme-popup__overlay" style="<?php echo esc_attr( $overlay_style . ( 'yes' === $options['show_overlay'] ? '' : 'display:none;' ) ); ?>"></div>
-			<div class="pixels-theme-popup__dialog" role="dialog" aria-modal="true" tabindex="-1" style="<?php echo esc_attr( $dialog_style ); ?>">
-				<button type="button" class="pixels-theme-popup__close" aria-label="<?php esc_attr_e( 'Close popup', 'pixels-core-creative-tools-for-elementor' ); ?>" style="<?php echo esc_attr( $close_button_style . ( 'yes' === $options['show_close_button'] ? '' : 'display:none;' ) ); ?>">
+		<?php $this->enqueue_popup_responsive_css( '#pixeccte-theme-popup-editor-preview-' . absint( $popup_id ), $popup_id, $options ); ?>
+		<div id="pixeccte-theme-popup-editor-preview-<?php echo esc_attr( (string) $popup_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" aria-hidden="false">
+			<div class="pixeccte-theme-popup__overlay" style="<?php echo esc_attr( $overlay_style . ( 'yes' === $options['show_overlay'] ? '' : 'display:none;' ) ); ?>"></div>
+			<div class="pixeccte-theme-popup__dialog" role="dialog" aria-modal="true" tabindex="-1" style="<?php echo esc_attr( $dialog_style ); ?>">
+				<button type="button" class="pixeccte-theme-popup__close" aria-label="<?php esc_attr_e( 'Close popup', 'pixels-core-creative-tools-for-elementor' ); ?>" style="<?php echo esc_attr( $close_button_style . ( 'yes' === $options['show_close_button'] ? '' : 'display:none;' ) ); ?>">
 					<span aria-hidden="true"></span>
 				</button>
-				<div class="pixels-theme-popup__content" style="<?php echo esc_attr( $content_style ); ?>">
+				<div class="pixeccte-theme-popup__content" style="<?php echo esc_attr( $content_style ); ?>">
 		<?php
 	}
 
 	public function close_popup_editor_wrapper() {
 		$popup_id = get_the_ID();
 
-		if ( ! $popup_id || 'pixels-theme' !== get_post_type( $popup_id ) || 'type_popup' !== pixels_get_theme_template_type( $popup_id ) ) :
+		if ( ! $popup_id || 'pixeccte-theme' !== get_post_type( $popup_id ) || 'type_popup' !== pixeccte_get_theme_template_type( $popup_id ) ) :
 			return;
 		endif;
 		?>
@@ -1560,41 +1556,41 @@ class Theme_Elementor {
 	}
 
 	private function get_popup_options( $popup_id ) {
-		$options = get_post_meta( $popup_id, 'pixels_popup_options', true );
+		$options = get_post_meta( $popup_id, 'pixeccte_popup_options', true );
 		$options = wp_parse_args( is_array( $options ) ? $options : [], $this->get_default_popup_options() );
 		$page_settings = get_post_meta( $popup_id, '_elementor_page_settings', true );
 		$page_settings = is_array( $page_settings ) ? $page_settings : [];
 
-		$options['trigger'] = ! empty( $page_settings['pixels_popup_trigger'] )
-			? sanitize_key( $page_settings['pixels_popup_trigger'] )
-			: ( get_post_meta( $popup_id, 'pixels_popup_trigger', true ) ?: $options['trigger'] );
+		$options['trigger'] = ! empty( $page_settings['pixeccte_popup_trigger'] )
+			? sanitize_key( $page_settings['pixeccte_popup_trigger'] )
+			: ( get_post_meta( $popup_id, 'pixeccte_popup_trigger', true ) ?: $options['trigger'] );
 
-		$options['delay'] = isset( $page_settings['pixels_popup_delay'] )
-			? absint( $page_settings['pixels_popup_delay'] )
-			: absint( get_post_meta( $popup_id, 'pixels_popup_delay', true ) );
+		$options['delay'] = isset( $page_settings['pixeccte_popup_delay'] )
+			? absint( $page_settings['pixeccte_popup_delay'] )
+			: absint( get_post_meta( $popup_id, 'pixeccte_popup_delay', true ) );
 
-		$options['page_load_delay'] = isset( $page_settings['pixels_popup_page_load_delay'] )
-			? max( 0, (float) $page_settings['pixels_popup_page_load_delay'] )
+		$options['page_load_delay'] = isset( $page_settings['pixeccte_popup_page_load_delay'] )
+			? max( 0, (float) $page_settings['pixeccte_popup_page_load_delay'] )
 			: $options['page_load_delay'];
 
-		if ( empty( $page_settings['pixels_popup_page_load_delay'] ) && ! empty( $options['delay'] ) ) {
+		if ( empty( $page_settings['pixeccte_popup_page_load_delay'] ) && ! empty( $options['delay'] ) ) {
 			$options['page_load_delay'] = $options['delay'] / 1000;
 		}
 
 		foreach ( array_keys( $this->get_popup_trigger_options() ) as $key ) {
-			$setting_key = 'pixels_popup_trigger_' . $key;
+			$setting_key = 'pixeccte_popup_trigger_' . $key;
 
 			if ( array_key_exists( $setting_key, $page_settings ) ) {
 				$options[ 'trigger_' . $key ] = 'yes' === $page_settings[ $setting_key ] ? 'yes' : 'no';
 			}
 		}
 
-		if ( ! array_key_exists( 'pixels_popup_trigger_page_load', $page_settings ) && 'manual' === $options['trigger'] ) {
+		if ( ! array_key_exists( 'pixeccte_popup_trigger_page_load', $page_settings ) && 'manual' === $options['trigger'] ) {
 			$options['trigger_page_load'] = 'no';
 		}
 
-		$options['width']  = $this->popup_dimension_to_css( $page_settings['pixels_popup_width'] ?? null, $options['width'] . 'px' );
-		$options['height'] = $this->popup_dimension_to_css( $page_settings['pixels_popup_height'] ?? null, $options['height'] ? $options['height'] . 'px' : '' );
+		$options['width']  = $this->popup_dimension_to_css( $page_settings['pixeccte_popup_width'] ?? null, $options['width'] . 'px' );
+		$options['height'] = $this->popup_dimension_to_css( $page_settings['pixeccte_popup_height'] ?? null, $options['height'] ? $options['height'] . 'px' : '' );
 
 		foreach ( [
 			'height_type',
@@ -1618,10 +1614,31 @@ class Theme_Elementor {
 			'open_selector',
 			'css_classes',
 		] as $key ) {
-			$setting_key = 'pixels_popup_' . $key;
+			$setting_key = 'pixeccte_popup_' . $key;
 
 			if ( array_key_exists( $setting_key, $page_settings ) && '' !== $page_settings[ $setting_key ] ) {
-				$options[ $key ] = $page_settings[ $setting_key ];
+				$raw_value = $page_settings[ $setting_key ];
+
+				if ( ! is_scalar( $raw_value ) ) {
+					continue;
+				}
+
+				$value = sanitize_text_field( (string) $raw_value );
+
+				if ( in_array( $key, [ 'scroll_to_selector', 'class_click_selector', 'open_selector' ], true ) ) {
+					$options[ $key ] = $this->sanitize_popup_selector( $value );
+					continue;
+				}
+
+				if ( 'css_classes' === $key ) {
+					$options[ $key ] = implode(
+						' ',
+						array_filter( array_map( 'sanitize_html_class', preg_split( '/\s+/', $value ) ?: [] ) )
+					);
+					continue;
+				}
+
+				$options[ $key ] = $value;
 			}
 		}
 
@@ -1632,7 +1649,7 @@ class Theme_Elementor {
 			'adblock_delay'      => [ 0, 3600 ],
 			'page_load_delay'    => [ 0, 3600 ],
 		] as $key => $range ) {
-			$setting_key = 'pixels_popup_' . $key;
+			$setting_key = 'pixeccte_popup_' . $key;
 
 			if ( array_key_exists( $setting_key, $page_settings ) && '' !== $page_settings[ $setting_key ] ) {
 				$options[ $key ] = min( $range[1], max( $range[0], (float) $page_settings[ $setting_key ] ) );
@@ -1646,41 +1663,41 @@ class Theme_Elementor {
 		$options['content_border_style'] = in_array( $options['content_border_style'], [ 'none', 'solid', 'dashed', 'dotted', 'double' ], true ) ? $options['content_border_style'] : 'dashed';
 
 		foreach ( [ 'close_button_offset_x', 'close_button_offset_y', 'close_button_size', 'close_button_icon_size', 'close_button_border_width', 'close_button_border_radius', 'content_border_width', 'content_border_radius' ] as $key ) {
-			$setting_key = 'pixels_popup_' . $key;
+			$setting_key = 'pixeccte_popup_' . $key;
 
 			if ( array_key_exists( $setting_key, $page_settings ) ) {
 				$options[ $key ] = $this->popup_dimension_to_css( $page_settings[ $setting_key ], $options[ $key ] );
 			}
 		}
 
-		if ( array_key_exists( 'pixels_popup_horizontal_position', $page_settings ) && '' !== $page_settings['pixels_popup_horizontal_position'] ) {
-			$options['horizontal_position'] = $this->popup_flex_to_horizontal_position( $page_settings['pixels_popup_horizontal_position'] );
+		if ( array_key_exists( 'pixeccte_popup_horizontal_position', $page_settings ) && '' !== $page_settings['pixeccte_popup_horizontal_position'] ) {
+			$options['horizontal_position'] = $this->popup_flex_to_horizontal_position( $page_settings['pixeccte_popup_horizontal_position'] );
 		}
 
-		if ( array_key_exists( 'pixels_popup_vertical_position', $page_settings ) && '' !== $page_settings['pixels_popup_vertical_position'] ) {
-			$options['vertical_position'] = $this->popup_flex_to_vertical_position( $page_settings['pixels_popup_vertical_position'] );
+		if ( array_key_exists( 'pixeccte_popup_vertical_position', $page_settings ) && '' !== $page_settings['pixeccte_popup_vertical_position'] ) {
+			$options['vertical_position'] = $this->popup_flex_to_vertical_position( $page_settings['pixeccte_popup_vertical_position'] );
 		}
 
 		foreach ( [ 'show_overlay', 'show_close_button', 'prevent_overlay_close', 'prevent_esc_close', 'disable_scroll', 'avoid_multiple', 'accessible_navigation' ] as $key ) {
-			$setting_key = 'pixels_popup_' . $key;
+			$setting_key = 'pixeccte_popup_' . $key;
 
 			if ( array_key_exists( $setting_key, $page_settings ) ) {
 				$options[ $key ] = 'yes' === $page_settings[ $setting_key ] ? 'yes' : 'no';
 			}
 		}
 
-		if ( isset( $page_settings['pixels_popup_margin'] ) ) {
-			$options['margin'] = $this->popup_dimensions_to_spacing( $page_settings['pixels_popup_margin'] );
+		if ( isset( $page_settings['pixeccte_popup_margin'] ) ) {
+			$options['margin'] = $this->popup_dimensions_to_spacing( $page_settings['pixeccte_popup_margin'] );
 		}
 
-		if ( isset( $page_settings['pixels_popup_padding'] ) ) {
-			$options['padding'] = $this->popup_dimensions_to_spacing( $page_settings['pixels_popup_padding'] );
+		if ( isset( $page_settings['pixeccte_popup_padding'] ) ) {
+			$options['padding'] = $this->popup_dimensions_to_spacing( $page_settings['pixeccte_popup_padding'] );
 		}
 
-		if ( array_key_exists( 'pixels_popup_content_box_shadow_box_shadow_type', $page_settings ) ) {
+		if ( array_key_exists( 'pixeccte_popup_content_box_shadow_box_shadow_type', $page_settings ) ) {
 			$options['content_box_shadow'] = $this->popup_box_shadow_to_css(
-				$page_settings['pixels_popup_content_box_shadow_box_shadow'] ?? null,
-				$page_settings['pixels_popup_content_box_shadow_box_shadow_type']
+				$page_settings['pixeccte_popup_content_box_shadow_box_shadow'] ?? null,
+				$page_settings['pixeccte_popup_content_box_shadow_box_shadow_type']
 			);
 		}
 
@@ -1693,7 +1710,7 @@ class Theme_Elementor {
 	private function enqueue_popup_responsive_css( $selector, $popup_id, $options ) {
 		$page_settings = get_post_meta( $popup_id, '_elementor_page_settings', true );
 		$page_settings = is_array( $page_settings ) ? $page_settings : [];
-		$selector      = preg_replace( '/[^#\.\-\_a-zA-Z0-9]/', '', (string) $selector );
+		$selector      = preg_replace( '/[^#.\-_a-zA-Z0-9]/', '', (string) $selector );
 
 		if ( empty( $selector ) ) {
 			return;
@@ -1703,7 +1720,7 @@ class Theme_Elementor {
 		$desktop_horizontal = $this->popup_horizontal_position_to_flex( $options['horizontal_position'] );
 		$desktop_vertical   = $this->popup_vertical_position_to_flex( $options['vertical_position'] );
 		$css                = sprintf(
-			'%1$s{justify-content:%2$s;align-items:%3$s;}%1$s .pixels-theme-popup__dialog{--pixels-popup-width:%4$s;}',
+			'%1$s{justify-content:%2$s;align-items:%3$s;}%1$s .pixeccte-theme-popup__dialog{--pixeccte-popup-width:%4$s;}',
 			$selector,
 			$desktop_horizontal,
 			$desktop_vertical,
@@ -1716,9 +1733,18 @@ class Theme_Elementor {
 		];
 
 		foreach ( $responsive_devices as $device => $breakpoint ) {
-			$device_width      = $this->popup_dimension_to_css( $page_settings[ 'pixels_popup_width_' . $device ] ?? null, '' );
-			$device_horizontal = $this->popup_get_responsive_position( $page_settings, 'pixels_popup_horizontal_position_' . $device, 'horizontal' );
-			$device_vertical   = $this->popup_get_responsive_position( $page_settings, 'pixels_popup_vertical_position_' . $device, 'vertical' );
+			$breakpoint = $this->sanitize_popup_css_size( $breakpoint, '' );
+
+			if ( '' === $breakpoint ) {
+				continue;
+			}
+
+			$device_width      = $this->sanitize_popup_css_size(
+				$this->popup_dimension_to_css( $page_settings[ 'pixeccte_popup_width_' . $device ] ?? null, '' ),
+				''
+			);
+			$device_horizontal = $this->popup_get_responsive_position( $page_settings, 'pixeccte_popup_horizontal_position_' . $device, 'horizontal' );
+			$device_vertical   = $this->popup_get_responsive_position( $page_settings, 'pixeccte_popup_vertical_position_' . $device, 'vertical' );
 			$device_css        = '';
 
 			if ( $device_horizontal ) {
@@ -1735,16 +1761,16 @@ class Theme_Elementor {
 
 			if ( $device_width ) {
 				$css .= sprintf(
-					'@media (max-width:%1$s){%2$s .pixels-theme-popup__dialog{--pixels-popup-width:%3$s;}}',
+					'@media (max-width:%1$s){%2$s .pixeccte-theme-popup__dialog{--pixeccte-popup-width:%3$s;}}',
 					$breakpoint,
 					$selector,
-					$this->sanitize_popup_css_size( $device_width, $desktop_width )
+					$device_width
 				);
 			}
 		}
 
-		$handle = 'pixels-theme-popup-' . absint( $popup_id );
-		wp_register_style( $handle, false, [], PIXELS_CORE_VERSION );
+		$handle = 'pixeccte-theme-popup-' . absint( $popup_id );
+		wp_register_style( $handle, false, [], PIXECCTE_VERSION );
 		wp_enqueue_style( $handle );
 		wp_add_inline_style( $handle, $css );
 	}
@@ -1908,9 +1934,14 @@ class Theme_Elementor {
 			return $fallback;
 		}
 
-		$unit = ! empty( $dimension['unit'] ) ? $dimension['unit'] : 'px';
+		$unit           = ! empty( $dimension['unit'] ) ? (string) $dimension['unit'] : 'px';
+		$allowed_units  = [ 'px', '%', 'vw', 'vh', 'em', 'rem' ];
 
-		return $dimension['size'] . $unit;
+		if ( ! in_array( $unit, $allowed_units, true ) ) {
+			$unit = 'px';
+		}
+
+		return $this->sanitize_popup_css_size( $dimension['size'] . $unit, $fallback );
 	}
 
 	private function popup_box_shadow_to_css( $shadow, $type ) {
@@ -1957,27 +1988,31 @@ class Theme_Elementor {
 	}
 
 	private function popup_horizontal_position_to_flex( $value ) {
+		$allowed = [ 'flex-start', 'center', 'flex-end' ];
+
 		if ( 'left' === $value || 'flex-start' === $value ) {
-			return 'flex-start';
+			$value = 'flex-start';
+		} elseif ( 'right' === $value || 'flex-end' === $value ) {
+			$value = 'flex-end';
+		} else {
+			$value = 'center';
 		}
 
-		if ( 'right' === $value || 'flex-end' === $value ) {
-			return 'flex-end';
-		}
-
-		return 'center';
+		return in_array( $value, $allowed, true ) ? $value : 'center';
 	}
 
 	private function popup_vertical_position_to_flex( $value ) {
+		$allowed = [ 'flex-start', 'center', 'flex-end' ];
+
 		if ( 'top' === $value || 'flex-start' === $value ) {
-			return 'flex-start';
+			$value = 'flex-start';
+		} elseif ( 'bottom' === $value || 'flex-end' === $value ) {
+			$value = 'flex-end';
+		} else {
+			$value = 'center';
 		}
 
-		if ( 'bottom' === $value || 'flex-end' === $value ) {
-			return 'flex-end';
-		}
-
-		return 'center';
+		return in_array( $value, $allowed, true ) ? $value : 'center';
 	}
 
 	private function popup_flex_to_horizontal_position( $value ) {
@@ -2006,9 +2041,9 @@ class Theme_Elementor {
 
 	private function get_popup_dialog_style( $options ) {
 		$style = [
-			'--pixels-popup-width:' . $this->sanitize_popup_css_size( $options['width'], '420px' ),
-			'--pixels-popup-height:' . ( 'custom' === $options['height_type'] && $options['height'] ? $this->sanitize_popup_css_size( $options['height'], 'auto' ) : 'auto' ),
-			'--pixels-popup-margin:' . implode(
+			'--pixeccte-popup-width:' . $this->sanitize_popup_css_size( $options['width'], '420px' ),
+			'--pixeccte-popup-height:' . ( 'custom' === $options['height_type'] && $options['height'] ? $this->sanitize_popup_css_size( $options['height'], 'auto' ) : 'auto' ),
+			'--pixeccte-popup-margin:' . implode(
 				' ',
 				[
 					$this->sanitize_popup_css_size( $options['margin']['top'], '0px' ),
@@ -2023,12 +2058,12 @@ class Theme_Elementor {
 	}
 
 	private function get_popup_overlay_style( $options ) {
-		return '--pixels-popup-overlay-color:' . $this->sanitize_popup_color( $options['overlay_color'], 'rgba(0, 0, 0, 0.78)' ) . ';';
+		return '--pixeccte-popup-overlay-color:' . $this->sanitize_popup_color( $options['overlay_color'], 'rgba(0, 0, 0, 0.78)' ) . ';';
 	}
 
 	private function get_popup_content_style( $options ) {
 		$style = [
-			'--pixels-popup-padding:' . implode(
+			'--pixeccte-popup-padding:' . implode(
 				' ',
 				[
 					$this->sanitize_popup_css_size( $options['padding']['top'], '0px' ),
@@ -2037,12 +2072,12 @@ class Theme_Elementor {
 					$this->sanitize_popup_css_size( $options['padding']['left'], '0px' ),
 				]
 			),
-			'--pixels-popup-content-background-color:' . $this->sanitize_popup_color( $options['content_background_color'], '#fff' ),
-			'--pixels-popup-content-border-style:' . $this->sanitize_popup_border_style( $options['content_border_style'], 'dashed' ),
-			'--pixels-popup-content-border-color:' . $this->sanitize_popup_color( $options['content_border_color'], '#dcdcdc' ),
-			'--pixels-popup-content-border-width:' . $this->sanitize_popup_css_size( $options['content_border_width'], '1px' ),
-			'--pixels-popup-content-border-radius:' . $this->sanitize_popup_css_size( $options['content_border_radius'], '0px' ),
-			'--pixels-popup-content-box-shadow:' . $this->sanitize_popup_box_shadow( $options['content_box_shadow'], 'none' ),
+			'--pixeccte-popup-content-background-color:' . $this->sanitize_popup_color( $options['content_background_color'], '#fff' ),
+			'--pixeccte-popup-content-border-style:' . $this->sanitize_popup_border_style( $options['content_border_style'], 'dashed' ),
+			'--pixeccte-popup-content-border-color:' . $this->sanitize_popup_color( $options['content_border_color'], '#dcdcdc' ),
+			'--pixeccte-popup-content-border-width:' . $this->sanitize_popup_css_size( $options['content_border_width'], '1px' ),
+			'--pixeccte-popup-content-border-radius:' . $this->sanitize_popup_css_size( $options['content_border_radius'], '0px' ),
+			'--pixeccte-popup-content-box-shadow:' . $this->sanitize_popup_box_shadow( $options['content_box_shadow'], 'none' ),
 		];
 
 		return implode( ';', $style ) . ';';
@@ -2088,6 +2123,21 @@ class Theme_Elementor {
 		}
 
 		return $fallback;
+	}
+
+	/**
+	 * Sanitize a CSS/querySelector string used by popup triggers.
+	 *
+	 * Allows common selector characters while stripping quotes and control chars.
+	 *
+	 * @param string $value Raw selector.
+	 * @return string
+	 */
+	private function sanitize_popup_selector( $value ) {
+		$value = sanitize_text_field( (string) $value );
+		$value = preg_replace( '/[\'"`\\\\]/', '', $value );
+
+		return is_string( $value ) ? trim( $value ) : '';
 	}
 
 	private function sanitize_popup_color( $value, $fallback ) {
@@ -2147,10 +2197,10 @@ class Theme_Elementor {
 				'id' => '',
 			],
 			$atts,
-			'pixels_hf_template'
+			'pixeccte_hf_template'
 		);
 
-		$id = ! empty( $atts['id'] ) ? apply_filters( 'pixels_hf_render_template_id', absint( $atts['id'] ) ) : 0;
+		$id = ! empty( $atts['id'] ) ? apply_filters( 'pixeccte_hf_render_template_id', absint( $atts['id'] ) ) : 0;
 
 		if ( empty( $id ) ) {
 			return '';
@@ -2158,7 +2208,7 @@ class Theme_Elementor {
 
 		$post = get_post( $id );
 
-		if ( ! $post || 'pixels-theme' !== $post->post_type ) {
+		if ( ! $post || 'pixeccte-theme' !== $post->post_type ) {
 			return '';
 		}
 
@@ -2178,7 +2228,11 @@ class Theme_Elementor {
 			$css_file->enqueue();
 		}
 
-		return self::$elementor_instance->frontend->get_builder_content_for_display( $id );
+		// Trusted Elementor builder markup for a validated pixeccte-theme CPT ID.
+		return wp_kses(
+			self::$elementor_instance->frontend->get_builder_content_for_display( $id ),
+			pixeccte_get_builder_allowed_html()
+		);
 	}
 
 	/**
@@ -2189,13 +2243,13 @@ class Theme_Elementor {
 	 * @return string
 	 */
 	public function maybe_use_popup_canvas_template( $template ) {
-		if ( ! is_singular( 'pixels-theme' ) || is_admin() ) {
+		if ( ! is_singular( 'pixeccte-theme' ) || is_admin() ) {
 			return $template;
 		}
 
 		$post_id = get_the_ID();
 
-		if ( ! $post_id || 'type_popup' !== pixels_get_theme_template_type( $post_id ) ) {
+		if ( ! $post_id || 'type_popup' !== pixeccte_get_theme_template_type( $post_id ) ) {
 			return $template;
 		}
 
@@ -2216,7 +2270,7 @@ class Theme_Elementor {
 			return $template;
 		}
 
-		$page_404 = pixels_get_404_id();
+		$page_404 = pixeccte_get_404_id();
 
 		if ( empty( $page_404 ) ) {
 			return $template;
@@ -2227,7 +2281,7 @@ class Theme_Elementor {
 		 *
 		 * @param int $page_404 Template post ID.
 		 */
-		$page_404 = apply_filters( 'pixels_404_template_id', $page_404 );
+		$page_404 = apply_filters( 'pixeccte_404_template_id', $page_404 );
 
 		if ( empty( $page_404 ) ) {
 			return $template;
@@ -2246,7 +2300,7 @@ class Theme_Elementor {
 			$css_file->enqueue();
 		}
 
-		$not_found_template = PIXELS_CORE_PATH . 'includes/theme-builder/themes/default/pixels-theme-404.php';
+		$not_found_template = PIXECCTE_PATH . 'includes/theme-builder/themes/default/pixeccte-theme-404.php';
 
 		if ( file_exists( $not_found_template ) ) {
 			return $not_found_template;
@@ -2280,7 +2334,7 @@ class Theme_Elementor {
 		 *
 		 * @param int $archive_id Template post ID.
 		 */
-		$archive_id = apply_filters( 'pixels_archive_post_template_id', $archive_id );
+		$archive_id = apply_filters( 'pixeccte_archive_post_template_id', $archive_id );
 
 		if ( empty( $archive_id ) ) {
 			return $template;
@@ -2299,7 +2353,7 @@ class Theme_Elementor {
 			$css_file->enqueue();
 		}
 
-		$archive_template = PIXELS_CORE_PATH . 'includes/theme-builder/themes/default/pixels-archive.php';
+		$archive_template = PIXECCTE_PATH . 'includes/theme-builder/themes/default/pixeccte-archive.php';
 
 		if ( file_exists( $archive_template ) ) {
 			return $archive_template;
@@ -2324,7 +2378,7 @@ class Theme_Elementor {
 		}
 
 		// Never hijack the template post type itself.
-		if ( is_singular( 'pixels-theme' ) ) {
+		if ( is_singular( 'pixeccte-theme' ) ) {
 			return $template;
 		}
 
@@ -2340,7 +2394,7 @@ class Theme_Elementor {
 		 *
 		 * @param int $single_id Template post ID.
 		 */
-		$single_id = apply_filters( 'pixels_single_post_template_id', $single_id );
+		$single_id = apply_filters( 'pixeccte_single_post_template_id', $single_id );
 
 		if ( empty( $single_id ) ) {
 			return $template;
@@ -2360,7 +2414,7 @@ class Theme_Elementor {
 		}
 
 		// Use our custom single template which outputs the full HTML markup.
-		$single_template = PIXELS_CORE_PATH . 'includes/theme-builder/themes/default/pixels-single.php';
+		$single_template = PIXECCTE_PATH . 'includes/theme-builder/themes/default/pixeccte-single.php';
 
 		if ( file_exists( $single_template ) ) {
 			return $single_template;

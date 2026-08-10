@@ -1,6 +1,12 @@
-#adminmenu #toplevel_page_pixels-core .wp-menu-image img {
-	opacity: 1;
-    padding: 5px 0 0;
-    width: 36px;
-    height: 30px;
+#adminmenu #toplevel_page_pixeccte .wp-menu-image img {
+	width: 30px;
+	height: 30px;
+	padding: 7px 0 0;
+	opacity: 1 !important;
+	filter: none !important;
+}
+
+.wp-has-submenu.wp-not-current-submenu.toplevel_page_pixeccte .wp-menu-image img{
+	width: 24px !important;
+	height: 24px !important;
 }
