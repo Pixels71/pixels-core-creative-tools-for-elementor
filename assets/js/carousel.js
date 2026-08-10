@@ -5,13 +5,13 @@
 		getDefaultSettings() {
 			return {
 				selectors: {
-					carousel: '.pixels-core-carousel__wrapper',
-					slides: '.pixels-core-carousel__slides > .swiper-slide',
+					carousel: '.pixeccte-carousel__wrapper',
+					slides: '.pixeccte-carousel__slides > .swiper-slide',
 					prev: '.elementor-swiper-button-prev',
 					next: '.elementor-swiper-button-next',
 					pagination: '.swiper-pagination',
-					thumbsWrapper: '.pixels-core-carousel__thumbs-wrapper',
-					thumbs: '.pixels-core-carousel__thumbs > .swiper-slide',
+					thumbsWrapper: '.pixeccte-carousel__thumbs-wrapper',
+					thumbs: '.pixeccte-carousel__thumbs > .swiper-slide',
 				},
 			};
 		},
@@ -528,6 +528,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-core-carousel', PixelsCarouselHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixeccte-carousel', PixelsCarouselHandler);
 	});
 })(jQuery);

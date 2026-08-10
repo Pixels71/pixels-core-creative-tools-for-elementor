@@ -1,7 +1,7 @@
 (function ($) {
 	'use strict';
 
-	const enabledWidgets = window.pixelsCoreEditor?.enabledNestedWidgets || [];
+	const enabledWidgets = window.pixeccteEditor?.enabledNestedWidgets || [];
 
 	const registerPixelsTabs = () => {
 		const NestedElementBase = elementor.modules.elements.types.NestedElementBase;
@@ -18,26 +18,26 @@
 			}
 
 			applyPanelAttributes(childView) {
-				const $widget = childView._parent.$el.find('.pixels-core-tabs');
+				const $widget = childView._parent.$el.find('.pixeccte-tabs');
 				const widgetNumber = $widget.data('widget-number');
 				const index = childView.model.attributes.dataIndex;
 				const $tabTitle = childView._parent.$el.find(
-					`.pixels-core-tabs__title[data-tab="${index}"]`
+					`.pixeccte-tabs__title[data-tab="${index}"]`
 				);
 				const defaultActive = parseInt($widget.data('default-tab'), 10) || 1;
 				const isInitialLoad = elementor.previewView.isBuffering;
 				const isActive = isInitialLoad ? index === defaultActive : $tabTitle.hasClass('is-active');
 
-				childView.$el.addClass('pixels-core-tabs__panel');
+				childView.$el.addClass('pixeccte-tabs__panel');
 
 				if (isActive) {
 					childView.$el.addClass('is-active');
 				}
 
 				childView.$el.attr({
-					id: `pixels-tab-content-${widgetNumber}${index}`,
+					id: `pixeccte-tab-content-${widgetNumber}${index}`,
 					role: 'tabpanel',
-					'aria-labelledby': $tabTitle.attr('id') || `pixels-tab-title-${widgetNumber}${index}`,
+					'aria-labelledby': $tabTitle.attr('id') || `pixeccte-tab-title-${widgetNumber}${index}`,
 					'data-tab': index,
 					'data-tab-index': index,
 				});
@@ -56,7 +56,7 @@
 
 		class PixelsTabsElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-tabs';
+				return 'pixeccte-tabs';
 			}
 
 			getView() {
@@ -80,7 +80,7 @@
 				const $summary = childView._parent.$el.find('summary').first();
 				const titleId = $summary.attr('id');
 
-				childView.$el.addClass('pixels-core-accordion__panel');
+				childView.$el.addClass('pixeccte-accordion__panel');
 				childView.$el.attr({
 					role: 'region',
 					'aria-labelledby': titleId,
@@ -90,7 +90,7 @@
 
 		class PixelsAccordionElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-accordion';
+				return 'pixeccte-accordion';
 			}
 
 			getView() {
@@ -116,7 +116,7 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('swiper-slide pixels-core-carousel__slide');
+				childView.$el.addClass('swiper-slide pixeccte-carousel__slide');
 				childView.$el.attr({
 					role: 'group',
 					'aria-roledescription': 'slide',
@@ -126,7 +126,7 @@
 
 		class PixelsCarouselElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-carousel';
+				return 'pixeccte-carousel';
 			}
 
 			getView() {
@@ -156,7 +156,7 @@
 
 				if (childView?._index !== undefined) {
 					const $wrapper = containerView.$el
-						.find('.pixels-core-stack-card__card-wrapper')
+						.find('.pixeccte-stack-card__card-wrapper')
 						.eq(childView._index);
 
 					if ($wrapper.length) {
@@ -178,7 +178,7 @@
 					this.model?.config?.support_improved_repeaters &&
 					this.model?.config?.is_interlaced
 				) {
-					const $wrappers = $container.find('.pixels-core-stack-card__card-wrapper');
+					const $wrappers = $container.find('.pixeccte-stack-card__card-wrapper');
 
 					$wrappers.each(function () {
 						if (buffer.childNodes.length) {
@@ -193,13 +193,13 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('pixels-core-stack-card__card-inner');
+				childView.$el.addClass('pixeccte-stack-card__card-inner');
 			}
 		}
 
 		class PixelsStackCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-stack-card';
+				return 'pixeccte-stack-card';
 			}
 
 			getView() {
@@ -229,9 +229,9 @@
 
 				if (childView?._index !== undefined) {
 					const $item = containerView.$el
-						.find('.pixels-core-timeline__item')
+						.find('.pixeccte-timeline__item')
 						.eq(childView._index);
-					const $card = $item.find('.pixels-core-timeline__card');
+					const $card = $item.find('.pixeccte-timeline__card');
 
 					if ($card.length) {
 						return $card;
@@ -252,7 +252,7 @@
 					this.model?.config?.support_improved_repeaters &&
 					this.model?.config?.is_interlaced
 				) {
-					const $cards = $container.find('.pixels-core-timeline__card');
+					const $cards = $container.find('.pixeccte-timeline__card');
 
 					$cards.each(function () {
 						if (buffer.childNodes.length) {
@@ -267,13 +267,13 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('pixels-core-timeline__card-inner');
+				childView.$el.addClass('pixeccte-timeline__card-inner');
 			}
 		}
 
 		class PixelsTimelineElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-timeline';
+				return 'pixeccte-timeline';
 			}
 
 			getView() {
@@ -299,13 +299,13 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('pixels-core-marquee__item');
+				childView.$el.addClass('pixeccte-marquee__item');
 			}
 		}
 
 		class PixelsMarqueeElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-marquee';
+				return 'pixeccte-marquee';
 			}
 
 			getView() {
@@ -332,11 +332,11 @@
 
 			onAddChild(childView) {
 				const index = childView.model.attributes.dataIndex;
-				const $widget = childView._parent.$el.find('.pixels-core-expanding-card');
+				const $widget = childView._parent.$el.find('.pixeccte-expanding-card');
 				const defaultActive =
 					Math.max(0, (parseInt($widget.data('active-index'), 10) || 0));
 
-				childView.$el.addClass('pixels-core-expanding-card__item');
+				childView.$el.addClass('pixeccte-expanding-card__item');
 				childView.$el.attr('data-card-index', index - 1);
 
 				if (index - 1 === defaultActive) {
@@ -347,7 +347,7 @@
 
 		class PixelsExpandingCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-core-expanding-card';
+				return 'pixeccte-expanding-card';
 			}
 
 			getView() {

@@ -23,9 +23,9 @@ get_header();
 
 		echo wp_kses(
 			\Elementor\Plugin::instance()->frontend->get_builder_content_for_display(
-				pixels_core_get_single_post_id()
+				pixeccte_get_single_post_id()
 			),
-			pixels_core_get_builder_allowed_html()
+			pixeccte_get_builder_allowed_html()
 		);
 
 	endwhile;

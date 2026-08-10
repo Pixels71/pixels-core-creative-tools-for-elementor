@@ -1,17 +1,17 @@
-.pixels-core-progress-bar {
+.pixeccte-progress-bar {
   width: 100%;
 }
 
-.pixels-core-progress-bar__list {
+.pixeccte-progress-bar__list {
   width: 100%;
 }
 
-.pixels-core-progress-bar__item {
+.pixeccte-progress-bar__item {
   position: relative;
   min-width: 0;
 }
 
-.pixels-core-progress-bar__header {
+.pixeccte-progress-bar__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,7 +19,7 @@
   margin-bottom: 8px;
 }
 
-.pixels-core-progress-bar__title {
+.pixeccte-progress-bar__title {
   display: block;
   margin: 0;
   font-size: 15px;
@@ -28,7 +28,7 @@
   color: #333;
 }
 
-.pixels-core-progress-bar__percent {
+.pixeccte-progress-bar__percent {
   display: inline-block;
   font-size: 14px;
   font-weight: 600;
@@ -36,14 +36,14 @@
   color: #333;
 }
 
-.pixels-core-progress-bar__description {
+.pixeccte-progress-bar__description {
   margin: 8px 0 0;
   font-size: 13px;
   line-height: 1.5;
   color: #777;
 }
 
-.pixels-core-progress-bar--horizontal .pixels-core-progress-bar__track {
+.pixeccte-progress-bar--horizontal .pixeccte-progress-bar__track {
   position: relative;
   width: 100%;
   height: 8px;
@@ -52,29 +52,29 @@
   border-radius: 999px;
 }
 
-.pixels-core-progress-bar--horizontal .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--horizontal .pixeccte-progress-bar__fill {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 0;
   height: 100%;
-  background-color: var(--pixels-progress-color, #6c5ce7);
+  background-color: var(--pixeccte-progress-color, #6c5ce7);
   border-radius: inherit;
   transition: width 1.2s ease;
 }
 
-.pixels-core-progress-bar--horizontal.pixels-core-progress-bar--fill-gradient
-  .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--horizontal.pixeccte-progress-bar--fill-gradient
+  .pixeccte-progress-bar__fill {
   background-image: linear-gradient(
     90deg,
-    var(--pixels-progress-color, #6c5ce7),
-    color-mix(in srgb, var(--pixels-progress-color, #6c5ce7) 65%, #ffffff)
+    var(--pixeccte-progress-color, #6c5ce7),
+    color-mix(in srgb, var(--pixeccte-progress-color, #6c5ce7) 65%, #ffffff)
   );
 }
 
-.pixels-core-progress-bar--horizontal.pixels-core-progress-bar--fill-striped
-  .pixels-core-progress-bar__fill {
-  background-color: var(--pixels-progress-color, #6c5ce7);
+.pixeccte-progress-bar--horizontal.pixeccte-progress-bar--fill-striped
+  .pixeccte-progress-bar__fill {
+  background-color: var(--pixeccte-progress-color, #6c5ce7);
   background-image: repeating-linear-gradient(
     -45deg,
     transparent,
@@ -84,37 +84,37 @@
   );
 }
 
-.pixels-core-progress-bar--horizontal.pixels-core-progress-bar--percent-inside
-  .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--horizontal.pixeccte-progress-bar--percent-inside
+  .pixeccte-progress-bar__fill {
   padding-right: 8px;
 }
 
-.pixels-core-progress-bar--horizontal.pixels-core-progress-bar--percent-inside
-  .pixels-core-progress-bar__percent {
+.pixeccte-progress-bar--horizontal.pixeccte-progress-bar--percent-inside
+  .pixeccte-progress-bar__percent {
   color: #fff;
   font-size: 11px;
   white-space: nowrap;
 }
 
-.pixels-core-progress-bar--animate.pixels-core-progress-bar--horizontal
-  .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--animate.pixeccte-progress-bar--horizontal
+  .pixeccte-progress-bar__fill {
   width: 0 !important;
 }
 
-.pixels-core-progress-bar--animate.pixels-core-progress-bar--horizontal.is-animated
-  .pixels-core-progress-bar__fill {
-  width: var(--pixels-core-target-width, 0) !important;
+.pixeccte-progress-bar--animate.pixeccte-progress-bar--horizontal.is-animated
+  .pixeccte-progress-bar__fill {
+  width: var(--pixeccte-target-width, 0) !important;
 }
 
 /* Vertical */
-.pixels-core-progress-bar--vertical .pixels-core-progress-bar__item--vertical {
+.pixeccte-progress-bar--vertical .pixeccte-progress-bar__item--vertical {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.pixels-core-progress-bar--vertical .pixels-core-progress-bar__track {
+.pixeccte-progress-bar--vertical .pixeccte-progress-bar__track {
   display: flex;
   align-items: flex-end;
   width: 80px;
@@ -124,30 +124,30 @@
   border-radius: 6px;
 }
 
-.pixels-core-progress-bar--vertical .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--vertical .pixeccte-progress-bar__fill {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   width: 100%;
   height: 0;
   padding-top: 8px;
-  background-color: var(--pixels-progress-color, #0984e3);
+  background-color: var(--pixeccte-progress-color, #0984e3);
   border-radius: inherit;
   transition: height 1.2s ease;
 }
 
-.pixels-core-progress-bar--vertical.pixels-core-progress-bar--fill-gradient
-  .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--vertical.pixeccte-progress-bar--fill-gradient
+  .pixeccte-progress-bar__fill {
   background-image: linear-gradient(
     0deg,
-    var(--pixels-progress-color, #0984e3),
-    color-mix(in srgb, var(--pixels-progress-color, #0984e3) 65%, #ffffff)
+    var(--pixeccte-progress-color, #0984e3),
+    color-mix(in srgb, var(--pixeccte-progress-color, #0984e3) 65%, #ffffff)
   );
 }
 
-.pixels-core-progress-bar--vertical.pixels-core-progress-bar--fill-striped
-  .pixels-core-progress-bar__fill {
-  background-color: var(--pixels-progress-color, #0984e3);
+.pixeccte-progress-bar--vertical.pixeccte-progress-bar--fill-striped
+  .pixeccte-progress-bar__fill {
+  background-color: var(--pixeccte-progress-color, #0984e3);
   background-image: repeating-linear-gradient(
     -45deg,
     transparent,
@@ -157,83 +157,83 @@
   );
 }
 
-.pixels-core-progress-bar--vertical .pixels-core-progress-bar__meta {
+.pixeccte-progress-bar--vertical .pixeccte-progress-bar__meta {
   margin-top: 14px;
 }
 
-.pixels-core-progress-bar--vertical .pixels-core-progress-bar__percent {
+.pixeccte-progress-bar--vertical .pixeccte-progress-bar__percent {
   margin-bottom: 6px;
 }
 
-.pixels-core-progress-bar--vertical.pixels-core-progress-bar--percent-inside
-  .pixels-core-progress-bar__percent {
+.pixeccte-progress-bar--vertical.pixeccte-progress-bar--percent-inside
+  .pixeccte-progress-bar__percent {
   color: #fff;
   font-size: 12px;
 }
 
-.pixels-core-progress-bar--animate.pixels-core-progress-bar--vertical
-  .pixels-core-progress-bar__fill {
+.pixeccte-progress-bar--animate.pixeccte-progress-bar--vertical
+  .pixeccte-progress-bar__fill {
   height: 0 !important;
 }
 
-.pixels-core-progress-bar--animate.pixels-core-progress-bar--vertical.is-animated
-  .pixels-core-progress-bar__fill {
-  height: var(--pixels-core-target-height, 0) !important;
+.pixeccte-progress-bar--animate.pixeccte-progress-bar--vertical.is-animated
+  .pixeccte-progress-bar__fill {
+  height: var(--pixeccte-target-height, 0) !important;
 }
 
 /* Circle / Donut / Semi Circle */
-.pixels-core-progress-bar--circle .pixels-core-progress-bar__item,
-.pixels-core-progress-bar--semi-circle .pixels-core-progress-bar__item {
+.pixeccte-progress-bar--circle .pixeccte-progress-bar__item,
+.pixeccte-progress-bar--semi-circle .pixeccte-progress-bar__item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.pixels-core-progress-bar__ring {
+.pixeccte-progress-bar__ring {
   position: relative;
   width: 140px;
   height: 140px;
   margin: 0 auto;
 }
 
-.pixels-core-progress-bar--semi-circle .pixels-core-progress-bar__ring {
+.pixeccte-progress-bar--semi-circle .pixeccte-progress-bar__ring {
   height: 70px;
   overflow: visible;
 }
 
-.pixels-core-progress-bar__ring-svg {
+.pixeccte-progress-bar__ring-svg {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.pixels-core-progress-bar--circle .pixels-core-progress-bar__ring-svg {
+.pixeccte-progress-bar--circle .pixeccte-progress-bar__ring-svg {
   transform: rotate(-90deg);
 }
 
-.pixels-core-progress-bar__ring-track,
-.pixels-core-progress-bar__ring-progress {
+.pixeccte-progress-bar__ring-track,
+.pixeccte-progress-bar__ring-progress {
   fill: none;
   stroke-width: 6;
 }
 
-.pixels-core-progress-bar__ring-track {
+.pixeccte-progress-bar__ring-track {
   stroke: #e8e8e8;
 }
 
-.pixels-core-progress-bar__ring-progress {
-  stroke: var(--pixels-progress-color, #00cec9);
+.pixeccte-progress-bar__ring-progress {
+  stroke: var(--pixeccte-progress-color, #00cec9);
   stroke-linecap: round;
   transition: stroke-dashoffset 1.2s ease;
 }
 
-.pixels-core-progress-bar--circle .pixels-core-progress-bar__ring-track,
-.pixels-core-progress-bar--circle .pixels-core-progress-bar__ring-progress {
+.pixeccte-progress-bar--circle .pixeccte-progress-bar__ring-track,
+.pixeccte-progress-bar--circle .pixeccte-progress-bar__ring-progress {
   stroke-width: 4;
 }
 
-.pixels-core-progress-bar__ring-center {
+.pixeccte-progress-bar__ring-center {
   position: absolute;
   inset: 0;
   display: flex;
@@ -243,27 +243,27 @@
   box-sizing: border-box;
 }
 
-.pixels-core-progress-bar--semi-circle .pixels-core-progress-bar__ring-center {
+.pixeccte-progress-bar--semi-circle .pixeccte-progress-bar__ring-center {
   align-items: flex-end;
   padding-bottom: 0;
 }
 
-.pixels-core-progress-bar--circle .pixels-core-progress-bar__percent,
-.pixels-core-progress-bar--semi-circle .pixels-core-progress-bar__percent {
+.pixeccte-progress-bar--circle .pixeccte-progress-bar__percent,
+.pixeccte-progress-bar--semi-circle .pixeccte-progress-bar__percent {
   font-size: 24px;
   font-weight: 700;
 }
 
-.pixels-core-progress-bar--circle .pixels-core-progress-bar__title,
-.pixels-core-progress-bar--semi-circle .pixels-core-progress-bar__title {
+.pixeccte-progress-bar--circle .pixeccte-progress-bar__title,
+.pixeccte-progress-bar--semi-circle .pixeccte-progress-bar__title {
   margin-top: 12px;
 }
 
-.pixels-core-progress-bar--animate .pixels-core-progress-bar__ring-progress {
-  transition: stroke-dashoffset var(--pixels-progress-duration, 1.2s) ease;
+.pixeccte-progress-bar--animate .pixeccte-progress-bar__ring-progress {
+  transition: stroke-dashoffset var(--pixeccte-progress-duration, 1.2s) ease;
 }
 
-.pixels-core-progress-bar--animate:not(.is-animated)
-  .pixels-core-progress-bar__ring-progress {
-  stroke-dashoffset: var(--pixels-ring-circumference, 283) !important;
+.pixeccte-progress-bar--animate:not(.is-animated)
+  .pixeccte-progress-bar__ring-progress {
+  stroke-dashoffset: var(--pixeccte-ring-circumference, 283) !important;
 }

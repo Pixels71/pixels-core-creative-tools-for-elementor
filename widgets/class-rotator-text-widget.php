@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
@@ -24,7 +24,7 @@ class RotatorTextWidget extends Widget_Base {
     private const INNER_SQUARE_SIZE = 118;
 
     public function get_name(): string {
-        return 'pixels-core-rotator-text';
+        return 'pixeccte-rotator-text';
     }
 
     public function get_title(): string {
@@ -32,15 +32,15 @@ class RotatorTextWidget extends Widget_Base {
     }
 
     public function get_icon(): string {
-        return 'pixels-icon pixels-icon-rotator-text';
+        return 'pixeccte-icon pixeccte-icon-rotator-text';
     }
 
     public function get_categories(): array {
-        return [ 'pixels-core' ];
+        return [ 'pixeccte' ];
     }
 
     public function get_keywords(): array {
-        return [ 'rotator', 'circular', 'text', 'rotation', 'scroll', 'branding', 'logo', 'pixels' ];
+        return [ 'rotator', 'circular', 'text', 'rotation', 'scroll', 'branding', 'logo', 'pixeccte' ];
     }
 
     protected function get_assets_slug(): string {
@@ -313,7 +313,7 @@ class RotatorTextWidget extends Widget_Base {
                     'size' => 320,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text' => '--pixels-rotator-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text' => '--pixeccte-rotator-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -322,7 +322,7 @@ class RotatorTextWidget extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name'     => 'container_background',
-                'selector' => '{{WRAPPER}} .pixels-core-rotator-text__stage',
+                'selector' => '{{WRAPPER}} .pixeccte-rotator-text__stage',
             ]
         );
 
@@ -333,7 +333,7 @@ class RotatorTextWidget extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', 'rem', '%' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__stage' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__stage' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -345,7 +345,7 @@ class RotatorTextWidget extends Widget_Base {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', 'rem', '%' ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -354,7 +354,7 @@ class RotatorTextWidget extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'container_border',
-                'selector' => '{{WRAPPER}} .pixels-core-rotator-text__stage',
+                'selector' => '{{WRAPPER}} .pixeccte-rotator-text__stage',
             ]
         );
 
@@ -379,7 +379,7 @@ class RotatorTextWidget extends Widget_Base {
                     'size' => 50,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__stage' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__stage' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -388,7 +388,7 @@ class RotatorTextWidget extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'container_box_shadow',
-                'selector' => '{{WRAPPER}} .pixels-core-rotator-text__stage',
+                'selector' => '{{WRAPPER}} .pixeccte-rotator-text__stage',
             ]
         );
 
@@ -409,7 +409,7 @@ class RotatorTextWidget extends Widget_Base {
             [
                 'name'     => 'inner_typography',
                 'label'    => esc_html__( 'Inner Ring Typography', 'pixels-core-creative-tools-for-elementor' ),
-                'selector' => '{{WRAPPER}} .pixels-core-rotator-text__ring--inner text',
+                'selector' => '{{WRAPPER}} .pixeccte-rotator-text__ring--inner text',
             ]
         );
 
@@ -420,7 +420,7 @@ class RotatorTextWidget extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#111111',
                 'selectors' => [
-                    '{{WRAPPER}} .pixels-core-rotator-text' => '--pixels-rotator-inner-color: {{VALUE}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text' => '--pixeccte-rotator-inner-color: {{VALUE}};',
                 ],
             ]
         );
@@ -430,7 +430,7 @@ class RotatorTextWidget extends Widget_Base {
             [
                 'name'      => 'outer_typography',
                 'label'     => esc_html__( 'Outer Ring Typography', 'pixels-core-creative-tools-for-elementor' ),
-                'selector'  => '{{WRAPPER}} .pixels-core-rotator-text__ring--outer text',
+                'selector'  => '{{WRAPPER}} .pixeccte-rotator-text__ring--outer text',
                 'condition' => [
                     'layout' => [ 'dual', 'scroll' ],
                 ],
@@ -444,7 +444,7 @@ class RotatorTextWidget extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '#333333',
                 'selectors' => [
-                    '{{WRAPPER}} .pixels-core-rotator-text' => '--pixels-rotator-outer-color: {{VALUE}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text' => '--pixeccte-rotator-outer-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'layout' => [ 'dual', 'scroll' ],
@@ -494,7 +494,7 @@ class RotatorTextWidget extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'default'   => 'rgba(0, 0, 0, 0.15)',
                 'selectors' => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__ripple' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__ripple' => 'border-color: {{VALUE}};',
                 ],
             ]
         );
@@ -516,7 +516,7 @@ class RotatorTextWidget extends Widget_Base {
                     'size' => 1,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__ripple' => 'border-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__ripple' => 'border-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -539,7 +539,7 @@ class RotatorTextWidget extends Widget_Base {
                     'size' => 4,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text' => '--pixels-rotator-ripple-duration: {{SIZE}}s;',
+                    '{{WRAPPER}} .pixeccte-rotator-text' => '--pixeccte-rotator-ripple-duration: {{SIZE}}s;',
                 ],
             ]
         );
@@ -577,7 +577,7 @@ class RotatorTextWidget extends Widget_Base {
                     'size' => 28,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text' => '--pixels-rotator-center-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text' => '--pixeccte-rotator-center-size: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -586,7 +586,7 @@ class RotatorTextWidget extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name'     => 'center_background',
-                'selector' => '{{WRAPPER}} .pixels-core-rotator-text__center',
+                'selector' => '{{WRAPPER}} .pixeccte-rotator-text__center',
             ]
         );
 
@@ -594,7 +594,7 @@ class RotatorTextWidget extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'center_border',
-                'selector' => '{{WRAPPER}} .pixels-core-rotator-text__center',
+                'selector' => '{{WRAPPER}} .pixeccte-rotator-text__center',
             ]
         );
 
@@ -615,7 +615,7 @@ class RotatorTextWidget extends Widget_Base {
                     'size' => 50,
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__center' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__center' => 'border-radius: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -624,7 +624,7 @@ class RotatorTextWidget extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      => 'center_text_typography',
-                'selector'  => '{{WRAPPER}} .pixels-core-rotator-text__center-text',
+                'selector'  => '{{WRAPPER}} .pixeccte-rotator-text__center-text',
                 'condition' => [
                     'center_type' => 'text',
                 ],
@@ -637,8 +637,8 @@ class RotatorTextWidget extends Widget_Base {
                 'label'     => esc_html__( 'Text Color', 'pixels-core-creative-tools-for-elementor' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__center-text' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .pixels-core-rotator-text__center-icon' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__center-text' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__center-icon' => 'color: {{VALUE}}; fill: {{VALUE}};',
                 ],
             ]
         );
@@ -656,8 +656,8 @@ class RotatorTextWidget extends Widget_Base {
                     ],
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .pixels-core-rotator-text__center-icon' => 'font-size: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pixels-core-rotator-text__center-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__center-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pixeccte-rotator-text__center-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
                 ],
                 'condition'  => [
                     'center_type' => 'icon',
@@ -752,7 +752,7 @@ class RotatorTextWidget extends Widget_Base {
 
         if ( $has_link ) {
             $this->add_link_attributes( 'center_link', $link );
-            $this->add_render_attribute( 'center_link', 'class', 'pixels-core-rotator-text__center-link' );
+            $this->add_render_attribute( 'center_link', 'class', 'pixeccte-rotator-text__center-link' );
             echo '<a ';
             $this->print_render_attribute_string( 'center_link' );
             echo '>';
@@ -762,14 +762,14 @@ class RotatorTextWidget extends Widget_Base {
             case 'text':
                 $text = $settings['center_text'] ?? '';
                 if ( '' !== $text ) {
-                    echo '<span class="pixels-core-rotator-text__center-text">' . esc_html( $text ) . '</span>';
+                    echo '<span class="pixeccte-rotator-text__center-text">' . esc_html( $text ) . '</span>';
                 }
                 break;
 
             case 'icon':
                 $icon = $settings['center_icon'] ?? [];
                 if ( ! empty( $icon['value'] ) ) {
-                    echo '<span class="pixels-core-rotator-text__center-icon">';
+                    echo '<span class="pixeccte-rotator-text__center-icon">';
                     \Elementor\Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
                     echo '</span>';
                 }
@@ -782,7 +782,7 @@ class RotatorTextWidget extends Widget_Base {
 
                 if ( '' !== $url ) {
                     printf(
-                        '<img class="pixels-core-rotator-text__center-image" src="%1$s" alt="%2$s" loading="lazy" decoding="async" />',
+                        '<img class="pixeccte-rotator-text__center-image" src="%1$s" alt="%2$s" loading="lazy" decoding="async" />',
                         esc_url( $url ),
                         esc_attr( $image['alt'] ?? '' )
                     );
@@ -813,14 +813,14 @@ class RotatorTextWidget extends Widget_Base {
         $inner_text_dy = $show_outer ? $this->getTextRadialOffset( 'inner', $ring_gap ) : 0.0;
         $outer_text_dy = $this->getTextRadialOffset( 'outer', $ring_gap );
 
-        $inner_path_id = 'pixels-rotator-inner-' . $widget_id;
-        $outer_path_id = 'pixels-rotator-outer-' . $widget_id;
+        $inner_path_id = 'pixeccte-rotator-inner-' . $widget_id;
+        $outer_path_id = 'pixeccte-rotator-outer-' . $widget_id;
 
-        $this->add_render_attribute( 'wrapper', 'class', 'pixels-core-rotator-text' );
-        $this->add_render_attribute( 'wrapper', 'class', 'pixels-core-rotator-text--layout-' . sanitize_html_class( $layout ) );
+        $this->add_render_attribute( 'wrapper', 'class', 'pixeccte-rotator-text' );
+        $this->add_render_attribute( 'wrapper', 'class', 'pixeccte-rotator-text--layout-' . sanitize_html_class( $layout ) );
 
         if ( $show_ripple ) {
-            $this->add_render_attribute( 'wrapper', 'class', 'pixels-core-rotator-text--ripple-' . sanitize_html_class( $data['ripple_animation'] ) );
+            $this->add_render_attribute( 'wrapper', 'class', 'pixeccte-rotator-text--ripple-' . sanitize_html_class( $data['ripple_animation'] ) );
         }
 
         $this->add_render_attribute( 'wrapper', 'data-layout', esc_attr( $layout ) );
@@ -832,20 +832,20 @@ class RotatorTextWidget extends Widget_Base {
             $this->add_render_attribute( 'wrapper', 'data-outer-text', esc_attr( $data['outer_text'] ) );
         }
 
-        $this->add_render_attribute( 'stage', 'class', 'pixels-core-rotator-text__stage' );
-        $this->add_render_attribute( 'svg', 'class', 'pixels-core-rotator-text__svg' );
+        $this->add_render_attribute( 'stage', 'class', 'pixeccte-rotator-text__stage' );
+        $this->add_render_attribute( 'svg', 'class', 'pixeccte-rotator-text__svg' );
         $this->add_render_attribute( 'svg', 'viewBox', '0 0 ' . self::VIEWBOX_SIZE . ' ' . self::VIEWBOX_SIZE );
         $this->add_render_attribute( 'svg', 'aria-hidden', 'true' );
         $this->add_render_attribute( 'svg', 'focusable', 'false' );
-        $this->add_render_attribute( 'center', 'class', 'pixels-core-rotator-text__center' );
+        $this->add_render_attribute( 'center', 'class', 'pixeccte-rotator-text__center' );
         ?>
         <div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
             <div <?php $this->print_render_attribute_string( 'stage' ); ?>>
                 <?php if ( $show_ripple ) : ?>
-                    <div class="pixels-core-rotator-text__ripples" aria-hidden="true">
-                        <span class="pixels-core-rotator-text__ripple pixels-core-rotator-text__ripple--inner"></span>
-                        <span class="pixels-core-rotator-text__ripple pixels-core-rotator-text__ripple--mid"></span>
-                        <span class="pixels-core-rotator-text__ripple pixels-core-rotator-text__ripple--outer"></span>
+                    <div class="pixeccte-rotator-text__ripples" aria-hidden="true">
+                        <span class="pixeccte-rotator-text__ripple pixeccte-rotator-text__ripple--inner"></span>
+                        <span class="pixeccte-rotator-text__ripple pixeccte-rotator-text__ripple--mid"></span>
+                        <span class="pixeccte-rotator-text__ripple pixeccte-rotator-text__ripple--outer"></span>
                     </div>
                 <?php endif; ?>
 
@@ -858,8 +858,8 @@ class RotatorTextWidget extends Widget_Base {
                     </defs>
 
                     <?php if ( $show_outer && '' !== $data['outer_text'] ) : ?>
-                        <g class="pixels-core-rotator-text__ring pixels-core-rotator-text__ring--outer" data-direction="ccw">
-                            <text class="pixels-core-rotator-text__ring-text" dy="<?php echo esc_attr( (string) $outer_text_dy ); ?>">
+                        <g class="pixeccte-rotator-text__ring pixeccte-rotator-text__ring--outer" data-direction="ccw">
+                            <text class="pixeccte-rotator-text__ring-text" dy="<?php echo esc_attr( (string) $outer_text_dy ); ?>">
                                 <textPath href="#<?php echo esc_attr( $outer_path_id ); ?>" startOffset="0%">
                                     <?php echo esc_html( $data['outer_text'] ); ?>
                                 </textPath>
@@ -868,8 +868,8 @@ class RotatorTextWidget extends Widget_Base {
                     <?php endif; ?>
 
                     <?php if ( '' !== $data['inner_text'] ) : ?>
-                        <g class="pixels-core-rotator-text__ring pixels-core-rotator-text__ring--inner" data-direction="cw">
-                            <text class="pixels-core-rotator-text__ring-text" dy="<?php echo esc_attr( (string) $inner_text_dy ); ?>">
+                        <g class="pixeccte-rotator-text__ring pixeccte-rotator-text__ring--inner" data-direction="cw">
+                            <text class="pixeccte-rotator-text__ring-text" dy="<?php echo esc_attr( (string) $inner_text_dy ); ?>">
                                 <textPath href="#<?php echo esc_attr( $inner_path_id ); ?>" startOffset="0%">
                                     <?php echo esc_html( $data['inner_text'] ); ?>
                                 </textPath>

@@ -4,7 +4,7 @@
 		
 		$(selector).astselect2({
 
-			placeholder: pixelsCoreRules.search,
+			placeholder: pixeccteRules.search,
 
 			ajax: {
 			    url: ajaxurl,
@@ -15,8 +15,8 @@
 			      	return {
 			        	q: params.term, // search term
 				        page: params.page,
-						action: 'pixels_core_get_posts_by_query',
-						nonce: pixelsCoreRules.ajax_nonce
+						action: 'pixeccte_get_posts_by_query',
+						nonce: pixeccteRules.ajax_nonce
 			    	};
 				},
 				processResults: function (data) {
@@ -29,16 +29,16 @@
 			    cache: true
 			},
 			minimumInputLength: 2,
-			language: pixelsCoreRules.ast_lang
+			language: pixeccteRules.ast_lang
 		});
 	};
 
 	var update_target_rule_input = function(wrapper) {
-		var rule_input 		= wrapper.find('.pixels-core-target_rule-input');
+		var rule_input 		= wrapper.find('.pixeccte-target_rule-input');
 		var old_value = rule_input.val();
 		var new_value = [];
 		
-		wrapper.find('.pixels-core-target-rule-condition').each(function(i) {
+		wrapper.find('.pixeccte-target-rule-condition').each(function(i) {
 			
 			var $this 			= $(this);
 			var temp_obj 		= {};
@@ -66,8 +66,8 @@
 
 	var update_close_button = function(wrapper) {
 
-		type 		= wrapper.closest('.pixels-core-target-rule-wrapper').attr('data-type');
-		rules 		= wrapper.find('.pixels-core-target-rule-condition');
+		type 		= wrapper.closest('.pixeccte-target-rule-wrapper').attr('data-type');
+		rules 		= wrapper.find('.pixeccte-target-rule-condition');
 		show_close	= false;
 
 		if ( 'display' == type ) {
@@ -80,35 +80,35 @@
 
 		rules.each(function() {
 			if ( show_close ) {
-				jQuery(this).find('.target_rule-condition-delete').removeClass('pixels-core-hidden');
+				jQuery(this).find('.target_rule-condition-delete').removeClass('pixeccte-hidden');
 			}else{
-				jQuery(this).find('.target_rule-condition-delete').addClass('pixels-core-hidden');
+				jQuery(this).find('.target_rule-condition-delete').addClass('pixeccte-hidden');
 			}
 		});
 	};
 
 	var update_exclusion_button = function( force_show, force_hide ) {
-		var display_on = $('.pixels-core-target-rule-display-on-wrap');
-		var exclude_on = $('.pixels-core-target-rule-exclude-on-wrap');
+		var display_on = $('.pixeccte-target-rule-display-on-wrap');
+		var exclude_on = $('.pixeccte-target-rule-exclude-on-wrap');
 		
 		var exclude_field_wrap = exclude_on.closest('tr');
 		var add_exclude_block  = display_on.find('.target_rule-add-exclusion-rule');
-		var exclude_conditions = exclude_on.find('.pixels-core-target-rule-condition');
+		var exclude_conditions = exclude_on.find('.pixeccte-target-rule-condition');
 		
 		if ( true == force_hide ) {
-			exclude_field_wrap.addClass( 'pixels-core-hidden' );
-			add_exclude_block.removeClass( 'pixels-core-hidden' );
+			exclude_field_wrap.addClass( 'pixeccte-hidden' );
+			add_exclude_block.removeClass( 'pixeccte-hidden' );
 		}else if( true == force_show ){
-			exclude_field_wrap.removeClass( 'pixels-core-hidden' );
-			add_exclude_block.addClass( 'pixels-core-hidden' );
+			exclude_field_wrap.removeClass( 'pixeccte-hidden' );
+			add_exclude_block.addClass( 'pixeccte-hidden' );
 		}else{
 			
 			if ( 1 == exclude_conditions.length && '' == $(exclude_conditions[0]).find('select.target_rule-condition').val() ) {
-				exclude_field_wrap.addClass( 'pixels-core-hidden' );
-				add_exclude_block.removeClass( 'pixels-core-hidden' );
+				exclude_field_wrap.addClass( 'pixeccte-hidden' );
+				add_exclude_block.removeClass( 'pixeccte-hidden' );
 			}else{
-				exclude_field_wrap.removeClass( 'pixels-core-hidden' );
-				add_exclude_block.addClass( 'pixels-core-hidden' );
+				exclude_field_wrap.removeClass( 'pixeccte-hidden' );
+				add_exclude_block.addClass( 'pixeccte-hidden' );
 			}
 		}
 
@@ -116,7 +116,7 @@
 
 	$(document).ready(function($) {
 
-		jQuery( '.pixels-core-target-rule-condition' ).each( function() {
+		jQuery( '.pixeccte-target-rule-condition' ).each( function() {
 			var $this 			= $( this ),
 				condition 		= $this.find('select.target_rule-condition'),
 				condition_val 	= condition.val(),
@@ -132,59 +132,59 @@
 			init_target_rule_select2( el );
 		});
 
-		jQuery('.pixels-core-target-rule-selector-wrapper').each(function() {
+		jQuery('.pixeccte-target-rule-selector-wrapper').each(function() {
 			update_close_button( jQuery(this) );
 		})
 
 		/* Show hide exclusion button */
 		update_exclusion_button();
 
-		jQuery( document ).on( 'change', '.pixels-core-target-rule-condition select.target_rule-condition' , function( e ) {
+		jQuery( document ).on( 'change', '.pixeccte-target-rule-condition select.target_rule-condition' , function( e ) {
 			
 			var $this 		= jQuery(this),
 				this_val 	= $this.val(),
-				field_wrap 	= $this.closest('.pixels-core-target-rule-wrapper');
+				field_wrap 	= $this.closest('.pixeccte-target-rule-wrapper');
 
 			if( 'specifics' == this_val ) {
-				$this.closest( '.pixels-core-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideDown( 300 );
+				$this.closest( '.pixeccte-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideDown( 300 );
 			} else {
-				$this.closest( '.pixels-core-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideUp( 300 );
+				$this.closest( '.pixeccte-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideUp( 300 );
 			}
 
 			update_target_rule_input( field_wrap );
 		} );
 
-		jQuery( '.pixels-core-target-rule-selector-wrapper' ).on( 'change', '.target-rule-select2', function(e) {
+		jQuery( '.pixeccte-target-rule-selector-wrapper' ).on( 'change', '.target-rule-select2', function(e) {
 			var $this 		= jQuery( this ),
-				field_wrap 	= $this.closest('.pixels-core-target-rule-wrapper');
+				field_wrap 	= $this.closest('.pixeccte-target-rule-wrapper');
 
 			update_target_rule_input( field_wrap );
 		});
 		
-		jQuery( '.pixels-core-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-rule-wrap a', function(e) {
+		jQuery( '.pixeccte-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-rule-wrap a', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			var $this 	= jQuery( this ),
 				id 		= $this.attr( 'data-rule-id' ),
 				new_id 	= parseInt(id) + 1,
 				type 	= $this.attr( 'data-rule-type' ),
-				rule_wrap = $this.closest('.pixels-core-target-rule-selector-wrapper').find('.target_rule-builder-wrap'),
-				template  = wp.template( 'pixels-core-target-rule-' + type + '-condition' ),
-				field_wrap 		= $this.closest('.pixels-core-target-rule-wrapper');
+				rule_wrap = $this.closest('.pixeccte-target-rule-selector-wrapper').find('.target_rule-builder-wrap'),
+				template  = wp.template( 'pixeccte-target-rule-' + type + '-condition' ),
+				field_wrap 		= $this.closest('.pixeccte-target-rule-wrapper');
 
 			rule_wrap.append( template( { id : new_id, type : type } ) );
 			
-			init_target_rule_select2( '.pixels-core-target-rule-'+type+'-on .target-rule-select2' );
+			init_target_rule_select2( '.pixeccte-target-rule-'+type+'-on .target-rule-select2' );
 			
 			$this.attr( 'data-rule-id', new_id );
 
 			update_close_button( field_wrap );
 		});
 
-		jQuery( '.pixels-core-target-rule-selector-wrapper' ).on( 'click', '.target_rule-condition-delete', function(e) {
+		jQuery( '.pixeccte-target-rule-selector-wrapper' ).on( 'click', '.target_rule-condition-delete', function(e) {
 			var $this 			= jQuery( this ),
-				rule_condition 	= $this.closest('.pixels-core-target-rule-condition'),
-				field_wrap 		= $this.closest('.pixels-core-target-rule-wrapper');
+				rule_condition 	= $this.closest('.pixeccte-target-rule-condition'),
+				field_wrap 		= $this.closest('.pixeccte-target-rule-wrapper');
 				cnt 			= 0,
 				data_type 		= field_wrap.attr( 'data-type' ),
 				optionVal 		= $this.siblings('.target_rule-condition-wrap').children('.target_rule-condition').val();
@@ -199,17 +199,17 @@
 					update_exclusion_button( false, true );
 
 				}else{
-					$this.parent('.pixels-core-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
+					$this.parent('.pixeccte-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
 					rule_condition.remove();
 				}
 
 			} else {
 
-				$this.parent('.pixels-core-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
+				$this.parent('.pixeccte-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
 				rule_condition.remove();
 			}
 
-			field_wrap.find('.pixels-core-target-rule-condition').each(function(i) {
+			field_wrap.find('.pixeccte-target-rule-condition').each(function(i) {
 				var condition       = jQuery( this ),
 					old_rule_id     = condition.attr('data-rule'),
 					select_location = condition.find('.target_rule-condition'),
@@ -220,7 +220,7 @@
 
 				select_location.attr( 'name', location_name.replace('['+old_rule_id+']', '['+i+']') );
 				
-				condition.removeClass('pixels-core-target-rule-'+old_rule_id).addClass('pixels-core-target-rule-'+i);
+				condition.removeClass('pixeccte-target-rule-'+old_rule_id).addClass('pixeccte-target-rule-'+i);
 
 				cnt = i;
 			});
@@ -231,7 +231,7 @@
 			update_target_rule_input( field_wrap );
 		});
 		
-		jQuery( '.pixels-core-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-exclusion-rule a', function(e) {
+		jQuery( '.pixeccte-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-exclusion-rule a', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			update_exclusion_button( true );

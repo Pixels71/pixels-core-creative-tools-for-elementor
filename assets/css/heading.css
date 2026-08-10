@@ -1,8 +1,8 @@
-.pixels-core-heading {
+.pixeccte-heading {
 	width: 100%;
 }
 
-.pixels-core-heading__title {
+.pixeccte-heading__title {
 	display: block;
 	margin: 0;
 	font-size: 2rem;
@@ -13,12 +13,12 @@
 	transition: color 0.2s ease;
 }
 
-.pixels-core-heading__title:hover,
-.pixels-core-heading__title:focus {
+.pixeccte-heading__title:hover,
+.pixeccte-heading__title:focus {
 	color: #2271b1;
 }
 
-.pixels-core-heading__subheading {
+.pixeccte-heading__subheading {
 	margin: 0;
 	font-size: 1rem;
 	font-weight: 400;

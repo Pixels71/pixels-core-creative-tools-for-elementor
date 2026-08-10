@@ -1,7 +1,7 @@
 <?php
-namespace PixelsCore\Theme_Builder;
+namespace PixelsCoreCreativeToolsForElementor\Theme_Builder;
 
-use PixelsCore\Theme_Builder\Target_Rules_Fields;
+use PixelsCoreCreativeToolsForElementor\Theme_Builder\Target_Rules_Fields;
 
 defined( 'ABSPATH' ) or exit;
 
@@ -40,23 +40,23 @@ class Admin {
 		add_action( 'save_post', [ $this, 'save_meta' ] );
 		add_action( 'admin_notices', [ $this, 'location_notice' ] );
 		add_action( 'template_redirect', [ $this, 'block_template_frontend' ] );
-		add_filter( 'manage_pixels-core-theme_posts_columns', [ $this, 'set_shortcode_columns' ] );
-		add_action( 'manage_pixels-core-theme_posts_custom_column', [ $this, 'render_shortcode_column' ], 10, 2 );
+		add_filter( 'manage_pixeccte-theme_posts_columns', [ $this, 'set_shortcode_columns' ] );
+		add_action( 'manage_pixeccte-theme_posts_custom_column', [ $this, 'render_shortcode_column' ], 10, 2 );
 		if ( defined( 'ELEMENTOR_PRO_VERSION' ) && ELEMENTOR_PRO_VERSION > 2.8 ) :
 			add_action( 'elementor/editor/footer', [ $this, 'register_hf_epro_script' ], 99 );
 		endif;
 
 		if ( is_admin() ) :
-			add_action( 'manage_pixels-core-theme_posts_custom_column', [ $this, 'column_content' ], 10, 2 );
-			add_filter( 'manage_pixels-core-theme_posts_columns', [ $this, 'column_headings' ] );
+			add_action( 'manage_pixeccte-theme_posts_custom_column', [ $this, 'column_content' ], 10, 2 );
+			add_filter( 'manage_pixeccte-theme_posts_columns', [ $this, 'column_headings' ] );
 
-			add_filter( 'views_edit-pixels-core-theme', [ $this, 'pixels_core_admin_theme_builder_tabs' ] );
-			add_action( 'pre_get_posts', [ $this, 'pixels_core_hf_filter_post_type_by_meta' ] );
+			add_filter( 'views_edit-pixeccte-theme', [ $this, 'pixeccte_admin_theme_builder_tabs' ] );
+			add_action( 'pre_get_posts', [ $this, 'pixeccte_hf_filter_post_type_by_meta' ] );
 			add_action( 'admin_head-nav-menus.php', [ $this, 'register_mega_menu_nav_metabox' ] );
 
 			// In __construct(), inside is_admin() block:
 			add_action( 'add_meta_boxes', [ $this, 'register_preview_metabox' ] );
-			add_action( 'save_post_pixels-core-theme', [ $this, 'save_preview_meta' ] );
+			add_action( 'save_post_pixeccte-theme', [ $this, 'save_preview_meta' ] );
 		endif;
 	}
 
@@ -66,20 +66,20 @@ class Admin {
 	public function register_hf_epro_script() {
 		$ids_array = [
 			[
-				'id'    => pixels_core_get_header_id(),
+				'id'    => pixeccte_get_header_id(),
 				'value' => 'Header'
 			],
 			[
-				'id'    => pixels_core_get_footer_id(),
+				'id'    => pixeccte_get_footer_id(),
 				'value' => 'Footer'
 			]
 		];
 
-		wp_enqueue_script( 'pixels-core-theme-elementor-pro-compatibility', PIXELS_CORE_URL . 'assets/js/pixels-core-theme-elementor-pro-compatibility.js', [ 'jquery' ], PIXELS_CORE_VERSION, true );
+		wp_enqueue_script( 'pixeccte-theme-elementor-pro-compatibility', PIXECCTE_URL . 'assets/js/pixeccte-theme-elementor-pro-compatibility.js', [ 'jquery' ], PIXECCTE_VERSION, true );
 
 		wp_localize_script(
-			'pixels-core-theme-elementor-pro-compatibility',
-			'pixels_core_hf_admin',
+			'pixeccte-theme-elementor-pro-compatibility',
+			'pixeccte_hf_admin',
 			[
 				'ids_array' => wp_json_encode( $ids_array ),
 			]
@@ -95,7 +95,7 @@ class Admin {
 	public function column_headings( $columns ) {
 		unset( $columns['date'] );
 
-		$columns['pixels_core_hf_display_rules'] = esc_html__( 'Display Rules', 'pixels-core-creative-tools-for-elementor' );
+		$columns['pixeccte_hf_display_rules'] = esc_html__( 'Display Rules', 'pixels-core-creative-tools-for-elementor' );
 		$columns['date']                  = esc_html__( 'Date', 'pixels-core-creative-tools-for-elementor' );
 
 		return $columns;
@@ -106,19 +106,19 @@ class Admin {
 	 */
 	public function column_content( $column, $post_id ) {
 
-		if ( 'pixels_core_hf_display_rules' == $column ) :
+		if ( 'pixeccte_hf_display_rules' == $column ) :
 
-			$locations = get_post_meta( $post_id, 'pixels_core_hf_target_include_locations', true );
+			$locations = get_post_meta( $post_id, 'pixeccte_hf_target_include_locations', true );
 			if ( ! empty( $locations ) ) :
-				echo '<div class="pixels-core-theme-advanced-headers-location-wrap" style="margin-bottom: 5px;">';
+				echo '<div class="pixeccte-theme-advanced-headers-location-wrap" style="margin-bottom: 5px;">';
 				echo '<strong>' . esc_html__( 'Display:', 'pixels-core-creative-tools-for-elementor' ) . ' </strong>';
 				$this->column_display_location_rules( $locations );
 				echo '</div>';
 			endif;
 
-			$locations = get_post_meta( $post_id, 'pixels_core_hf_target_exclude_locations', true );
+			$locations = get_post_meta( $post_id, 'pixeccte_hf_target_exclude_locations', true );
 			if ( ! empty( $locations ) ) :
-				echo '<div class="pixels-core-theme-advanced-headers-exclusion-wrap" style="margin-bottom: 5px;">';
+				echo '<div class="pixeccte-theme-advanced-headers-exclusion-wrap" style="margin-bottom: 5px;">';
 					echo '<strong>' . esc_html__( 'Exclusion:', 'pixels-core-creative-tools-for-elementor' ) . ' </strong>';
 					$this->column_display_location_rules( $locations );
 				echo '</div>';
@@ -196,7 +196,7 @@ class Admin {
 			'supports'            => [ 'title', 'thumbnail', 'elementor' ]
 		];
 
-		register_post_type( 'pixels-core-theme', $args );
+		register_post_type( 'pixeccte-theme', $args );
 	}
 
 	/**
@@ -204,11 +204,11 @@ class Admin {
 	 */
 	public function register_admin_menu() {
 		add_submenu_page(
-			'pixels-core',
+			'pixeccte',
 			esc_html__( 'Theme Builder', 'pixels-core-creative-tools-for-elementor' ),
 			esc_html__( 'Theme Builder', 'pixels-core-creative-tools-for-elementor' ),
 			'edit_pages',
-			'edit.php?post_type=pixels-core-theme'
+			'edit.php?post_type=pixeccte-theme'
 		);
 	}
 
@@ -221,8 +221,8 @@ class Admin {
 	public function highlight_parent_menu( $parent_file ) {
 		$screen = get_current_screen();
 
-		if ( $screen && 'pixels-core-theme' === $screen->post_type ) {
-			return 'pixels-core';
+		if ( $screen && 'pixeccte-theme' === $screen->post_type ) {
+			return 'pixeccte';
 		}
 
 		return $parent_file;
@@ -237,8 +237,8 @@ class Admin {
 	public function highlight_submenu( $submenu_file ) {
 		$screen = get_current_screen();
 
-		if ( $screen && 'pixels-core-theme' === $screen->post_type ) {
-			return 'edit.php?post_type=pixels-core-theme';
+		if ( $screen && 'pixeccte-theme' === $screen->post_type ) {
+			return 'edit.php?post_type=pixeccte-theme';
 		}
 
 		return $submenu_file;
@@ -249,7 +249,7 @@ class Admin {
 	 */
 	public function register_mega_menu_nav_metabox() {
 		add_meta_box(
-			'pixels-core-mega-menu-nav-metabox',
+			'pixeccte-mega-menu-nav-metabox',
 			esc_html__( 'Mega Menu', 'pixels-core-creative-tools-for-elementor' ),
 			[ $this, 'render_mega_menu_nav_metabox' ],
 			'nav-menus',
@@ -264,12 +264,12 @@ class Admin {
 	public function render_mega_menu_nav_metabox() {
 		$mega_menus = get_posts(
 			[
-				'post_type'      => 'pixels-core-theme',
+				'post_type'      => 'pixeccte-theme',
 				'post_status'    => 'publish',
 				'posts_per_page' => -1,
 				'orderby'        => 'title',
 				'order'          => 'ASC',
-				'meta_key'       => pixels_core_get_theme_template_type_meta_key(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_key'       => pixeccte_get_theme_template_type_meta_key(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 				'meta_value'     => 'type_mega_menu', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 			]
 		);
@@ -278,7 +278,7 @@ class Admin {
 			?>
 			<p><?php esc_html_e( 'No published Mega Menu templates found.', 'pixels-core-creative-tools-for-elementor' ); ?></p>
 			<p>
-				<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=pixels-core-theme' ) ); ?>">
+				<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=pixeccte-theme' ) ); ?>">
 					<?php esc_html_e( 'Create a Mega Menu template', 'pixels-core-creative-tools-for-elementor' ); ?>
 				</a>
 			</p>
@@ -286,9 +286,9 @@ class Admin {
 			return;
 		endif;
 		?>
-		<div id="pixels-core-mega-menu" class="posttypediv">
-			<div id="tabs-panel-pixels-core-mega-menu" class="tabs-panel tabs-panel-active">
-				<ul id="pixels-core-mega-menu-checklist" class="categorychecklist form-no-clear">
+		<div id="pixeccte-mega-menu" class="posttypediv">
+			<div id="tabs-panel-pixeccte-mega-menu" class="tabs-panel tabs-panel-active">
+				<ul id="pixeccte-mega-menu-checklist" class="categorychecklist form-no-clear">
 					<?php foreach ( $mega_menus as $mega_menu ) : ?>
 						<?php $menu_item_id = -1 * absint( $mega_menu->ID ); ?>
 						<li>
@@ -302,7 +302,7 @@ class Admin {
 								<?php echo esc_html( $mega_menu->post_title ); ?>
 							</label>
 							<input type="hidden" name="menu-item[<?php echo esc_attr( (string) $menu_item_id ); ?>][menu-item-db-id]" value="0">
-							<input type="hidden" name="menu-item[<?php echo esc_attr( (string) $menu_item_id ); ?>][menu-item-object]" value="pixels-core-theme">
+							<input type="hidden" name="menu-item[<?php echo esc_attr( (string) $menu_item_id ); ?>][menu-item-object]" value="pixeccte-theme">
 							<input type="hidden" name="menu-item[<?php echo esc_attr( (string) $menu_item_id ); ?>][menu-item-parent-id]" value="0">
 							<input type="hidden" name="menu-item[<?php echo esc_attr( (string) $menu_item_id ); ?>][menu-item-type]" value="post_type">
 							<input type="hidden" name="menu-item[<?php echo esc_attr( (string) $menu_item_id ); ?>][menu-item-title]" value="<?php echo esc_attr( $mega_menu->post_title ); ?>">
@@ -318,11 +318,11 @@ class Admin {
 			</div>
 			<p class="button-controls wp-clearfix">
 				<span class="list-controls hide-if-no-js">
-					<input type="checkbox" id="pixels-core-mega-menu-tab" class="select-all">
-					<label for="pixels-core-mega-menu-tab"><?php esc_html_e( 'Select All', 'pixels-core-creative-tools-for-elementor' ); ?></label>
+					<input type="checkbox" id="pixeccte-mega-menu-tab" class="select-all">
+					<label for="pixeccte-mega-menu-tab"><?php esc_html_e( 'Select All', 'pixels-core-creative-tools-for-elementor' ); ?></label>
 				</span>
 				<span class="add-to-menu">
-					<input type="submit" class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', 'pixels-core-creative-tools-for-elementor' ); ?>" name="add-pixels-core-mega-menu-menu-item" id="submit-pixels-core-mega-menu">
+					<input type="submit" class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', 'pixels-core-creative-tools-for-elementor' ); ?>" name="add-pixeccte-mega-menu-menu-item" id="submit-pixeccte-mega-menu">
 					<span class="spinner"></span>
 				</span>
 			</p>
@@ -335,13 +335,13 @@ class Admin {
 	 */
 	function register_metabox() {
 		add_meta_box(
-			'pixels-core-theme-meta-box',
+			'pixeccte-theme-meta-box',
 			__( 'Pixels Theme Builder', 'pixels-core-creative-tools-for-elementor' ),
 			[
 				$this,
 				'metabox_render',
 			],
-			'pixels-core-theme',
+			'pixeccte-theme',
 			'normal',
 			'high'
 		);
@@ -353,20 +353,20 @@ class Admin {
 	 * @param  POST $post Currennt post object which is being displayed.
 	 */
 	function metabox_render( $post ) {
-		$template_type = esc_attr( pixels_core_get_theme_template_type( $post->ID ) );
+		$template_type = esc_attr( pixeccte_get_theme_template_type( $post->ID ) );
 
-		wp_nonce_field( 'pixels_core_hf_meta_nounce', 'pixels_core_hf_meta_nounce' );
+		wp_nonce_field( 'pixeccte_hf_meta_nounce', 'pixeccte_hf_meta_nounce' );
 		?>
-		<table class="pixels-core-theme-options-table widefat">
+		<table class="pixeccte-theme-options-table widefat">
 			<tbody>
-				<tr class="pixels-core-theme-options-row type-of-template">
-					<td class="pixels-core-theme-options-row-heading">
-						<label for="pixels_core_hf_template_type"><?php esc_html_e( 'Type of Template', 'pixels-core-creative-tools-for-elementor' ); ?></label>
+				<tr class="pixeccte-theme-options-row type-of-template">
+					<td class="pixeccte-theme-options-row-heading">
+						<label for="pixeccte_hf_template_type"><?php esc_html_e( 'Type of Template', 'pixels-core-creative-tools-for-elementor' ); ?></label>
 					</td>
-					<td class="pixels-core-theme-options-row-content">
-						<select name="pixels_core_hf_template_type" id="pixels_core_hf_template_type">
+					<td class="pixeccte-theme-options-row-content">
+						<select name="pixeccte_hf_template_type" id="pixeccte_hf_template_type">
 							<option value="" <?php selected( $template_type, '' ); ?>><?php esc_html_e( 'Select Option', 'pixels-core-creative-tools-for-elementor' ); ?></option>
-							<?php foreach ( \PixelsCore\Plugin::get_theme_template_types() as $type_key => $type_label ) : ?>
+							<?php foreach ( \PixelsCoreCreativeToolsForElementor\Plugin::get_theme_template_types() as $type_key => $type_label ) : ?>
 								<option value="<?php echo esc_attr( $type_key ); ?>" <?php selected( $template_type, $type_key ); ?>><?php echo esc_html( $type_label ); ?></option>
 							<?php endforeach; ?>
 						</select>
@@ -386,19 +386,19 @@ class Admin {
 		// Load Target Rule assets.
 		Target_Rules_Fields::get_instance()->admin_styles();
 
-		$include_locations = get_post_meta( get_the_id(), 'pixels_core_hf_target_include_locations', true );
-		$exclude_locations = get_post_meta( get_the_id(), 'pixels_core_hf_target_exclude_locations', true );
+		$include_locations = get_post_meta( get_the_id(), 'pixeccte_hf_target_include_locations', true );
+		$exclude_locations = get_post_meta( get_the_id(), 'pixeccte_hf_target_exclude_locations', true );
 		?>
-		<tr class="pixels-core-theme-target-rules-row pixels-core-theme-options-row">
-			<td class="pixels-core-theme-target-rules-row-heading pixels-core-theme-options-row-heading">
+		<tr class="pixeccte-theme-target-rules-row pixeccte-theme-options-row">
+			<td class="pixeccte-theme-target-rules-row-heading pixeccte-theme-options-row-heading">
 				<label><?php esc_html_e( 'Display On', 'pixels-core-creative-tools-for-elementor' ); ?></label>
-				<i class="pixels-core-theme-target-rules-heading-help dashicons dashicons-editor-help"
+				<i class="pixeccte-theme-target-rules-heading-help dashicons dashicons-editor-help"
 					title="<?php echo esc_attr__( 'Add locations for where this template should appear.', 'pixels-core-creative-tools-for-elementor' ); ?>"></i>
 			</td>
-			<td class="pixels-core-theme-target-rules-row-content pixels-core-theme-options-row-content">
+			<td class="pixeccte-theme-target-rules-row-content pixeccte-theme-options-row-content">
 				<?php
 				Target_Rules_Fields::target_rule_settings_field(
-					'pixels-core-target-rules-location',
+					'pixeccte-target-rules-location',
 					[
 						'title'          => esc_html__( 'Display Rules', 'pixels-core-creative-tools-for-elementor' ),
 						'value'          => '[{"type":"basic-global","specific":null}]',
@@ -411,16 +411,16 @@ class Admin {
 				?>
 			</td>
 		</tr>
-		<tr class="pixels-core-theme-target-rules-row pixels-core-theme-options-row">
-			<td class="pixels-core-theme-target-rules-row-heading pixels-core-theme-options-row-heading">
+		<tr class="pixeccte-theme-target-rules-row pixeccte-theme-options-row">
+			<td class="pixeccte-theme-target-rules-row-heading pixeccte-theme-options-row-heading">
 				<label><?php esc_html_e( 'Do Not Display On', 'pixels-core-creative-tools-for-elementor' ); ?></label>
-				<i class="pixels-core-theme-target-rules-heading-help dashicons dashicons-editor-help"
+				<i class="pixeccte-theme-target-rules-heading-help dashicons dashicons-editor-help"
 					title="<?php echo esc_attr__( 'Add locations for where this template should not appear.', 'pixels-core-creative-tools-for-elementor' ); ?>"></i>
 			</td>
-			<td class="pixels-core-theme-target-rules-row-content pixels-core-theme-options-row-content">
+			<td class="pixeccte-theme-target-rules-row-content pixeccte-theme-options-row-content">
 				<?php
 				Target_Rules_Fields::target_rule_settings_field(
-					'pixels-core-theme-target-rules-exclusion',
+					'pixeccte-theme-target-rules-exclusion',
 					[
 						'title'          => esc_html__( 'Exclude On', 'pixels-core-creative-tools-for-elementor' ),
 						'value'          => '[]',
@@ -448,36 +448,45 @@ class Admin {
 			return;
 		}
 
+		$post_id = absint( $post_id );
+
+		if ( ! $post_id || 'pixeccte-theme' !== get_post_type( $post_id ) ) {
+			return;
+		}
+
 		// Verify nonce safely.
-		if ( ! isset( $_POST['pixels_core_hf_meta_nounce'] ) ) {
+		if ( ! isset( $_POST['pixeccte_hf_meta_nounce'] ) ) {
 			return;
 		}
 
-		$nonce = sanitize_text_field( wp_unslash( $_POST['pixels_core_hf_meta_nounce'] ) );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['pixeccte_hf_meta_nounce'] ) );
 
-		if ( ! wp_verify_nonce( $nonce, 'pixels_core_hf_meta_nounce' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'pixeccte_hf_meta_nounce' ) ) {
 			return;
 		}
 
-		if ( ! current_user_can( 'edit_posts' ) ) {
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}
 
-		$target_locations = Target_Rules_Fields::get_format_rule_value( $_POST, 'pixels-core-target-rules-location' );
-		$target_exclusion = Target_Rules_Fields::get_format_rule_value( $_POST, 'pixels-core-theme-target-rules-exclusion' );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Unslashed once; get_format_rule_value sanitizes.
+		$post_data = wp_unslash( $_POST );
 
-		update_post_meta( $post_id, 'pixels_core_hf_target_include_locations', $target_locations );
-		update_post_meta( $post_id, 'pixels_core_hf_target_exclude_locations', $target_exclusion );
+		$target_locations = Target_Rules_Fields::get_format_rule_value( $post_data, 'pixeccte-target-rules-location' );
+		$target_exclusion = Target_Rules_Fields::get_format_rule_value( $post_data, 'pixeccte-theme-target-rules-exclusion' );
 
-		if ( isset( $_POST['pixels_core_hf_template_type'] ) ) {
-			$template_type = sanitize_text_field( wp_unslash( $_POST['pixels_core_hf_template_type'] ) );
-			$allowed_types = array_keys( \PixelsCore\Plugin::get_theme_template_types() );
+		update_post_meta( $post_id, 'pixeccte_hf_target_include_locations', $target_locations );
+		update_post_meta( $post_id, 'pixeccte_hf_target_exclude_locations', $target_exclusion );
+
+		if ( isset( $post_data['pixeccte_hf_template_type'] ) ) {
+			$template_type = sanitize_text_field( $post_data['pixeccte_hf_template_type'] );
+			$allowed_types = array_keys( \PixelsCoreCreativeToolsForElementor\Plugin::get_theme_template_types() );
 
 			if ( '' !== $template_type && ! in_array( $template_type, $allowed_types, true ) ) {
 				$template_type = '';
 			}
 
-			pixels_core_update_theme_template_type( $post_id, $template_type );
+			pixeccte_update_theme_template_type( $post_id, $template_type );
 
 			if ( 'type_popup' === $template_type ) {
 				update_post_meta( $post_id, '_wp_page_template', 'elementor_canvas' );
@@ -493,14 +502,14 @@ class Admin {
 		global $pagenow;
 		global $post;
 
-		if ( 'post.php' != $pagenow || ! is_object( $post ) || 'pixels-core-theme' != $post->post_type ) :
+		if ( 'post.php' != $pagenow || ! is_object( $post ) || 'pixeccte-theme' != $post->post_type ) :
 			return;
 		endif;
 
-		$template_type = pixels_core_get_theme_template_type( $post->ID );
+		$template_type = pixeccte_get_theme_template_type( $post->ID );
 
 		if ( '' !== $template_type ) :
-			$templates = \PixelsCore\Theme_Builder\Theme_Elementor::get_template_id( $template_type );
+			$templates = \PixelsCoreCreativeToolsForElementor\Theme_Builder\Theme_Elementor::get_template_id( $template_type );
 
 			// Check if more than one template is selected for current template type.
 			if ( is_array( $templates ) && isset( $templates[1] ) && $post->ID != $templates[0] ) :
@@ -544,7 +553,7 @@ class Admin {
 	 *
 	 */
 	public function block_template_frontend() {
-		if ( is_singular( 'pixels-core-theme' ) && ! current_user_can( 'edit_posts' ) ) :
+		if ( is_singular( 'pixeccte-theme' ) && ! current_user_can( 'edit_posts' ) ) :
 			wp_safe_redirect( site_url(), 301 );
 			exit;
 		endif;
@@ -577,13 +586,13 @@ class Admin {
 		switch ( $column ) {
 			case 'shortcode':
 				?>
-				<span class="pixels-core-theme-shortcode-col-wrap">
-					<input type="text" onfocus="this.select();" readonly="readonly" value="[pixels_core_hf_template id='<?php echo esc_attr( $post_id ); ?>']" class="pixels-core-theme-large-text code">
+				<span class="pixeccte-theme-shortcode-col-wrap">
+					<input type="text" onfocus="this.select();" readonly="readonly" value="[pixeccte_hf_template id='<?php echo esc_attr( $post_id ); ?>']" class="pixeccte-theme-large-text code">
 				</span>
 				<?php
 				break;
 			case 'type':
-				$type = pixels_core_get_theme_template_type( $post_id );
+				$type = pixeccte_get_theme_template_type( $post_id );
 
 				if ( ! empty( $type ) ) {
 					$label = $this->template_location( $type );
@@ -611,7 +620,7 @@ class Admin {
 		}
 	}
 
-	public function pixels_core_hf_filter_post_type_by_meta( $query ) {
+	public function pixeccte_hf_filter_post_type_by_meta( $query ) {
 		global $pagenow;
 
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only admin list table filter; no state change.
@@ -619,24 +628,24 @@ class Admin {
 		$meta_value = isset( $_GET['filter'] ) ? sanitize_key( wp_unslash( $_GET['filter'] ) ) : '';
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
-		if ( is_admin() && 'edit.php' === $pagenow && 'pixels-core-theme' === $post_type && ! empty( $meta_value ) ) {
-			$query->query_vars['meta_key']   = pixels_core_get_theme_template_type_meta_key(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		if ( is_admin() && 'edit.php' === $pagenow && 'pixeccte-theme' === $post_type && ! empty( $meta_value ) ) {
+			$query->query_vars['meta_key']   = pixeccte_get_theme_template_type_meta_key(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			$query->query_vars['meta_value'] = $meta_value; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 		}
 	}
 
-	public function pixels_core_admin_theme_builder_tabs( $views ) {
+	public function pixeccte_admin_theme_builder_tabs( $views ) {
 		global $typenow;
 
-		if ( 'pixels-core-theme' === $typenow ) {
+		if ( 'pixeccte-theme' === $typenow ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list table filter; no state change.
 			$current_tab = isset( $_GET['filter'] ) ? sanitize_key( wp_unslash( $_GET['filter'] ) ) : 'all';
-			$types       = \PixelsCore\Plugin::get_theme_template_types();
+			$types       = \PixelsCoreCreativeToolsForElementor\Plugin::get_theme_template_types();
 			?>
 			<div class="nav-tab-wrapper">
-				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pixels-core-theme' ) ); ?>" class="nav-tab <?php echo 'all' === $current_tab ? 'nav-tab-active' : ''; ?>" data-template-type=""><?php esc_html_e( 'All', 'pixels-core-creative-tools-for-elementor' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pixeccte-theme' ) ); ?>" class="nav-tab <?php echo 'all' === $current_tab ? 'nav-tab-active' : ''; ?>" data-template-type=""><?php esc_html_e( 'All', 'pixels-core-creative-tools-for-elementor' ); ?></a>
 				<?php foreach ( $types as $type_key => $type_label ) : ?>
-					<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pixels-core-theme&filter=' . rawurlencode( $type_key ) ) ); ?>" class="nav-tab <?php echo $current_tab === $type_key ? 'nav-tab-active' : ''; ?>" data-template-type="<?php echo esc_attr( $type_key ); ?>"><?php echo esc_html( $type_label ); ?></a>
+					<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=pixeccte-theme&filter=' . rawurlencode( $type_key ) ) ); ?>" class="nav-tab <?php echo $current_tab === $type_key ? 'nav-tab-active' : ''; ?>" data-template-type="<?php echo esc_attr( $type_key ); ?>"><?php echo esc_html( $type_label ); ?></a>
 				<?php endforeach; ?>
 			</div>
 			<?php
@@ -648,32 +657,32 @@ class Admin {
 	public function register_preview_metabox() {
 		global $post;
 
-		if ( ! $post || 'pixels-core-theme' !== $post->post_type ) {
+		if ( ! $post || 'pixeccte-theme' !== $post->post_type ) {
 			return;
 		}
 
-		$template_type = pixels_core_get_theme_template_type( $post->ID );
+		$template_type = pixeccte_get_theme_template_type( $post->ID );
 
 		if ( ! in_array( $template_type, [ 'type_single_post', 'type_archive_post' ], true ) ) {
 			return;
 		}
 
 		add_meta_box(
-			'pixels-core-theme-preview-meta-box',
+			'pixeccte-theme-preview-meta-box',
 			__( 'Preview Settings', 'pixels-core-creative-tools-for-elementor' ),
 			[ $this, 'render_preview_metabox' ],
-			'pixels-core-theme',
+			'pixeccte-theme',
 			'side',
 			'default'
 		);
 	}
 	
 	public function render_preview_metabox( $post ) {
-		$preview_post_id = (int) get_post_meta( $post->ID, '_pixels_core_preview_post_id', true );
-		$template_type   = pixels_core_get_theme_template_type( $post->ID );
-		wp_nonce_field( 'pixels_core_hf_preview_meta', 'pixels_core_hf_preview_meta' );
+		$preview_post_id = (int) get_post_meta( $post->ID, '_pixeccte_preview_post_id', true );
+		$template_type   = pixeccte_get_theme_template_type( $post->ID );
+		wp_nonce_field( 'pixeccte_hf_preview_meta', 'pixeccte_hf_preview_meta' );
 
-		$posts_by_type = pixels_core_get_theme_builder_preview_posts_by_type();
+		$posts_by_type = pixeccte_get_theme_builder_preview_posts_by_type();
 		$post_type_objects = get_post_types(
 			[
 				'name'   => array_keys( $posts_by_type ),
@@ -691,8 +700,8 @@ class Admin {
 			}
 			?>
 		</p>
-		<p><label for="pixels_core_preview_post_id"><?php esc_html_e( 'Preview with post:', 'pixels-core-creative-tools-for-elementor' ); ?></label></p>
-		<select name="pixels_core_preview_post_id" id="pixels_core_preview_post_id" class="widefat">
+		<p><label for="pixeccte_preview_post_id"><?php esc_html_e( 'Preview with post:', 'pixels-core-creative-tools-for-elementor' ); ?></label></p>
+		<select name="pixeccte_preview_post_id" id="pixeccte_preview_post_id" class="widefat">
 			<option value=""><?php esc_html_e( 'Select a post', 'pixels-core-creative-tools-for-elementor' ); ?></option>
 			<?php
 			foreach ( $posts_by_type as $type => $type_posts ) :
@@ -716,8 +725,8 @@ class Admin {
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
-		if ( ! isset( $_POST['pixels_core_hf_preview_meta'] ) ||
-			 ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pixels_core_hf_preview_meta'] ) ), 'pixels_core_hf_preview_meta' )
+		if ( ! isset( $_POST['pixeccte_hf_preview_meta'] ) ||
+			 ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pixeccte_hf_preview_meta'] ) ), 'pixeccte_hf_preview_meta' )
 		) {
 			return;
 		}
@@ -725,12 +734,12 @@ class Admin {
 			return;
 		}
 	
-		$preview_post_id = isset( $_POST['pixels_core_preview_post_id'] ) ? (int) $_POST['pixels_core_preview_post_id'] : 0;
+		$preview_post_id = isset( $_POST['pixeccte_preview_post_id'] ) ? absint( wp_unslash( $_POST['pixeccte_preview_post_id'] ) ) : 0;
 	
 		if ( $preview_post_id > 0 ) {
-			update_post_meta( $post_id, '_pixels_core_preview_post_id', $preview_post_id );
+			update_post_meta( $post_id, '_pixeccte_preview_post_id', $preview_post_id );
 		} else {
-			delete_post_meta( $post_id, '_pixels_core_preview_post_id' );
+			delete_post_meta( $post_id, '_pixeccte_preview_post_id' );
 		}
 	}
 }

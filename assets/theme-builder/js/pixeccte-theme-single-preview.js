@@ -29,8 +29,8 @@
 			return;
 		}
 
-		model.on('change:pixels_core_preview_post_id', function (model, value) {
-			const previous = model.previous('pixels_core_preview_post_id');
+		model.on('change:pixeccte_preview_post_id', function (model, value) {
+			const previous = model.previous('pixeccte_preview_post_id');
 
 			if (String(previous || '') === String(value || '')) {
 				return;

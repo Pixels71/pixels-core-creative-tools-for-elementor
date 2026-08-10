@@ -1,4 +1,4 @@
-.pixels-core-countdown-timer .pixels-timer {
+.pixeccte-countdown-timer .pixeccte-timer {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
@@ -7,46 +7,46 @@
 }
 
 /* @media (min-width: 1025px) {
-	.elementor-element.pixels-core-countdown-timer--cols-1 .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-2 .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-3 .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-4 .pixels-timer-separator {
+	.elementor-element.pixeccte-countdown-timer--cols-1 .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-2 .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-3 .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-4 .pixeccte-timer-separator {
 		display: none !important;
 	}
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
-	.elementor-element.pixels-core-countdown-timer--cols-1-tablet .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-2-tablet .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-3-tablet .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-4-tablet .pixels-timer-separator {
+	.elementor-element.pixeccte-countdown-timer--cols-1-tablet .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-2-tablet .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-3-tablet .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-4-tablet .pixeccte-timer-separator {
 		display: none !important;
 	}
 }
 
 @media (max-width: 767px) {
-	.elementor-element.pixels-core-countdown-timer--cols-1-mobile .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-2-mobile .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-3-mobile .pixels-timer-separator,
-	.elementor-element.pixels-core-countdown-timer--cols-4-mobile .pixels-timer-separator {
+	.elementor-element.pixeccte-countdown-timer--cols-1-mobile .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-2-mobile .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-3-mobile .pixeccte-timer-separator,
+	.elementor-element.pixeccte-countdown-timer--cols-4-mobile .pixeccte-timer-separator {
 		display: none !important;
 	}
 } */
 
-.pixels-core-countdown-timer .pixels-timer-unit {
+.pixeccte-countdown-timer .pixeccte-timer-unit {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	box-sizing: border-box;
 }
 
-.pixels-core-countdown-timer .pixels-timer-unit-digits {
+.pixeccte-countdown-timer .pixeccte-timer-unit-digits {
 	display: flex;
 	align-items: center;
 	gap: 0;
 }
 
-.pixels-core-countdown-timer .pixels-timer-digit {
+.pixeccte-countdown-timer .pixeccte-timer-digit {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -61,8 +61,8 @@
 	line-height: 1;
 }
 
-.pixels-core-countdown-timer .pixels-timer-digit-flow,
-.pixels-core-countdown-timer number-flow.pixels-timer-digit-flow {
+.pixeccte-countdown-timer .pixeccte-timer-digit-flow,
+.pixeccte-countdown-timer number-flow.pixeccte-timer-digit-flow {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -72,7 +72,7 @@
 	font-variant-numeric: tabular-nums;
 }
 
-.pixels-core-countdown-timer .pixels-timer-label {
+.pixeccte-countdown-timer .pixeccte-timer-label {
 	margin-top: 0;
 	margin-bottom: 0;
 	font-size: 18px;
@@ -82,24 +82,24 @@
 	text-align: center;
 }
 
-.pixels-core-countdown-timer--label-bottom .pixels-timer-unit {
+.pixeccte-countdown-timer--label-bottom .pixeccte-timer-unit {
 	flex-direction: column;
 }
 
-.pixels-core-countdown-timer--label-top .pixels-timer-unit {
+.pixeccte-countdown-timer--label-top .pixeccte-timer-unit {
 	flex-direction: column-reverse;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-unit {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-unit {
 	flex-direction: column;
 }
 
-.pixels-core-countdown-timer .pixels-timer-separator {
+.pixeccte-countdown-timer .pixeccte-timer-separator {
 	display: none;
 	flex-shrink: 0;
 }
 
-.pixels-core-countdown-timer--separator-colon .pixels-timer-separator--colon {
+.pixeccte-countdown-timer--separator-colon .pixeccte-timer-separator--colon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -111,7 +111,7 @@
 	color: #111;
 }
 
-.pixels-core-countdown-timer--separator-line .pixels-timer-separator--line {
+.pixeccte-countdown-timer--separator-line .pixeccte-timer-separator--line {
 	display: block;
 	align-self: center;
 	width: 1px;
@@ -120,50 +120,50 @@
 	background: #111;
 }
 
-.pixels-core-countdown-timer--has-rings.pixels-core-countdown-timer--separator-line .pixels-timer-separator--line {
+.pixeccte-countdown-timer--has-rings.pixeccte-countdown-timer--separator-line .pixeccte-timer-separator--line {
 	height: 120px;
 	align-self: flex-start;
 }
 
-.pixels-core-countdown-timer .pixels-timer-expired-message {
+.pixeccte-countdown-timer .pixeccte-timer-expired-message {
 	font-size: 16px;
 }
 
-.pixels-core-countdown-timer .is-hidden {
+.pixeccte-countdown-timer .is-hidden {
 	display: none;
 }
 
 /* Circle progress per unit */
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring {
 	position: relative;
 	width: 120px;
 	height: 120px;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__svg {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__svg {
 	display: block;
 	width: 100%;
 	height: 100%;
 	transform: rotate(-90deg);
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__track,
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__progress {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__track,
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__progress {
 	fill: none;
 	stroke-width: 6;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__track {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__track {
 	stroke: #e5e5e5;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__progress {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__progress {
 	stroke: #0b3b25;
 	stroke-linecap: round;
 	transition: stroke-dashoffset 0.35s linear;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__center {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__center {
 	position: absolute;
 	inset: 0;
 	display: flex;
@@ -176,23 +176,23 @@
 	text-align: center;
 }
 
-.pixels-core-countdown-timer--ring-label-bottom .pixels-timer-ring__center,
-.pixels-core-countdown-timer--has-rings.pixels-core-countdown-timer--ring-label-bottom .pixels-timer-ring__center {
+.pixeccte-countdown-timer--ring-label-bottom .pixeccte-timer-ring__center,
+.pixeccte-countdown-timer--has-rings.pixeccte-countdown-timer--ring-label-bottom .pixeccte-timer-ring__center {
 	flex-direction: column;
 }
 
-.pixels-core-countdown-timer--ring-label-top .pixels-timer-ring__center,
-.pixels-core-countdown-timer--has-rings.pixels-core-countdown-timer--ring-label-top .pixels-timer-ring__center {
+.pixeccte-countdown-timer--ring-label-top .pixeccte-timer-ring__center,
+.pixeccte-countdown-timer--has-rings.pixeccte-countdown-timer--ring-label-top .pixeccte-timer-ring__center {
 	flex-direction: column-reverse;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-ring__center .pixels-timer-label {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-ring__center .pixeccte-timer-label {
 	font-size: 11px;
 	line-height: 1.1;
 	max-width: 100%;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-unit-digits {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-unit-digits {
 	position: static;
 	inset: auto;
 	display: flex;
@@ -204,7 +204,7 @@
 	line-height: 1;
 }
 
-.pixels-core-countdown-timer--has-rings .pixels-timer-digit {
+.pixeccte-countdown-timer--has-rings .pixeccte-timer-digit {
 	width: auto;
 	height: auto;
 	background: transparent;

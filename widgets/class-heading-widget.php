@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Text_Shadow;
@@ -16,7 +16,7 @@ class Heading_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-core-heading';
+		return 'pixeccte-heading';
 	}
 
 	public function get_title(): string {
@@ -24,15 +24,15 @@ class Heading_Widget extends Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-heading';
+		return 'pixeccte-icon pixeccte-icon-heading';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'heading', 'title', 'headline', 'pixels' ];
+		return [ 'heading', 'title', 'headline', 'pixeccte' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -155,7 +155,7 @@ class Heading_Widget extends Widget_Base {
 				],
 				'default'   => 'left',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-heading' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-heading' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -178,7 +178,7 @@ class Heading_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-heading__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-heading__title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -187,7 +187,7 @@ class Heading_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'title_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-heading__title',
+				'selector' => '{{WRAPPER}} .pixeccte-heading__title',
 			]
 		);
 
@@ -195,7 +195,7 @@ class Heading_Widget extends Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name'     => 'title_text_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-heading__title',
+				'selector' => '{{WRAPPER}} .pixeccte-heading__title',
 			]
 		);
 
@@ -212,7 +212,7 @@ class Heading_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-heading__title' => 'margin: 0 0 {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-heading__title' => 'margin: 0 0 {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -236,7 +236,7 @@ class Heading_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-heading__subheading' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-heading__subheading' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -245,7 +245,7 @@ class Heading_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'subheading_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-heading__subheading',
+				'selector' => '{{WRAPPER}} .pixeccte-heading__subheading',
 			]
 		);
 
@@ -259,11 +259,11 @@ class Heading_Widget extends Widget_Base {
 			return;
 		}
 
-		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-heading' );
+		$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-heading' );
 
 		$title_tag = Utils::validate_html_tag( $settings['title_tag'] );
 
-		$this->add_render_attribute( 'title', 'class', 'pixels-core-heading__title' );
+		$this->add_render_attribute( 'title', 'class', 'pixeccte-heading__title' );
 
 		if ( ! empty( $settings['link']['url'] ) ) {
 			$this->add_link_attributes( 'title', $settings['link'] );
@@ -286,7 +286,7 @@ class Heading_Widget extends Widget_Base {
 			<?php endif; ?>
 
 			<?php if ( 'yes' === $settings['show_subheading'] && ! empty( $settings['subheading'] ) ) : ?>
-				<p class="pixels-core-heading__subheading"><?php echo wp_kses_post( $settings['subheading'] ); ?></p>
+				<p class="pixeccte-heading__subheading"><?php echo wp_kses_post( $settings['subheading'] ); ?></p>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -301,16 +301,16 @@ class Heading_Widget extends Widget_Base {
 			hasSubheading = 'yes' === settings.show_subheading && settings.subheading;
 		#>
 		<# if ( hasTitle || hasSubheading ) { #>
-			<div class="pixels-core-heading">
+			<div class="pixeccte-heading">
 				<# if ( hasTitle ) { #>
 					<# if ( hasLink ) { #>
-						<a href="{{ settings.link.url }}" class="pixels-core-heading__title elementor-heading-title">{{{ settings.title }}}</a>
+						<a href="{{ settings.link.url }}" class="pixeccte-heading__title elementor-heading-title">{{{ settings.title }}}</a>
 					<# } else { #>
-						<{{ titleTag }} class="pixels-core-heading__title elementor-heading-title">{{{ settings.title }}}</{{ titleTag }}>
+						<{{ titleTag }} class="pixeccte-heading__title elementor-heading-title">{{{ settings.title }}}</{{ titleTag }}>
 					<# } #>
 				<# } #>
 				<# if ( hasSubheading ) { #>
-					<p class="pixels-core-heading__subheading">{{{ settings.subheading }}}</p>
+					<p class="pixeccte-heading__subheading">{{{ settings.subheading }}}</p>
 				<# } #>
 			</div>
 		<# } #>

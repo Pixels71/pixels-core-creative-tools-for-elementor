@@ -1,6 +1,6 @@
 <?php
 use Elementor\Utils;
-use PixelsCore\Theme_Builder\Theme_Elementor;
+use PixelsCoreCreativeToolsForElementor\Theme_Builder\Theme_Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

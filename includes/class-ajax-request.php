@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore;
+namespace PixelsCoreCreativeToolsForElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -33,15 +33,15 @@ class Ajax_Request {
 	];
 
 	public function __construct() {
-		add_action( 'wp_ajax_pixels_core_live_paste', [ $this, 'live_paste' ] );
-		add_action( 'wp_ajax_pixels_core_cross_cp_import', [ $this, 'cross_copy_paste_media_import' ] );
+		add_action( 'wp_ajax_pixeccte_live_paste', [ $this, 'live_paste' ] );
+		add_action( 'wp_ajax_pixeccte_cross_cp_import', [ $this, 'cross_copy_paste_media_import' ] );
 	}
 
 	/**
 	 * Handle Live Paste — enable widgets required by pasted content.
 	 */
 	public function live_paste() {
-		if ( ! check_ajax_referer( 'pixels_core_cross_cp_import', 'nonce', false ) ) {
+		if ( ! check_ajax_referer( 'pixeccte_cross_cp_import', 'nonce', false ) ) {
 			wp_send_json(
 				$this->set_response(
 					false,
@@ -64,7 +64,7 @@ class Ajax_Request {
 		$type = isset( $_POST['type'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['type'] ) ) ) : '';
 
 		switch ( $type ) {
-			case 'pixels_core_enable_widget':
+			case 'pixeccte_enable_widget':
 				$widgets_name = [];
 				if ( isset( $_POST['widgets_name'] ) ) {
 					$raw_widgets = map_deep( wp_unslash( $_POST['widgets_name'] ), 'sanitize_text_field' );
@@ -133,7 +133,7 @@ class Ajax_Request {
 		 * @param array{widgets: array<int, string>, extensions: string} $type
 		 */
 		apply_filters(
-			'pixels_core_enable_selected_widgets',
+			'pixeccte_enable_selected_widgets',
 			[
 				'widgets'    => $widgets_name,
 				'extensions' => '',
@@ -161,13 +161,13 @@ class Ajax_Request {
 	 * Cross copy paste media import.
 	 */
 	public function cross_copy_paste_media_import() {
-		check_ajax_referer( 'pixels_core_cross_cp_import', 'nonce' );
+		check_ajax_referer( 'pixeccte_cross_cp_import', 'nonce' );
 
 		if ( ! current_user_can( 'edit_posts' ) || ! current_user_can( 'upload_files' ) ) {
 			wp_send_json_error( __( 'You do not have permission to import media.', 'pixels-core-creative-tools-for-elementor' ), 403 );
 		}
 
-		$raw_copy_content = filter_input( INPUT_POST, 'copy_content', FILTER_UNSAFE_RAW );
+		$raw_copy_content = filter_input( INPUT_POST, 'copy_content', FILTER_UNSAFE_RAW ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Raw JSON required; sanitized in parse_and_sanitize_copy_content().
 		if ( null === $raw_copy_content || false === $raw_copy_content ) {
 			wp_send_json_error( __( 'Empty Content.', 'pixels-core-creative-tools-for-elementor' ) );
 		}

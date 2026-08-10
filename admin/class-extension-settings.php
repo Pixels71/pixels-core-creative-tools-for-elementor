@@ -1,7 +1,7 @@
 <?php
-namespace PixelsCore\Admin;
+namespace PixelsCoreCreativeToolsForElementor\Admin;
 
-use PixelsCore\Extension_Registry;
+use PixelsCoreCreativeToolsForElementor\Extension_Registry;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -9,8 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Extension_Settings {
 
-	public const OPTION_KEY       = 'pixels_core_active_extensions';
-	public const SYNCED_SLUGS_KEY = 'pixels_core_extensions_synced_slugs';
+	public const OPTION_KEY       = 'pixeccte_active_extensions';
+	public const SYNCED_SLUGS_KEY = 'pixeccte_extensions_synced_slugs';
 
 	private static ?Extension_Settings $instance = null;
 
@@ -106,7 +106,7 @@ final class Extension_Settings {
 		$registry     = Extension_Registry::instance();
 		$active_slugs = $this->get_active_slugs();
 		$extensions   = [];
-		$upgrade_url  = defined( 'PIXELS_CORE_UPGRADE_URL' ) ? PIXELS_CORE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
+		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
 
 		foreach ( $registry->get_all() as $slug => $config ) {
 			$tier = $config['tier'] ?? 'free';

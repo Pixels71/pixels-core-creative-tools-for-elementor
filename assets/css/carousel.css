@@ -1,61 +1,61 @@
-.pixels-core-carousel {
+.pixeccte-carousel {
 	width: 100%;
 	overflow: visible;
 }
 
-.pixels-core-carousel__stage {
+.pixeccte-carousel__stage {
 	position: relative;
 	overflow: visible;
 }
 
-.pixels-core-carousel__wrapper {
+.pixeccte-carousel__wrapper {
 	position: relative;
 	overflow: hidden;
-	--pixels-carousel-slides-to-show: 1;
-	--pixels-carousel-slide-gap: 16px;
+	--pixeccte-carousel-slides-to-show: 1;
+	--pixeccte-carousel-slide-gap: 16px;
 }
 
 /* Elementor containers default to width:100%, which breaks multi-slide carousels. */
-.pixels-core-carousel__slides > .swiper-slide.e-con {
+.pixeccte-carousel__slides > .swiper-slide.e-con {
 	--width: auto;
 	width: auto;
 	flex-shrink: 0;
 	box-sizing: border-box;
 }
 
-.pixels-core-carousel__slides > .swiper-slide {
+.pixeccte-carousel__slides > .swiper-slide {
 	height: auto;
 	flex-shrink: 0;
 	box-sizing: border-box;
 }
 
-.pixels-core-carousel__wrapper:not(.swiper-initialized) .pixels-core-carousel__slides {
+.pixeccte-carousel__wrapper:not(.swiper-initialized) .pixeccte-carousel__slides {
 	display: flex;
 	flex-wrap: nowrap;
-	gap: var(--pixels-carousel-slide-gap, 0px);
+	gap: var(--pixeccte-carousel-slide-gap, 0px);
 }
 
-.pixels-core-carousel__wrapper:not(.swiper-initialized) .pixels-core-carousel__slides > .swiper-slide {
+.pixeccte-carousel__wrapper:not(.swiper-initialized) .pixeccte-carousel__slides > .swiper-slide {
 	flex: 0 0 calc(
-		(100% - (var(--pixels-carousel-slides-to-show, 1) - 1) * var(--pixels-carousel-slide-gap, 0px))
-		/ var(--pixels-carousel-slides-to-show, 1)
+		(100% - (var(--pixeccte-carousel-slides-to-show, 1) - 1) * var(--pixeccte-carousel-slide-gap, 0px))
+		/ var(--pixeccte-carousel-slides-to-show, 1)
 	);
 	max-width: calc(
-		(100% - (var(--pixels-carousel-slides-to-show, 1) - 1) * var(--pixels-carousel-slide-gap, 0px))
-		/ var(--pixels-carousel-slides-to-show, 1)
+		(100% - (var(--pixeccte-carousel-slides-to-show, 1) - 1) * var(--pixeccte-carousel-slide-gap, 0px))
+		/ var(--pixeccte-carousel-slides-to-show, 1)
 	);
 }
 
-.pixels-core-carousel__slides > .e-con {
+.pixeccte-carousel__slides > .e-con {
 	height: auto;
 	box-sizing: border-box;
 }
 
-.pixels-core-carousel--vertical .pixels-core-carousel__wrapper {
+.pixeccte-carousel--vertical .pixeccte-carousel__wrapper {
 	height: 400px;
 }
 
-.pixels-core-carousel .elementor-swiper-button {
+.pixeccte-carousel .elementor-swiper-button {
 	position: absolute;
 	z-index: 2;
 	display: inline-flex;
@@ -75,7 +75,7 @@
 	transition: background-color 0.2s ease, color 0.2s ease, top 0.2s ease, right 0.2s ease, bottom 0.2s ease, left 0.2s ease, transform 0.2s ease;
 }
 
-.pixels-core-carousel .elementor-swiper-button-prev {
+.pixeccte-carousel .elementor-swiper-button-prev {
 	top: 50%;
 	bottom: auto;
 	left: 1rem;
@@ -83,7 +83,7 @@
 	transform: translateY(-50%);
 }
 
-.pixels-core-carousel .elementor-swiper-button-next {
+.pixeccte-carousel .elementor-swiper-button-next {
 	top: 50%;
 	bottom: auto;
 	right: 1rem;
@@ -91,19 +91,19 @@
 	transform: translateY(-50%);
 }
 
-.pixels-core-carousel .elementor-swiper-button:hover,
-.pixels-core-carousel .elementor-swiper-button:focus {
+.pixeccte-carousel .elementor-swiper-button:hover,
+.pixeccte-carousel .elementor-swiper-button:focus {
 	outline: none;
 	background: rgba(0, 0, 0, 0.65);
 	color: #fff;
 }
 
-.pixels-core-carousel .elementor-swiper-button:focus-visible {
+.pixeccte-carousel .elementor-swiper-button:focus-visible {
 	outline: 2px solid #2271b1;
 	outline-offset: 2px;
 }
 
-.pixels-core-carousel--vertical .elementor-swiper-button-prev {
+.pixeccte-carousel--vertical .elementor-swiper-button-prev {
 	top: 1rem;
 	bottom: auto;
 	left: 50%;
@@ -111,7 +111,7 @@
 	transform: translateX(-50%);
 }
 
-.pixels-core-carousel--vertical .elementor-swiper-button-next {
+.pixeccte-carousel--vertical .elementor-swiper-button-next {
 	top: auto;
 	bottom: 1rem;
 	left: 50%;
@@ -119,7 +119,7 @@
 	transform: translateX(-50%);
 }
 
-.pixels-core-carousel .swiper-pagination {
+.pixeccte-carousel .swiper-pagination {
 	position: absolute;
 	z-index: 3;
 	width: auto;
@@ -133,125 +133,125 @@
 	align-items: center;
 }
 
-.pixels-core-carousel-pagination--inside .pixels-core-carousel .swiper-pagination {
+.pixeccte-carousel-pagination--inside .pixeccte-carousel .swiper-pagination {
 	top: auto;
 	bottom: 1rem;
 	margin-top: 0;
 }
 
-.pixels-core-carousel-pagination--outside .pixels-core-carousel .swiper-pagination {
+.pixeccte-carousel-pagination--outside .pixeccte-carousel .swiper-pagination {
 	top: 100%;
 	bottom: auto;
 	margin-top: 1rem;
 }
 
-.pixels-core-carousel--has-thumbs > .pixels-core-carousel {
+.pixeccte-carousel--has-thumbs > .pixeccte-carousel {
 	display: flex;
 	width: 100%;
 }
 
-.pixels-core-carousel--has-thumbs.pixels-core-carousel-thumbs--bottom > .pixels-core-carousel,
-.pixels-core-carousel--has-thumbs.pixels-core-carousel-thumbs--top > .pixels-core-carousel {
+.pixeccte-carousel--has-thumbs.pixeccte-carousel-thumbs--bottom > .pixeccte-carousel,
+.pixeccte-carousel--has-thumbs.pixeccte-carousel-thumbs--top > .pixeccte-carousel {
 	flex-direction: column;
 }
 
-.pixels-core-carousel--has-thumbs.pixels-core-carousel-thumbs--top > .pixels-core-carousel {
+.pixeccte-carousel--has-thumbs.pixeccte-carousel-thumbs--top > .pixeccte-carousel {
 	flex-direction: column-reverse;
 }
 
-.pixels-core-carousel--has-thumbs.pixels-core-carousel-thumbs--left > .pixels-core-carousel,
-.pixels-core-carousel--has-thumbs.pixels-core-carousel-thumbs--right > .pixels-core-carousel {
+.pixeccte-carousel--has-thumbs.pixeccte-carousel-thumbs--left > .pixeccte-carousel,
+.pixeccte-carousel--has-thumbs.pixeccte-carousel-thumbs--right > .pixeccte-carousel {
 	flex-direction: row;
 	align-items: stretch;
 }
 
-.pixels-core-carousel--has-thumbs.pixels-core-carousel-thumbs--right > .pixels-core-carousel {
+.pixeccte-carousel--has-thumbs.pixeccte-carousel-thumbs--right > .pixeccte-carousel {
 	flex-direction: row-reverse;
 }
 
-.pixels-core-carousel--has-thumbs .pixels-core-carousel__stage {
+.pixeccte-carousel--has-thumbs .pixeccte-carousel__stage {
 	flex: 1 1 auto;
 	min-width: 0;
 }
 
-.pixels-core-carousel__thumbs-wrapper {
+.pixeccte-carousel__thumbs-wrapper {
 	overflow: hidden;
 	flex-shrink: 0;
-	--pixels-carousel-thumbs-to-show: 4;
-	--pixels-carousel-thumb-gap: 10px;
+	--pixeccte-carousel-thumbs-to-show: 4;
+	--pixeccte-carousel-thumb-gap: 10px;
 	width: 100%;
 }
 
-.pixels-core-carousel-thumbs--left .pixels-core-carousel__thumbs-wrapper,
-.pixels-core-carousel-thumbs--right .pixels-core-carousel__thumbs-wrapper {
+.pixeccte-carousel-thumbs--left .pixeccte-carousel__thumbs-wrapper,
+.pixeccte-carousel-thumbs--right .pixeccte-carousel__thumbs-wrapper {
 	width: auto;
 	height: 100%;
 	align-self: stretch;
 }
 
-.pixels-core-carousel__thumbs > .swiper-slide.pixels-core-carousel__thumb {
+.pixeccte-carousel__thumbs > .swiper-slide.pixeccte-carousel__thumb {
 	flex-shrink: 0;
 	box-sizing: border-box;
 }
 
-.pixels-core-carousel-thumbs--bottom .pixels-core-carousel__thumbs > .swiper-slide.pixels-core-carousel__thumb,
-.pixels-core-carousel-thumbs--top .pixels-core-carousel__thumbs > .swiper-slide.pixels-core-carousel__thumb {
+.pixeccte-carousel-thumbs--bottom .pixeccte-carousel__thumbs > .swiper-slide.pixeccte-carousel__thumb,
+.pixeccte-carousel-thumbs--top .pixeccte-carousel__thumbs > .swiper-slide.pixeccte-carousel__thumb {
 	width: calc(
-		(100% - (var(--pixels-carousel-thumbs-to-show, 4) - 1) * var(--pixels-carousel-thumb-gap, 0px))
-		/ var(--pixels-carousel-thumbs-to-show, 4)
+		(100% - (var(--pixeccte-carousel-thumbs-to-show, 4) - 1) * var(--pixeccte-carousel-thumb-gap, 0px))
+		/ var(--pixeccte-carousel-thumbs-to-show, 4)
 	);
 }
 
-.pixels-core-carousel-thumbs--left .pixels-core-carousel__thumbs > .swiper-slide.pixels-core-carousel__thumb,
-.pixels-core-carousel-thumbs--right .pixels-core-carousel__thumbs > .swiper-slide.pixels-core-carousel__thumb {
+.pixeccte-carousel-thumbs--left .pixeccte-carousel__thumbs > .swiper-slide.pixeccte-carousel__thumb,
+.pixeccte-carousel-thumbs--right .pixeccte-carousel__thumbs > .swiper-slide.pixeccte-carousel__thumb {
 	width: 100%;
 	height: calc(
-		(100% - (var(--pixels-carousel-thumbs-to-show, 4) - 1) * var(--pixels-carousel-thumb-gap, 0px))
-		/ var(--pixels-carousel-thumbs-to-show, 4)
+		(100% - (var(--pixeccte-carousel-thumbs-to-show, 4) - 1) * var(--pixeccte-carousel-thumb-gap, 0px))
+		/ var(--pixeccte-carousel-thumbs-to-show, 4)
 	);
 }
 
-.pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs {
+.pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs {
 	display: flex;
 	flex-wrap: nowrap;
-	gap: var(--pixels-carousel-thumb-gap, 0px);
+	gap: var(--pixeccte-carousel-thumb-gap, 0px);
 }
 
-.pixels-core-carousel-thumbs--left .pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs,
-.pixels-core-carousel-thumbs--right .pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs {
+.pixeccte-carousel-thumbs--left .pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs,
+.pixeccte-carousel-thumbs--right .pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs {
 	flex-direction: column;
 }
 
-.pixels-core-carousel-thumbs--bottom .pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs > .swiper-slide,
-.pixels-core-carousel-thumbs--top .pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs > .swiper-slide {
+.pixeccte-carousel-thumbs--bottom .pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs > .swiper-slide,
+.pixeccte-carousel-thumbs--top .pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs > .swiper-slide {
 	flex: 0 0 calc(
-		(100% - (var(--pixels-carousel-thumbs-to-show, 4) - 1) * var(--pixels-carousel-thumb-gap, 0px))
-		/ var(--pixels-carousel-thumbs-to-show, 4)
+		(100% - (var(--pixeccte-carousel-thumbs-to-show, 4) - 1) * var(--pixeccte-carousel-thumb-gap, 0px))
+		/ var(--pixeccte-carousel-thumbs-to-show, 4)
 	);
 	max-width: calc(
-		(100% - (var(--pixels-carousel-thumbs-to-show, 4) - 1) * var(--pixels-carousel-thumb-gap, 0px))
-		/ var(--pixels-carousel-thumbs-to-show, 4)
+		(100% - (var(--pixeccte-carousel-thumbs-to-show, 4) - 1) * var(--pixeccte-carousel-thumb-gap, 0px))
+		/ var(--pixeccte-carousel-thumbs-to-show, 4)
 	);
 }
 
-.pixels-core-carousel-thumbs--left .pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs > .swiper-slide,
-.pixels-core-carousel-thumbs--right .pixels-core-carousel__thumbs-wrapper:not(.swiper-initialized) .pixels-core-carousel__thumbs > .swiper-slide {
+.pixeccte-carousel-thumbs--left .pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs > .swiper-slide,
+.pixeccte-carousel-thumbs--right .pixeccte-carousel__thumbs-wrapper:not(.swiper-initialized) .pixeccte-carousel__thumbs > .swiper-slide {
 	flex: 0 0 calc(
-		(100% - (var(--pixels-carousel-thumbs-to-show, 4) - 1) * var(--pixels-carousel-thumb-gap, 0px))
-		/ var(--pixels-carousel-thumbs-to-show, 4)
+		(100% - (var(--pixeccte-carousel-thumbs-to-show, 4) - 1) * var(--pixeccte-carousel-thumb-gap, 0px))
+		/ var(--pixeccte-carousel-thumbs-to-show, 4)
 	);
 	max-height: calc(
-		(100% - (var(--pixels-carousel-thumbs-to-show, 4) - 1) * var(--pixels-carousel-thumb-gap, 0px))
-		/ var(--pixels-carousel-thumbs-to-show, 4)
+		(100% - (var(--pixeccte-carousel-thumbs-to-show, 4) - 1) * var(--pixeccte-carousel-thumb-gap, 0px))
+		/ var(--pixeccte-carousel-thumbs-to-show, 4)
 	);
 }
 
-.pixels-core-carousel-thumbs--left .pixels-core-carousel__thumbs-wrapper,
-.pixels-core-carousel-thumbs--right .pixels-core-carousel__thumbs-wrapper {
+.pixeccte-carousel-thumbs--left .pixeccte-carousel__thumbs-wrapper,
+.pixeccte-carousel-thumbs--right .pixeccte-carousel__thumbs-wrapper {
 	height: auto;
 }
 
-.pixels-core-carousel__thumb {
+.pixeccte-carousel__thumb {
 	box-sizing: border-box;
 	cursor: pointer;
 	overflow: hidden;
@@ -259,22 +259,22 @@
 	transition: opacity 0.2s ease, border-color 0.2s ease;
 }
 
-.pixels-core-carousel__thumb.swiper-slide-thumb-active {
+.pixeccte-carousel__thumb.swiper-slide-thumb-active {
 	opacity: 1;
 }
 
-.pixels-core-carousel__thumb img,
-.pixels-core-carousel__thumb-placeholder {
+.pixeccte-carousel__thumb img,
+.pixeccte-carousel__thumb-placeholder {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
 
-.pixels-core-carousel__thumb img {
+.pixeccte-carousel__thumb img {
 	object-fit: cover;
 }
 
-.pixels-core-carousel__thumb-placeholder {
+.pixeccte-carousel__thumb-placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -285,7 +285,7 @@
 	line-height: 1;
 }
 
-.pixels-core-carousel-pagination-type--progress .swiper-pagination {
+.pixeccte-carousel-pagination-type--progress .swiper-pagination {
 	width: 100%;
 	max-width: 100%;
 	left: 0;
@@ -294,26 +294,26 @@
 	display: block;
 }
 
-.pixels-core-carousel .swiper-pagination-progressbar {
+.pixeccte-carousel .swiper-pagination-progressbar {
 	position: relative;
 	overflow: hidden;
 }
 
-.pixels-core-carousel-pagination-type--fraction .swiper-pagination {
+.pixeccte-carousel-pagination-type--fraction .swiper-pagination {
 	width: auto;
 	display: inline-flex;
 }
 
-.pixels-core-carousel .swiper-pagination-fraction {
+.pixeccte-carousel .swiper-pagination-fraction {
 	line-height: 1;
 	white-space: nowrap;
 }
 
-.pixels-core-carousel .swiper-pagination-bullet {
+.pixeccte-carousel .swiper-pagination-bullet {
 	transition: transform 0.2s ease, opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
 }
 
-.pixels-core-carousel .swiper-button-disabled {
+.pixeccte-carousel .swiper-button-disabled {
 	opacity: 0.35;
 	cursor: default;
 	pointer-events: none;

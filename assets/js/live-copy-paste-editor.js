@@ -21,10 +21,10 @@
                 return (
                     a.push(h),
                     b.push({
-                        name: "pixels_core_" + g[e],
+                        name: "pixeccte_" + g[e],
                         actions: [
                             {
-                                name: "pixels_core_live_paste",
+                                name: "pixeccte_live_paste",
                                 title: "Pixels Live Paste",
                                 icon: "eicon-import-kit",
                                 callback: function () {
@@ -35,15 +35,15 @@
                                     if (navigator.permissions && typeof navigator.permissions.query === 'function') {
                                         navigator.permissions.query({ name: "clipboard-read" }).then(function (permissionStatus) {
                                             if (permissionStatus.state === "denied") {
-                                                pixels_core_show_paste_fallback_lightbox(h);
+                                                pixeccte_show_paste_fallback_lightbox(h);
                                             } else {
-                                                pixels_core_try_clipboard_read_text_then_paste(h);
+                                                pixeccte_try_clipboard_read_text_then_paste(h);
                                             }
                                         }).catch(function () {
-                                            pixels_core_try_clipboard_read_text_then_paste(h);
+                                            pixeccte_try_clipboard_read_text_then_paste(h);
                                         });
                                     } else {
-                                        pixels_core_try_clipboard_read_text_then_paste(h);
+                                        pixeccte_try_clipboard_read_text_then_paste(h);
                                     }
                                 },
                             },
@@ -55,7 +55,7 @@
         });
     });
 
-    const pixels_core_manage_paste = async (parsedData, h) => {
+    const pixeccte_manage_paste = async (parsedData, h) => {
 
         let message1 = 'Preparing your design...';
         let message2 = 'Analyzing widgets...';
@@ -67,7 +67,7 @@
 
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        const widgets_name = await pixels_core_get_widgetsname(parsedData.tpelecode);
+        const widgets_name = await pixeccte_get_widgetsname(parsedData.tpelecode);
 
         // Show widgets being processed
         if (widgets_name && widgets_name.length > 0) {
@@ -79,12 +79,12 @@
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         const response = await jQuery.ajax({
-            url: pixels_core_cross_cp.ajax_url,
+            url: pixeccte_cross_cp.ajax_url,
             method: "POST",
             data: {
-                nonce: pixels_core_cross_cp.nonce,
-                action: "pixels_core_live_paste",
-                type: "pixels_core_enable_widget",
+                nonce: pixeccte_cross_cp.nonce,
+                action: "pixeccte_live_paste",
+                type: "pixeccte_enable_widget",
                 widgets_name: widgets_name,
             }
         });
@@ -106,12 +106,12 @@
 
         // Load widgets if needed
         if (widgets_name && widgets_name.length > 0) {
-            await pixels_core_widgets_load();
+            await pixeccte_widgets_load();
 
             // Update widget status indicators
             for (let i = 0; i < widgets_name.length; i++) {
                 await new Promise(resolve => setTimeout(resolve, 300));
-                const tickEl = document.getElementById(`pixels-core-widget-status-${i}`);
+                const tickEl = document.getElementById(`pixeccte-widget-status-${i}`);
                 if (tickEl) {
                     tickEl.classList.remove("loader");
                     tickEl.textContent = "✔";
@@ -121,7 +121,7 @@
 
         // Create the element
         showPixelsPopup('Creating element...');
-        await pixels_core_createWidgetElements(parsedData, h);
+        await pixeccte_createWidgetElements(parsedData, h);
 
         // Show success message
         showPixelsPopup(message4, [], true);
@@ -142,10 +142,10 @@
     /**
      * Parse clipboard JSON and run Live Paste (shared by Async Clipboard API + manual paste field).
      */
-    function pixels_core_apply_live_paste_from_string(pastedData, h) {
+    function pixeccte_apply_live_paste_from_string(pastedData, h) {
         pastedData = String(pastedData || '').trim();
 
-        if (!pastedData || pixels_core_isJSON(pastedData) == false) {
+        if (!pastedData || pixeccte_isJSON(pastedData) == false) {
             hidePixelsPopup();
             alert(Json_error);
             return;
@@ -179,27 +179,27 @@
             tpelecode: parsedData.tpelecode
         };
 
-        var existingDialog = document.getElementById('pixels-core-paste-area-dialog');
+        var existingDialog = document.getElementById('pixeccte-paste-area-dialog');
         if (existingDialog) {
             existingDialog.parentNode.removeChild(existingDialog);
         }
 
-        pixels_core_manage_paste(pasteData, h);
+        pixeccte_manage_paste(pasteData, h);
     }
 
     /**
      * Manual paste lightbox (Firefox often rejects clipboard-read permission query; readText may still fail).
      */
-    function pixels_core_show_paste_fallback_lightbox(h) {
+    function pixeccte_show_paste_fallback_lightbox(h) {
         hidePixelsPopup();
 
-        var existingDialog = document.getElementById('pixels-core-paste-area-dialog');
+        var existingDialog = document.getElementById('pixeccte-paste-area-dialog');
         if (existingDialog) {
             existingDialog.parentNode.removeChild(existingDialog);
         }
 
-        var pixels_core_paste = document.querySelector('#pixels-core-paste-area-input');
-        if (pixels_core_paste) {
+        var pixeccte_paste = document.querySelector('#pixeccte-paste-area-input');
+        if (pixeccte_paste) {
             return;
         }
 
@@ -209,7 +209,7 @@
         paragraph.innerHTML = "Paste your copied Live Copy JSON here (Firefox may require this instead of direct clipboard read).";
 
         var inputArea = document.createElement('input');
-        inputArea.id = 'pixels-core-paste-area-input';
+        inputArea.id = 'pixeccte-paste-area-input';
         inputArea.type = 'text';
         inputArea.setAttribute('autocomplete', 'off');
         inputArea.setAttribute('autofocus', 'autofocus');
@@ -230,7 +230,7 @@
             showPixelsPopup('Processing pasted data...');
 
             var pastedData = event.clipboardData.getData('text');
-            pixels_core_apply_live_paste_from_string(pastedData, h);
+            pixeccte_apply_live_paste_from_string(pastedData, h);
         });
 
         var getSystem = '';
@@ -241,7 +241,7 @@
         }
 
         var pixelsDilouge = elementorCommon.dialogsManager.createWidget('lightbox', {
-            id: 'pixels-core-paste-area-dialog',
+            id: 'pixeccte-paste-area-dialog',
             headerMessage: getSystem + ' + V',
             message: container,
             position: {
@@ -263,39 +263,39 @@
         pixelsDilouge.show();
     }
 
-    function pixels_core_try_clipboard_read_text_then_paste(h) {
+    function pixeccte_try_clipboard_read_text_then_paste(h) {
         if (!navigator.clipboard || typeof navigator.clipboard.readText !== 'function') {
             hidePixelsPopup();
-            pixels_core_show_paste_fallback_lightbox(h);
+            pixeccte_show_paste_fallback_lightbox(h);
             return;
         }
 
         navigator.clipboard.readText().then(function (pastedData) {
             showPixelsPopup('Processing clipboard data...');
-            pixels_core_apply_live_paste_from_string(pastedData, h);
+            pixeccte_apply_live_paste_from_string(pastedData, h);
         }).catch(function () {
             hidePixelsPopup();
-            pixels_core_show_paste_fallback_lightbox(h);
+            pixeccte_show_paste_fallback_lightbox(h);
         });
     }
 
     /**
      * This Function are used for get all widgets list.
      */
-    const pixels_core_get_widgetsname = async (obj, widgetTypes = []) => {
+    const pixeccte_get_widgetsname = async (obj, widgetTypes = []) => {
 
         if (obj.hasOwnProperty("widgetType") && obj.widgetType) {
             widgetTypes.push(obj.widgetType);
         }
         if (Array.isArray(obj.elements)) {
             obj.elements.forEach(element =>
-                pixels_core_get_widgetsname(element, widgetTypes));
+                pixeccte_get_widgetsname(element, widgetTypes));
         }
 
         return [...new Set(widgetTypes)];
     }
 
-    const pixels_core_widgets_load = async () => {
+    const pixeccte_widgets_load = async () => {
         const Oa = (e) => {
             return new Promise((resolve, reject) => {
                 const r = document.createElement(e.nodeName);
@@ -329,7 +329,7 @@
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
                     // Step 3: Define IDs to filter
-                    const idsToInclude = ['wp-blocks-js-after', 'pixels-core-css-css', 'pixels-core-js-js', 'elementor-editor-js-before'];
+                    const idsToInclude = ['wp-blocks-js-after', 'pixeccte-css-css', 'pixeccte-js-js', 'elementor-editor-js-before'];
                     // Step 4: Select and filter elements
                     const elements = Array.from(doc.querySelectorAll('link[rel="stylesheet"],script')).filter(element => {
                         return element.id && (idsToInclude.includes(element.id) || !document.getElementById(element.id));
@@ -349,13 +349,13 @@
     }
 
     // Check if element contains images recursively
-    const pixels_core_containsImage = (obj) => {
+    const pixeccte_containsImage = (obj) => {
         if (!obj || typeof obj !== 'object') {
             return false;
         }
         
         if (Array.isArray(obj)) {
-            return obj.some(item => pixels_core_containsImage(item));
+            return obj.some(item => pixeccte_containsImage(item));
         }
         
         for (let key in obj) {
@@ -372,7 +372,7 @@
                 
                 // Check nested objects and arrays
                 if (typeof value === 'object' && value !== null) {
-                    if (pixels_core_containsImage(value)) {
+                    if (pixeccte_containsImage(value)) {
                         return true;
                     }
                 }
@@ -386,7 +386,7 @@
      * Elementor's document/elements/create passes options to addElement(), which only honors `at`
      * (Backbone collection index). Using `index` is ignored and new root sections end up at the bottom.
      */
-    function pixels_core_get_root_child_container_for_insert(targetElement) {
+    function pixeccte_get_root_child_container_for_insert(targetElement) {
         var preview = elementor.getPreviewContainer();
         if (!preview || !targetElement || typeof targetElement.getContainer !== 'function') {
             return null;
@@ -408,9 +408,9 @@
         return null;
     }
 
-    function pixels_core_get_insert_at_after_target_on_document(targetElement) {
+    function pixeccte_get_insert_at_after_target_on_document(targetElement) {
         var preview = elementor.getPreviewContainer();
-        var anchor = pixels_core_get_root_child_container_for_insert(targetElement);
+        var anchor = pixeccte_get_root_child_container_for_insert(targetElement);
         if (!anchor || !anchor.view || typeof anchor.view.getOption !== 'function') {
             if (preview && preview.view && preview.view.collection) {
                 return preview.view.collection.length;
@@ -429,7 +429,7 @@
         return idx + 1;
     }
 
-    const pixels_core_createWidgetElements = async (data, element) => {
+    const pixeccte_createWidgetElements = async (data, element) => {
         var targetElement = element,
             targetElementType = element.model.get("elType"),
             sourceElementType = data.tpelecode.elType,
@@ -437,18 +437,18 @@
             sourceElementJson = JSON.stringify(sourceElementData);
 
         // Check for images more thoroughly
-        var containsImage = pixels_core_containsImage(sourceElementData);
+        var containsImage = pixeccte_containsImage(sourceElementData);
         
         var elementModel = { elType: sourceElementType, settings: sourceElementData.settings },
             targetContainer = null,
             insertOptions = {};
 
         if (sourceElementType === "section" || sourceElementType === "container") {
-            elementModel.elements = pixels_core_parseElements(sourceElementData.elements);
+            elementModel.elements = pixeccte_parseElements(sourceElementData.elements);
             targetContainer = elementor.getPreviewContainer();
-            insertOptions.at = pixels_core_get_insert_at_after_target_on_document(targetElement);
+            insertOptions.at = pixeccte_get_insert_at_after_target_on_document(targetElement);
         } else if (sourceElementType === "column") {
-            elementModel.elements = pixels_core_parseElements(sourceElementData.elements);
+            elementModel.elements = pixeccte_parseElements(sourceElementData.elements);
             if (targetElementType === "section" || targetElementType === "container") {
                 targetContainer = targetElement.getContainer();
             } else if (targetElementType === "column") {
@@ -478,11 +478,11 @@
                 showPixelsPopup('Importing images and media...');
                 
                 var importResponse = await jQuery.ajax({
-                    url: pixels_core_cross_cp.ajax_url,
+                    url: pixeccte_cross_cp.ajax_url,
                     method: "POST",
                     data: {
-                        nonce: pixels_core_cross_cp.nonce,
-                        action: "pixels_core_cross_cp_import",
+                        nonce: pixeccte_cross_cp.nonce,
+                        action: "pixeccte_cross_cp_import",
                         copy_content: sourceElementJson
                     }
                 });
@@ -494,7 +494,7 @@
                     if (elementModel.elType === "widget") {
                         elementModel.widgetType = importedData.widgetType || data.tpeletype;
                     } else {
-                        elementModel.elements = importedData.elements || pixels_core_parseElements(sourceElementData.elements);
+                        elementModel.elements = importedData.elements || pixeccte_parseElements(sourceElementData.elements);
                     }
                 }
             } catch (e) {
@@ -537,7 +537,7 @@
         return createdElement;
     }
 
-    function pixels_core_parseElements(elements) {
+    function pixeccte_parseElements(elements) {
         if (!elements || !Array.isArray(elements)) {
             return [];
         }
@@ -552,7 +552,7 @@
                 }
                 // Recursively process nested elements
                 if (cloned.elements && Array.isArray(cloned.elements)) {
-                    cloned.elements = pixels_core_parseElements(cloned.elements);
+                    cloned.elements = pixeccte_parseElements(cloned.elements);
                 }
                 return cloned;
             }
@@ -560,7 +560,7 @@
         });
     }
 
-    function pixels_core_isJSON(str) {
+    function pixeccte_isJSON(str) {
         try {
             JSON.parse(str);
             return true;
@@ -576,26 +576,26 @@
      */
     function initPixelsPopup() {
 
-        if (document.getElementById("pixels-core-popup-overlay")) return;
+        if (document.getElementById("pixeccte-popup-overlay")) return;
 
         const style = document.createElement("style");
         document.head.appendChild(style);
 
         const popup = document.createElement("div");
-        popup.id = "pixels-core-popup-overlay";
+        popup.id = "pixeccte-popup-overlay";
         popup.style.display = "none";
         popup.innerHTML = `
-                    <div id="pixels-core-popup-box">
-                        <div class="pixels-core-heading-container">
-                        <div id="pixels-core-popup-icon" class="pixels-core-spinner-container pixels-core-spinner">
-                            <img id="pixels-core-popup-spinner" class="pixels-core-spinner" src="${pixels_core_cross_cp.asset_url}images/loader.svg" width="60" height="60" alt=" Loading... " />
+                    <div id="pixeccte-popup-box">
+                        <div class="pixeccte-heading-container">
+                        <div id="pixeccte-popup-icon" class="pixeccte-spinner-container pixeccte-spinner">
+                            <img id="pixeccte-popup-spinner" class="pixeccte-spinner" src="${pixeccte_cross_cp.asset_url}images/loader.svg" width="60" height="60" alt=" Loading... " />
                         </div>
-                        <div class="pixels-core-message-container">
-                            <span id="pixels-core-popup-message">Loading...</span>
-                            <span id="pixels-core-popup-submessage">Pasting design from clipboard…</span>
+                        <div class="pixeccte-message-container">
+                            <span id="pixeccte-popup-message">Loading...</span>
+                            <span id="pixeccte-popup-submessage">Pasting design from clipboard…</span>
                         </div>
                         </div>
-                        <div id="pixels-core-widget-info"></div>
+                        <div id="pixeccte-widget-info"></div>
                     </div>`;
 
         document.body.appendChild(popup);
@@ -613,11 +613,11 @@
     const initSpinner = () => {
         if (!storedIconImg) {
             storedIconImg = new Image();
-            storedIconImg.src = pixels_core_cross_cp.asset_url + '/images/loader.svg';
+            storedIconImg.src = pixeccte_cross_cp.asset_url + '/images/loader.svg';
             storedIconImg.width = 60;
             storedIconImg.height = 60;
             storedIconImg.alt = "Loading...";
-            storedIconImg.className = "pixels-core-spinner";
+            storedIconImg.className = "pixeccte-spinner";
         }
     };
 
@@ -626,33 +626,33 @@
         initPixelsPopup();
         initSpinner();
 
-        const iconContainer = document.getElementById("pixels-core-popup-icon");
-        const msg = document.getElementById("pixels-core-popup-message");
-        const info = document.getElementById("pixels-core-widget-info");
-        const submsg = document.getElementById("pixels-core-popup-submessage");
+        const iconContainer = document.getElementById("pixeccte-popup-icon");
+        const msg = document.getElementById("pixeccte-popup-message");
+        const info = document.getElementById("pixeccte-widget-info");
+        const submsg = document.getElementById("pixeccte-popup-submessage");
 
         typeMessage(msg, message);
 
         let widgetHTML = "";
         if (Array.isArray(widgets) && widgets.length > 0) {
-            widgetHTML += `<div class="pixels-core-widget-list">`;
+            widgetHTML += `<div class="pixeccte-widget-list">`;
 
             if (showCount) {
-                widgetHTML += `<div class="pixels-core-widget-count"><span>We've found ${widgets.length} widget(s) used in this design</span></div>`;
+                widgetHTML += `<div class="pixeccte-widget-count"><span>We've found ${widgets.length} widget(s) used in this design</span></div>`;
             }
 
-            widgetHTML += `<div class="pixels-core-widget-names">`;
+            widgetHTML += `<div class="pixeccte-widget-names">`;
             widgets.forEach((widget, index) => {
                 widgetHTML += `
-                    <div id="pixels-core-widget-${index}" class="pixels-core-widget-row">
-                        <span class="pixels-core-widget-tick loader" id="pixels-core-widget-status-${index}"></span>
-                        <span class="pixels-core-widget-name">${widget}</span>
+                    <div id="pixeccte-widget-${index}" class="pixeccte-widget-row">
+                        <span class="pixeccte-widget-tick loader" id="pixeccte-widget-status-${index}"></span>
+                        <span class="pixeccte-widget-name">${widget}</span>
                     </div>`;
             });
             widgetHTML += `</div>`;
 
             if (showCount) {
-                widgetHTML += `<div class="pixels-core-widget-note"><span><strong>Note:</strong> We enable these widgets in your WordPress site</span></div>`;
+                widgetHTML += `<div class="pixeccte-widget-note"><span><strong>Note:</strong> We enable these widgets in your WordPress site</span></div>`;
             }
 
             widgetHTML += `</div>`;
@@ -661,14 +661,14 @@
         info.innerHTML = widgetHTML;
 
         if (isSuccess) {
-            iconContainer.className = "pixels-core-checkmark";
+            iconContainer.className = "pixeccte-checkmark";
             iconContainer.textContent = "✔";
             if (storedIconImg) {
                 storedIconImg.style.display = "none";
             }
         } else {
 
-            iconContainer.className = "pixels-core-spinner-container";
+            iconContainer.className = "pixeccte-spinner-container";
             iconContainer.textContent = "";
 
             if (!iconContainer.contains(storedIconImg) && storedIconImg instanceof Node) {
@@ -678,12 +678,12 @@
         }
 
         // Show the popup overlay
-        document.getElementById("pixels-core-popup-overlay").style.display = "flex";
+        document.getElementById("pixeccte-popup-overlay").style.display = "flex";
     };
 
 
     function hidePixelsPopup() {
-        const el = document.getElementById("pixels-core-popup-overlay");
+        const el = document.getElementById("pixeccte-popup-overlay");
         if (el) el.style.display = "none";
     }
 

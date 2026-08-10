@@ -1,9 +1,9 @@
 <?php
-namespace PixelsCore;
+namespace PixelsCoreCreativeToolsForElementor;
 
-use PixelsCore\Admin\Admin_Loader;
-use PixelsCore\Admin\Extension_Settings;
-use PixelsCore\Admin\Widget_Settings;
+use PixelsCoreCreativeToolsForElementor\Admin\Admin_Loader;
+use PixelsCoreCreativeToolsForElementor\Admin\Extension_Settings;
+use PixelsCoreCreativeToolsForElementor\Admin\Widget_Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -27,7 +27,7 @@ final class Plugin {
 	}
 
 	public function load_admin(): void {
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-admin-loader.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-admin-loader.php';
 
 		Admin_Loader::init();
 	}
@@ -51,12 +51,12 @@ final class Plugin {
 			add_action( 'admin_notices', [ $this, 'admin_notice_missing_nested_elements' ] );
 		}
 
-		require_once PIXELS_CORE_PATH . 'includes/class-widget-registry.php';
-		require_once PIXELS_CORE_PATH . 'includes/class-extension-registry.php';
-		require_once PIXELS_CORE_PATH . 'includes/class-widgets-loader.php';
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/class-pixels-core-theme-elementor.php';
-		require_once PIXELS_CORE_PATH . 'includes/class-extensions-loader.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-admin-loader.php';
+		require_once PIXECCTE_PATH . 'includes/class-widget-registry.php';
+		require_once PIXECCTE_PATH . 'includes/class-extension-registry.php';
+		require_once PIXECCTE_PATH . 'includes/class-widgets-loader.php';
+		require_once PIXECCTE_PATH . 'includes/theme-builder/class-pixeccte-theme-elementor.php';
+		require_once PIXECCTE_PATH . 'includes/class-extensions-loader.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-admin-loader.php';
 
 		Admin_Loader::load_settings();
 		Widget_Settings::sync_new_widgets();
@@ -69,7 +69,7 @@ final class Plugin {
 		 * Fires after Pixels Core Creative Tools for Elementor has initialized Elementor integrations.
 		 * Used by Pixels Core Pro to boot form handlers and related features.
 		 */
-		do_action( 'pixels_core_loaded' );
+		do_action( 'pixeccte_loaded' );
 	}
 
 	/**
@@ -88,7 +88,7 @@ final class Plugin {
 		 *
 		 * @param array<string, string> $types
 		 */
-		return apply_filters( 'pixels_core_theme_template_types', $types );
+		return apply_filters( 'pixeccte_theme_template_types', $types );
 	}
 
 	public static function is_nested_elements_active(): bool {

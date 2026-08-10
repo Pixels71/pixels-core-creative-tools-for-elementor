@@ -42,11 +42,11 @@
 	}
 
 	function isAsidePanel($menu) {
-		return $menu.hasClass('pixels-core-menu--panel-aside');
+		return $menu.hasClass('pixeccte-menu--panel-aside');
 	}
 
 	function bindMenu($scope) {
-		const $menu = $scope.find('.pixels-core-menu').first();
+		const $menu = $scope.find('.pixeccte-menu').first();
 
 		if (!$menu.length || $menu.data('pixelsMenuBound')) {
 			return;
@@ -54,11 +54,11 @@
 
 		$menu.data('pixelsMenuBound', true);
 
-		const $toggle = $menu.find('.pixels-core-menu__toggle');
-		const $wrap = $menu.find('.pixels-core-menu__wrap');
-		const $overlay = $menu.find('.pixels-core-menu__overlay');
-		const $close = $menu.find('.pixels-core-menu__close');
-		const parentSelector = '.menu-item-has-children, .pixels-core-mega-menu-item';
+		const $toggle = $menu.find('.pixeccte-menu__toggle');
+		const $wrap = $menu.find('.pixeccte-menu__wrap');
+		const $overlay = $menu.find('.pixeccte-menu__overlay');
+		const $close = $menu.find('.pixeccte-menu__close');
+		const parentSelector = '.menu-item-has-children, .pixeccte-mega-menu-item';
 		const menuUid = $menu.attr('id') || 'menu-' + Math.random().toString(36).slice(2);
 		const breakpoint = Math.max(
 			320,
@@ -78,7 +78,7 @@
 				return;
 			}
 
-			document.body.classList.toggle('pixels-core-menu-aside-open', locked);
+			document.body.classList.toggle('pixeccte-menu-aside-open', locked);
 		};
 
 		const closeMenu = () => {
@@ -166,7 +166,7 @@
 			if (!$item.is(parentSelector)) {
 				return;
 			}
-			const hasSubmenu = $item.children('.sub-menu, .pixels-core-mega-menu-panel').length > 0;
+			const hasSubmenu = $item.children('.sub-menu, .pixeccte-mega-menu-panel').length > 0;
 
 			if (!hasSubmenu) {
 				return;
@@ -202,7 +202,7 @@
 
 			const $link = $(event.currentTarget);
 			const $item = $link.parent();
-			const hasSubmenu = $item.children('.sub-menu, .pixels-core-mega-menu-panel').length > 0;
+			const hasSubmenu = $item.children('.sub-menu, .pixeccte-mega-menu-panel').length > 0;
 
 			if (hasSubmenu && $item.is(parentSelector) && isAccordionSubmenuMode()) {
 				return;
@@ -252,13 +252,13 @@
 
 	function runReadyTriggers() {
 		if (!window.elementorFrontend || !elementorFrontend.elementsHandler) {
-			$('.elementor-widget-pixels-core-menu').each(function () {
+			$('.elementor-widget-pixeccte-menu').each(function () {
 				bindMenu($(this));
 			});
 			return;
 		}
 
-		$('.elementor-widget-pixels-core-menu').each(function () {
+		$('.elementor-widget-pixeccte-menu').each(function () {
 			try {
 				elementorFrontend.elementsHandler.runReadyTrigger(this);
 			} catch (error) {
@@ -278,7 +278,7 @@
 
 		registerElementorHooks.initialized = true;
 
-		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-core-menu.default', function ($scope) {
+		elementorFrontend.hooks.addAction('frontend/element_ready/pixeccte-menu.default', function ($scope) {
 			bindMenu($scope);
 		});
 

@@ -1,45 +1,45 @@
-.pixels-core-counter {
-	--pixels-counter-align: center;
-	--pixels-counter-justify: center;
+.pixeccte-counter {
+	--pixeccte-counter-align: center;
+	--pixeccte-counter-justify: center;
 	display: flex;
 	width: 100%;
 	gap: 8px;
 }
 
-.pixels-core-counter--layout-stacked-before {
+.pixeccte-counter--layout-stacked-before {
 	flex-direction: column;
-	align-items: var(--pixels-counter-align);
+	align-items: var(--pixeccte-counter-align);
 }
 
-.pixels-core-counter--layout-stacked-after {
+.pixeccte-counter--layout-stacked-after {
 	flex-direction: column-reverse;
-	align-items: var(--pixels-counter-align);
+	align-items: var(--pixeccte-counter-align);
 }
 
-.pixels-core-counter--layout-inline-start {
+.pixeccte-counter--layout-inline-start {
 	flex-direction: row;
-	justify-content: var(--pixels-counter-justify);
+	justify-content: var(--pixeccte-counter-justify);
 	align-items: center;
 }
 
-.pixels-core-counter--layout-inline-end {
+.pixeccte-counter--layout-inline-end {
 	flex-direction: row-reverse;
-	justify-content: var(--pixels-counter-justify);
+	justify-content: var(--pixeccte-counter-justify);
 	align-items: center;
 }
 
-.pixels-core-counter__title {
+.pixeccte-counter__title {
 	margin: 0;
 	flex: 0 1 auto;
 }
 
-.pixels-core-counter--layout-inline-start .pixels-core-counter__title,
-.pixels-core-counter--layout-inline-end .pixels-core-counter__title {
+.pixeccte-counter--layout-inline-start .pixeccte-counter__title,
+.pixeccte-counter--layout-inline-end .pixeccte-counter__title {
 	display: flex;
 	align-items: center;
 }
 
-.pixels-core-counter__number-wrapper {
+.pixeccte-counter__number-wrapper {
 	display: inline-flex;
 	align-items: baseline;
 	flex: 0 1 auto;
@@ -49,13 +49,13 @@
 	font-variant-numeric: tabular-nums;
 }
 
-.pixels-core-counter__prefix,
-.pixels-core-counter__suffix {
+.pixeccte-counter__prefix,
+.pixeccte-counter__suffix {
 	display: inline-block;
 }
 
-.pixels-core-counter__flow,
-.pixels-core-counter number-flow.pixels-core-counter__flow {
+.pixeccte-counter__flow,
+.pixeccte-counter number-flow.pixeccte-counter__flow {
 	display: none;
 	line-height: inherit;
 	font: inherit;
@@ -66,15 +66,15 @@
 	paint-order: stroke fill;
 }
 
-.pixels-core-counter--flow-ready .pixels-core-counter__flow,
-.pixels-core-counter--flow-ready number-flow.pixels-core-counter__flow {
+.pixeccte-counter--flow-ready .pixeccte-counter__flow,
+.pixeccte-counter--flow-ready number-flow.pixeccte-counter__flow {
 	display: inline-block;
 }
 
-.pixels-core-counter--flow-ready .pixels-core-counter__value--fallback {
+.pixeccte-counter--flow-ready .pixeccte-counter__value--fallback {
 	display: none;
 }
 
-.pixels-core-counter__value--fallback {
+.pixeccte-counter__value--fallback {
 	display: inline-block;
 }

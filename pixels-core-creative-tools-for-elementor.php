@@ -20,33 +20,33 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('PIXELS_CORE_VERSION', '1.0.1');
-define('PIXELS_CORE_FILE', __FILE__);
-define('PIXELS_CORE_PATH', plugin_dir_path(__FILE__));
-define('PIXELS_CORE_URL', plugin_dir_url(__FILE__));
-define('PIXELS_CORE_URL_ASSETS', PIXELS_CORE_URL . 'assets/');
-define('PIXELS_CORE_ADMIN_PATH', PIXELS_CORE_PATH . 'admin/');
-define('PIXELS_CORE_ADMIN_URL', PIXELS_CORE_URL . 'admin/');
-define('PIXELS_CORE_UPGRADE_URL', 'https://pixels71.com/pixels-core-pro/');
+define('PIXECCTE_VERSION', '1.0.1');
+define('PIXECCTE_FILE', __FILE__);
+define('PIXECCTE_PATH', plugin_dir_path(__FILE__));
+define('PIXECCTE_URL', plugin_dir_url(__FILE__));
+define('PIXECCTE_URL_ASSETS', PIXECCTE_URL . 'assets/');
+define('PIXECCTE_ADMIN_PATH', PIXECCTE_PATH . 'admin/');
+define('PIXECCTE_ADMIN_URL', PIXECCTE_URL . 'admin/');
+define('PIXECCTE_UPGRADE_URL', 'https://pixels71.com/pixels-core-pro/');
 // Set to true when Pixels Core Pro is available for purchase/activation.
-define('PIXELS_CORE_SHOW_PRO_UPSSELL', false);
+define('PIXECCTE_SHOW_PRO_UPSSELL', false);
 
-require_once PIXELS_CORE_PATH . 'includes/class-pixels-core.php';
+require_once PIXECCTE_PATH . 'includes/class-pixeccte.php';
 
 register_activation_hook(
 	__FILE__,
 	static function (): void {
-		require_once PIXELS_CORE_PATH . 'includes/class-widget-registry.php';
-		require_once PIXELS_CORE_PATH . 'includes/class-extension-registry.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-widget-settings.php';
-		require_once PIXELS_CORE_ADMIN_PATH . 'class-extension-settings.php';
+		require_once PIXECCTE_PATH . 'includes/class-widget-registry.php';
+		require_once PIXECCTE_PATH . 'includes/class-extension-registry.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-widget-settings.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-extension-settings.php';
 
-		\PixelsCore\Admin\Widget_Settings::activate_defaults();
-		\PixelsCore\Admin\Extension_Settings::activate_defaults();
+		\PixelsCoreCreativeToolsForElementor\Admin\Widget_Settings::activate_defaults();
+		\PixelsCoreCreativeToolsForElementor\Admin\Extension_Settings::activate_defaults();
 		flush_rewrite_rules();
 
-		set_transient('pixels_core_activation_redirect', true, 30);
+		set_transient('pixeccte_activation_redirect', true, 30);
 	}
 );
 
-PixelsCore\Plugin::instance();
+PixelsCoreCreativeToolsForElementor\Plugin::instance();

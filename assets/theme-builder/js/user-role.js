@@ -2,8 +2,8 @@
 
 	var user_role_update_close_button = function(wrapper) {
 
-		type 		= wrapper.closest('.pixels-core-user-role-wrapper').attr('data-type');
-		rules 		= wrapper.find('.pixels-core-user-role-condition');
+		type 		= wrapper.closest('.pixeccte-user-role-wrapper').attr('data-type');
+		rules 		= wrapper.find('.pixeccte-user-role-condition');
 		show_close	= false;
 
 		if ( rules.length > 1 ) {
@@ -12,28 +12,28 @@
 
 		rules.each(function() {
 			if ( show_close ) {
-				jQuery(this).find('.user_role-condition-delete').removeClass('pixels-core-hidden');
+				jQuery(this).find('.user_role-condition-delete').removeClass('pixeccte-hidden');
 			}else{
-				jQuery(this).find('.user_role-condition-delete').addClass('pixels-core-hidden');
+				jQuery(this).find('.user_role-condition-delete').addClass('pixeccte-hidden');
 			}
 		});
 	};
 
 	$(document).ready(function($) {
 
-		jQuery('.pixels-core-user-role-selector-wrapper').each(function() {
+		jQuery('.pixeccte-user-role-selector-wrapper').each(function() {
 			user_role_update_close_button( jQuery(this) );
 		})
 		
-		jQuery( '.pixels-core-user-role-selector-wrapper' ).on( 'click', '.user_role-add-rule-wrap a', function(e) {
+		jQuery( '.pixeccte-user-role-selector-wrapper' ).on( 'click', '.user_role-add-rule-wrap a', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			var $this 		= jQuery( this ),
 				id 			= $this.attr( 'data-rule-id' ),
 				new_id 		= parseInt(id) + 1,
-				rule_wrap 	= $this.closest('.pixels-core-user-role-selector-wrapper').find('.user_role-builder-wrap'),
-				template  	= wp.template( 'pixels-core-user-role-condition' ),
-				field_wrap 	= $this.closest('.pixels-core-user-role-wrapper');
+				rule_wrap 	= $this.closest('.pixeccte-user-role-selector-wrapper').find('.user_role-builder-wrap'),
+				template  	= wp.template( 'pixeccte-user-role-condition' ),
+				field_wrap 	= $this.closest('.pixeccte-user-role-wrapper');
 
 			rule_wrap.append( template( { id : new_id } ) );
 			
@@ -42,17 +42,17 @@
 			user_role_update_close_button( field_wrap );
 		});
 
-		jQuery( '.pixels-core-user-role-selector-wrapper' ).on( 'click', '.user_role-condition-delete', function(e) {
+		jQuery( '.pixeccte-user-role-selector-wrapper' ).on( 'click', '.user_role-condition-delete', function(e) {
 			var $this 			= jQuery( this ),
-				rule_condition 	= $this.closest('.pixels-core-user-role-condition'),
-				field_wrap 		= $this.closest('.pixels-core-user-role-wrapper');
+				rule_condition 	= $this.closest('.pixeccte-user-role-condition'),
+				field_wrap 		= $this.closest('.pixeccte-user-role-wrapper');
 				cnt 			= 0,
 				data_type 		= field_wrap.attr( 'data-type' ),
 				optionVal 		= $this.siblings('.user_role-condition-wrap').children('.user_role-condition').val();
 
 			rule_condition.remove();
 
-			field_wrap.find('.pixels-core-user-role-condition').each(function(i) {
+			field_wrap.find('.pixeccte-user-role-condition').each(function(i) {
 				var condition       = jQuery( this ),
 					old_rule_id     = condition.attr('data-rule'),
 					select_location = condition.find('.user_role-condition'),
@@ -62,7 +62,7 @@
 
 				select_location.attr( 'name', location_name.replace('['+old_rule_id+']', '['+i+']') );
 
-				condition.removeClass('pixels-core-user-role-'+old_rule_id).addClass('pixels-core-user-role-'+i);
+				condition.removeClass('pixeccte-user-role-'+old_rule_id).addClass('pixeccte-user-role-'+i);
 
 				cnt = i;
 			});

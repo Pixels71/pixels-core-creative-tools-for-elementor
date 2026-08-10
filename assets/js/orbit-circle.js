@@ -107,7 +107,7 @@
       this.center.style.animation = "none";
 
       const baskets = this.center.querySelectorAll(
-        ".orbit-basket, .pixels-core-orbit-circle__basket",
+        ".orbit-basket, .pixeccte-orbit-circle__basket",
       );
 
       baskets.forEach(function (basket) {
@@ -125,12 +125,12 @@
 
       this.center.style.left = hubOffset + "px";
       this.center.style.top = hubOffset + "px";
-      this.center.style.setProperty("--pixels-orbit-base", "0deg");
+      this.center.style.setProperty("--pixeccte-orbit-base", "0deg");
       this.center.style.transform = "rotate(0deg)";
 
       const pivotOriginY = sizePx / 2 + 10;
       const pivots = this.center.querySelectorAll(
-        ".orbit-pivot-outer, .pixels-core-orbit-circle__pivot",
+        ".orbit-pivot-outer, .pixeccte-orbit-circle__pivot",
       );
       const count = pivots.length;
 
@@ -142,24 +142,24 @@
 
       pivots.forEach(function (pivot, index) {
         const basket = pivot.querySelector(
-          ".orbit-basket, .pixels-core-orbit-circle__basket",
+          ".orbit-basket, .pixeccte-orbit-circle__basket",
         );
         const pivotHalf = pivot.offsetWidth / 2 || 10;
         const baseAngle = index * space;
 
         pivot.style.transformOrigin = pivotHalf + "px " + pivotOriginY + "px";
-        pivot.style.setProperty("--pixels-orbit-base", baseAngle + "deg");
+        pivot.style.setProperty("--pixeccte-orbit-base", baseAngle + "deg");
         pivot.style.transform = "rotate(" + baseAngle + "deg)";
 
         if (basket) {
           basket.style.transformOrigin = "center center";
-          basket.style.setProperty("--pixels-orbit-base", -baseAngle + "deg");
+          basket.style.setProperty("--pixeccte-orbit-base", -baseAngle + "deg");
           basket.style.transform = "rotate(" + -baseAngle + "deg)";
         }
       });
 
       return this.center.querySelectorAll(
-        ".orbit-basket, .pixels-core-orbit-circle__basket",
+        ".orbit-basket, .pixeccte-orbit-circle__basket",
       );
     }
 
@@ -167,12 +167,12 @@
       const effectiveDuration = this.duration / this.speed;
       const spinName =
         this.direction === "counter-clockwise"
-          ? "pixels-orbit-spin-ccw"
-          : "pixels-orbit-spin-cw";
+          ? "pixeccte-orbit-spin-ccw"
+          : "pixeccte-orbit-spin-cw";
       const counterName =
         this.direction === "counter-clockwise"
-          ? "pixels-orbit-spin-cw"
-          : "pixels-orbit-spin-ccw";
+          ? "pixeccte-orbit-spin-cw"
+          : "pixeccte-orbit-spin-ccw";
 
       this.center.style.animation =
         spinName + " " + effectiveDuration + "s linear infinite";
@@ -235,7 +235,7 @@
   const instances = new WeakMap();
 
   function initScope($scope) {
-    $scope.find(".pixels-core-orbit-circle").each(function () {
+    $scope.find(".pixeccte-orbit-circle").each(function () {
       const root = this;
 
       if (instances.has(root)) {
@@ -250,7 +250,7 @@
 
   $(window).on("elementor/frontend/init", function () {
     elementorFrontend.hooks.addAction(
-      "frontend/element_ready/pixels-core-orbit-circle.default",
+      "frontend/element_ready/pixeccte-orbit-circle.default",
       function ($scope) {
         initScope($scope);
       },

@@ -1,7 +1,7 @@
 <?php
-namespace PixelsCore;
+namespace PixelsCoreCreativeToolsForElementor;
 
-use PixelsCore\Admin\Extension_Settings;
+use PixelsCoreCreativeToolsForElementor\Admin\Extension_Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -26,7 +26,7 @@ final class Extensions_Loader {
 			return;
 		}
 
-		require_once PIXELS_CORE_PATH . 'includes/class-assets-manager.php';
+		require_once PIXECCTE_PATH . 'includes/class-assets-manager.php';
 
 		$definitions = Extension_Registry::instance()->get_asset_definitions( $active_slugs );
 
@@ -62,7 +62,7 @@ final class Extensions_Loader {
 				continue;
 			}
 
-			$base = $config['base_path'] ?? PIXELS_CORE_PATH;
+			$base = $config['base_path'] ?? PIXECCTE_PATH;
 			$path = $base . $config['file'];
 
 			if ( ! file_exists( $path ) ) {

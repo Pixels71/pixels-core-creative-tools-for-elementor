@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
@@ -20,7 +20,7 @@ class Site_Logo_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-core-site-logo';
+		return 'pixeccte-site-logo';
 	}
 
 	public function get_title(): string {
@@ -28,15 +28,15 @@ class Site_Logo_Widget extends Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-site-logo';
+		return 'pixeccte-icon pixeccte-icon-site-logo';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'logo', 'site', 'brand', 'identity', 'header', 'pixels' ];
+		return [ 'logo', 'site', 'brand', 'identity', 'header', 'pixeccte' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -196,7 +196,7 @@ class Site_Logo_Widget extends Widget_Base {
 				],
 				'default'   => 'left',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-site-logo' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-site-logo' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -230,7 +230,7 @@ class Site_Logo_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-site-logo__image' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -252,7 +252,7 @@ class Site_Logo_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-site-logo__image' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -270,7 +270,7 @@ class Site_Logo_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-site-logo__image' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -288,7 +288,7 @@ class Site_Logo_Widget extends Widget_Base {
 					'contain' => esc_html__( 'Contain', 'pixels-core-creative-tools-for-elementor' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-site-logo__image' => 'object-fit: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'object-fit: {{VALUE}};',
 				],
 			]
 		);
@@ -297,7 +297,7 @@ class Site_Logo_Widget extends Widget_Base {
 			Group_Control_Css_Filter::get_type(),
 			[
 				'name'     => 'logo_css_filters',
-				'selector' => '{{WRAPPER}} .pixels-core-site-logo__image',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
 			]
 		);
 
@@ -305,7 +305,7 @@ class Site_Logo_Widget extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'logo_border',
-				'selector' => '{{WRAPPER}} .pixels-core-site-logo__image',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
 			]
 		);
 
@@ -316,7 +316,7 @@ class Site_Logo_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-site-logo__image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -325,7 +325,7 @@ class Site_Logo_Widget extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'logo_box_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-site-logo__image',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
 			]
 		);
 
@@ -348,7 +348,7 @@ class Site_Logo_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-site-logo__caption' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-site-logo__caption' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -366,7 +366,7 @@ class Site_Logo_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-site-logo__caption' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-site-logo__caption' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -387,7 +387,7 @@ class Site_Logo_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-site-logo__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-site-logo__title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -396,7 +396,7 @@ class Site_Logo_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'title_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-site-logo__title',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__title',
 			]
 		);
 
@@ -503,7 +503,7 @@ class Site_Logo_Widget extends Widget_Base {
 			return;
 		}
 
-		$this->add_render_attribute( 'title', 'class', 'pixels-core-site-logo__title' );
+		$this->add_render_attribute( 'title', 'class', 'pixeccte-site-logo__title' );
 
 		$title_html = sprintf(
 			'<span %1$s>%2$s</span>',
@@ -515,7 +515,7 @@ class Site_Logo_Widget extends Widget_Base {
 
 		if ( $has_link ) {
 			$this->get_logo_link_attributes( $settings );
-			$this->add_render_attribute( 'link', 'class', 'pixels-core-site-logo__link' );
+			$this->add_render_attribute( 'link', 'class', 'pixeccte-site-logo__link' );
 			echo '<a ';
 			$this->print_render_attribute_string( 'link' );
 			echo '>' . wp_kses_post( $title_html ) . '</a>';
@@ -543,12 +543,12 @@ class Site_Logo_Widget extends Widget_Base {
 			$alt = get_bloginfo( 'name' );
 
 			$image_html = sprintf(
-				'<img src="%1$s" alt="%2$s" class="pixels-core-site-logo__image" loading="lazy" />',
+				'<img src="%1$s" alt="%2$s" class="pixeccte-site-logo__image" loading="lazy" />',
 				esc_url( $logo['url'] ),
 				esc_attr( $alt )
 			);
 		} else {
-			$this->add_render_attribute( 'image', 'class', 'pixels-core-site-logo__image' );
+			$this->add_render_attribute( 'image', 'class', 'pixeccte-site-logo__image' );
 			$image_html = str_replace( '<img ', '<img ' . $this->get_render_attribute_string( 'image' ) . ' ', $image_html );
 		}
 
@@ -556,7 +556,7 @@ class Site_Logo_Widget extends Widget_Base {
 
 		if ( $has_link ) {
 			$this->get_logo_link_attributes( $settings );
-			$this->add_render_attribute( 'link', 'class', 'pixels-core-site-logo__link' );
+			$this->add_render_attribute( 'link', 'class', 'pixeccte-site-logo__link' );
 			echo '<a ';
 			$this->print_render_attribute_string( 'link' );
 			echo '>' . wp_kses_post( $image_html ) . '</a>';
@@ -566,7 +566,7 @@ class Site_Logo_Widget extends Widget_Base {
 
 		if ( 'yes' === $settings['caption'] && ! empty( $settings['caption_text'] ) ) {
 			printf(
-				'<div class="pixels-core-site-logo__caption">%s</div>',
+				'<div class="pixeccte-site-logo__caption">%s</div>',
 				esc_html( $settings['caption_text'] )
 			);
 		}
@@ -575,7 +575,7 @@ class Site_Logo_Widget extends Widget_Base {
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-site-logo' );
+		$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-site-logo' );
 
 		?>
 		<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
@@ -608,27 +608,27 @@ class Site_Logo_Widget extends Widget_Base {
 			imageUrl = '';
 		}
 		#>
-		<div class="pixels-core-site-logo">
+		<div class="pixeccte-site-logo">
 			<# if ( imageUrl ) { #>
 				<# if ( hasLink && linkUrl ) { #>
-					<a href="{{ linkUrl }}" class="pixels-core-site-logo__link">
-						<img src="{{ imageUrl }}" alt="" class="pixels-core-site-logo__image" />
+					<a href="{{ linkUrl }}" class="pixeccte-site-logo__link">
+						<img src="{{ imageUrl }}" alt="" class="pixeccte-site-logo__image" />
 					</a>
 				<# } else { #>
-					<img src="{{ imageUrl }}" alt="" class="pixels-core-site-logo__image" />
+					<img src="{{ imageUrl }}" alt="" class="pixeccte-site-logo__image" />
 				<# } #>
 			<# } else if ( siteTitle ) { #>
 				<# if ( hasLink && linkUrl ) { #>
-					<a href="{{ linkUrl }}" class="pixels-core-site-logo__link">
-						<span class="pixels-core-site-logo__title">{{{ siteTitle }}}</span>
+					<a href="{{ linkUrl }}" class="pixeccte-site-logo__link">
+						<span class="pixeccte-site-logo__title">{{{ siteTitle }}}</span>
 					</a>
 				<# } else { #>
-					<span class="pixels-core-site-logo__title">{{{ siteTitle }}}</span>
+					<span class="pixeccte-site-logo__title">{{{ siteTitle }}}</span>
 				<# } #>
 			<# } #>
 
 			<# if ( showCaption ) { #>
-				<div class="pixels-core-site-logo__caption">{{{ settings.caption_text }}}</div>
+				<div class="pixeccte-site-logo__caption">{{{ settings.caption_text }}}</div>
 			<# } #>
 		</div>
 		<?php

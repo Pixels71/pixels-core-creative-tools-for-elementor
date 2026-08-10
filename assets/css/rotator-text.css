@@ -1,16 +1,16 @@
-.pixels-core-rotator-text {
-  --pixels-rotator-size: 320px;
-  --pixels-rotator-inner-color: #111111;
-  --pixels-rotator-outer-color: #333333;
-  --pixels-rotator-center-size: 28%;
-  --pixels-rotator-ripple-duration: 4s;
-  --pixels-rotator-speed: 20s;
-  width: var(--pixels-rotator-size);
+.pixeccte-rotator-text {
+  --pixeccte-rotator-size: 320px;
+  --pixeccte-rotator-inner-color: #111111;
+  --pixeccte-rotator-outer-color: #333333;
+  --pixeccte-rotator-center-size: 28%;
+  --pixeccte-rotator-ripple-duration: 4s;
+  --pixeccte-rotator-speed: 20s;
+  width: var(--pixeccte-rotator-size);
   max-width: 100%;
   margin-inline: auto;
 }
 
-.pixels-core-rotator-text__stage {
+.pixeccte-rotator-text__stage {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
@@ -21,7 +21,7 @@
   border-radius: 50%;
 }
 
-.pixels-core-rotator-text__svg {
+.pixeccte-rotator-text__svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -29,13 +29,13 @@
   overflow: visible;
 }
 
-.pixels-core-rotator-text__ring {
+.pixeccte-rotator-text__ring {
   transform-box: fill-box;
   transform-origin: center;
 }
 
-.pixels-core-rotator-text__ring text {
-  fill: var(--pixels-rotator-inner-color);
+.pixeccte-rotator-text__ring text {
+  fill: var(--pixeccte-rotator-inner-color);
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0;
@@ -43,28 +43,28 @@
   font-family: inherit;
 }
 
-.pixels-core-rotator-text__ring--outer text {
-  fill: var(--pixels-rotator-outer-color);
+.pixeccte-rotator-text__ring--outer text {
+  fill: var(--pixeccte-rotator-outer-color);
   font-size: 12px;
   letter-spacing: 0;
 }
 
-.pixels-core-rotator-text__ring--inner .pixels-core-rotator-text__ring-text {
+.pixeccte-rotator-text__ring--inner .pixeccte-rotator-text__ring-text {
   dominant-baseline: middle;
 }
 
-.pixels-core-rotator-text__ring--outer .pixels-core-rotator-text__ring-text {
+.pixeccte-rotator-text__ring--outer .pixeccte-rotator-text__ring-text {
   dominant-baseline: middle;
 }
 
-.pixels-core-rotator-text__center {
+.pixeccte-rotator-text__center {
   position: relative;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--pixels-rotator-center-size);
-  height: var(--pixels-rotator-center-size);
+  width: var(--pixeccte-rotator-center-size);
+  height: var(--pixeccte-rotator-center-size);
   border-radius: 50%;
   overflow: hidden;
   transition:
@@ -72,7 +72,7 @@
     box-shadow 0.35s ease;
 }
 
-.pixels-core-rotator-text__center-link {
+.pixeccte-rotator-text__center-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,19 +82,19 @@
   text-decoration: none;
 }
 
-.pixels-core-rotator-text__center-image {
+.pixeccte-rotator-text__center-image {
   display: block;
   width: 70%;
   height: 70%;
   object-fit: contain;
 }
 
-.pixels-core-rotator-text__center-text {
+.pixeccte-rotator-text__center-text {
   font-weight: 400;
   line-height: 1;
 }
 
-.pixels-core-rotator-text__center-icon {
+.pixeccte-rotator-text__center-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -102,31 +102,31 @@
 }
 
 /* Auto-rotation (single, dual, ripple, rounded-square) */
-.pixels-core-rotator-text:not(.pixels-core-rotator-text--layout-scroll)
-  .pixels-core-rotator-text__ring[data-direction="cw"] {
-  animation: pixels-rotator-spin-cw var(--pixels-rotator-speed) linear infinite;
+.pixeccte-rotator-text:not(.pixeccte-rotator-text--layout-scroll)
+  .pixeccte-rotator-text__ring[data-direction="cw"] {
+  animation: pixeccte-rotator-spin-cw var(--pixeccte-rotator-speed) linear infinite;
 }
 
-.pixels-core-rotator-text:not(.pixels-core-rotator-text--layout-scroll)
-  .pixels-core-rotator-text__ring[data-direction="ccw"] {
-  animation: pixels-rotator-spin-ccw var(--pixels-rotator-speed) linear infinite;
+.pixeccte-rotator-text:not(.pixeccte-rotator-text--layout-scroll)
+  .pixeccte-rotator-text__ring[data-direction="ccw"] {
+  animation: pixeccte-rotator-spin-ccw var(--pixeccte-rotator-speed) linear infinite;
 }
 
 /* Scroll-driven rotation */
-.pixels-core-rotator-text--layout-scroll .pixels-core-rotator-text__ring {
+.pixeccte-rotator-text--layout-scroll .pixeccte-rotator-text__ring {
   animation: none !important;
   will-change: transform;
 }
 
 /* Ripple decorative rings */
-.pixels-core-rotator-text__ripples {
+.pixeccte-rotator-text__ripples {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
 }
 
-.pixels-core-rotator-text__ripple {
+.pixeccte-rotator-text__ripple {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -135,75 +135,75 @@
   transform: translate(-50%, -50%);
 }
 
-.pixels-core-rotator-text__ripple--inner {
+.pixeccte-rotator-text__ripple--inner {
   width: 58%;
   height: 58%;
 }
 
-.pixels-core-rotator-text__ripple--mid {
+.pixeccte-rotator-text__ripple--mid {
   width: 72%;
   height: 72%;
 }
 
-.pixels-core-rotator-text__ripple--outer {
+.pixeccte-rotator-text__ripple--outer {
   width: 88%;
   height: 88%;
 }
 
-.pixels-core-rotator-text--ripple-pulse
-  .pixels-core-rotator-text__ripple--inner {
-  animation: pixels-rotator-ripple-pulse var(--pixels-rotator-ripple-duration)
+.pixeccte-rotator-text--ripple-pulse
+  .pixeccte-rotator-text__ripple--inner {
+  animation: pixeccte-rotator-ripple-pulse var(--pixeccte-rotator-ripple-duration)
     ease-in-out infinite;
 }
 
-.pixels-core-rotator-text--ripple-pulse .pixels-core-rotator-text__ripple--mid {
-  animation: pixels-rotator-ripple-pulse var(--pixels-rotator-ripple-duration)
+.pixeccte-rotator-text--ripple-pulse .pixeccte-rotator-text__ripple--mid {
+  animation: pixeccte-rotator-ripple-pulse var(--pixeccte-rotator-ripple-duration)
     ease-in-out infinite 0.6s;
 }
 
-.pixels-core-rotator-text--ripple-pulse
-  .pixels-core-rotator-text__ripple--outer {
-  animation: pixels-rotator-ripple-pulse var(--pixels-rotator-ripple-duration)
+.pixeccte-rotator-text--ripple-pulse
+  .pixeccte-rotator-text__ripple--outer {
+  animation: pixeccte-rotator-ripple-pulse var(--pixeccte-rotator-ripple-duration)
     ease-in-out infinite 1.2s;
 }
 
-.pixels-core-rotator-text--ripple-expand .pixels-core-rotator-text__ripple {
-  animation: pixels-rotator-ripple-expand var(--pixels-rotator-ripple-duration)
+.pixeccte-rotator-text--ripple-expand .pixeccte-rotator-text__ripple {
+  animation: pixeccte-rotator-ripple-expand var(--pixeccte-rotator-ripple-duration)
     ease-in-out infinite;
 }
 
-.pixels-core-rotator-text--ripple-expand
-  .pixels-core-rotator-text__ripple--mid {
+.pixeccte-rotator-text--ripple-expand
+  .pixeccte-rotator-text__ripple--mid {
   animation-delay: 0.5s;
 }
 
-.pixels-core-rotator-text--ripple-expand
-  .pixels-core-rotator-text__ripple--outer {
+.pixeccte-rotator-text--ripple-expand
+  .pixeccte-rotator-text__ripple--outer {
   animation-delay: 1s;
 }
 
-.pixels-core-rotator-text--ripple-breathe .pixels-core-rotator-text__ripple {
-  animation: pixels-rotator-ripple-breathe var(--pixels-rotator-ripple-duration)
+.pixeccte-rotator-text--ripple-breathe .pixeccte-rotator-text__ripple {
+  animation: pixeccte-rotator-ripple-breathe var(--pixeccte-rotator-ripple-duration)
     ease-in-out infinite;
 }
 
-.pixels-core-rotator-text--ripple-breathe
-  .pixels-core-rotator-text__ripple--mid {
+.pixeccte-rotator-text--ripple-breathe
+  .pixeccte-rotator-text__ripple--mid {
   animation-delay: 0.4s;
 }
 
-.pixels-core-rotator-text--ripple-breathe
-  .pixels-core-rotator-text__ripple--outer {
+.pixeccte-rotator-text--ripple-breathe
+  .pixeccte-rotator-text__ripple--outer {
   animation-delay: 0.8s;
 }
 
 /* Rounded-square layout stage */
-.pixels-core-rotator-text--layout-rounded-square
-  .pixels-core-rotator-text__stage {
+.pixeccte-rotator-text--layout-rounded-square
+  .pixeccte-rotator-text__stage {
   border-radius: 18%;
 }
 
-@keyframes pixels-rotator-spin-cw {
+@keyframes pixeccte-rotator-spin-cw {
   from {
     transform: rotate(0deg);
   }
@@ -213,7 +213,7 @@
   }
 }
 
-@keyframes pixels-rotator-spin-ccw {
+@keyframes pixeccte-rotator-spin-ccw {
   from {
     transform: rotate(0deg);
   }
@@ -223,7 +223,7 @@
   }
 }
 
-@keyframes pixels-rotator-ripple-pulse {
+@keyframes pixeccte-rotator-ripple-pulse {
   0%,
   100% {
     opacity: 0.35;
@@ -236,7 +236,7 @@
   }
 }
 
-@keyframes pixels-rotator-ripple-expand {
+@keyframes pixeccte-rotator-ripple-expand {
   0%,
   100% {
     opacity: 0.25;
@@ -249,7 +249,7 @@
   }
 }
 
-@keyframes pixels-rotator-ripple-breathe {
+@keyframes pixeccte-rotator-ripple-breathe {
   0%,
   100% {
     opacity: 0.4;
@@ -263,8 +263,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pixels-core-rotator-text__ring,
-  .pixels-core-rotator-text__ripple {
+  .pixeccte-rotator-text__ring,
+  .pixeccte-rotator-text__ripple {
     animation: none !important;
   }
 }

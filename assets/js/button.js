@@ -11,7 +11,7 @@
 
   function initButtonV4(root) {
     var wrappers = getRoot(root).querySelectorAll(
-      "[data-pixels-button-v4]:not(.pixels-core-button__link--v9)",
+      "[data-pixeccte-button-v4]:not(.pixeccte-button__link--v9)",
     );
 
     Array.prototype.forEach.call(wrappers, function (buttonWrapper) {
@@ -21,8 +21,8 @@
 
       buttonWrapper.dataset.pixelsV4Bound = "true";
 
-      var iconWrapper = buttonWrapper.querySelector("[data-pixels-button-v4-icon]");
-      var buttonText = buttonWrapper.querySelector("[data-pixels-button-v4-text]");
+      var iconWrapper = buttonWrapper.querySelector("[data-pixeccte-button-v4-icon]");
+      var buttonText = buttonWrapper.querySelector("[data-pixeccte-button-v4-text]");
 
       if (!iconWrapper || !buttonText) {
         return;
@@ -75,7 +75,7 @@
 
     for (i = 0; i < text.length; i++) {
       var span = document.createElement("span");
-      span.className = "pixels-core-button__char";
+      span.className = "pixeccte-button__char";
       span.setAttribute("aria-hidden", "true");
       span.textContent = text.charAt(i) === " " ? "\u00a0" : text.charAt(i);
       span.style.display = "inline-block";
@@ -147,7 +147,7 @@
   }
 
   function initButtonV6(root) {
-    var wrappers = getRoot(root).querySelectorAll(".pixels-core-button__inner--v6");
+    var wrappers = getRoot(root).querySelectorAll(".pixeccte-button__inner--v6");
 
     Array.prototype.forEach.call(wrappers, function (buttonWrapper) {
       if (buttonWrapper.dataset.pixelsV6Bound === "true") {
@@ -157,8 +157,8 @@
       if (
         createSplitHover(
           buttonWrapper,
-          ".pixels-core-button__v6-text--upper",
-          ".pixels-core-button__v6-text--lower",
+          ".pixeccte-button__v6-text--upper",
+          ".pixeccte-button__v6-text--lower",
         )
       ) {
         buttonWrapper.dataset.pixelsV6Bound = "true";
@@ -167,7 +167,7 @@
   }
 
   function initButtonV7(root) {
-    var wrappers = getRoot(root).querySelectorAll(".pixels-core-button__link--v7");
+    var wrappers = getRoot(root).querySelectorAll(".pixeccte-button__link--v7");
 
     Array.prototype.forEach.call(wrappers, function (buttonWrapper) {
       if (buttonWrapper.dataset.pixelsV7Bound === "true") {
@@ -177,8 +177,8 @@
       if (
         createSplitHover(
           buttonWrapper,
-          ".pixels-core-button__v7-text--upper",
-          ".pixels-core-button__v7-text--lower",
+          ".pixeccte-button__v7-text--upper",
+          ".pixeccte-button__v7-text--lower",
         )
       ) {
         buttonWrapper.dataset.pixelsV7Bound = "true";
@@ -198,7 +198,7 @@
       return;
     }
 
-    window.jQuery(".elementor-widget-pixels-core-button").each(function () {
+    window.jQuery(".elementor-widget-pixeccte-button").each(function () {
       try {
         elementorFrontend.elementsHandler.runReadyTrigger(this);
       } catch (error) {
@@ -219,7 +219,7 @@
     registerElementorHooks.initialized = true;
 
     elementorFrontend.hooks.addAction(
-      "frontend/element_ready/pixels-core-button.default",
+      "frontend/element_ready/pixeccte-button.default",
       function ($scope) {
         initAll($scope[0]);
       },
@@ -242,7 +242,7 @@
     initAll(document);
   }
 
-  window.PixelsCoreButton = {
+  window.PixeccteButton = {
     init: initAll,
   };
 

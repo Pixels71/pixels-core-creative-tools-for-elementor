@@ -96,7 +96,7 @@
 	}
 
 	function updateFallback(wrapperNode, value, data) {
-		const fallbackNode = wrapperNode.querySelector('.pixels-core-counter__value--fallback');
+		const fallbackNode = wrapperNode.querySelector('.pixeccte-counter__value--fallback');
 
 		if (!fallbackNode) {
 			return;
@@ -157,8 +157,8 @@
 	}
 
 	function initCounterNode(counterNode, force) {
-		const flowNode = counterNode.querySelector('.pixels-core-counter__flow');
-		const wrapperNode = counterNode.querySelector('.pixels-core-counter__number-wrapper');
+		const flowNode = counterNode.querySelector('.pixeccte-counter__flow');
+		const wrapperNode = counterNode.querySelector('.pixeccte-counter__number-wrapper');
 
 		if (!flowNode || !wrapperNode) {
 			return;
@@ -171,7 +171,7 @@
 		}
 
 		whenNumberFlowReady(function () {
-			counterNode.classList.add('pixels-core-counter--flow-ready');
+			counterNode.classList.add('pixeccte-counter--flow-ready');
 			animateCounter(flowNode, wrapperNode, data, force);
 		});
 	}
@@ -180,8 +180,8 @@
 		getDefaultSettings() {
 			return {
 				selectors: {
-					counter: '.pixels-core-counter',
-					flow: '.pixels-core-counter__flow',
+					counter: '.pixeccte-counter',
+					flow: '.pixeccte-counter__flow',
 				},
 			};
 		},
@@ -279,10 +279,10 @@
 		}
 
 		bootCounterHandler.initialized = true;
-		elementorFrontend.elementsHandler.attachHandler('pixels-core-counter', CounterHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixeccte-counter', CounterHandler);
 
 		// Widget scripts can load after Elementor init on the frontend.
-		$('.elementor-widget-pixels-core-counter').each(function () {
+		$('.elementor-widget-pixeccte-counter').each(function () {
 			elementorFrontend.elementsHandler.runReadyTrigger(this);
 		});
 	}

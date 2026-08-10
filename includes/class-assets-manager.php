@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore;
+namespace PixelsCoreCreativeToolsForElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -59,17 +59,17 @@ final class Assets_Manager {
 
 	public function register_vendor_scripts(): void {
 		wp_register_script(
-			'pixels-core-number-flow',
-			PIXELS_CORE_URL . 'assets/js/vendor/number-flow.js',
+			'pixeccte-number-flow',
+			PIXECCTE_URL . 'assets/js/vendor/number-flow.js',
 			[],
-			PIXELS_CORE_VERSION,
+			PIXECCTE_VERSION,
 			true
 		);
 
 		/**
 		 * Register additional vendor scripts (Pro: marquee, Matter.js, etc.).
 		 */
-		do_action( 'pixels_core_register_vendor_scripts' );
+		do_action( 'pixeccte_register_vendor_scripts' );
 	}
 
 	/**
@@ -78,7 +78,7 @@ final class Assets_Manager {
 	 * @param string $src    Script source URL.
 	 */
 	public function add_module_type_to_scripts( string $tag, string $handle, string $src ): string {
-		if ( 'pixels-core-number-flow' !== $handle ) {
+		if ( 'pixeccte-number-flow' !== $handle ) {
 			return $tag;
 		}
 
@@ -111,19 +111,19 @@ final class Assets_Manager {
 	}
 
 	public function get_script_handle( string $slug ): string {
-		return 'pixels-core-' . $slug;
+		return 'pixeccte-' . $slug;
 	}
 
 	public function get_style_handle( string $slug ): string {
-		return 'pixels-core-' . $slug;
+		return 'pixeccte-' . $slug;
 	}
 
 	public function get_extension_script_handle( string $slug ): string {
-		return 'pixels-core-' . $slug;
+		return 'pixeccte-' . $slug;
 	}
 
 	public function get_extension_style_handle( string $slug ): string {
-		return 'pixels-core-' . $slug;
+		return 'pixeccte-' . $slug;
 	}
 
 	public function register_frontend_scripts(): void {
@@ -175,10 +175,10 @@ final class Assets_Manager {
 				continue;
 			}
 
-			$base_path   = $definition['base_path'] ?? PIXELS_CORE_PATH;
-			$base_url    = $definition['base_url'] ?? PIXELS_CORE_URL;
+			$base_path   = $definition['base_path'] ?? PIXECCTE_PATH;
+			$base_url    = $definition['base_url'] ?? PIXECCTE_URL;
 			$script_path = $base_path . $definition['script'];
-			$version     = file_exists( $script_path ) ? (string) filemtime( $script_path ) : PIXELS_CORE_VERSION;
+			$version     = file_exists( $script_path ) ? (string) filemtime( $script_path ) : PIXECCTE_VERSION;
 
 			wp_register_script(
 				$handle_callback( $slug ),
@@ -229,10 +229,10 @@ final class Assets_Manager {
 				continue;
 			}
 
-			$base_path  = $definition['base_path'] ?? PIXELS_CORE_PATH;
-			$base_url   = $definition['base_url'] ?? PIXELS_CORE_URL;
+			$base_path  = $definition['base_path'] ?? PIXECCTE_PATH;
+			$base_url   = $definition['base_url'] ?? PIXECCTE_URL;
 			$style_path = $base_path . $definition['style'];
-			$version    = file_exists( $style_path ) ? (string) filemtime( $style_path ) : PIXELS_CORE_VERSION;
+			$version    = file_exists( $style_path ) ? (string) filemtime( $style_path ) : PIXECCTE_VERSION;
 
 			wp_register_style(
 				$handle_callback( $slug ),
@@ -245,19 +245,19 @@ final class Assets_Manager {
 
 	public function enqueue_editor_assets(): void {
 		wp_enqueue_style(
-			'pixels-core-editor-panel',
-			PIXELS_CORE_URL . 'assets/css/editor-panel.css',
+			'pixeccte-editor-panel',
+			PIXECCTE_URL . 'assets/css/editor-panel.css',
 			[],
-			PIXELS_CORE_VERSION
+			PIXECCTE_VERSION
 		);
 
-		$icon_css = PIXELS_CORE_PATH . 'assets/icons/dist/pixels-icons.css';
+		$icon_css = PIXECCTE_PATH . 'assets/icons/dist/pixeccte-icons.css';
 		if ( file_exists( $icon_css ) ) {
 			wp_enqueue_style(
-				'pixels-core-icons',
-				PIXELS_CORE_URL . 'assets/icons/dist/pixels-icons.css',
+				'pixeccte-icons',
+				PIXECCTE_URL . 'assets/icons/dist/pixeccte-icons.css',
 				[],
-				PIXELS_CORE_VERSION
+				PIXECCTE_VERSION
 			);
 		}
 
@@ -294,16 +294,16 @@ final class Assets_Manager {
 		}
 
 		wp_enqueue_script(
-			'pixels-core-nested-widgets-editor',
-			PIXELS_CORE_URL . 'assets/js/editor/nested-widgets.js',
+			'pixeccte-nested-widgets-editor',
+			PIXECCTE_URL . 'assets/js/editor/nested-widgets.js',
 			[ 'nested-elements' ],
-			PIXELS_CORE_VERSION,
+			PIXECCTE_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'pixels-core-nested-widgets-editor',
-			'pixelsCoreEditor',
+			'pixeccte-nested-widgets-editor',
+			'pixeccteEditor',
 			[
 				'enabledNestedWidgets' => $nested_slugs,
 			]

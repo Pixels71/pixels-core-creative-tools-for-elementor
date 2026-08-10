@@ -1,7 +1,7 @@
 (function ($) {
 	'use strict';
 
-	const popupClassPrefix = 'pixels-core-theme-popup-';
+	const popupClassPrefix = 'pixeccte-theme-popup-';
 
 	function getPreviewDocument() {
 		if (!window.elementor || !elementor.$previewContents || !elementor.$previewContents[0]) {
@@ -116,11 +116,11 @@
 	}
 
 	function applyCloseButtonPreview(closeButton, model) {
-		const placement = model.get('pixels_core_popup_close_button_placement') || 'inside';
-		const horizontal = model.get('pixels_core_popup_close_button_horizontal_position') || 'right';
-		const vertical = model.get('pixels_core_popup_close_button_vertical_position') || 'top';
-		const offsetX = dimensionToCss(model.get('pixels_core_popup_close_button_offset_x'), '11px');
-		const offsetY = dimensionToCss(model.get('pixels_core_popup_close_button_offset_y'), '11px');
+		const placement = model.get('pixeccte_popup_close_button_placement') || 'inside';
+		const horizontal = model.get('pixeccte_popup_close_button_horizontal_position') || 'right';
+		const vertical = model.get('pixeccte_popup_close_button_vertical_position') || 'top';
+		const offsetX = dimensionToCss(model.get('pixeccte_popup_close_button_offset_x'), '11px');
+		const offsetY = dimensionToCss(model.get('pixeccte_popup_close_button_offset_y'), '11px');
 		const positionX = placement === 'outside' ? `calc(${offsetX} * -1)` : offsetX;
 		const positionY = placement === 'outside' ? `calc(${offsetY} * -1)` : offsetY;
 
@@ -130,15 +130,15 @@
 		closeButton.style.bottom = 'auto';
 		closeButton.style[horizontal === 'left' ? 'left' : 'right'] = positionX;
 		closeButton.style[vertical === 'bottom' ? 'bottom' : 'top'] = positionY;
-		closeButton.style.width = dimensionToCss(model.get('pixels_core_popup_close_button_size'), '18px');
-		closeButton.style.height = dimensionToCss(model.get('pixels_core_popup_close_button_size'), '18px');
-		closeButton.style.fontSize = dimensionToCss(model.get('pixels_core_popup_close_button_icon_size'), '20px');
-		closeButton.style.color = model.get('pixels_core_popup_close_button_color') || '#303030';
-		closeButton.style.background = model.get('pixels_core_popup_close_button_background_color') || 'transparent';
+		closeButton.style.width = dimensionToCss(model.get('pixeccte_popup_close_button_size'), '18px');
+		closeButton.style.height = dimensionToCss(model.get('pixeccte_popup_close_button_size'), '18px');
+		closeButton.style.fontSize = dimensionToCss(model.get('pixeccte_popup_close_button_icon_size'), '20px');
+		closeButton.style.color = model.get('pixeccte_popup_close_button_color') || '#303030';
+		closeButton.style.background = model.get('pixeccte_popup_close_button_background_color') || 'transparent';
 		closeButton.style.borderStyle = 'solid';
-		closeButton.style.borderColor = model.get('pixels_core_popup_close_button_border_color') || 'transparent';
-		closeButton.style.borderWidth = dimensionToCss(model.get('pixels_core_popup_close_button_border_width'), '0px');
-		closeButton.style.borderRadius = dimensionToCss(model.get('pixels_core_popup_close_button_border_radius'), '0px');
+		closeButton.style.borderColor = model.get('pixeccte_popup_close_button_border_color') || 'transparent';
+		closeButton.style.borderWidth = dimensionToCss(model.get('pixeccte_popup_close_button_border_width'), '0px');
+		closeButton.style.borderRadius = dimensionToCss(model.get('pixeccte_popup_close_button_border_radius'), '0px');
 	}
 
 	function replaceClassByPrefix(element, prefix, nextClass) {
@@ -161,36 +161,36 @@
 			return;
 		}
 
-		const popup = previewDocument.querySelector('.pixels-core-theme-popup-editor-preview');
-		const dialog = previewDocument.querySelector('.pixels-core-theme-popup__dialog');
-		const overlay = previewDocument.querySelector('.pixels-core-theme-popup__overlay');
-		const content = previewDocument.querySelector('.pixels-core-theme-popup__content');
-		const closeButton = previewDocument.querySelector('.pixels-core-theme-popup__close');
+		const popup = previewDocument.querySelector('.pixeccte-theme-popup-editor-preview');
+		const dialog = previewDocument.querySelector('.pixeccte-theme-popup__dialog');
+		const overlay = previewDocument.querySelector('.pixeccte-theme-popup__overlay');
+		const content = previewDocument.querySelector('.pixeccte-theme-popup__content');
+		const closeButton = previewDocument.querySelector('.pixeccte-theme-popup__close');
 
 		if (!popup || !dialog || !content) {
 			return;
 		}
 
-		const heightType = model.get('pixels_core_popup_height_type') || 'fit';
-		const horizontal = getResponsiveValue(model, 'pixels_core_popup_horizontal_position') || 'center';
-		const vertical = getResponsiveValue(model, 'pixels_core_popup_vertical_position') || 'center';
-		const entrance = model.get('pixels_core_popup_entrance_animation') || 'default';
-		const exit = model.get('pixels_core_popup_exit_animation') || 'default';
+		const heightType = model.get('pixeccte_popup_height_type') || 'fit';
+		const horizontal = getResponsiveValue(model, 'pixeccte_popup_horizontal_position') || 'center';
+		const vertical = getResponsiveValue(model, 'pixeccte_popup_vertical_position') || 'center';
+		const entrance = model.get('pixeccte_popup_entrance_animation') || 'default';
+		const exit = model.get('pixeccte_popup_exit_animation') || 'default';
 
-		dialog.style.setProperty('--pixels-core-popup-width', dimensionToCss(getResponsiveValue(model, 'pixels_core_popup_width'), '420px'));
-		dialog.style.setProperty('--pixels-core-popup-height', heightType === 'custom' ? dimensionToCss(model.get('pixels_core_popup_height'), 'auto') : 'auto');
-		dialog.style.setProperty('--pixels-core-popup-margin', spacingToCss(model.get('pixels_core_popup_margin')));
-		content.style.setProperty('--pixels-core-popup-padding', spacingToCss(model.get('pixels_core_popup_padding')));
-		content.style.setProperty('--pixels-core-popup-content-background-color', model.get('pixels_core_popup_content_background_color') || '#fff');
-		content.style.setProperty('--pixels-core-popup-content-border-color', model.get('pixels_core_popup_content_border_color') || '#dcdcdc');
-		content.style.setProperty('--pixels-core-popup-content-border-style', model.get('pixels_core_popup_content_border_style') || 'dashed');
-		content.style.setProperty('--pixels-core-popup-content-border-width', dimensionToCss(model.get('pixels_core_popup_content_border_width'), '1px'));
-		content.style.setProperty('--pixels-core-popup-content-border-radius', dimensionToCss(model.get('pixels_core_popup_content_border_radius'), '0px'));
+		dialog.style.setProperty('--pixeccte-popup-width', dimensionToCss(getResponsiveValue(model, 'pixeccte_popup_width'), '420px'));
+		dialog.style.setProperty('--pixeccte-popup-height', heightType === 'custom' ? dimensionToCss(model.get('pixeccte_popup_height'), 'auto') : 'auto');
+		dialog.style.setProperty('--pixeccte-popup-margin', spacingToCss(model.get('pixeccte_popup_margin')));
+		content.style.setProperty('--pixeccte-popup-padding', spacingToCss(model.get('pixeccte_popup_padding')));
+		content.style.setProperty('--pixeccte-popup-content-background-color', model.get('pixeccte_popup_content_background_color') || '#fff');
+		content.style.setProperty('--pixeccte-popup-content-border-color', model.get('pixeccte_popup_content_border_color') || '#dcdcdc');
+		content.style.setProperty('--pixeccte-popup-content-border-style', model.get('pixeccte_popup_content_border_style') || 'dashed');
+		content.style.setProperty('--pixeccte-popup-content-border-width', dimensionToCss(model.get('pixeccte_popup_content_border_width'), '1px'));
+		content.style.setProperty('--pixeccte-popup-content-border-radius', dimensionToCss(model.get('pixeccte_popup_content_border_radius'), '0px'));
 		content.style.setProperty(
-			'--pixels-core-popup-content-box-shadow',
+			'--pixeccte-popup-content-box-shadow',
 			boxShadowToCss(
-				model.get('pixels_core_popup_content_box_shadow_box_shadow'),
-				model.get('pixels_core_popup_content_box_shadow_box_shadow_type')
+				model.get('pixeccte_popup_content_box_shadow_box_shadow'),
+				model.get('pixeccte_popup_content_box_shadow_box_shadow_type')
 			)
 		);
 		popup.style.justifyContent = horizontalPositionToFlex(horizontal);
@@ -202,13 +202,13 @@
 		replaceClassByPrefix(popup, `${popupClassPrefix}exit-`, `${popupClassPrefix}exit-${exit}`);
 
 		if (overlay) {
-			overlay.style.display = model.get('pixels_core_popup_show_overlay') === 'yes' ? '' : 'none';
-			overlay.style.setProperty('--pixels-core-popup-overlay-color', model.get('pixels_core_popup_overlay_color') || 'rgba(0, 0, 0, 0.78)');
+			overlay.style.display = model.get('pixeccte_popup_show_overlay') === 'yes' ? '' : 'none';
+			overlay.style.setProperty('--pixeccte-popup-overlay-color', model.get('pixeccte_popup_overlay_color') || 'rgba(0, 0, 0, 0.78)');
 		}
 
 		if (closeButton) {
 			applyCloseButtonPreview(closeButton, model);
-			closeButton.style.display = model.get('pixels_core_popup_show_close_button') === 'yes' ? '' : 'none';
+			closeButton.style.display = model.get('pixeccte_popup_show_close_button') === 'yes' ? '' : 'none';
 		}
 
 		if (popup.dataset.customClasses) {
@@ -219,7 +219,7 @@
 			});
 		}
 
-		const customClasses = (model.get('pixels_core_popup_css_classes') || '').trim();
+		const customClasses = (model.get('pixeccte_popup_css_classes') || '').trim();
 
 		if (customClasses) {
 			customClasses.split(/\s+/).forEach(function (className) {
@@ -241,28 +241,28 @@
 			'exit_intent',
 			'adblock',
 		].filter(function (key) {
-			return model.get(`pixels_core_popup_trigger_${key}`) === 'yes';
+			return model.get(`pixeccte_popup_trigger_${key}`) === 'yes';
 		});
 
 		popup.dataset.triggers = triggers.join(',');
 		popup.dataset.trigger = triggers.indexOf('page_load') !== -1 ? 'page_load' : 'manual';
-		popup.dataset.delay = model.get('pixels_core_popup_delay') || '0';
-		popup.dataset.pageLoadDelay = model.get('pixels_core_popup_page_load_delay') || '0';
-		popup.dataset.scrollDirection = model.get('pixels_core_popup_scroll_direction') || 'down';
-		popup.dataset.scrollPercent = model.get('pixels_core_popup_scroll_percent') || '50';
-		popup.dataset.scrollToSelector = model.get('pixels_core_popup_scroll_to_selector') || '';
-		popup.dataset.classClickSelector = model.get('pixels_core_popup_class_click_selector') || '';
-		popup.dataset.clickCount = model.get('pixels_core_popup_click_count') || '1';
-		popup.dataset.inactivityDelay = model.get('pixels_core_popup_inactivity_delay') || '30';
-		popup.dataset.adblockDelay = model.get('pixels_core_popup_adblock_delay') || '0';
-		popup.dataset.autoCloseAfter = model.get('pixels_core_popup_auto_close_after') || '';
-		popup.dataset.closeButtonDelay = model.get('pixels_core_popup_close_button_delay') || '';
-		popup.dataset.preventOverlayClose = model.get('pixels_core_popup_prevent_overlay_close') === 'yes' ? 'yes' : 'no';
-		popup.dataset.preventEscClose = model.get('pixels_core_popup_prevent_esc_close') === 'yes' ? 'yes' : 'no';
-		popup.dataset.disableScroll = model.get('pixels_core_popup_disable_scroll') === 'yes' ? 'yes' : 'no';
-		popup.dataset.avoidMultiple = model.get('pixels_core_popup_avoid_multiple') === 'yes' ? 'yes' : 'no';
-		popup.dataset.accessibleNavigation = model.get('pixels_core_popup_accessible_navigation') === 'yes' ? 'yes' : 'no';
-		popup.dataset.openSelector = model.get('pixels_core_popup_open_selector') || '';
+		popup.dataset.delay = model.get('pixeccte_popup_delay') || '0';
+		popup.dataset.pageLoadDelay = model.get('pixeccte_popup_page_load_delay') || '0';
+		popup.dataset.scrollDirection = model.get('pixeccte_popup_scroll_direction') || 'down';
+		popup.dataset.scrollPercent = model.get('pixeccte_popup_scroll_percent') || '50';
+		popup.dataset.scrollToSelector = model.get('pixeccte_popup_scroll_to_selector') || '';
+		popup.dataset.classClickSelector = model.get('pixeccte_popup_class_click_selector') || '';
+		popup.dataset.clickCount = model.get('pixeccte_popup_click_count') || '1';
+		popup.dataset.inactivityDelay = model.get('pixeccte_popup_inactivity_delay') || '30';
+		popup.dataset.adblockDelay = model.get('pixeccte_popup_adblock_delay') || '0';
+		popup.dataset.autoCloseAfter = model.get('pixeccte_popup_auto_close_after') || '';
+		popup.dataset.closeButtonDelay = model.get('pixeccte_popup_close_button_delay') || '';
+		popup.dataset.preventOverlayClose = model.get('pixeccte_popup_prevent_overlay_close') === 'yes' ? 'yes' : 'no';
+		popup.dataset.preventEscClose = model.get('pixeccte_popup_prevent_esc_close') === 'yes' ? 'yes' : 'no';
+		popup.dataset.disableScroll = model.get('pixeccte_popup_disable_scroll') === 'yes' ? 'yes' : 'no';
+		popup.dataset.avoidMultiple = model.get('pixeccte_popup_avoid_multiple') === 'yes' ? 'yes' : 'no';
+		popup.dataset.accessibleNavigation = model.get('pixeccte_popup_accessible_navigation') === 'yes' ? 'yes' : 'no';
+		popup.dataset.openSelector = model.get('pixeccte_popup_open_selector') || '';
 	}
 
 	function bindModelChanges() {
@@ -277,7 +277,7 @@
 		model.on('change', function (changedModel) {
 			const changed = changedModel.changed || {};
 			const shouldUpdate = Object.keys(changed).some(function (key) {
-				return key.indexOf('pixels_core_popup_') === 0;
+				return key.indexOf('pixeccte_popup_') === 0;
 			});
 
 			if (shouldUpdate) {

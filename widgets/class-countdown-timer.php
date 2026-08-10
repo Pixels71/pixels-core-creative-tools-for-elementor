@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
@@ -19,7 +19,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-core-countdown-timer';
+		return 'pixeccte-countdown-timer';
 	}
 
 	public function get_title(): string {
@@ -27,15 +27,15 @@ class Countdown_Timer_Widget extends Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-countdown-timer';
+		return 'pixeccte-icon pixeccte-icon-countdown-timer';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'countdown', 'timer', 'pixels' ];
+		return [ 'countdown', 'timer', 'pixeccte' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -203,7 +203,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'3'    => '3',
 					'4'    => '4',
 				],
-				'prefix_class'         => 'pixels-core-countdown-timer--cols-',
+				'prefix_class'         => 'pixeccte-countdown-timer--cols-',
 				'selectors_dictionary' => [
 					'auto' => 'display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;',
 					'1'    => 'display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); justify-items: center; align-items: start;',
@@ -212,7 +212,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'4'    => 'display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); justify-items: center; align-items: start;',
 				],
 				'selectors'            => [
-					'{{WRAPPER}} .pixels-timer' => '{{VALUE}}',
+					'{{WRAPPER}} .pixeccte-timer' => '{{VALUE}}',
 				],
 			]
 		);
@@ -238,7 +238,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 16,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -260,7 +260,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-unit' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-unit' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -269,7 +269,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'unit_item_background',
-				'selector' => '{{WRAPPER}} .pixels-timer-unit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-unit',
 			]
 		);
 
@@ -280,7 +280,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-unit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-unit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -289,7 +289,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'unit_item_border',
-				'selector' => '{{WRAPPER}} .pixels-timer-unit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-unit',
 			]
 		);
 
@@ -300,7 +300,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-unit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .pixeccte-timer-unit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
 			]
 		);
@@ -309,7 +309,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'unit_item_shadow',
-				'selector' => '{{WRAPPER}} .pixels-timer-unit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-unit',
 			]
 		);
 
@@ -343,7 +343,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 120,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-ring' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-ring' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -355,7 +355,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#e5e5e5',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-ring__track' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-ring__track' => 'stroke: {{VALUE}};',
 				],
 			]
 		);
@@ -367,7 +367,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#0b3b25',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-ring__progress' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-ring__progress' => 'stroke: {{VALUE}};',
 				],
 			]
 		);
@@ -388,7 +388,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 6,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-ring__track, {{WRAPPER}} .pixels-timer-ring__progress' => 'stroke-width: {{SIZE}};',
+					'{{WRAPPER}} .pixeccte-timer-ring__track, {{WRAPPER}} .pixeccte-timer-ring__progress' => 'stroke-width: {{SIZE}};',
 				],
 			]
 		);
@@ -400,7 +400,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#222222',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-unit-digits' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-unit-digits' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -409,7 +409,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'digit_typography',
-				'selector'  => '{{WRAPPER}} .pixels-timer-unit-digits',
+				'selector'  => '{{WRAPPER}} .pixeccte-timer-unit-digits',
 			]
 		);
 
@@ -430,7 +430,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name'     => 'digit_box_background',
-				'selector' => '{{WRAPPER}} .pixels-timer-digit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-digit',
 			]
 		);
 
@@ -441,7 +441,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#000000',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-digit' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-digit' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -450,7 +450,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'digit_box_typography',
-				'selector' => '{{WRAPPER}} .pixels-timer-digit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-digit',
 			]
 		);
 
@@ -483,7 +483,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 54,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-digit' => 'width: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .pixeccte-timer-digit' => 'width: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'digit_box_custom_size' => 'yes',
@@ -508,7 +508,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 50,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-digit' => 'height: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .pixeccte-timer-digit' => 'height: {{SIZE}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'digit_box_custom_size' => 'yes',
@@ -533,7 +533,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 0,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-unit-digits' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-unit-digits' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -545,7 +545,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-digit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-digit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -554,7 +554,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'digit_box_border',
-				'selector' => '{{WRAPPER}} .pixels-timer-digit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-digit',
 			]
 		);
 
@@ -565,7 +565,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-digit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .pixeccte-timer-digit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
 			]
 		);
@@ -574,7 +574,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'digit_box_shadow',
-				'selector' => '{{WRAPPER}} .pixels-timer-digit',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-digit',
 			]
 		);
 
@@ -595,7 +595,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#222222',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-label' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -604,7 +604,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'label_typography',
-				'selector' => '{{WRAPPER}} .pixels-timer-label',
+				'selector' => '{{WRAPPER}} .pixeccte-timer-label',
 			]
 		);
 
@@ -618,7 +618,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'top'    => esc_html__( 'Top', 'pixels-core-creative-tools-for-elementor' ),
 					'bottom' => esc_html__( 'Bottom', 'pixels-core-creative-tools-for-elementor' ),
 				],
-				'prefix_class' => 'pixels-core-countdown-timer--label-',
+				'prefix_class' => 'pixeccte-countdown-timer--label-',
 				'condition'    => [
 					'show_circle_progress!' => 'yes',
 				],
@@ -635,7 +635,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'top'    => esc_html__( 'Top', 'pixels-core-creative-tools-for-elementor' ),
 					'bottom' => esc_html__( 'Bottom', 'pixels-core-creative-tools-for-elementor' ),
 				],
-				'prefix_class' => 'pixels-core-countdown-timer--ring-label-',
+				'prefix_class' => 'pixeccte-countdown-timer--ring-label-',
 				'condition'    => [
 					'show_circle_progress' => 'yes',
 				],
@@ -659,7 +659,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-label' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-label' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -685,7 +685,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 10,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-label' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-label' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -723,8 +723,8 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#111111',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-timer-separator--colon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .pixels-timer-separator--line' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--colon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--line' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -746,7 +746,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 8,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-separator' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-separator' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -779,7 +779,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 40,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-separator--colon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--colon' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'separator_style' => 'colon',
@@ -815,7 +815,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 1,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-separator--line' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--line' => 'width: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'separator_style' => 'line',
@@ -844,7 +844,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					'size' => 50,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-separator--line' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--line' => 'height: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'separator_style' => 'line',
@@ -865,8 +865,8 @@ class Countdown_Timer_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-timer-separator--colon' => 'margin-top: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .pixels-timer-separator--line' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--colon' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-timer-separator--line' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -893,7 +893,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 	}
 
 	private function register_individual_unit_item_style_controls( string $unit, string $label ): void {
-		$selector   = '{{WRAPPER}} .pixels-timer-unit-' . $unit;
+		$selector   = '{{WRAPPER}} .pixeccte-timer-unit-' . $unit;
 		$visibility = [ 'show_' . $unit => 'yes' ];
 
 		$this->start_controls_section(
@@ -983,11 +983,11 @@ class Countdown_Timer_Widget extends Widget_Base {
 	}
 
 	private function register_individual_unit_digit_style_controls( string $unit, string $label ): void {
-		$unit_selector   = '{{WRAPPER}} .pixels-timer-unit-' . $unit;
-		$digit_selector  = $unit_selector . ' .pixels-timer-digit';
-		$digits_selector = $unit_selector . ' .pixels-timer-unit-digits';
-		$custom_class    = 'pixels-core-countdown-timer--' . $unit . '-digit-custom-size';
-		$custom_digit_selector = '{{WRAPPER}}.' . $custom_class . ' .pixels-timer-unit-' . $unit . ' .pixels-timer-digit';
+		$unit_selector   = '{{WRAPPER}} .pixeccte-timer-unit-' . $unit;
+		$digit_selector  = $unit_selector . ' .pixeccte-timer-digit';
+		$digits_selector = $unit_selector . ' .pixeccte-timer-unit-digits';
+		$custom_class    = 'pixeccte-countdown-timer--' . $unit . '-digit-custom-size';
+		$custom_digit_selector = '{{WRAPPER}}.' . $custom_class . ' .pixeccte-timer-unit-' . $unit . ' .pixeccte-timer-digit';
 		$visibility      = [ 'show_' . $unit => 'yes' ];
 
 		$this->start_controls_section(
@@ -1040,7 +1040,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Circle Track Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					$unit_selector . ' .pixels-timer-ring__track' => 'stroke: {{VALUE}};',
+					$unit_selector . ' .pixeccte-timer-ring__track' => 'stroke: {{VALUE}};',
 				],
 				'condition' => [
 					'show_circle_progress' => 'yes',
@@ -1054,7 +1054,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Circle Progress Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					$unit_selector . ' .pixels-timer-ring__progress' => 'stroke: {{VALUE}};',
+					$unit_selector . ' .pixeccte-timer-ring__progress' => 'stroke: {{VALUE}};',
 				],
 				'condition' => [
 					'show_circle_progress' => 'yes',
@@ -1199,7 +1199,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 	}
 
 	private function register_individual_unit_label_style_controls( string $unit, string $label ): void {
-		$selector   = '{{WRAPPER}} .pixels-timer-unit-' . $unit . ' .pixels-timer-label';
+		$selector   = '{{WRAPPER}} .pixeccte-timer-unit-' . $unit . ' .pixeccte-timer-label';
 		$visibility = [ 'show_' . $unit => 'yes' ];
 
 		$this->start_controls_section(
@@ -1315,12 +1315,12 @@ class Countdown_Timer_Widget extends Widget_Base {
 
 	private function render_unit_digits(): void {
 		?>
-		<div class="pixels-timer-unit-digits">
-			<span class="pixels-timer-digit pixels-timer-digit-tens">
-				<number-flow class="pixels-timer-digit-flow" aria-hidden="true">0</number-flow>
+		<div class="pixeccte-timer-unit-digits">
+			<span class="pixeccte-timer-digit pixeccte-timer-digit-tens">
+				<number-flow class="pixeccte-timer-digit-flow" aria-hidden="true">0</number-flow>
 			</span>
-			<span class="pixels-timer-digit pixels-timer-digit-ones">
-				<number-flow class="pixels-timer-digit-flow" aria-hidden="true">0</number-flow>
+			<span class="pixeccte-timer-digit pixeccte-timer-digit-ones">
+				<number-flow class="pixeccte-timer-digit-flow" aria-hidden="true">0</number-flow>
 			</span>
 		</div>
 		<?php
@@ -1329,11 +1329,11 @@ class Countdown_Timer_Widget extends Widget_Base {
 	private function render_unit_ring( string $label_text ): void {
 		$circumference = $this->get_ring_circumference();
 		?>
-		<div class="pixels-timer-ring">
-			<svg class="pixels-timer-ring__svg" viewBox="0 0 100 100" aria-hidden="true">
-				<circle class="pixels-timer-ring__track" cx="50" cy="50" r="<?php echo esc_attr( (string) self::RING_RADIUS ); ?>" />
+		<div class="pixeccte-timer-ring">
+			<svg class="pixeccte-timer-ring__svg" viewBox="0 0 100 100" aria-hidden="true">
+				<circle class="pixeccte-timer-ring__track" cx="50" cy="50" r="<?php echo esc_attr( (string) self::RING_RADIUS ); ?>" />
 				<circle
-					class="pixels-timer-ring__progress"
+					class="pixeccte-timer-ring__progress"
 					cx="50"
 					cy="50"
 					r="<?php echo esc_attr( (string) self::RING_RADIUS ); ?>"
@@ -1341,9 +1341,9 @@ class Countdown_Timer_Widget extends Widget_Base {
 					stroke-dashoffset="0"
 				/>
 			</svg>
-			<div class="pixels-timer-ring__center">
+			<div class="pixeccte-timer-ring__center">
 				<?php $this->render_unit_digits(); ?>
-				<span class="pixels-timer-label pixels-timer-ring__label"><?php echo esc_html( $label_text ); ?></span>
+				<span class="pixeccte-timer-label pixeccte-timer-ring__label"><?php echo esc_html( $label_text ); ?></span>
 			</div>
 		</div>
 		<?php
@@ -1419,7 +1419,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 			return;
 		}
 
-		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-countdown-timer' );
+		$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-countdown-timer' );
 
 		$target_ms            = (int) $timer_data['target_ms'];
 		$active_units         = $timer_data['active_units'];
@@ -1431,21 +1431,21 @@ class Countdown_Timer_Widget extends Widget_Base {
 		$custom_labels        = $timer_data['labels'];
 
 		if ( $show_circle_progress ) {
-			$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-countdown-timer--has-rings' );
+			$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-countdown-timer--has-rings' );
 
 			$ring_label_position = $settings['ring_label_position'] ?? 'bottom';
 			if ( in_array( $ring_label_position, [ 'top', 'bottom' ], true ) ) {
-				$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-countdown-timer--ring-label-' . $ring_label_position );
+				$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-countdown-timer--ring-label-' . $ring_label_position );
 			}
 		} else {
 			$label_position = $settings['label_position'] ?? 'bottom';
 			if ( in_array( $label_position, [ 'top', 'bottom' ], true ) ) {
-				$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-countdown-timer--label-' . $label_position );
+				$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-countdown-timer--label-' . $label_position );
 			}
 		}
 
 		if ( $show_separator && in_array( $separator_style, [ 'colon', 'line' ], true ) ) {
-			$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-countdown-timer--separator-' . $separator_style );
+			$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-countdown-timer--separator-' . $separator_style );
 		}
 
 		$label_map = [
@@ -1457,23 +1457,23 @@ class Countdown_Timer_Widget extends Widget_Base {
 
 		?>
 		<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
-			<div class="pixels-timer" data-end-time="<?php echo esc_attr( (string) $target_ms ); ?>" data-expiry-action="<?php echo esc_attr( $expiry_action ); ?>" data-expiry-message="<?php echo esc_attr( $expiry_message ); ?>">
+			<div class="pixeccte-timer" data-end-time="<?php echo esc_attr( (string) $target_ms ); ?>" data-expiry-action="<?php echo esc_attr( $expiry_action ); ?>" data-expiry-message="<?php echo esc_attr( $expiry_message ); ?>">
 				<?php foreach ( $active_units as $index => $unit ) : ?>
 					<?php
 					if ( ! isset( $label_map[ $unit ] ) ) {
 						continue;
 					}
 					?>
-					<div class="pixels-timer-unit pixels-timer-unit-<?php echo esc_attr( $unit ); ?>" data-unit="<?php echo esc_attr( $unit ); ?>"<?php echo $show_circle_progress ? ' data-ring-max="' . esc_attr( (string) $this->get_unit_ring_max( $unit ) ) . '"' : ''; ?>>
+					<div class="pixeccte-timer-unit pixeccte-timer-unit-<?php echo esc_attr( $unit ); ?>" data-unit="<?php echo esc_attr( $unit ); ?>"<?php echo $show_circle_progress ? ' data-ring-max="' . esc_attr( (string) $this->get_unit_ring_max( $unit ) ) . '"' : ''; ?>>
 						<?php if ( $show_circle_progress ) : ?>
 							<?php $this->render_unit_ring( $label_map[ $unit ] ); ?>
 						<?php else : ?>
 							<?php $this->render_unit_digits(); ?>
-							<span class="pixels-timer-label"><?php echo esc_html( $label_map[ $unit ] ); ?></span>
+							<span class="pixeccte-timer-label"><?php echo esc_html( $label_map[ $unit ] ); ?></span>
 						<?php endif; ?>
 					</div>
 					<?php if ( $show_separator && $index < ( count( $active_units ) - 1 ) ) : ?>
-						<span class="pixels-timer-separator pixels-timer-separator--<?php echo esc_attr( $separator_style ); ?>" aria-hidden="true">
+						<span class="pixeccte-timer-separator pixeccte-timer-separator--<?php echo esc_attr( $separator_style ); ?>" aria-hidden="true">
 							<?php if ( 'colon' === $separator_style ) : ?>
 								:
 							<?php endif; ?>
@@ -1481,7 +1481,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
-			<div class="pixels-timer-expired-message is-hidden">
+			<div class="pixeccte-timer-expired-message is-hidden">
 				<?php echo esc_html( $expiry_message ); ?>
 			</div>
 		</div>

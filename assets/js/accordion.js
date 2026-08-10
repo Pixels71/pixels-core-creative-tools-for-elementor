@@ -5,11 +5,11 @@
 		getDefaultSettings() {
 			return {
 				selectors: {
-					accordion: '.pixels-core-accordion',
-					item: '.pixels-core-accordion__item',
-					title: '.pixels-core-accordion__title',
-					content: '.pixels-core-accordion__content',
-					panel: '.pixels-core-accordion__panel',
+					accordion: '.pixeccte-accordion',
+					item: '.pixeccte-accordion__item',
+					title: '.pixeccte-accordion__title',
+					content: '.pixeccte-accordion__content',
+					panel: '.pixeccte-accordion__panel',
 				},
 				animationDuration: 550,
 			};
@@ -48,7 +48,7 @@
 
 			if (!elementorFrontend.isEditMode()) {
 				this.wrapPanels();
-				this.elements.$accordion.addClass('pixels-core-accordion--animated');
+				this.elements.$accordion.addClass('pixeccte-accordion--animated');
 				this.initOpenItems();
 			}
 
@@ -56,7 +56,7 @@
 		},
 
 		isAnimated() {
-			return this.elements.$accordion.hasClass('pixels-core-accordion--animated');
+			return this.elements.$accordion.hasClass('pixeccte-accordion--animated');
 		},
 
 		prefersReducedMotion() {
@@ -70,12 +70,12 @@
 				const $item = $(this);
 				const $panel = $item.children(selectors.panel).first();
 
-				if (!$panel.length || $panel.parent().hasClass('pixels-core-accordion__content-inner')) {
+				if (!$panel.length || $panel.parent().hasClass('pixeccte-accordion__content-inner')) {
 					return;
 				}
 
-				$panel.wrap('<div class="pixels-core-accordion__content-inner"></div>');
-				$panel.parent().wrap('<div class="pixels-core-accordion__content"></div>');
+				$panel.wrap('<div class="pixeccte-accordion__content-inner"></div>');
+				$panel.parent().wrap('<div class="pixeccte-accordion__content"></div>');
 			});
 		},
 
@@ -212,19 +212,19 @@
 			this.elements.$items.each(function (index) {
 				const $item = $(this);
 				const itemId = base + index;
-				const titleId = itemId.replace('pixels-accordion-item-', 'pixels-accordion-title-');
+				const titleId = itemId.replace('pixeccte-accordion-item-', 'pixeccte-accordion-title-');
 
 				$item.attr('id', itemId);
 
-				const $title = $item.find('.pixels-core-accordion__title');
+				const $title = $item.find('.pixeccte-accordion__title');
 				$title.attr('id', titleId);
 				$title.attr('data-item-index', index + 1);
 				$title.attr('aria-controls', itemId);
 
-				const $label = $item.find('.pixels-core-accordion__label');
+				const $label = $item.find('.pixeccte-accordion__label');
 				$label.attr('data-binding-index', index + 1);
 
-				const $panel = $item.find('.pixels-core-accordion__panel').first();
+				const $panel = $item.find('.pixeccte-accordion__panel').first();
 				if ($panel.length) {
 					$panel.attr('aria-labelledby', titleId);
 				}
@@ -244,7 +244,7 @@
 				const $targetItem = this.elements.$items.eq(targetIndex);
 
 				if ($targetItem.length && targetContainer && targetContainer.view) {
-					const $inner = $targetItem.find('.pixels-core-accordion__content-inner').first();
+					const $inner = $targetItem.find('.pixeccte-accordion__content-inner').first();
 
 					if ($inner.length) {
 						$inner.append(targetContainer.view.$el[0]);
@@ -272,6 +272,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-core-accordion', AccordionHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixeccte-accordion', AccordionHandler);
 	});
 })(jQuery);

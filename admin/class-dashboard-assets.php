@@ -1,7 +1,7 @@
 <?php
-namespace PixelsCore\Admin;
+namespace PixelsCoreCreativeToolsForElementor\Admin;
 
-use PixelsCore\Plugin;
+use PixelsCoreCreativeToolsForElementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,29 +18,29 @@ final class Dashboard_Assets {
 	 */
 	public static function get_config(): array {
 		$config = [
-			'restUrl'              => untrailingslashit( esc_url_raw( rest_url( 'pixels-core/v1' ) ) ),
+			'restUrl'              => untrailingslashit( esc_url_raw( rest_url( 'pixeccte/v1' ) ) ),
 			'nonce'                => wp_create_nonce( 'wp_rest' ),
-			'adminUrl'             => esc_url_raw( admin_url( 'admin.php?page=pixels-core' ) ),
-			'pluginUrl'            => esc_url_raw( PIXELS_CORE_URL ),
+			'adminUrl'             => esc_url_raw( admin_url( 'admin.php?page=pixeccte' ) ),
+			'pluginUrl'            => esc_url_raw( PIXECCTE_URL ),
 			'elementorActive'      => (bool) did_action( 'elementor/loaded' ),
 			'nestedElementsActive' => (bool) Plugin::is_nested_elements_active(),
 			'notices'              => self::get_notices(),
-			'version'              => PIXELS_CORE_VERSION,
-			'proActive'            => defined( 'PIXELS_CORE_PRO_VERSION' ),
-			'showProUpsell'        => defined( 'PIXELS_CORE_SHOW_PRO_UPSSELL' ) && PIXELS_CORE_SHOW_PRO_UPSSELL,
-			'upgradeUrl'           => defined( 'PIXELS_CORE_UPGRADE_URL' ) ? PIXELS_CORE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/',
+			'version'              => PIXECCTE_VERSION,
+			'proActive'            => defined( 'PIXECCTE_PRO_VERSION' ),
+			'showProUpsell'        => defined( 'PIXECCTE_SHOW_PRO_UPSSELL' ) && PIXECCTE_SHOW_PRO_UPSSELL,
+			'upgradeUrl'           => esc_url_raw( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/' ),
 			'license'              => [
 				'active'    => false,
 				'maskedKey' => '',
 				'managedBy' => 'pro',
 			],
 			'links'                => [
-				'tutorials'     => 'https://pixels71.com',
-				'help'          => 'https://pixels71.com',
-				'community'     => 'https://pixels71.com',
-				'knowledgeBase' => 'https://pixels71.com',
-				'review'        => 'https://wordpress.org/support/plugin/pixels-core-creative-tools-for-elementor/reviews/',
-				'pro'           => defined( 'PIXELS_CORE_UPGRADE_URL' ) ? PIXELS_CORE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/',
+				'tutorials'     => esc_url_raw( 'https://pixels71.com' ),
+				'help'          => esc_url_raw( 'https://pixels71.com' ),
+				'community'     => esc_url_raw( 'https://pixels71.com' ),
+				'knowledgeBase' => esc_url_raw( 'https://pixels71.com' ),
+				'review'        => esc_url_raw( 'https://wordpress.org/support/plugin/pixels-core-creative-tools-for-elementor/reviews/' ),
+				'pro'           => esc_url_raw( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/' ),
 			],
 			'widgets'              => self::get_widgets_payload(),
 			'extensions'           => self::get_extensions_payload(),
@@ -53,22 +53,22 @@ final class Dashboard_Assets {
 		 *
 		 * @param array<string, mixed> $config
 		 */
-		return apply_filters( 'pixels_core_dashboard_config', $config );
+		return apply_filters( 'pixeccte_dashboard_config', $config );
 	}
 
 	public static function enqueue( string $hook ): void {
-		if ( 'toplevel_page_pixels-core' !== $hook ) {
+		if ( 'toplevel_page_pixeccte' !== $hook ) {
 			return;
 		}
 
-		$manifest_path = PIXELS_CORE_PATH . 'assets/dashboard/.vite/manifest.json';
+		$manifest_path = PIXECCTE_PATH . 'assets/dashboard/.vite/manifest.json';
 
 		if ( ! file_exists( $manifest_path ) ) {
 			add_action(
 				'admin_notices',
 				static function (): void {
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin page check for notice display.
-					if ( ! isset( $_GET['page'] ) || 'pixels-core' !== sanitize_key( wp_unslash( $_GET['page'] ) ) ) {
+					if ( ! isset( $_GET['page'] ) || 'pixeccte' !== sanitize_key( wp_unslash( $_GET['page'] ) ) ) {
 						return;
 					}
 
@@ -92,16 +92,16 @@ final class Dashboard_Assets {
 		}
 
 		$entry    = $manifest[ self::MANIFEST_ENTRY ];
-		$base_url = PIXELS_CORE_URL . 'assets/dashboard/';
-		$js_path  = PIXELS_CORE_PATH . 'assets/dashboard/' . $entry['file'];
-		$version  = file_exists( $js_path ) ? (string) filemtime( $js_path ) : PIXELS_CORE_VERSION;
+		$base_url = PIXECCTE_URL . 'assets/dashboard/';
+		$js_path  = PIXECCTE_PATH . 'assets/dashboard/' . $entry['file'];
+		$version  = file_exists( $js_path ) ? (string) filemtime( $js_path ) : PIXECCTE_VERSION;
 
 		if ( ! empty( $entry['css'] ) && is_array( $entry['css'] ) ) {
 			foreach ( $entry['css'] as $index => $css_file ) {
-				$css_path = PIXELS_CORE_PATH . 'assets/dashboard/' . $css_file;
+				$css_path = PIXECCTE_PATH . 'assets/dashboard/' . $css_file;
 
 				wp_enqueue_style(
-					'pixels-core-dashboard' . ( 0 === $index ? '' : '-' . $index ),
+					'pixeccte-dashboard' . ( 0 === $index ? '' : '-' . $index ),
 					$base_url . $css_file,
 					[],
 					file_exists( $css_path ) ? (string) filemtime( $css_path ) : $version
@@ -110,7 +110,7 @@ final class Dashboard_Assets {
 		}
 
 		wp_enqueue_script(
-			'pixels-core-dashboard',
+			'pixeccte-dashboard',
 			$base_url . $entry['file'],
 			[],
 			$version,
@@ -121,7 +121,7 @@ final class Dashboard_Assets {
 		add_filter(
 			'script_loader_tag',
 			static function ( string $tag, string $handle ): string {
-				if ( 'pixels-core-dashboard' !== $handle ) {
+				if ( 'pixeccte-dashboard' !== $handle ) {
 					return $tag;
 				}
 
@@ -136,16 +136,16 @@ final class Dashboard_Assets {
 		);
 
 		wp_add_inline_script(
-			'pixels-core-dashboard',
-			'window.pixelsCoreDashboard = ' . wp_json_encode( self::get_config() ) . ';',
+			'pixeccte-dashboard',
+			'window.pixeccteDashboard = ' . wp_json_encode( self::get_config() ) . ';',
 			'before'
 		);
 
-		wp_register_style( 'pixels-core-dashboard-layout', false, [], PIXELS_CORE_VERSION );
-		wp_enqueue_style( 'pixels-core-dashboard-layout' );
+		wp_register_style( 'pixeccte-dashboard-layout', false, [], PIXECCTE_VERSION );
+		wp_enqueue_style( 'pixeccte-dashboard-layout' );
 		wp_add_inline_style(
-			'pixels-core-dashboard-layout',
-			'#wpcontent{padding-left:0;}#wpbody-content{padding-bottom:0;}#pixels-dashboard-root .wrap{margin:0;}.pixels-core-dashboard-page .notice{margin:16px 20px 0;}'
+			'pixeccte-dashboard-layout',
+			'#wpcontent{padding-left:0;}#wpbody-content{padding-bottom:0;}#pixeccte-dashboard-root .wrap{margin:0;}.pixeccte-dashboard-page .notice{margin:16px 20px 0;}'
 		);
 	}
 
@@ -194,11 +194,11 @@ final class Dashboard_Assets {
 	 * @return array<string, string>|null
 	 */
 	public static function get_form_settings_payload(): ?array {
-		if ( ! class_exists( '\\PixelsCore\\Form_Settings' ) ) {
+		if ( ! class_exists( '\\PixelsCoreCreativeToolsForElementor\\Form_Settings' ) ) {
 			return null;
 		}
 
-		$settings = \PixelsCore\Form_Settings::get_all();
+		$settings = \PixelsCoreCreativeToolsForElementor\Form_Settings::get_all();
 
 		return [
 			'recaptchaV2SiteKey'   => $settings['recaptcha_v2_site_key'],

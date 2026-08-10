@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
@@ -18,7 +18,7 @@ class Nav_Menu_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-core-menu';
+		return 'pixeccte-menu';
 	}
 
 	public function get_title(): string {
@@ -26,15 +26,15 @@ class Nav_Menu_Widget extends Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-menu';
+		return 'pixeccte-icon pixeccte-icon-menu';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'menu', 'nav', 'navigation', 'header', 'pixels' ];
+		return [ 'menu', 'nav', 'navigation', 'header', 'pixeccte' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -104,10 +104,10 @@ class Nav_Menu_Widget extends Widget_Base {
 					'right'  => 'flex-end',
 				],
 				'selectors'            => [
-					'{{WRAPPER}} .pixels-core-menu--layout-horizontal:not(.is-hamburger) .pixels-core-menu__wrap' => 'justify-content: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-menu--layout-vertical:not(.is-hamburger) .pixels-core-menu__wrap'   => 'align-items: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-menu.is-hamburger'                                                    => 'align-items: {{VALUE}};',
-					'{{WRAPPER}} .pixels-core-menu.is-hamburger .pixels-core-menu__list'                            => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu--layout-horizontal:not(.is-hamburger) .pixeccte-menu__wrap' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu--layout-vertical:not(.is-hamburger) .pixeccte-menu__wrap'   => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu.is-hamburger'                                                    => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu.is-hamburger .pixeccte-menu__list'                            => 'align-items: {{VALUE}};',
 				],
 			]
 		);
@@ -254,14 +254,14 @@ class Nav_Menu_Widget extends Widget_Base {
 	}
 
 	private function register_style_controls(): void {
-		$top_level_link = '{{WRAPPER}} .pixels-core-menu__list > .menu-item > a';
-		$top_level_active = '{{WRAPPER}} .pixels-core-menu__list > .menu-item.current-menu-item > a, {{WRAPPER}} .pixels-core-menu__list > .menu-item.current-menu-ancestor > a, {{WRAPPER}} .pixels-core-menu__list > .menu-item.current-menu-parent > a';
-		$submenu_link     = '{{WRAPPER}} .pixels-core-menu__list .sub-menu a';
-		$submenu_panel    = '{{WRAPPER}} .pixels-core-menu__list .sub-menu';
-		$hamburger_panel  = '{{WRAPPER}} .pixels-core-menu.is-hamburger .pixels-core-menu__wrap';
-		$dropdown_panel   = '{{WRAPPER}} .pixels-core-menu--panel-dropdown.is-hamburger.is-open .pixels-core-menu__wrap';
-		$overlay          = '{{WRAPPER}} .pixels-core-menu--panel-aside.is-hamburger .pixels-core-menu__overlay';
-		$dropdown_arrow   = '{{WRAPPER}} .pixels-core-menu__list .menu-item-has-children > a::after, {{WRAPPER}} .pixels-core-menu__list .pixels-core-mega-menu-item > a::after';
+		$top_level_link = '{{WRAPPER}} .pixeccte-menu__list > .menu-item > a';
+		$top_level_active = '{{WRAPPER}} .pixeccte-menu__list > .menu-item.current-menu-item > a, {{WRAPPER}} .pixeccte-menu__list > .menu-item.current-menu-ancestor > a, {{WRAPPER}} .pixeccte-menu__list > .menu-item.current-menu-parent > a';
+		$submenu_link     = '{{WRAPPER}} .pixeccte-menu__list .sub-menu a';
+		$submenu_panel    = '{{WRAPPER}} .pixeccte-menu__list .sub-menu';
+		$hamburger_panel  = '{{WRAPPER}} .pixeccte-menu.is-hamburger .pixeccte-menu__wrap';
+		$dropdown_panel   = '{{WRAPPER}} .pixeccte-menu--panel-dropdown.is-hamburger.is-open .pixeccte-menu__wrap';
+		$overlay          = '{{WRAPPER}} .pixeccte-menu--panel-aside.is-hamburger .pixeccte-menu__overlay';
+		$dropdown_arrow   = '{{WRAPPER}} .pixeccte-menu__list .menu-item-has-children > a::after, {{WRAPPER}} .pixeccte-menu__list .pixeccte-mega-menu-item > a::after';
 
 		$this->start_controls_section(
 			'section_style_menu',
@@ -415,9 +415,9 @@ class Nav_Menu_Widget extends Widget_Base {
 					'px' => [ 'min' => 0, 'max' => 80 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu--layout-horizontal .pixels-core-menu__list > .menu-item' => 'margin-inline: calc({{SIZE}}{{UNIT}} / 2);',
-					'{{WRAPPER}} .pixels-core-menu--layout-vertical .pixels-core-menu__list > .menu-item + .menu-item' => 'margin-top: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .pixels-core-menu.is-hamburger .pixels-core-menu__list > .menu-item + .menu-item' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu--layout-horizontal .pixeccte-menu__list > .menu-item' => 'margin-inline: calc({{SIZE}}{{UNIT}} / 2);',
+					'{{WRAPPER}} .pixeccte-menu--layout-vertical .pixeccte-menu__list > .menu-item + .menu-item' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu.is-hamburger .pixeccte-menu__list > .menu-item + .menu-item' => 'margin-top: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -429,7 +429,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__list > .menu-item > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__list > .menu-item > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -449,7 +449,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__list > .menu-item + .menu-item' => 'border-top-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__list > .menu-item + .menu-item' => 'border-top-color: {{VALUE}};',
 				],
 				'condition' => [
 					'menu_divider_style!' => '',
@@ -470,7 +470,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'dotted' => esc_html__( 'Dotted', 'pixels-core-creative-tools-for-elementor' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__list > .menu-item + .menu-item' => 'border-top-style: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__list > .menu-item + .menu-item' => 'border-top-style: {{VALUE}};',
 				],
 			]
 		);
@@ -489,7 +489,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'size' => 1,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__list > .menu-item + .menu-item' => 'border-top-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__list > .menu-item + .menu-item' => 'border-top-width: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'menu_divider_style!' => '',
@@ -650,7 +650,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__list .sub-menu .current-menu-item > a, {{WRAPPER}} .pixels-core-menu__list .sub-menu .current-menu-ancestor > a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__list .sub-menu .current-menu-item > a, {{WRAPPER}} .pixeccte-menu__list .sub-menu .current-menu-ancestor > a' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -661,7 +661,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__list .sub-menu .current-menu-item > a, {{WRAPPER}} .pixels-core-menu__list .sub-menu .current-menu-ancestor > a' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__list .sub-menu .current-menu-item > a, {{WRAPPER}} .pixeccte-menu__list .sub-menu .current-menu-ancestor > a' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -766,7 +766,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__toggle' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -777,7 +777,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__toggle' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -795,7 +795,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__toggle:hover, {{WRAPPER}} .pixels-core-menu__toggle:focus' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle:hover, {{WRAPPER}} .pixeccte-menu__toggle:focus' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -806,7 +806,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-menu__toggle:hover, {{WRAPPER}} .pixels-core-menu__toggle:focus' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle:hover, {{WRAPPER}} .pixeccte-menu__toggle:focus' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -818,7 +818,7 @@ class Nav_Menu_Widget extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'toggle_border',
-				'selector'  => '{{WRAPPER}} .pixels-core-menu__toggle',
+				'selector'  => '{{WRAPPER}} .pixeccte-menu__toggle',
 				'separator' => 'before',
 			]
 		);
@@ -830,7 +830,7 @@ class Nav_Menu_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -839,7 +839,7 @@ class Nav_Menu_Widget extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name'     => 'toggle_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-menu__toggle',
+				'selector' => '{{WRAPPER}} .pixeccte-menu__toggle',
 			]
 		);
 
@@ -853,7 +853,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'px' => [ 'min' => 24, 'max' => 80 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__toggle' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -868,7 +868,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'px' => [ 'min' => 12, 'max' => 40 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__toggle-icon' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle-icon' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -883,7 +883,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'px' => [ 'min' => 1, 'max' => 8 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__toggle-bar' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle-bar' => 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -898,7 +898,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'px' => [ 'min' => 2, 'max' => 12 ],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu__toggle-icon' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-menu__toggle-icon' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -929,7 +929,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					'size' => 320,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-menu--panel-aside.is-hamburger .pixels-core-menu__wrap' => 'width: {{SIZE}}{{UNIT}}; max-width: 100vw;',
+					'{{WRAPPER}} .pixeccte-menu--panel-aside.is-hamburger .pixeccte-menu__wrap' => 'width: {{SIZE}}{{UNIT}}; max-width: 100vw;',
 				],
 			]
 		);
@@ -1065,7 +1065,7 @@ class Nav_Menu_Widget extends Widget_Base {
 
 		if ( empty( $settings['nav_menu'] ) ) {
 			if ( $this->is_editor_preview() ) {
-				echo '<div class="pixels-core-menu pixels-core-menu--placeholder">';
+				echo '<div class="pixeccte-menu pixeccte-menu--placeholder">';
 				echo esc_html__( 'Select a WordPress menu in the widget settings.', 'pixels-core-creative-tools-for-elementor' );
 				echo '</div>';
 			}
@@ -1077,7 +1077,7 @@ class Nav_Menu_Widget extends Widget_Base {
 		$layout       = 'vertical' === ( $settings['layout'] ?? 'horizontal' ) ? 'vertical' : 'horizontal';
 		$panel_type   = 'dropdown' === ( $settings['hamburger_panel_type'] ?? 'aside' ) ? 'dropdown' : 'aside';
 		$aside_side   = 'right' === ( $settings['aside_position'] ?? 'left' ) ? 'right' : 'left';
-		$menu_id      = 'pixels-core-menu-' . $this->get_id();
+		$menu_id      = 'pixeccte-menu-' . $this->get_id();
 		$toggle_id    = $menu_id . '-toggle';
 		$overlay_id   = $menu_id . '-overlay';
 		$close_id     = $menu_id . '-close';
@@ -1085,35 +1085,35 @@ class Nav_Menu_Widget extends Widget_Base {
 			? $settings['mobile_toggle_label']
 			: esc_html__( 'Menu', 'pixels-core-creative-tools-for-elementor' );
 		$nav_classes  = [
-			'pixels-core-menu',
-			'pixels-core-menu--layout-' . $layout,
-			'pixels-core-menu--panel-' . $panel_type,
+			'pixeccte-menu',
+			'pixeccte-menu--layout-' . $layout,
+			'pixeccte-menu--panel-' . $panel_type,
 		];
 
 		if ( 'aside' === $panel_type ) {
-			$nav_classes[] = 'pixels-core-menu--aside-' . $aside_side;
+			$nav_classes[] = 'pixeccte-menu--aside-' . $aside_side;
 		}
 
 		$this->add_render_attribute( 'nav', 'class', $nav_classes );
-		$this->add_render_attribute( 'nav', 'style', '--pixels-menu-breakpoint: ' . $breakpoint . 'px;' );
+		$this->add_render_attribute( 'nav', 'style', '--pixeccte-menu-breakpoint: ' . $breakpoint . 'px;' );
 		$this->add_render_attribute( 'nav', 'data-breakpoint', (string) $breakpoint );
 		$this->add_render_attribute( 'nav', 'data-desktop-hamburger', 'yes' === ( $settings['desktop_hamburger'] ?? '' ) ? '1' : '0' );
 		$this->add_render_attribute( 'nav', 'data-mobile-hamburger', 'yes' === ( $settings['mobile_hamburger'] ?? 'yes' ) ? '1' : '0' );
 
-		$this->add_render_attribute( 'toggle', 'class', 'pixels-core-menu__toggle' );
+		$this->add_render_attribute( 'toggle', 'class', 'pixeccte-menu__toggle' );
 		$this->add_render_attribute( 'toggle', 'type', 'button' );
 		$this->add_render_attribute( 'toggle', 'id', $toggle_id );
 		$this->add_render_attribute( 'toggle', 'aria-controls', $menu_id );
 		$this->add_render_attribute( 'toggle', 'aria-expanded', 'false' );
 		$this->add_render_attribute( 'toggle', 'aria-label', $toggle_label );
 
-		$this->add_render_attribute( 'wrap', 'class', 'pixels-core-menu__wrap' );
+		$this->add_render_attribute( 'wrap', 'class', 'pixeccte-menu__wrap' );
 		$this->add_render_attribute( 'wrap', 'id', $menu_id );
-		$this->add_render_attribute( 'overlay', 'class', 'pixels-core-menu__overlay' );
+		$this->add_render_attribute( 'overlay', 'class', 'pixeccte-menu__overlay' );
 		$this->add_render_attribute( 'overlay', 'id', $overlay_id );
 		$this->add_render_attribute( 'overlay', 'aria-hidden', 'true' );
 
-		$this->add_render_attribute( 'close', 'class', 'pixels-core-menu__close' );
+		$this->add_render_attribute( 'close', 'class', 'pixeccte-menu__close' );
 		$this->add_render_attribute( 'close', 'type', 'button' );
 		$this->add_render_attribute( 'close', 'id', $close_id );
 		$this->add_render_attribute( 'close', 'aria-label', esc_html__( 'Close menu', 'pixels-core-creative-tools-for-elementor' ) );
@@ -1121,10 +1121,10 @@ class Nav_Menu_Widget extends Widget_Base {
 		?>
 		<nav <?php $this->print_render_attribute_string( 'nav' ); ?>>
 			<button <?php $this->print_render_attribute_string( 'toggle' ); ?>>
-				<span class="pixels-core-menu__toggle-icon" aria-hidden="true">
-					<span class="pixels-core-menu__toggle-bar"></span>
-					<span class="pixels-core-menu__toggle-bar"></span>
-					<span class="pixels-core-menu__toggle-bar"></span>
+				<span class="pixeccte-menu__toggle-icon" aria-hidden="true">
+					<span class="pixeccte-menu__toggle-bar"></span>
+					<span class="pixeccte-menu__toggle-bar"></span>
+					<span class="pixeccte-menu__toggle-bar"></span>
 				</span>
 				<span class="screen-reader-text"><?php echo esc_html( $toggle_label ); ?></span>
 			</button>
@@ -1143,7 +1143,7 @@ class Nav_Menu_Widget extends Widget_Base {
 					[
 						'menu'        => $settings['nav_menu'],
 						'container'   => false,
-						'menu_class'  => 'pixels-core-menu__list',
+						'menu_class'  => 'pixeccte-menu__list',
 						'fallback_cb' => false,
 						'depth'       => 0,
 						'items_wrap'  => '<ul id="%1$s" class="%2$s">%3$s</ul>',

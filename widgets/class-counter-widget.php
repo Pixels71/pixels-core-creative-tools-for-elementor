@@ -1,5 +1,5 @@
 <?php
-namespace PixelsCore\Widgets;
+namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Text_Shadow;
@@ -17,7 +17,7 @@ class Counter_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-core-counter';
+		return 'pixeccte-counter';
 	}
 
 	public function get_title(): string {
@@ -25,15 +25,15 @@ class Counter_Widget extends Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'pixels-icon pixels-icon-counter';
+		return 'pixeccte-icon pixeccte-icon-counter';
 	}
 
 	public function get_categories(): array {
-		return [ 'pixels-core' ];
+		return [ 'pixeccte' ];
 	}
 
 	public function get_keywords(): array {
-		return [ 'counter', 'number', 'stats', 'animate', 'pixels', 'number flow' ];
+		return [ 'counter', 'number', 'stats', 'animate', 'pixeccte', 'number flow' ];
 	}
 
 	protected function get_assets_slug(): string {
@@ -212,12 +212,12 @@ class Counter_Widget extends Widget_Base {
 				],
 				'default'              => 'center',
 				'selectors_dictionary' => [
-					'left'   => '--pixels-counter-align: flex-start; --pixels-counter-justify: flex-start;',
-					'center' => '--pixels-counter-align: center; --pixels-counter-justify: center;',
-					'right'  => '--pixels-counter-align: flex-end; --pixels-counter-justify: flex-end;',
+					'left'   => '--pixeccte-counter-align: flex-start; --pixeccte-counter-justify: flex-start;',
+					'center' => '--pixeccte-counter-align: center; --pixeccte-counter-justify: center;',
+					'right'  => '--pixeccte-counter-align: flex-end; --pixeccte-counter-justify: flex-end;',
 				],
 				'selectors'            => [
-					'{{WRAPPER}} .pixels-core-counter' => '{{VALUE}}',
+					'{{WRAPPER}} .pixeccte-counter' => '{{VALUE}}',
 				],
 			]
 		);
@@ -243,7 +243,7 @@ class Counter_Widget extends Widget_Base {
 				],
 				'default'   => 'center',
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-counter' => 'align-items: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-counter' => 'align-items: {{VALUE}};',
 				],
 				'condition' => [
 					'title!' => '',
@@ -265,7 +265,7 @@ class Counter_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-counter' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-counter' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'title!' => '',
@@ -289,7 +289,7 @@ class Counter_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-counter__number-wrapper' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-counter__number-wrapper' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -298,7 +298,7 @@ class Counter_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'number_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-counter__number-wrapper',
+				'selector' => '{{WRAPPER}} .pixeccte-counter__number-wrapper',
 			]
 		);
 
@@ -306,7 +306,7 @@ class Counter_Widget extends Widget_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name'     => 'number_text_stroke',
-				'selector' => '{{WRAPPER}} .pixels-core-counter__number-wrapper, {{WRAPPER}} .pixels-core-counter__flow, {{WRAPPER}} .pixels-core-counter__value--fallback, {{WRAPPER}} .pixels-core-counter__prefix, {{WRAPPER}} .pixels-core-counter__suffix',
+				'selector' => '{{WRAPPER}} .pixeccte-counter__number-wrapper, {{WRAPPER}} .pixeccte-counter__flow, {{WRAPPER}} .pixeccte-counter__value--fallback, {{WRAPPER}} .pixeccte-counter__prefix, {{WRAPPER}} .pixeccte-counter__suffix',
 			]
 		);
 
@@ -314,7 +314,7 @@ class Counter_Widget extends Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name'     => 'number_text_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-counter__number-wrapper',
+				'selector' => '{{WRAPPER}} .pixeccte-counter__number-wrapper',
 			]
 		);
 
@@ -331,7 +331,7 @@ class Counter_Widget extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .pixels-core-counter__number-wrapper' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pixeccte-counter__number-wrapper' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -355,7 +355,7 @@ class Counter_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .pixels-core-counter__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-counter__title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -364,7 +364,7 @@ class Counter_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'title_typography',
-				'selector' => '{{WRAPPER}} .pixels-core-counter__title',
+				'selector' => '{{WRAPPER}} .pixeccte-counter__title',
 			]
 		);
 
@@ -372,7 +372,7 @@ class Counter_Widget extends Widget_Base {
 			Group_Control_Text_Stroke::get_type(),
 			[
 				'name'     => 'title_text_stroke',
-				'selector' => '{{WRAPPER}} .pixels-core-counter__title',
+				'selector' => '{{WRAPPER}} .pixeccte-counter__title',
 			]
 		);
 
@@ -380,7 +380,7 @@ class Counter_Widget extends Widget_Base {
 			Group_Control_Text_Shadow::get_type(),
 			[
 				'name'     => 'title_text_shadow',
-				'selector' => '{{WRAPPER}} .pixels-core-counter__title',
+				'selector' => '{{WRAPPER}} .pixeccte-counter__title',
 			]
 		);
 
@@ -462,10 +462,10 @@ class Counter_Widget extends Widget_Base {
 			$layout = 'stacked-before';
 		}
 
-		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-counter' );
-		$this->add_render_attribute( 'wrapper', 'class', 'pixels-core-counter--layout-' . sanitize_html_class( $layout ) );
-		$this->add_render_attribute( 'number_wrapper', 'class', 'pixels-core-counter__number-wrapper' );
-		$this->add_render_attribute( 'flow', 'class', 'pixels-core-counter__flow' );
+		$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-counter' );
+		$this->add_render_attribute( 'wrapper', 'class', 'pixeccte-counter--layout-' . sanitize_html_class( $layout ) );
+		$this->add_render_attribute( 'number_wrapper', 'class', 'pixeccte-counter__number-wrapper' );
+		$this->add_render_attribute( 'flow', 'class', 'pixeccte-counter__flow' );
 		$this->add_render_attribute( 'flow', 'data-start', (string) $data['start'] );
 		$this->add_render_attribute( 'flow', 'data-end', (string) $data['end'] );
 		$this->add_render_attribute( 'flow', 'data-duration', (string) $data['duration'] );
@@ -476,15 +476,15 @@ class Counter_Widget extends Widget_Base {
 		$this->add_render_attribute( 'flow', 'data-integer-digits', (string) $data['integer_digits'] );
 
 		if ( ! empty( $data['prefix'] ) ) {
-			$this->add_render_attribute( 'prefix', 'class', 'pixels-core-counter__prefix' );
+			$this->add_render_attribute( 'prefix', 'class', 'pixeccte-counter__prefix' );
 		}
 
 		if ( ! empty( $data['suffix'] ) ) {
-			$this->add_render_attribute( 'suffix', 'class', 'pixels-core-counter__suffix' );
+			$this->add_render_attribute( 'suffix', 'class', 'pixeccte-counter__suffix' );
 		}
 
 		if ( '' !== $title ) {
-			$this->add_render_attribute( 'title', 'class', 'pixels-core-counter__title' );
+			$this->add_render_attribute( 'title', 'class', 'pixeccte-counter__title' );
 			$this->add_inline_editing_attributes( 'title' );
 		}
 
@@ -506,7 +506,7 @@ class Counter_Widget extends Widget_Base {
 
 				<number-flow <?php $this->print_render_attribute_string( 'flow' ); ?>><?php echo esc_html( $display_start ); ?></number-flow>
 
-				<span class="pixels-core-counter__value pixels-core-counter__value--fallback" aria-live="polite">
+				<span class="pixeccte-counter__value pixeccte-counter__value--fallback" aria-live="polite">
 					<?php echo esc_html( $display_start ); ?>
 				</span>
 
