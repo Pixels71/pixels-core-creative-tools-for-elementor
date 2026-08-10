@@ -4,7 +4,7 @@
  * Plugin Name:       Pixels Core Creative Tools for Elementor
  * Plugin URI:        https://addons.pixels71.com
  * Description:       Free Elementor addon with essential widgets, Live Copy Paste, and a Header/Footer theme builder from Pixels71.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Pixels71
  * Author URI:        https://profiles.wordpress.org/pixels71
  * Text Domain:       pixels-core-creative-tools-for-elementor
@@ -20,7 +20,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('PIXECCTE_VERSION', '1.0.1');
+define('PIXECCTE_VERSION', '1.0.2');
 define('PIXECCTE_FILE', __FILE__);
 define('PIXECCTE_PATH', plugin_dir_path(__FILE__));
 define('PIXECCTE_URL', plugin_dir_url(__FILE__));

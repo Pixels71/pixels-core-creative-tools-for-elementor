@@ -5,7 +5,7 @@ Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
 Requires Plugins: elementor
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,12 @@ Go to **Theme Builder**, create a Header or Footer template, design it with Elem
 3. Theme Builder for headers and footers.
 
 == Changelog ==
+
+= 1.0.2 =
+* Hardened sanitization, escaping, and validation.
+* Sanitize display-rule meta on save; use post-specific edit capability for Theme Builder meta.
+* Add REST route argument sanitize/validate callbacks; escape localized and dashboard URLs.
+* Sanitize popup selector and CSS class settings before output.
 
 = 1.0.1 =
 * Renamed plugin for WordPress.org distinctiveness and trademark clarity.
