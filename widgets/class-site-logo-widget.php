@@ -20,7 +20,7 @@ class Site_Logo_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-site-logo';
+		return 'pixels-core-site-logo';
 	}
 
 	public function get_title(): string {
@@ -516,11 +516,13 @@ class Site_Logo_Widget extends Widget_Base {
 		if ( $has_link ) {
 			$this->get_logo_link_attributes( $settings );
 			$this->add_render_attribute( 'link', 'class', 'pixels-core-site-logo__link' );
-			echo '<a ' . $this->get_render_attribute_string( 'link' ) . '>' . $title_html . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo '<a ';
+			$this->print_render_attribute_string( 'link' );
+			echo '>' . wp_kses_post( $title_html ) . '</a>';
 			return;
 		}
 
-		echo $title_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo wp_kses_post( $title_html );
 	}
 
 	/**
@@ -555,9 +557,11 @@ class Site_Logo_Widget extends Widget_Base {
 		if ( $has_link ) {
 			$this->get_logo_link_attributes( $settings );
 			$this->add_render_attribute( 'link', 'class', 'pixels-core-site-logo__link' );
-			echo '<a ' . $this->get_render_attribute_string( 'link' ) . '>' . $image_html . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo '<a ';
+			$this->print_render_attribute_string( 'link' );
+			echo '>' . wp_kses_post( $image_html ) . '</a>';
 		} else {
-			echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses_post( $image_html );
 		}
 
 		if ( 'yes' === $settings['caption'] && ! empty( $settings['caption_text'] ) ) {

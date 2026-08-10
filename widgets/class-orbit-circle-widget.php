@@ -20,7 +20,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-orbit-circle';
+		return 'pixels-core-orbit-circle';
 	}
 
 	public function get_title(): string {
@@ -649,8 +649,7 @@ class Orbit_Circle_Widget extends Widget_Base {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor image HTML.
-		echo $image_html;
+		echo wp_kses_post( $image_html );
 	}
 
 	protected function render(): void {

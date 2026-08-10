@@ -12,7 +12,7 @@
                 setTimeout( function() {
                     jQuery.each( elementorFrontend.documentsManager.documents, function ( index, document ) {
                         var $documentElement = document.$element;
-                        var ids_array = JSON.parse( pixels_hf_admin.ids_array );
+                        var ids_array = JSON.parse( pixels_core_hf_admin.ids_array );
                         ids_array.forEach( function( item, index ){
                         	var elementor_id = $documentElement.data( 'elementor-id' );
                         	if( elementor_id == ids_array[index].id ){

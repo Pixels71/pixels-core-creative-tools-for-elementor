@@ -59,7 +59,7 @@ final class Assets_Manager {
 
 	public function register_vendor_scripts(): void {
 		wp_register_script(
-			'pixels-number-flow',
+			'pixels-core-number-flow',
 			PIXELS_CORE_URL . 'assets/js/vendor/number-flow.js',
 			[],
 			PIXELS_CORE_VERSION,
@@ -78,7 +78,7 @@ final class Assets_Manager {
 	 * @param string $src    Script source URL.
 	 */
 	public function add_module_type_to_scripts( string $tag, string $handle, string $src ): string {
-		if ( 'pixels-number-flow' !== $handle ) {
+		if ( 'pixels-core-number-flow' !== $handle ) {
 			return $tag;
 		}
 
@@ -245,7 +245,7 @@ final class Assets_Manager {
 
 	public function enqueue_editor_assets(): void {
 		wp_enqueue_style(
-			'pixels-editor-panel',
+			'pixels-core-editor-panel',
 			PIXELS_CORE_URL . 'assets/css/editor-panel.css',
 			[],
 			PIXELS_CORE_VERSION
@@ -254,7 +254,7 @@ final class Assets_Manager {
 		$icon_css = PIXELS_CORE_PATH . 'assets/icons/dist/pixels-icons.css';
 		if ( file_exists( $icon_css ) ) {
 			wp_enqueue_style(
-				'pixels-icons',
+				'pixels-core-icons',
 				PIXELS_CORE_URL . 'assets/icons/dist/pixels-icons.css',
 				[],
 				PIXELS_CORE_VERSION

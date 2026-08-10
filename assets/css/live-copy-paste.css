@@ -3,19 +3,19 @@
  */
 
 /* Copyable Section - Highlight on hover */
-.pixels-copyable-section {
+.pixels-core-copyable-section {
     position: relative;
     transition: all 0.2s ease;
   }
   
-  .pixels-copyable-section.pixels-section-hover {
+  .pixels-core-copyable-section.pixels-core-section-hover {
     outline: 2px solid #0073aa;
     outline-offset: -2px;
     box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.2);
   }
   
   /* Frontend Copy Button */
-  .pixels-live-copy-btn {
+  .pixels-core-live-copy-btn {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -38,60 +38,60 @@
     transform: translateY(-5px);
   }
   
-  .pixels-live-copy-btn.show {
+  .pixels-core-live-copy-btn.show {
     display: flex;
     opacity: 1;
     transform: translateY(0);
   }
   
-  .pixels-live-copy-btn.copied {
+  .pixels-core-live-copy-btn.copied {
     display: flex;
   }
   
-  .pixels-live-copy-btn:hover {
+  .pixels-core-live-copy-btn:hover {
     background: #005a87;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
-  .pixels-live-copy-btn:active {
+  .pixels-core-live-copy-btn:active {
     transform: translateY(0);
   }
   
-  .pixels-live-copy-btn.copying {
+  .pixels-core-live-copy-btn.copying {
     opacity: 0.7;
     cursor: wait;
   }
   
-  .pixels-live-copy-btn.copying .pixels-live-copy-icon {
+  .pixels-core-live-copy-btn.copying .pixels-core-live-copy-icon {
     animation: spin 1s linear infinite;
   }
   
-  .pixels-live-copy-btn.copied {
+  .pixels-core-live-copy-btn.copied {
     background: #46b450;
   }
   
-  .pixels-live-copy-btn.copied .pixels-live-copy-icon::before {
+  .pixels-core-live-copy-btn.copied .pixels-core-live-copy-icon::before {
     content: '✓';
   }
   
-  .pixels-live-copy-icon {
+  .pixels-core-live-copy-icon {
     font-size: 14px;
     line-height: 1;
   }
   
-  .pixels-live-copy-text {
+  .pixels-core-live-copy-text {
     white-space: nowrap;
   }
   
   /* Hide button in Elementor editor */
-  .elementor-editor-active .pixels-live-copy-btn,
-  body.elementor-editor-preview .pixels-live-copy-btn {
+  .elementor-editor-active .pixels-core-live-copy-btn,
+  body.elementor-editor-preview .pixels-core-live-copy-btn {
     display: none !important;
   }
   
   /* Message notification */
-  .pixels-live-copy-message {
+  .pixels-core-live-copy-message {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -108,22 +108,22 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   }
   
-  .pixels-live-copy-message.show {
+  .pixels-core-live-copy-message.show {
     transform: translateX(0);
     opacity: 1;
   }
   
-  .pixels-live-copy-message-success {
+  .pixels-core-live-copy-message-success {
     background: #46b450;
     color: #fff;
   }
   
-  .pixels-live-copy-message-error {
+  .pixels-core-live-copy-message-error {
     background: #dc3232;
     color: #fff;
   }
   
-  .pixels-live-copy-message-info {
+  .pixels-core-live-copy-message-info {
     background: #0073aa;
     color: #fff;
   }
@@ -139,18 +139,18 @@
   
   /* Responsive */
   @media (max-width: 768px) {
-    .pixels-live-copy-btn {
+    .pixels-core-live-copy-btn {
       top: 10px;
       right: 10px;
       padding: 6px 10px;
       font-size: 11px;
     }
   
-    .pixels-live-copy-text {
+    .pixels-core-live-copy-text {
       display: none;
     }
   
-    .pixels-live-copy-message {
+    .pixels-core-live-copy-message {
       right: 10px;
       left: 10px;
       max-width: none;
@@ -158,7 +158,7 @@
   }
   
   /* Editor Popup Styles */
-  #pixels-popup-overlay {
+  #pixels-core-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -171,7 +171,7 @@
     justify-content: center;
   }
   
-  #pixels-popup-box {
+  #pixels-core-popup-box {
     background: #fff;
     border-radius: 8px;
     padding: 30px;
@@ -180,14 +180,14 @@
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   }
   
-  .pixels-heading-container {
+  .pixels-core-heading-container {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 20px;
   }
   
-  .pixels-spinner-container {
+  .pixels-core-spinner-container {
     width: 60px;
     height: 60px;
     display: flex;
@@ -195,11 +195,11 @@
     justify-content: center;
   }
   
-  .pixels-spinner {
+  .pixels-core-spinner {
     animation: spin 1s linear infinite;
   }
   
-  .pixels-checkmark {
+  .pixels-core-checkmark {
     width: 60px;
     height: 60px;
     display: flex;
@@ -209,11 +209,11 @@
     color: #46b450;
   }
   
-  .pixels-message-container {
+  .pixels-core-message-container {
     flex: 1;
   }
   
-  #pixels-popup-message {
+  #pixels-core-popup-message {
     display: block;
     font-size: 18px;
     font-weight: 600;
@@ -221,28 +221,28 @@
     margin-bottom: 5px;
   }
   
-  #pixels-popup-submessage {
+  #pixels-core-popup-submessage {
     display: block;
     font-size: 14px;
     color: #666;
   }
   
-  .pixels-widget-list {
+  .pixels-core-widget-list {
     margin-top: 20px;
   }
   
-  .pixels-widget-count {
+  .pixels-core-widget-count {
     margin-bottom: 15px;
     font-size: 14px;
     color: #666;
   }
   
-  .pixels-widget-names {
+  .pixels-core-widget-names {
     max-height: 200px;
     overflow-y: auto;
   }
   
-  .pixels-widget-row {
+  .pixels-core-widget-row {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -250,11 +250,11 @@
     border-bottom: 1px solid #eee;
   }
   
-  .pixels-widget-row:last-child {
+  .pixels-core-widget-row:last-child {
     border-bottom: none;
   }
   
-  .pixels-widget-tick {
+  .pixels-core-widget-tick {
     width: 20px;
     height: 20px;
     display: flex;
@@ -264,7 +264,7 @@
     color: #46b450;
   }
   
-  .pixels-widget-tick.loader {
+  .pixels-core-widget-tick.loader {
     border: 2px solid #ddd;
     border-top-color: #0073aa;
     border-radius: 50%;
@@ -272,12 +272,12 @@
     color: transparent;
   }
   
-  .pixels-widget-name {
+  .pixels-core-widget-name {
     font-size: 14px;
     color: #333;
   }
   
-  .pixels-widget-note {
+  .pixels-core-widget-note {
     margin-top: 15px;
     padding: 10px;
     background: #f0f0f1;
@@ -285,6 +285,6 @@
     font-size: 12px;
     color: #666;
   }
-  #pixels-paste-area-dialog .dialog-widget-content{
+  #pixels-core-paste-area-dialog .dialog-widget-content{
     padding: 30px;
   }

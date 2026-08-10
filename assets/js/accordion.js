@@ -272,6 +272,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-accordion', AccordionHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixels-core-accordion', AccordionHandler);
 	});
 })(jQuery);

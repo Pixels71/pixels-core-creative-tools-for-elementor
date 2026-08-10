@@ -54,7 +54,7 @@ final class Plugin {
 		require_once PIXELS_CORE_PATH . 'includes/class-widget-registry.php';
 		require_once PIXELS_CORE_PATH . 'includes/class-extension-registry.php';
 		require_once PIXELS_CORE_PATH . 'includes/class-widgets-loader.php';
-		require_once PIXELS_CORE_PATH . 'includes/theme-builder/class-pixels-theme-elementor.php';
+		require_once PIXELS_CORE_PATH . 'includes/theme-builder/class-pixels-core-theme-elementor.php';
 		require_once PIXELS_CORE_PATH . 'includes/class-extensions-loader.php';
 		require_once PIXELS_CORE_ADMIN_PATH . 'class-admin-loader.php';
 

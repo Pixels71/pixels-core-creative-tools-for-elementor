@@ -20,7 +20,7 @@ final class Widget_Registry {
 	private array $widgets = [
 		'button'    => [
 			'file'        => 'widgets/class-button-widget.php',
-			'name'        => 'pixels-button',
+			'name'        => 'pixels-core-button',
 			'title'       => 'Button',
 			'description' => 'Animated button with multiple style variations, icons, and link options.',
 			'icon'        => 'eicon-button',
@@ -32,7 +32,7 @@ final class Widget_Registry {
 		],
 		'tabs'            => [
 			'file'            => 'widgets/class-tabs-widget.php',
-			'name'            => 'pixels-tabs',
+			'name'            => 'pixels-core-tabs',
 			'title'           => 'Tabs',
 			'description'     => 'Tabbed content panels with nested Elementor containers.',
 			'icon'            => 'eicon-tabs',
@@ -46,7 +46,7 @@ final class Widget_Registry {
 		],
 		'accordion'       => [
 			'file'            => 'widgets/class-accordion-widget.php',
-			'name'            => 'pixels-accordion',
+			'name'            => 'pixels-core-accordion',
 			'title'           => 'Accordion',
 			'description'     => 'Collapsible accordion items with nested Elementor containers.',
 			'icon'            => 'eicon-accordion',
@@ -60,7 +60,7 @@ final class Widget_Registry {
 		],
 		'carousel'        => [
 			'file'            => 'widgets/class-carousel-widget.php',
-			'name'            => 'pixels-carousel',
+			'name'            => 'pixels-core-carousel',
 			'title'           => 'Carousel',
 			'description'     => 'Swiper-powered carousel with nested Elementor slide containers.',
 			'icon'            => 'eicon-nested-carousel',
@@ -76,7 +76,7 @@ final class Widget_Registry {
 		],
 		'heading'         => [
 			'file'        => 'widgets/class-heading-widget.php',
-			'name'        => 'pixels-heading',
+			'name'        => 'pixels-core-heading',
 			'title'       => 'Heading',
 			'description' => 'Customizable heading with optional subheading and link.',
 			'icon'        => 'eicon-t-letter',
@@ -87,7 +87,7 @@ final class Widget_Registry {
 		],
 		'countdown_timer' => [
 			'file'        => 'widgets/class-countdown-timer.php',
-			'name'        => 'pixels-countdown-timer',
+			'name'        => 'pixels-core-countdown-timer',
 			'title'       => 'Countdown Timer',
 			'description' => 'Countdown timer with customizable fields.',
 			'icon'        => 'eicon-countdown',
@@ -95,12 +95,12 @@ final class Widget_Registry {
 			'assets'      => [
 				'script'      => 'assets/js/countdown-timer.js',
 				'style'       => 'assets/css/countdown-timer.css',
-				'script_deps' => [ 'jquery', 'elementor-frontend', 'pixels-number-flow' ],
+				'script_deps' => [ 'jquery', 'elementor-frontend', 'pixels-core-number-flow' ],
 			],
 		],
 		'progress_bar'    => [
 			'file'        => 'widgets/class-progress-bar-widget.php',
-			'name'        => 'pixels-progress-bar',
+			'name'        => 'pixels-core-progress-bar',
 			'title'       => 'Progress Bar',
 			'description' => 'Skill and progress bars with horizontal, vertical, circle, and semi-circle styles.',
 			'icon'        => 'eicon-skill-bar',
@@ -112,7 +112,7 @@ final class Widget_Registry {
 		],
 		'counter'         => [
 			'file'        => 'widgets/class-counter-widget.php',
-			'name'        => 'pixels-counter',
+			'name'        => 'pixels-core-counter',
 			'title'       => 'Counter',
 			'description' => 'Animated counter with Number Flow digit transitions.',
 			'icon'        => 'eicon-counter',
@@ -120,12 +120,12 @@ final class Widget_Registry {
 			'assets'      => [
 				'script'      => 'assets/js/counter.js',
 				'style'       => 'assets/css/counter.css',
-				'script_deps' => [ 'jquery', 'elementor-frontend', 'pixels-number-flow' ],
+				'script_deps' => [ 'jquery', 'elementor-frontend', 'pixels-core-number-flow' ],
 			],
 		],
 		'rotator_text'    => [
 			'file'        => 'widgets/class-rotator-text-widget.php',
-			'name'        => 'pixels-rotator-text',
+			'name'        => 'pixels-core-rotator-text',
 			'title'       => 'Rotator Text',
 			'description' => 'Circular text rotator with single, dual, scroll, ripple, and rounded-square layouts.',
 			'icon'        => 'eicon-circle-o',
@@ -137,7 +137,7 @@ final class Widget_Registry {
 		],
 		'orbit_circle'    => [
 			'file'        => 'widgets/class-orbit-circle-widget.php',
-			'name'        => 'pixels-orbit-circle',
+			'name'        => 'pixels-core-orbit-circle',
 			'title'       => 'Orbit Circle',
 			'description' => 'Rotating integration logo ring with CSS animation.',
 			'icon'        => 'eicon-integration',
@@ -150,7 +150,7 @@ final class Widget_Registry {
 		],
 		'menu'            => [
 			'file'        => 'widgets/class-menu-widget.php',
-			'name'        => 'pixels-menu',
+			'name'        => 'pixels-core-menu',
 			'title'       => 'Menu',
 			'description' => 'Responsive WordPress navigation menu with configurable mobile breakpoint.',
 			'icon'        => 'eicon-nav-menu',
@@ -162,7 +162,7 @@ final class Widget_Registry {
 		],
 		'site_logo'       => [
 			'file'        => 'widgets/class-site-logo-widget.php',
-			'name'        => 'pixels-site-logo',
+			'name'        => 'pixels-core-site-logo',
 			'title'       => 'Site Logo',
 			'description' => 'Display the site identity logo or a custom uploaded logo.',
 			'icon'        => 'eicon-site-logo',

@@ -25,7 +25,7 @@ class Target_Rules_Fields {
 
 	public function __construct() {
 		add_action( 'admin_action_edit', array( $this, 'initialize_options' ) );
-		add_action( 'wp_ajax_pixels_get_posts_by_query', array( $this, 'get_posts_by_query' ) );
+		add_action( 'wp_ajax_pixels_core_get_posts_by_query', array( $this, 'get_posts_by_query' ) );
 	}
 
 	public function initialize_options() {
@@ -49,7 +49,7 @@ class Target_Rules_Fields {
 		$args['_builtin'] = false;
 		$custom_post_type = get_post_types( $args, 'objects' );
 
-		$post_types = apply_filters( 'pixels_location_rule_post_types', array_merge( $post_types, $custom_post_type ) );
+		$post_types = apply_filters( 'pixels_core_location_rule_post_types', array_merge( $post_types, $custom_post_type ) );
 
 		$special_pages = array(
 			'special-404'    => __( '404 Page', 'pixels-core-creative-tools-for-elementor' ),
@@ -125,7 +125,7 @@ class Target_Rules_Fields {
 		/**
 		 * Filter options displayed in the display conditions select field of Display conditions.
 		 */
-		return apply_filters( 'pixels_display_on_list', $selection_options );
+		return apply_filters( 'pixels_core_display_on_list', $selection_options );
 	}
 
 	/**
@@ -174,7 +174,7 @@ class Target_Rules_Fields {
 	 */
 	function get_posts_by_query() {
 
-		check_ajax_referer( 'pixels-theme-get-posts-by-query', 'nonce' );
+		check_ajax_referer( 'pixels-core-theme-get-posts-by-query', 'nonce' );
 
 		if ( ! current_user_can( 'edit_posts' ) ) {
 			wp_send_json_error( __( 'You do not have permission to search posts.', 'pixels-core-creative-tools-for-elementor' ), 403 );
@@ -193,7 +193,7 @@ class Target_Rules_Fields {
 		$operator   = 'and'; // also supports 'or'.
 		$post_types = get_post_types( $args, $output, $operator );
 
-		unset( $post_types['pixels-theme'] ); // Exclude Theme Builder templates.
+		unset( $post_types['pixels-core-theme'] ); // Exclude Theme Builder templates.
 
 		$post_types['Posts'] = 'post';
 		$post_types['Pages'] = 'page';
@@ -321,20 +321,20 @@ class Target_Rules_Fields {
 	 * Function Description: admin_styles.
 	 */
 	public function admin_styles() {
-		wp_enqueue_script( 'pixels-select2', PIXELS_CORE_URL_ASSETS . 'theme-builder/js/select2.js', array( 'jquery' ), PIXELS_CORE_VERSION, true );
+		wp_enqueue_script( 'pixels-core-select2', PIXELS_CORE_URL_ASSETS . 'theme-builder/js/select2.js', array( 'jquery' ), PIXELS_CORE_VERSION, true );
 
-		wp_register_script( 'pixels-target-rule', PIXELS_CORE_URL_ASSETS . 'theme-builder/js/target-rule.js', array( 'jquery', 'pixels-select2', ), PIXELS_CORE_VERSION, true );
+		wp_register_script( 'pixels-core-target-rule', PIXELS_CORE_URL_ASSETS . 'theme-builder/js/target-rule.js', array( 'jquery', 'pixels-core-select2', ), PIXELS_CORE_VERSION, true );
 
-		wp_enqueue_script( 'pixels-target-rule' );
+		wp_enqueue_script( 'pixels-core-target-rule' );
 
-		wp_register_script( 'pixels-user-role', PIXELS_CORE_URL_ASSETS . 'theme-builder/js/user-role.js', array( 'jquery', ), PIXELS_CORE_VERSION, true );
+		wp_register_script( 'pixels-core-user-role', PIXELS_CORE_URL_ASSETS . 'theme-builder/js/user-role.js', array( 'jquery', ), PIXELS_CORE_VERSION, true );
 
-		wp_enqueue_script( 'pixels-user-role' );
+		wp_enqueue_script( 'pixels-core-user-role' );
 
-		wp_register_style( 'pixels-select2', PIXELS_CORE_URL_ASSETS . 'theme-builder/css/select2.css', '', PIXELS_CORE_VERSION );
-		wp_enqueue_style( 'pixels-select2' );
-		wp_register_style( 'pixels-target-rule', PIXELS_CORE_URL_ASSETS . 'theme-builder/css/target-rule.css', '', PIXELS_CORE_VERSION );
-		wp_enqueue_style( 'pixels-target-rule' );
+		wp_register_style( 'pixels-core-select2', PIXELS_CORE_URL_ASSETS . 'theme-builder/css/select2.css', '', PIXELS_CORE_VERSION );
+		wp_enqueue_style( 'pixels-core-select2' );
+		wp_register_style( 'pixels-core-target-rule', PIXELS_CORE_URL_ASSETS . 'theme-builder/css/target-rule.css', '', PIXELS_CORE_VERSION );
+		wp_enqueue_style( 'pixels-core-target-rule' );
 
 		/**
 		 * Registered localize vars
@@ -352,9 +352,9 @@ class Target_Rules_Fields {
 			'searching'     => __( 'Searching…', 'pixels-core-creative-tools-for-elementor' ),
 			'not_loader'    => __( 'The results could not be loaded.', 'pixels-core-creative-tools-for-elementor' ),
 			'search'        => __( 'Search pages / post / categories', 'pixels-core-creative-tools-for-elementor' ),
-			'ajax_nonce'    => wp_create_nonce( 'pixels-theme-get-posts-by-query' )
+			'ajax_nonce'    => wp_create_nonce( 'pixels-core-theme-get-posts-by-query' )
 		);
-		wp_localize_script( 'pixels-select2', 'pixelsRules', $localize_vars );
+		wp_localize_script( 'pixels-core-select2', 'pixelsCoreRules', $localize_vars );
 	}
 
 	/**
@@ -380,44 +380,82 @@ class Target_Rules_Fields {
 		$selection_options = self::$location_selection;
 
 		/* WP Template Format */
-		$output .= '<script type="text/html" id="tmpl-pixels-target-rule-' . $rule_type . '-condition">';
-		$output .= '<div class="pixels-target-rule-condition pixels-target-rule-{{data.id}}" data-rule="{{data.id}}" >';
+		$output .= '<script type="text/html" id="tmpl-pixels-core-target-rule-' . esc_attr( $rule_type ) . '-condition">';
+		$output .= '<div class="pixels-core-target-rule-condition pixels-core-target-rule-{{data.id}}" data-rule="{{data.id}}" >';
 		$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
 		/* Condition Selection */
 		$output .= '<div class="target_rule-condition-wrap" >';
-		$output .= '<select name="' . esc_attr( $input_name ) . '[rule][{{data.id}}]" class="target_rule-condition form-control pixels-input">';
+		$output .= '<select name="' . esc_attr( $input_name ) . '[rule][{{data.id}}]" class="target_rule-condition form-control pixels-core-input">';
 		$output .= '<option value="">' . esc_html__( 'Select', 'pixels-core-creative-tools-for-elementor' ) . '</option>';
 
 		foreach ( $selection_options as $group => $group_data ) :
-			$output .= '<optgroup label="' . esc_attr($group_data['label']) . '">';
+			$output .= '<optgroup label="' . esc_attr( $group_data['label'] ) . '">';
 			foreach ( $group_data['value'] as $opt_key => $opt_value ) :
-				$output .= '<option value="' . esc_attr($opt_key) . '">' . esc_html($opt_value) . '</option>';
+				$output .= '<option value="' . esc_attr( $opt_key ) . '">' . esc_html( $opt_value ) . '</option>';
 			endforeach;
 			$output .= '</optgroup>';
 		endforeach;
 		$output .= '</select>';
 		$output .= '</div>';
 
-		$output .= '</div> <!-- pixels-target-rule-condition -->';
+		$output .= '</div> <!-- pixels-core-target-rule-condition -->';
 
 		/* Specific page selection */
 		$output .= '<div class="target_rule-specific-page-wrap" style="display:none">';
-		$output .= '<select name="' . esc_attr( $input_name ) . '[specific][]" class="target-rule-select2 target_rule-specific-page form-control pixels-input " multiple="multiple">';
+		$output .= '<select name="' . esc_attr( $input_name ) . '[specific][]" class="target-rule-select2 target_rule-specific-page form-control pixels-core-input " multiple="multiple">';
 		$output .= '</select>';
 		$output .= '</div>';
 
 		$output .= '</script>';
 
 		/* Wrapper Start */
-		$output .= '<div class="pixels-target-rule-wrapper pixels-target-rule-' . esc_attr( $rule_type ) . '-on-wrap" data-type="' . esc_attr( $rule_type ) . '">';
-		$output .= '<div class="pixels-target-rule-selector-wrapper pixels-target-rule-' . esc_attr( $rule_type ) . '-on">';
+		$output .= '<div class="pixels-core-target-rule-wrapper pixels-core-target-rule-' . esc_attr( $rule_type ) . '-on-wrap" data-type="' . esc_attr( $rule_type ) . '">';
+		$output .= '<div class="pixels-core-target-rule-selector-wrapper pixels-core-target-rule-' . esc_attr( $rule_type ) . '-on">';
 		$output .= self::generate_target_rule_selector( $rule_type, $selection_options, $input_name, $saved_values, $add_rule_label );
 		$output .= '</div>';
 
 		/* Wrapper end */
 		$output .= '</div>';
 
-		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Markup assembled with esc_* helpers above.
+		echo wp_kses( $output, self::get_target_rule_allowed_html() );
+	}
+
+	/**
+	 * Allowed HTML for target-rule admin field markup.
+	 *
+	 * @return array<string, array<string, bool>>
+	 */
+	private static function get_target_rule_allowed_html() {
+		$attrs = [
+			'aria-hidden'    => true,
+			'class'          => true,
+			'data-rule'      => true,
+			'data-rule-id'   => true,
+			'data-rule-type' => true,
+			'data-type'      => true,
+			'href'           => true,
+			'id'             => true,
+			'label'          => true,
+			'multiple'       => true,
+			'name'           => true,
+			'selected'       => true,
+			'style'          => true,
+			'type'           => true,
+			'value'          => true,
+		];
+
+		return [
+			'a'        => $attrs,
+			'div'      => $attrs,
+			'optgroup' => $attrs,
+			'option'   => $attrs,
+			'script'   => [
+				'id'   => true,
+				'type' => true,
+			],
+			'select'   => $attrs,
+			'span'     => $attrs,
+		];
 	}
 
 	/**
@@ -482,11 +520,11 @@ class Target_Rules_Fields {
 		$index = 0;
 
 		foreach ( $saved_values['rule'] as $index => $data ) :
-			$output .= '<div class="pixels-target-rule-condition pixels-target-rule-' . esc_attr( (string) $index ) . '" data-rule="' . esc_attr( (string) $index ) . '" >';
+			$output .= '<div class="pixels-core-target-rule-condition pixels-core-target-rule-' . esc_attr( (string) $index ) . '" data-rule="' . esc_attr( (string) $index ) . '" >';
 			/* Condition Selection */
 			$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
 			$output .= '<div class="target_rule-condition-wrap" >';
-			$output .= '<select name="' . esc_attr( $input_name ) . '[rule][' . esc_attr( (string) $index ) . ']" class="target_rule-condition form-control pixels-input">';
+			$output .= '<select name="' . esc_attr( $input_name ) . '[rule][' . esc_attr( (string) $index ) . ']" class="target_rule-condition form-control pixels-core-input">';
 			$output .= '<option value="">' . esc_html__( 'Select', 'pixels-core-creative-tools-for-elementor' ) . '</option>';
 
 			foreach ( $selection_options as $group => $group_data ) :
@@ -511,7 +549,7 @@ class Target_Rules_Fields {
 
 			/* Specific page selection */
 			$output .= '<div class="target_rule-specific-page-wrap" style="display:none">';
-			$output .= '<select name="' . esc_attr( $input_name ) . '[specific][]" class="target-rule-select2 target_rule-specific-page form-control pixels-input " multiple="multiple">';
+			$output .= '<select name="' . esc_attr( $input_name ) . '[specific][]" class="target-rule-select2 target_rule-specific-page form-control pixels-core-input " multiple="multiple">';
 
 			if ( 'specifics' == $data && isset( $saved_values['specific'] ) && null != $saved_values['specific'] && is_array( $saved_values['specific'] ) ) :
 				foreach ( $saved_values['specific'] as $data_key => $sel_value ) :
@@ -785,7 +823,7 @@ class Target_Rules_Fields {
 		$post_type = $post_type ? esc_sql( $post_type ) : esc_sql( $post->post_type );
 
 		if ( is_array( self::$current_page_data ) && isset( self::$current_page_data[ $post_type ] ) ) :
-			return apply_filters( 'pixels_get_display_posts_by_conditions', self::$current_page_data[ $post_type ], $post_type );
+			return apply_filters( 'pixels_core_get_display_posts_by_conditions', self::$current_page_data[ $post_type ], $post_type );
 		endif;
 
 		$current_page_type = $this->get_current_page_type();
@@ -889,7 +927,7 @@ class Target_Rules_Fields {
 			$this->remove_exclusion_rule_posts( $post_type, $option );
 		endif;
 
-		return apply_filters( 'pixels_get_display_posts_by_conditions', self::$current_page_data[ $post_type ], $post_type );
+		return apply_filters( 'pixels_core_get_display_posts_by_conditions', self::$current_page_data[ $post_type ], $post_type );
 	}
 
 	/**

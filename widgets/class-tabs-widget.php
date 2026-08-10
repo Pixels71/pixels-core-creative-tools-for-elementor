@@ -23,7 +23,7 @@ class Tabs_Widget extends Widget_Nested_Base {
 	private array $tab_item_settings = [];
 
 	public function get_name(): string {
-		return 'pixels-tabs';
+		return 'pixels-core-tabs';
 	}
 
 	public function get_title(): string {

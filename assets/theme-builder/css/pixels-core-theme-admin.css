@@ -1,0 +1,96 @@
+span.pixels-core-theme-shortcode-col-wrap > input {
+    background: inherit;
+    color: inherit;
+    font-size: 12px;
+    border: none;
+    box-shadow: none;
+    padding: 4px 8px;
+    margin: 0;
+}
+
+input.pixels-core-theme-large-text{
+    width: 99%;
+}
+
+.pixels-core-theme-options-row-heading {
+    border-right: 1px solid #E1E1E1;
+    padding: 15px;
+    width: 45%;
+    vertical-align: middle;
+}
+
+.pixels-core-theme-options-row td {
+    padding-left: 12px;
+    padding-right: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    zoom: 1;
+    vertical-align: middle;
+}
+
+.pixels-core-theme-options-table .pixels-core-theme-options-row-content {
+    padding: 15px 10px;
+    position: relative;
+    width: 55%;
+}
+
+.pixels-core-theme-options-table.widefat{
+	border-width: 0;
+}
+
+#pixels-core-theme-meta-box .inside {
+    margin: 0;
+    padding: 0;
+}
+
+.pixels-core-theme-options-row-heading label {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 1.4em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0 0 3px;
+    color: #333;
+}
+
+.pixels-core-theme-options-row-content select {
+    width: 95%;
+}
+
+.pixels_core_hf_radio_options {
+    display: inline-block;
+}
+
+li#toplevel_page_Settings-page {
+    display: none;
+}
+
+.wp-admin #adminmenu .wp-submenu a[href="themes.php?page=pixels-core-theme-settings"] {
+    display:none;
+}
+
+.appearance_page_pixels-core-theme-settings #adminmenu .wp-submenu a[href ="edit.php?post_type=pixels-core-theme" ] {
+    color: white;
+    font-weight: 600;
+}
+
+.pixels-core-theme-heading-inline{
+    font-size: 23px;
+    font-weight: 400;
+    margin: 0;
+    padding: 9px 0 4px 0;
+    line-height: 1.3;
+}
+
+.pixels-core-theme-selected-template-type-custom .pixels-core-theme-target-rules-row,
+.pixels-core-theme-selected-template-type-custom .enable-for-canvas {
+    display: none;
+}
+
+.pixels-core-theme-selected-template-type-none .pixels-core-theme-target-rules-row,
+.pixels-core-theme-selected-template-type-none .enable-for-canvas {
+    display: none;
+}
+
+input.pixels-core-theme-large-text.code {
+    width: 100%;
+}

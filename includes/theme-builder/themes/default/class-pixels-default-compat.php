@@ -21,20 +21,20 @@ class Default_Compat {
 	 * Run all the Actions / Filters.
 	 */
 	public function hooks() {
-		if ( pixels_header_enabled() ) :
+		if ( pixels_core_header_enabled() ) :
 			// Replace header.php template.
 			add_action( 'get_header', [ $this, 'override_header' ] );
 
-			// Display pixels_HF's header in the replaced header.
-			add_action( 'pixels_hf_header', 'pixels_render_header' );
+			// Display pixels_core_HF's header in the replaced header.
+			add_action( 'pixels_core_hf_header', 'pixels_core_render_header' );
 		endif;
 
-		if ( pixels_footer_enabled() ) :
+		if ( pixels_core_footer_enabled() ) :
 			// Replace header.php template.
 			add_action( 'get_footer', [ $this, 'override_footer' ] );
 
-			// Display pixels_HF's footer in the replaced header.
-			add_action( 'pixels_hf_footer', 'pixels_render_footer' );
+			// Display pixels_core_HF's footer in the replaced header.
+			add_action( 'pixels_core_hf_footer', 'pixels_core_render_footer' );
 		endif;
 	}
 

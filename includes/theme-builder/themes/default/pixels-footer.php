@@ -6,7 +6,7 @@ defined('ABSPATH') || exit; // Abort, if called directly.
 
 ?>
 
-<?php do_action( 'pixels_hf_footer' ); ?>
+<?php do_action( 'pixels_core_hf_footer' ); ?>
 </div><!-- #page -->
 <?php wp_footer(); ?>
 </body>

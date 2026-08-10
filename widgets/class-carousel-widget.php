@@ -21,7 +21,7 @@ class Carousel_Widget extends Widget_Nested_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-carousel';
+		return 'pixels-core-carousel';
 	}
 
 	public function get_title(): string {
@@ -1824,7 +1824,7 @@ class Carousel_Widget extends Widget_Nested_Base {
 					$this->get_thumb_image_settings( $image, $settings ),
 					'thumb_gallery_image'
 				);
-				echo $thumb_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor image HTML.
+				echo wp_kses_post( $thumb_html );
 				?>
 			<?php elseif ( $has_image && ! empty( $image['url'] ) ) : ?>
 				<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" loading="lazy" />

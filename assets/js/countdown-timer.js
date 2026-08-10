@@ -179,6 +179,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-countdown-timer', CountdownTimerHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixels-core-countdown-timer', CountdownTimerHandler);
 	});
 })(jQuery);

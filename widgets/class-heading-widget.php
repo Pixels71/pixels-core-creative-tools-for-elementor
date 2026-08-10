@@ -16,7 +16,7 @@ class Heading_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-heading';
+		return 'pixels-core-heading';
 	}
 
 	public function get_title(): string {
@@ -278,12 +278,9 @@ class Heading_Widget extends Widget_Base {
 					</a>
 				<?php else : ?>
 					<?php
-					printf(
-						'<%1$s %2$s>%3$s</%1$s>',
-						$title_tag, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						$this->get_render_attribute_string( 'title' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						wp_kses_post( $settings['title'] )
-					);
+					echo '<' . tag_escape( $title_tag ) . ' ';
+					$this->print_render_attribute_string( 'title' );
+					echo '>' . wp_kses_post( $settings['title'] ) . '</' . tag_escape( $title_tag ) . '>';
 					?>
 				<?php endif; ?>
 			<?php endif; ?>

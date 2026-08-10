@@ -250,7 +250,7 @@
 
   $(window).on("elementor/frontend/init", function () {
     elementorFrontend.hooks.addAction(
-      "frontend/element_ready/pixels-orbit-circle.default",
+      "frontend/element_ready/pixels-core-orbit-circle.default",
       function ($scope) {
         initScope($scope);
       },

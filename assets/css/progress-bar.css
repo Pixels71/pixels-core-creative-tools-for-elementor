@@ -103,7 +103,7 @@
 
 .pixels-core-progress-bar--animate.pixels-core-progress-bar--horizontal.is-animated
   .pixels-core-progress-bar__fill {
-  width: var(--pixels-target-width, 0) !important;
+  width: var(--pixels-core-target-width, 0) !important;
 }
 
 /* Vertical */
@@ -178,7 +178,7 @@
 
 .pixels-core-progress-bar--animate.pixels-core-progress-bar--vertical.is-animated
   .pixels-core-progress-bar__fill {
-  height: var(--pixels-target-height, 0) !important;
+  height: var(--pixels-core-target-height, 0) !important;
 }
 
 /* Circle / Donut / Semi Circle */

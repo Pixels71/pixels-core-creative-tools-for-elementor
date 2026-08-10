@@ -21,14 +21,14 @@ final class Live_Copy_Paste {
 		$js_path  = PIXELS_CORE_PATH . 'assets/js/live-copy-paste-editor.js';
 
 		wp_enqueue_style(
-			'pixels-live-copy-paste',
+			'pixels-core-live-copy-paste',
 			PIXELS_CORE_URL . 'assets/css/live-copy-paste.css',
 			[],
 			file_exists( $css_path ) ? (string) filemtime( $css_path ) : PIXELS_CORE_VERSION
 		);
 
 		wp_enqueue_script(
-			'pixels-live-copy-paste-editor',
+			'pixels-core-live-copy-paste-editor',
 			PIXELS_CORE_URL . 'assets/js/live-copy-paste-editor.js',
 			[ 'jquery', 'elementor-editor' ],
 			file_exists( $js_path ) ? (string) filemtime( $js_path ) : PIXELS_CORE_VERSION,
@@ -36,11 +36,11 @@ final class Live_Copy_Paste {
 		);
 
 		wp_localize_script(
-			'pixels-live-copy-paste-editor',
-			'pixels_cross_cp',
+			'pixels-core-live-copy-paste-editor',
+			'pixels_core_cross_cp',
 			[
 				'ajax_url'  => admin_url( 'admin-ajax.php' ),
-				'nonce'     => wp_create_nonce( 'pixels_cross_cp_import' ),
+				'nonce'     => wp_create_nonce( 'pixels_core_cross_cp_import' ),
 				'asset_url' => PIXELS_CORE_URL_ASSETS,
 			]
 		);

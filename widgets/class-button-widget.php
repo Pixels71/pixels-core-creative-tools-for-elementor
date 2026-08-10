@@ -18,7 +18,7 @@ class Button_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-button';
+		return 'pixels-core-button';
 	}
 
 	public function get_title(): string {

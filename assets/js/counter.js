@@ -279,10 +279,10 @@
 		}
 
 		bootCounterHandler.initialized = true;
-		elementorFrontend.elementsHandler.attachHandler('pixels-counter', CounterHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixels-core-counter', CounterHandler);
 
 		// Widget scripts can load after Elementor init on the frontend.
-		$('.elementor-widget-pixels-counter').each(function () {
+		$('.elementor-widget-pixels-core-counter').each(function () {
 			elementorFrontend.elementsHandler.runReadyTrigger(this);
 		});
 	}

@@ -56,7 +56,7 @@
 
 		class PixelsTabsElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-tabs';
+				return 'pixels-core-tabs';
 			}
 
 			getView() {
@@ -90,7 +90,7 @@
 
 		class PixelsAccordionElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-accordion';
+				return 'pixels-core-accordion';
 			}
 
 			getView() {
@@ -126,7 +126,7 @@
 
 		class PixelsCarouselElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-carousel';
+				return 'pixels-core-carousel';
 			}
 
 			getView() {
@@ -199,7 +199,7 @@
 
 		class PixelsStackCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-stack-card';
+				return 'pixels-core-stack-card';
 			}
 
 			getView() {
@@ -273,7 +273,7 @@
 
 		class PixelsTimelineElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-timeline';
+				return 'pixels-core-timeline';
 			}
 
 			getView() {
@@ -305,7 +305,7 @@
 
 		class PixelsMarqueeElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-marquee';
+				return 'pixels-core-marquee';
 			}
 
 			getView() {
@@ -332,11 +332,11 @@
 
 			onAddChild(childView) {
 				const index = childView.model.attributes.dataIndex;
-				const $widget = childView._parent.$el.find('.pixels-expanding-card');
+				const $widget = childView._parent.$el.find('.pixels-core-expanding-card');
 				const defaultActive =
 					Math.max(0, (parseInt($widget.data('active-index'), 10) || 0));
 
-				childView.$el.addClass('pixels-expanding-card__item');
+				childView.$el.addClass('pixels-core-expanding-card__item');
 				childView.$el.attr('data-card-index', index - 1);
 
 				if (index - 1 === defaultActive) {
@@ -347,7 +347,7 @@
 
 		class PixelsExpandingCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-expanding-card';
+				return 'pixels-core-expanding-card';
 			}
 
 			getView() {

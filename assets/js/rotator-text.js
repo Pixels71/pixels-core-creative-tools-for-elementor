@@ -182,7 +182,7 @@
 	}
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-rotator-text.default', function ($scope) {
+		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-core-rotator-text.default', function ($scope) {
 			initScope($scope);
 		});
 	});

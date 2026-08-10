@@ -29,9 +29,9 @@
 		fill.style.transitionDuration = duration + 'ms';
 
 		if (isVertical) {
-			fill.style.setProperty('--pixels-target-height', percent + '%');
+			fill.style.setProperty('--pixels-core-target-height', percent + '%');
 		} else {
-			fill.style.setProperty('--pixels-target-width', percent + '%');
+			fill.style.setProperty('--pixels-core-target-width', percent + '%');
 		}
 	}
 
@@ -138,7 +138,7 @@
 	}
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-progress-bar.default', function ($scope) {
+		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-core-progress-bar.default', function ($scope) {
 			initScope($scope);
 		});
 	});

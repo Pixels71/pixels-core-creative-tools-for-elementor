@@ -17,7 +17,7 @@ class Counter_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-counter';
+		return 'pixels-core-counter';
 	}
 
 	public function get_title(): string {

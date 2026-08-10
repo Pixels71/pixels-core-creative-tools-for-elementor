@@ -528,6 +528,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-carousel', PixelsCarouselHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixels-core-carousel', PixelsCarouselHandler);
 	});
 })(jQuery);

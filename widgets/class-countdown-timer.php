@@ -19,7 +19,7 @@ class Countdown_Timer_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-countdown-timer';
+		return 'pixels-core-countdown-timer';
 	}
 
 	public function get_title(): string {

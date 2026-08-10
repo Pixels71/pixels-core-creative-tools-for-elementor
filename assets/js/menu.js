@@ -58,7 +58,7 @@
 		const $wrap = $menu.find('.pixels-core-menu__wrap');
 		const $overlay = $menu.find('.pixels-core-menu__overlay');
 		const $close = $menu.find('.pixels-core-menu__close');
-		const parentSelector = '.menu-item-has-children, .pixels-mega-menu-item';
+		const parentSelector = '.menu-item-has-children, .pixels-core-mega-menu-item';
 		const menuUid = $menu.attr('id') || 'menu-' + Math.random().toString(36).slice(2);
 		const breakpoint = Math.max(
 			320,
@@ -166,7 +166,7 @@
 			if (!$item.is(parentSelector)) {
 				return;
 			}
-			const hasSubmenu = $item.children('.sub-menu, .pixels-mega-menu-panel').length > 0;
+			const hasSubmenu = $item.children('.sub-menu, .pixels-core-mega-menu-panel').length > 0;
 
 			if (!hasSubmenu) {
 				return;
@@ -202,7 +202,7 @@
 
 			const $link = $(event.currentTarget);
 			const $item = $link.parent();
-			const hasSubmenu = $item.children('.sub-menu, .pixels-mega-menu-panel').length > 0;
+			const hasSubmenu = $item.children('.sub-menu, .pixels-core-mega-menu-panel').length > 0;
 
 			if (hasSubmenu && $item.is(parentSelector) && isAccordionSubmenuMode()) {
 				return;
@@ -252,13 +252,13 @@
 
 	function runReadyTriggers() {
 		if (!window.elementorFrontend || !elementorFrontend.elementsHandler) {
-			$('.elementor-widget-pixels-menu').each(function () {
+			$('.elementor-widget-pixels-core-menu').each(function () {
 				bindMenu($(this));
 			});
 			return;
 		}
 
-		$('.elementor-widget-pixels-menu').each(function () {
+		$('.elementor-widget-pixels-core-menu').each(function () {
 			try {
 				elementorFrontend.elementsHandler.runReadyTrigger(this);
 			} catch (error) {
@@ -278,7 +278,7 @@
 
 		registerElementorHooks.initialized = true;
 
-		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-menu.default', function ($scope) {
+		elementorFrontend.hooks.addAction('frontend/element_ready/pixels-core-menu.default', function ($scope) {
 			bindMenu($scope);
 		});
 

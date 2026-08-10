@@ -198,7 +198,7 @@
       return;
     }
 
-    window.jQuery(".elementor-widget-pixels-button").each(function () {
+    window.jQuery(".elementor-widget-pixels-core-button").each(function () {
       try {
         elementorFrontend.elementsHandler.runReadyTrigger(this);
       } catch (error) {
@@ -219,7 +219,7 @@
     registerElementorHooks.initialized = true;
 
     elementorFrontend.hooks.addAction(
-      "frontend/element_ready/pixels-button.default",
+      "frontend/element_ready/pixels-core-button.default",
       function ($scope) {
         initAll($scope[0]);
       },

@@ -24,7 +24,7 @@ class RotatorTextWidget extends Widget_Base {
     private const INNER_SQUARE_SIZE = 118;
 
     public function get_name(): string {
-        return 'pixels-rotator-text';
+        return 'pixels-core-rotator-text';
     }
 
     public function get_title(): string {
@@ -753,7 +753,9 @@ class RotatorTextWidget extends Widget_Base {
         if ( $has_link ) {
             $this->add_link_attributes( 'center_link', $link );
             $this->add_render_attribute( 'center_link', 'class', 'pixels-core-rotator-text__center-link' );
-            echo '<a ' . $this->get_render_attribute_string( 'center_link' ) . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<a ';
+            $this->print_render_attribute_string( 'center_link' );
+            echo '>';
         }
 
         switch ( $center_type ) {

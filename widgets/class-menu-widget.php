@@ -18,7 +18,7 @@ class Nav_Menu_Widget extends Widget_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-menu';
+		return 'pixels-core-menu';
 	}
 
 	public function get_title(): string {
@@ -261,7 +261,7 @@ class Nav_Menu_Widget extends Widget_Base {
 		$hamburger_panel  = '{{WRAPPER}} .pixels-core-menu.is-hamburger .pixels-core-menu__wrap';
 		$dropdown_panel   = '{{WRAPPER}} .pixels-core-menu--panel-dropdown.is-hamburger.is-open .pixels-core-menu__wrap';
 		$overlay          = '{{WRAPPER}} .pixels-core-menu--panel-aside.is-hamburger .pixels-core-menu__overlay';
-		$dropdown_arrow   = '{{WRAPPER}} .pixels-core-menu__list .menu-item-has-children > a::after, {{WRAPPER}} .pixels-core-menu__list .pixels-mega-menu-item > a::after';
+		$dropdown_arrow   = '{{WRAPPER}} .pixels-core-menu__list .menu-item-has-children > a::after, {{WRAPPER}} .pixels-core-menu__list .pixels-core-mega-menu-item > a::after';
 
 		$this->start_controls_section(
 			'section_style_menu',

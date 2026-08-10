@@ -18,7 +18,7 @@ class Progress_Bar_Widget extends Widget_Base {
 	private const RING_RADIUS = 45;
 
 	public function get_name(): string {
-		return 'pixels-progress-bar';
+		return 'pixels-core-progress-bar';
 	}
 
 	public function get_title(): string {

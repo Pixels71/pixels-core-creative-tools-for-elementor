@@ -214,6 +214,6 @@
 	});
 
 	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.elementsHandler.attachHandler('pixels-tabs', PixelsTabsHandler);
+		elementorFrontend.elementsHandler.attachHandler('pixels-core-tabs', PixelsTabsHandler);
 	});
 })(jQuery);

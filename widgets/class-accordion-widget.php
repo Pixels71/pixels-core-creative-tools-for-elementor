@@ -21,7 +21,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 	use Widget_Assets_Trait;
 
 	public function get_name(): string {
-		return 'pixels-accordion';
+		return 'pixels-core-accordion';
 	}
 
 	public function get_title(): string {
@@ -624,10 +624,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 		$this->end_controls_section();
 	}
 
-	private function render_toggle_icons(): string {
+	private function print_toggle_icons(): void {
 		$settings = $this->get_settings_for_display();
-
-		ob_start();
 		?>
 		<span class="pixels-core-accordion__icon pixels-core-accordion__icon--collapsed">
 			<?php Icons_Manager::render_icon( $settings['icon_collapsed'], [ 'aria-hidden' => 'true' ] ); ?>
@@ -641,7 +639,6 @@ class Accordion_Widget extends Widget_Nested_Base {
 			?>
 		</span>
 		<?php
-		return ob_get_clean();
 	}
 
 	public function print_child( $index, $item_id = null ): void {
@@ -678,7 +675,6 @@ class Accordion_Widget extends Widget_Nested_Base {
 		$title_tag      = Utils::validate_html_tag( $settings['title_tag'] ?? 'div' );
 		$default_state  = $settings['default_state'] ?? 'expanded';
 		$allow_multiple = ( $settings['allow_multiple'] ?? '' ) === 'yes';
-		$icons_html     = $this->render_toggle_icons();
 
 		if ( empty( $items ) ) {
 			return;
@@ -736,12 +732,12 @@ class Accordion_Widget extends Widget_Nested_Base {
 							<?php
 							printf(
 								'<%1$s class="pixels-core-accordion__label">%2$s</%1$s>',
-								$title_tag, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								tag_escape( $title_tag ),
 								esc_html( $item['item_title'] )
 							);
 							?>
 						</span>
-						<span class="pixels-core-accordion__icons"><?php echo $icons_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<span class="pixels-core-accordion__icons"><?php $this->print_toggle_icons(); ?></span>
 					</summary>
 					<?php $this->print_child( $index, $title_id ); ?>
 				</details>
