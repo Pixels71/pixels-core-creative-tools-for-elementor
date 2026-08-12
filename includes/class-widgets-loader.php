@@ -1,4 +1,10 @@
 <?php
+/**
+ * Widgets loader.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor;
 
 use Elementor\Widgets_Manager;
@@ -8,10 +14,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Widgets loader.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Widgets_Loader {
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Widgets_Loader $instance = null;
 
+	/**
+	 * Instance.
+	 *
+	 * @return Widgets_Loader Result.
+	 */
 	public static function instance(): Widgets_Loader {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -20,9 +41,12 @@ final class Widgets_Loader {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
-		add_action( 'elementor/elements/categories_registered', [ $this, 'register_category' ] );
-		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
+		add_action( 'elementor/elements/categories_registered', array( $this, 'register_category' ) );
+		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ) );
 
 		require_once PIXECCTE_PATH . 'includes/class-assets-manager.php';
 
@@ -32,17 +56,22 @@ final class Widgets_Loader {
 		Assets_Manager::instance()->set_definitions( $definitions );
 	}
 
+	/**
+	 * Register category.
+	 *
+	 * @param mixed $elements_manager Elements manager.
+	 */
 	public function register_category( $elements_manager ): void {
 		if ( empty( Widget_Settings::instance()->get_active_slugs() ) ) {
 			return;
 		}
 
-		$category = [
-			'pixeccte' => [
+		$category = array(
+			'pixeccte' => array(
 				'title' => esc_html__( 'Pixels Core Creative Tools', 'pixels-core-creative-tools-for-elementor' ),
 				'icon'  => 'eicon-plug',
-			],
-		];
+			),
+		);
 
 		$existing = $elements_manager->get_categories();
 		unset( $existing['pixeccte'] );
@@ -55,6 +84,11 @@ final class Widgets_Loader {
 		$set_categories->call( $elements_manager, $categories );
 	}
 
+	/**
+	 * Register widgets.
+	 *
+	 * @param Widgets_Manager $widgets_manager Widgets manager.
+	 */
 	public function register_widgets( Widgets_Manager $widgets_manager ): void {
 		require_once PIXECCTE_PATH . 'widgets/trait-widget-assets.php';
 

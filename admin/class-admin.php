@@ -1,14 +1,35 @@
 <?php
+/**
+ * Admin.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Admin.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Admin {
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Admin $instance = null;
 
+	/**
+	 * Instance.
+	 *
+	 * @return Admin Result.
+	 */
 	public static function instance(): Admin {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -17,14 +38,20 @@ final class Admin {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
-		add_action( 'admin_menu', [ $this, 'register_menu' ] );
-		add_action( 'admin_init', [ $this, 'maybe_redirect_after_activation' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
-		add_filter( 'plugin_action_links_' . plugin_basename( PIXECCTE_FILE ), [ $this, 'add_settings_link' ] );
-		add_filter( 'admin_body_class', [ $this, 'add_body_class' ] );
+		add_action( 'admin_menu', array( $this, 'register_menu' ) );
+		add_action( 'admin_init', array( $this, 'maybe_redirect_after_activation' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( PIXECCTE_FILE ), array( $this, 'add_settings_link' ) );
+		add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
 	}
 
+	/**
+	 * Maybe redirect after activation.
+	 */
 	public function maybe_redirect_after_activation(): void {
 		if ( ! get_transient( 'pixeccte_activation_redirect' ) ) {
 			return;
@@ -49,7 +76,9 @@ final class Admin {
 	}
 
 	/**
-	 * @param array<string, string> $links
+	 * Add settings link.
+	 *
+	 * @param array $links Links.
 	 * @return array<string, string>
 	 */
 	public function add_settings_link( array $links ): array {
@@ -64,25 +93,33 @@ final class Admin {
 		return $links;
 	}
 
+	/**
+	 * Register menu.
+	 */
 	public function register_menu(): void {
 		add_menu_page(
 			esc_html__( 'Pixels Core Creative Tools for Elementor', 'pixels-core-creative-tools-for-elementor' ),
 			esc_html__( 'Pixels Core', 'pixels-core-creative-tools-for-elementor' ),
 			'manage_options',
 			'pixeccte',
-			[ $this, 'render_page' ],
+			array( $this, 'render_page' ),
 			PIXECCTE_URL . 'assets/images/pixeccte-logo.svg',
 			58
 		);
 	}
 
+	/**
+	 * Enqueue assets.
+	 *
+	 * @param string $hook Hook.
+	 */
 	public function enqueue_assets( string $hook ): void {
 		$menu_css = PIXECCTE_ADMIN_PATH . 'assets/css/admin-menu.css';
 
 		wp_enqueue_style(
 			'pixeccte-admin-menu',
 			PIXECCTE_ADMIN_URL . 'assets/css/admin-menu.css',
-			[],
+			array(),
 			file_exists( $menu_css ) ? (string) filemtime( $menu_css ) : PIXECCTE_VERSION
 		);
 
@@ -95,14 +132,16 @@ final class Admin {
 			wp_enqueue_style(
 				'pixeccte-admin',
 				PIXECCTE_ADMIN_URL . 'assets/css/admin.css',
-				[],
+				array(),
 				PIXECCTE_VERSION
 			);
 		}
 	}
 
 	/**
-	 * @param string $classes
+	 * Class.
+	 *
+	 * @param string $classes Classes.
 	 * @return string
 	 */
 	public function add_body_class( string $classes ): string {
@@ -114,6 +153,9 @@ final class Admin {
 		return $classes . ' pixeccte-dashboard-page';
 	}
 
+	/**
+	 * Render page.
+	 */
 	public function render_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;

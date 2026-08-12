@@ -1,5 +1,11 @@
 <?php
-defined('ABSPATH') || exit; // Abort, if called directly.
+/**
+ * Pixeccte theme functions.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
+defined( 'ABSPATH' ) || exit; // Abort, if called directly.
 /**
  * Header Footer Function
  */
@@ -70,11 +76,10 @@ function pixeccte_get_footer_id() {
 
 /**
  * Display header markup.
- *
  */
 function pixeccte_render_header() {
 
-	if ( false == apply_filters( 'pixeccte_enable_render_header', true ) ) :
+	if ( false === apply_filters( 'pixeccte_enable_render_header', true ) ) :
 		return;
 	endif;
 
@@ -82,7 +87,7 @@ function pixeccte_render_header() {
 	$classes      = array_filter(
 		array_map(
 			'sanitize_html_class',
-			array_merge( [ 'pixeccte-site-header' ], explode( ' ', (string) $render_class ) )
+			array_merge( array( 'pixeccte-site-header' ), explode( ' ', (string) $render_class ) )
 		)
 	);
 	?>
@@ -94,11 +99,10 @@ function pixeccte_render_header() {
 
 /**
  * Display footer markup.
- *
  */
 function pixeccte_render_footer() {
 
-	if ( false == apply_filters( 'pixeccte_enable_render_footer', true ) ) :
+	if ( false === apply_filters( 'pixeccte_enable_render_footer', true ) ) :
 		return;
 	endif;
 
@@ -107,7 +111,6 @@ function pixeccte_render_footer() {
 			<?php PixelsCoreCreativeToolsForElementor\Theme_Builder\Theme_Elementor::get_footer_content(); ?>
 		</footer>
 	<?php
-
 }
 
 /**
@@ -179,7 +182,7 @@ function pixeccte_get_builder_allowed_html() {
 	if ( null === $allowed ) {
 		$allowed = wp_kses_allowed_html( 'post' );
 
-		$svg_attrs = [
+		$svg_attrs = array(
 			'aria-hidden'       => true,
 			'aria-labelledby'   => true,
 			'class'             => true,
@@ -205,32 +208,73 @@ function pixeccte_get_builder_allowed_html() {
 			'xmlns'             => true,
 			'xmlns:xlink'       => true,
 			'y'                 => true,
-		];
+		);
 
-		$allowed['svg'] = array_merge(
+		$allowed['svg']      = array_merge(
 			$svg_attrs,
-			[
+			array(
 				'focusable'           => true,
 				'preserveaspectratio' => true,
 				'version'             => true,
-			]
+			)
 		);
 		$allowed['g']        = $svg_attrs;
-		$allowed['path']     = array_merge( $svg_attrs, [ 'd' => true, 'clip-rule' => true ] );
-		$allowed['circle']   = array_merge( $svg_attrs, [ 'cx' => true, 'cy' => true, 'r' => true ] );
-		$allowed['ellipse']  = array_merge( $svg_attrs, [ 'cx' => true, 'cy' => true, 'rx' => true, 'ry' => true ] );
-		$allowed['line']     = array_merge( $svg_attrs, [ 'x1' => true, 'x2' => true, 'y1' => true, 'y2' => true ] );
-		$allowed['polygon']  = array_merge( $svg_attrs, [ 'points' => true ] );
-		$allowed['polyline'] = array_merge( $svg_attrs, [ 'points' => true ] );
-		$allowed['rect']     = array_merge( $svg_attrs, [ 'rx' => true, 'ry' => true ] );
+		$allowed['path']     = array_merge(
+			$svg_attrs,
+			array(
+				'd'         => true,
+				'clip-rule' => true,
+			)
+		);
+		$allowed['circle']   = array_merge(
+			$svg_attrs,
+			array(
+				'cx' => true,
+				'cy' => true,
+				'r'  => true,
+			)
+		);
+		$allowed['ellipse']  = array_merge(
+			$svg_attrs,
+			array(
+				'cx' => true,
+				'cy' => true,
+				'rx' => true,
+				'ry' => true,
+			)
+		);
+		$allowed['line']     = array_merge(
+			$svg_attrs,
+			array(
+				'x1' => true,
+				'x2' => true,
+				'y1' => true,
+				'y2' => true,
+			)
+		);
+		$allowed['polygon']  = array_merge( $svg_attrs, array( 'points' => true ) );
+		$allowed['polyline'] = array_merge( $svg_attrs, array( 'points' => true ) );
+		$allowed['rect']     = array_merge(
+			$svg_attrs,
+			array(
+				'rx' => true,
+				'ry' => true,
+			)
+		);
 		$allowed['defs']     = $svg_attrs;
 		$allowed['clippath'] = $svg_attrs;
-		$allowed['use']      = array_merge( $svg_attrs, [ 'href' => true, 'xlink:href' => true ] );
+		$allowed['use']      = array_merge(
+			$svg_attrs,
+			array(
+				'href'       => true,
+				'xlink:href' => true,
+			)
+		);
 		$allowed['symbol']   = $svg_attrs;
-		$allowed['title']    = [ 'title' => true ];
+		$allowed['title']    = array( 'title' => true );
 		$allowed['desc']     = true;
 
-		$allowed['iframe'] = [
+		$allowed['iframe'] = array(
 			'allow'           => true,
 			'allowfullscreen' => true,
 			'class'           => true,
@@ -245,7 +289,7 @@ function pixeccte_get_builder_allowed_html() {
 			'style'           => true,
 			'title'           => true,
 			'width'           => true,
-		];
+		);
 	}
 
 	/**
@@ -270,6 +314,9 @@ function pixeccte_escape_builder_html( $html ) {
 	return wp_kses( $html, pixeccte_get_builder_allowed_html() );
 }
 
+/**
+ * Pixeccte render archive post.
+ */
 function pixeccte_render_archive_post() {
 	$archive_id = apply_filters( 'pixeccte_archive_post_template_id', pixeccte_get_archive_post_id() );
 
@@ -285,16 +332,25 @@ function pixeccte_render_archive_post() {
 	echo '</div>';
 }
 
+/**
+ * Pixeccte get 404 id.
+ */
 function pixeccte_get_404_id() {
 	$page_404 = \PixelsCoreCreativeToolsForElementor\Theme_Builder\Theme_Elementor::get_settings( 'type_404', '' );
 	return ( '' === $page_404 ) ? false : apply_filters( 'pixeccte_get_404_id', $page_404 );
 }
 
+/**
+ * Pixeccte 404 enabled.
+ */
 function pixeccte_404_enabled() {
 	$page_404 = \PixelsCoreCreativeToolsForElementor\Theme_Builder\Theme_Elementor::get_settings( 'type_404', '' );
-	return apply_filters( 'pixeccte_404_enabled', $page_404 !== '' );
+	return apply_filters( 'pixeccte_404_enabled', '' !== $page_404 );
 }
 
+/**
+ * Pixeccte render 404 page.
+ */
 function pixeccte_render_404_page() {
 	$page_404 = apply_filters( 'pixeccte_404_template_id', pixeccte_get_404_id() );
 
@@ -316,7 +372,7 @@ function pixeccte_render_404_page() {
  * @return array<int, string>
  */
 function pixeccte_get_theme_builder_preview_post_types() {
-	$post_types = get_post_types( [ 'public' => true ], 'names' );
+	$post_types = get_post_types( array( 'public' => true ), 'names' );
 
 	unset( $post_types['attachment'], $post_types['pixeccte-theme'], $post_types['page'] );
 
@@ -335,16 +391,16 @@ function pixeccte_get_theme_builder_preview_post_types() {
  */
 function pixeccte_get_theme_builder_preview_posts_by_type() {
 	$posts = get_posts(
-		[
+		array(
 			'post_type'      => pixeccte_get_theme_builder_preview_post_types(),
 			'posts_per_page' => 100,
 			'post_status'    => 'publish',
 			'orderby'        => 'title',
 			'order'          => 'ASC',
-		]
+		)
 	);
 
-	$posts_by_type = [];
+	$posts_by_type = array();
 
 	foreach ( $posts as $post ) {
 		$posts_by_type[ $post->post_type ][] = $post;
@@ -360,12 +416,12 @@ function pixeccte_get_theme_builder_preview_posts_by_type() {
  */
 function pixeccte_get_theme_builder_preview_post_select_options() {
 	$posts_by_type   = pixeccte_get_theme_builder_preview_posts_by_type();
-	$options         = [ '' => esc_html__( 'Select a post', 'pixels-core-creative-tools-for-elementor' ) ];
+	$options         = array( '' => esc_html__( 'Select a post', 'pixels-core-creative-tools-for-elementor' ) );
 	$post_type_names = get_post_types(
-		[
+		array(
 			'name'   => array_keys( $posts_by_type ),
 			'public' => true,
-		],
+		),
 		'objects'
 	);
 
@@ -477,7 +533,7 @@ function pixeccte_maybe_migrate_theme_template_type_meta() {
 	}
 
 	$post_ids = get_posts(
-		[
+		array(
 			'post_type'              => 'pixeccte-theme',
 			'post_status'            => 'any',
 			'posts_per_page'         => -1,
@@ -487,7 +543,7 @@ function pixeccte_maybe_migrate_theme_template_type_meta() {
 			'update_post_term_cache' => false,
 			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- One-time migration query.
 			'meta_key'               => 'ehf_template_type',
-		]
+		)
 	);
 
 	foreach ( $post_ids as $post_id ) {
@@ -561,11 +617,11 @@ function pixeccte_get_theme_builder_post_id() {
 	}
 
 	$posts = get_posts(
-		[
+		array(
 			'post_type'      => 'post',
 			'posts_per_page' => 1,
 			'post_status'    => 'publish',
-		]
+		)
 	);
 
 	return ! empty( $posts ) ? (int) $posts[0]->ID : 0;

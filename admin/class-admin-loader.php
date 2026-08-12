@@ -1,12 +1,26 @@
 <?php
+/**
+ * Admin loader.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Admin loader.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Admin_Loader {
 
+	/**
+	 * Init.
+	 */
 	public static function init(): void {
 		require_once PIXECCTE_PATH . 'includes/class-widget-registry.php';
 		require_once PIXECCTE_PATH . 'includes/class-extension-registry.php';
@@ -25,12 +39,17 @@ final class Admin_Loader {
 		Admin::instance();
 	}
 
+	/**
+	 * Load settings.
+	 */
 	public static function load_settings(): void {
 		require_once PIXECCTE_ADMIN_PATH . 'class-widget-settings.php';
 		require_once PIXECCTE_ADMIN_PATH . 'class-extension-settings.php';
 	}
 
 	/**
+	 * Get active widget slugs.
+	 *
 	 * @return array<int, string>
 	 */
 	public static function get_active_widget_slugs(): array {
@@ -39,6 +58,9 @@ final class Admin_Loader {
 		return Widget_Settings::instance()->get_active_slugs();
 	}
 
+	/**
+	 * Require files.
+	 */
 	private static function require_files(): void {
 		self::load_settings();
 		require_once PIXECCTE_ADMIN_PATH . 'class-dashboard-i18n.php';

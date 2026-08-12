@@ -1,0 +1,1126 @@
+<?php
+/**
+ * Pixeccte theme target rules fields.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
+namespace PixelsCoreCreativeToolsForElementor\Theme_Builder;
+
+defined( 'ABSPATH' ) || exit; // Abort, if called directly.
+/**
+ * Meta Boxes setup
+ */
+class Target_Rules_Fields {
+
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
+	private static $instance;
+
+	/**
+	 * Current page type.
+	 *
+	 * @var mixed
+	 */
+	private static $current_page_type = null;
+
+	/**
+	 * Current page data.
+	 *
+	 * @var mixed
+	 */
+	private static $current_page_data = array();
+
+	/**
+	 * Location selection.
+	 *
+	 * @var mixed
+	 */
+	private static $location_selection;
+
+	/**
+	 * Get instance.
+	 */
+	public static function get_instance() {
+		if ( ! isset( self::$instance ) ) :
+			self::$instance = new self();
+		endif;
+
+		return self::$instance;
+	}
+
+	/**
+	 * Construct.
+	 */
+	public function __construct() {
+		add_action( 'admin_action_edit', array( $this, 'initialize_options' ) );
+		add_action( 'wp_ajax_pixeccte_get_posts_by_query', array( $this, 'get_posts_by_query' ) );
+	}
+
+	/**
+	 * Initialize options.
+	 */
+	public function initialize_options() {
+		self::$location_selection = self::get_location_selections();
+	}
+
+	/**
+	 * Get location selection options.
+	 *
+	 * @return array
+	 */
+	public static function get_location_selections() {
+		$args = array(
+			'public'   => true,
+			'_builtin' => true,
+		);
+
+		$post_types = get_post_types( $args, 'objects' );
+		unset( $post_types['attachment'] );
+
+		$args['_builtin'] = false;
+		$custom_post_type = get_post_types( $args, 'objects' );
+
+		$post_types = apply_filters( 'pixeccte_location_rule_post_types', array_merge( $post_types, $custom_post_type ) );
+
+		$special_pages = array(
+			'special-404'    => __( '404 Page', 'pixels-core-creative-tools-for-elementor' ),
+			'special-search' => __( 'Search Page', 'pixels-core-creative-tools-for-elementor' ),
+			'special-blog'   => __( 'Blog / Posts Page', 'pixels-core-creative-tools-for-elementor' ),
+			'special-front'  => __( 'Front Page', 'pixels-core-creative-tools-for-elementor' ),
+			'special-date'   => __( 'Date Archive', 'pixels-core-creative-tools-for-elementor' ),
+			'special-author' => __( 'Author Archive', 'pixels-core-creative-tools-for-elementor' ),
+		);
+
+		if ( class_exists( 'WooCommerce' ) ) :
+			$special_pages['special-woo-shop'] = __( 'WooCommerce Shop Page', 'pixels-core-creative-tools-for-elementor' );
+		endif;
+
+		$selection_options = array(
+			'basic'         => array(
+				'label' => __( 'Basic', 'pixels-core-creative-tools-for-elementor' ),
+				'value' => array(
+					'basic-global'    => __( 'Entire Website', 'pixels-core-creative-tools-for-elementor' ),
+					'basic-singulars' => __( 'All Singulars', 'pixels-core-creative-tools-for-elementor' ),
+					'basic-archives'  => __( 'All Archives', 'pixels-core-creative-tools-for-elementor' ),
+				),
+			),
+
+			'special-pages' => array(
+				'label' => __( 'Special Pages', 'pixels-core-creative-tools-for-elementor' ),
+				'value' => $special_pages,
+			),
+		);
+
+		$args = array(
+			'public' => true,
+		);
+
+		$taxonomies = get_taxonomies( $args, 'objects' );
+
+		if ( ! empty( $taxonomies ) ) :
+			foreach ( $taxonomies as $taxonomy ) :
+
+				// skip post format taxonomy.
+				if ( 'post_format' === $taxonomy->name ) :
+					continue;
+				endif;
+
+				foreach ( $post_types as $post_type ) :
+					$post_opt = self::get_post_target_rule_options( $post_type, $taxonomy );
+
+					if ( isset( $selection_options[ $post_opt['post_key'] ] ) ) :
+						if ( ! empty( $post_opt['value'] ) && is_array( $post_opt['value'] ) ) :
+							foreach ( $post_opt['value'] as $key => $value ) :
+								if ( ! in_array( $value, $selection_options[ $post_opt['post_key'] ]['value'], true ) ) :
+									$selection_options[ $post_opt['post_key'] ]['value'][ $key ] = $value;
+								endif;
+							endforeach;
+						endif;
+					else :
+						$selection_options[ $post_opt['post_key'] ] = array(
+							'label' => $post_opt['label'],
+							'value' => $post_opt['value'],
+						);
+					endif;
+				endforeach;
+			endforeach;
+		endif;
+
+		$selection_options['specific-target'] = array(
+			'label' => __( 'Specific Target', 'pixels-core-creative-tools-for-elementor' ),
+			'value' => array(
+				'specifics' => __( 'Specific Pages / Posts / Taxonomies, etc.', 'pixels-core-creative-tools-for-elementor' ),
+			),
+		);
+
+		/**
+		 * Filter options displayed in the display conditions select field of Display conditions.
+		 */
+		return apply_filters( 'pixeccte_display_on_list', $selection_options );
+	}
+
+	/**
+	 * Get location label by key.
+	 *
+	 * @param string $key Location option key.
+	 * @return string
+	 */
+	public static function get_location_by_key( $key ) {
+		if ( ! isset( self::$location_selection ) || empty( self::$location_selection ) ) :
+			self::$location_selection = self::get_location_selections();
+		endif;
+		$location_selection = self::$location_selection;
+
+		foreach ( $location_selection as $location_grp ) :
+			if ( isset( $location_grp['value'][ $key ] ) ) :
+				return $location_grp['value'][ $key ];
+			endif;
+		endforeach;
+
+		if ( strpos( $key, 'post-' ) !== false ) :
+			$post_id = (int) str_replace( 'post-', '', $key );
+			return get_the_title( $post_id );
+		endif;
+
+		// taxonomy options.
+		if ( strpos( $key, 'tax-' ) !== false ) :
+			$tax_id = (int) str_replace( 'tax-', '', $key );
+			$term   = get_term( $tax_id );
+
+			if ( ! is_wp_error( $term ) ) :
+				$term_taxonomy = ucfirst( str_replace( '_', ' ', $term->taxonomy ) );
+				return $term->name . ' - ' . $term_taxonomy;
+			else :
+				return '';
+			endif;
+		endif;
+
+		return $key;
+	}
+
+	/**
+	 * Ajax handeler to return the posts based on the search query.
+	 * When searching for the post/pages only titles are searched for.
+	 */
+	public function get_posts_by_query() {
+
+		check_ajax_referer( 'pixeccte-theme-get-posts-by-query', 'nonce' );
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error( __( 'You do not have permission to search posts.', 'pixels-core-creative-tools-for-elementor' ), 403 );
+		}
+
+		$search_string = isset( $_POST['q'] ) ? sanitize_text_field( wp_unslash( $_POST['q'] ) ) : '';
+		$data          = array();
+		$result        = array();
+
+		$args = array(
+			'public'   => true,
+			'_builtin' => false,
+		);
+
+		$output     = 'names'; // names or objects, note names is the default.
+		$operator   = 'and'; // also supports 'or'.
+		$post_types = get_post_types( $args, $output, $operator );
+
+		unset( $post_types['pixeccte-theme'] ); // Exclude Theme Builder templates.
+
+		$post_types['Posts'] = 'post';
+		$post_types['Pages'] = 'page';
+
+		foreach ( $post_types as $key => $post_type ) :
+			$data = array();
+
+			add_filter( 'posts_search', array( $this, 'search_only_titles' ), 10, 2 );
+
+			$query = new \WP_Query(
+				array(
+					's'              => $search_string,
+					'post_type'      => $post_type,
+					'posts_per_page' => - 1,
+				)
+			);
+
+			if ( $query->have_posts() ) :
+				while ( $query->have_posts() ) :
+					$query->the_post();
+					$title  = get_the_title();
+					$title .= ( 0 !== $query->post->post_parent ) ? ' (' . get_the_title( $query->post->post_parent ) . ')' : '';
+					$id     = get_the_id();
+					$data[] = array(
+						'id'   => 'post-' . $id,
+						'text' => $title,
+					);
+				endwhile;
+			endif;
+
+			if ( is_array( $data ) && ! empty( $data ) ) :
+				$result[] = array(
+					'text'     => $key,
+					'children' => $data,
+				);
+			endif;
+		endforeach;
+
+		$data = array();
+
+		wp_reset_postdata();
+
+		$args = array(
+			'public' => true,
+		);
+
+		$output     = 'objects'; // names or objects, note names is the default.
+		$operator   = 'and'; // also supports 'or'.
+		$taxonomies = get_taxonomies( $args, $output, $operator );
+
+		foreach ( $taxonomies as $taxonomy ) :
+			$terms = get_terms(
+				array(
+					'taxonomy'   => $taxonomy->name,
+					'orderby'    => 'count',
+					'hide_empty' => false,
+					'name__like' => $search_string,
+				)
+			);
+
+			$data = array();
+
+			$label = ucwords( $taxonomy->label );
+
+			if ( ! empty( $terms ) ) :
+				foreach ( $terms as $term ) :
+					$term_taxonomy_name = ucfirst( str_replace( '_', ' ', $taxonomy->name ) );
+
+					$data[] = array(
+						'id'   => 'tax-' . $term->term_id,
+						'text' => $term->name . ' archive page',
+					);
+
+					$data[] = array(
+						'id'   => 'tax-' . $term->term_id . '-single-' . $taxonomy->name,
+						'text' => 'All singulars from ' . $term->name,
+					);
+				endforeach;
+			endif;
+
+			if ( is_array( $data ) && ! empty( $data ) ) :
+				$result[] = array(
+					'text'     => $label,
+					'children' => $data,
+				);
+			endif;
+		endforeach;
+
+		// return the result in json.
+		wp_send_json( $result );
+	}
+
+	/**
+	 * Return search results only by post title.
+	 * This is only run from get_posts_by_query()
+	 *
+	 * @param  (string)   $search   Search SQL for WHERE clause.
+	 * @param  (WP_Query) $wp_query The current WP_Query object.
+	 *
+	 * @return (string) The Modified Search SQL for WHERE clause.
+	 */
+	public function search_only_titles( $search, $wp_query ) {
+		if ( ! empty( $search ) && ! empty( $wp_query->query_vars['search_terms'] ) ) :
+			global $wpdb;
+
+			$q = $wp_query->query_vars;
+			$n = ! empty( $q['exact'] ) ? '' : '%';
+
+			$search = array();
+
+			foreach ( (array) $q['search_terms'] as $term ) :
+				$search[] = $wpdb->prepare( "$wpdb->posts.post_title LIKE %s", $n . $wpdb->esc_like( $term ) . $n );
+			endforeach;
+
+			if ( ! is_user_logged_in() ) :
+				$search[] = "$wpdb->posts.post_password = ''";
+			endif;
+
+			$search = ' AND ' . implode( ' AND ', $search );
+		endif;
+
+		return $search;
+	}
+
+	/**
+	 * Function Name: admin_styles.
+	 * Function Description: admin_styles.
+	 */
+	public function admin_styles() {
+		wp_enqueue_script( 'pixeccte-select2', PIXECCTE_URL_ASSETS . 'theme-builder/js/select2.js', array( 'jquery' ), PIXECCTE_VERSION, true );
+
+		wp_register_script( 'pixeccte-target-rule', PIXECCTE_URL_ASSETS . 'theme-builder/js/target-rule.js', array( 'jquery', 'pixeccte-select2' ), PIXECCTE_VERSION, true );
+
+		wp_enqueue_script( 'pixeccte-target-rule' );
+
+		wp_register_script( 'pixeccte-user-role', PIXECCTE_URL_ASSETS . 'theme-builder/js/user-role.js', array( 'jquery' ), PIXECCTE_VERSION, true );
+
+		wp_enqueue_script( 'pixeccte-user-role' );
+
+		wp_register_style( 'pixeccte-select2', PIXECCTE_URL_ASSETS . 'theme-builder/css/select2.css', '', PIXECCTE_VERSION );
+		wp_enqueue_style( 'pixeccte-select2' );
+		wp_register_style( 'pixeccte-target-rule', PIXECCTE_URL_ASSETS . 'theme-builder/css/target-rule.css', '', PIXECCTE_VERSION );
+		wp_enqueue_style( 'pixeccte-target-rule' );
+
+		/**
+		 * Registered localize vars
+		 */
+		$localize_vars = array(
+			'please_enter'  => __( 'Please enter', 'pixels-core-creative-tools-for-elementor' ),
+			'please_delete' => __( 'Please delete', 'pixels-core-creative-tools-for-elementor' ),
+			'more_char'     => __( 'or more characters', 'pixels-core-creative-tools-for-elementor' ),
+			'character'     => __( 'character', 'pixels-core-creative-tools-for-elementor' ),
+			'loading'       => __( 'Loading more results…', 'pixels-core-creative-tools-for-elementor' ),
+			'only_select'   => __( 'You can only select', 'pixels-core-creative-tools-for-elementor' ),
+			'item'          => __( 'item', 'pixels-core-creative-tools-for-elementor' ),
+			'char_s'        => __( 's', 'pixels-core-creative-tools-for-elementor' ),
+			'no_result'     => __( 'No results found', 'pixels-core-creative-tools-for-elementor' ),
+			'searching'     => __( 'Searching…', 'pixels-core-creative-tools-for-elementor' ),
+			'not_loader'    => __( 'The results could not be loaded.', 'pixels-core-creative-tools-for-elementor' ),
+			'search'        => __( 'Search pages / post / categories', 'pixels-core-creative-tools-for-elementor' ),
+			'ajax_nonce'    => wp_create_nonce( 'pixeccte-theme-get-posts-by-query' ),
+		);
+		wp_localize_script( 'pixeccte-select2', 'pixeccteRules', $localize_vars );
+	}
+
+	/**
+	 * Function Name: target_rule_settings_field.
+	 * Function Description: Function to handle new input type.
+	 *
+	 * @param string $name string parameter.
+	 * @param string $settings string parameter.
+	 * @param string $value string parameter.
+	 */
+	public static function target_rule_settings_field( $name, $settings, $value ) {
+		$input_name     = $name;
+		$type           = isset( $settings['type'] ) ? $settings['type'] : 'target_rule';
+		$class          = isset( $settings['class'] ) ? $settings['class'] : '';
+		$rule_type      = isset( $settings['rule_type'] ) ? $settings['rule_type'] : 'target_rule';
+		$add_rule_label = isset( $settings['add_rule_label'] ) ? $settings['add_rule_label'] : __( 'Add Rule', 'pixels-core-creative-tools-for-elementor' );
+		$saved_values   = $value;
+		$output         = '';
+
+		if ( isset( self::$location_selection ) || empty( self::$location_selection ) ) :
+			self::$location_selection = self::get_location_selections();
+		endif;
+		$selection_options = self::$location_selection;
+
+		/* WP Template Format */
+		$output .= '<script type="text/html" id="tmpl-pixeccte-target-rule-' . esc_attr( $rule_type ) . '-condition">';
+		$output .= '<div class="pixeccte-target-rule-condition pixeccte-target-rule-{{data.id}}" data-rule="{{data.id}}" >';
+		$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
+		/* Condition Selection */
+		$output .= '<div class="target_rule-condition-wrap" >';
+		$output .= '<select name="' . esc_attr( $input_name ) . '[rule][{{data.id}}]" class="target_rule-condition form-control pixeccte-input">';
+		$output .= '<option value="">' . esc_html__( 'Select', 'pixels-core-creative-tools-for-elementor' ) . '</option>';
+
+		foreach ( $selection_options as $group => $group_data ) :
+			$output .= '<optgroup label="' . esc_attr( $group_data['label'] ) . '">';
+			foreach ( $group_data['value'] as $opt_key => $opt_value ) :
+				$output .= '<option value="' . esc_attr( $opt_key ) . '">' . esc_html( $opt_value ) . '</option>';
+			endforeach;
+			$output .= '</optgroup>';
+		endforeach;
+		$output .= '</select>';
+		$output .= '</div>';
+
+		$output .= '</div> <!-- pixeccte-target-rule-condition -->';
+
+		/* Specific page selection */
+		$output .= '<div class="target_rule-specific-page-wrap" style="display:none">';
+		$output .= '<select name="' . esc_attr( $input_name ) . '[specific][]" class="target-rule-select2 target_rule-specific-page form-control pixeccte-input " multiple="multiple">';
+		$output .= '</select>';
+		$output .= '</div>';
+
+		$output .= '</script>';
+
+		/* Wrapper Start */
+		$output .= '<div class="pixeccte-target-rule-wrapper pixeccte-target-rule-' . esc_attr( $rule_type ) . '-on-wrap" data-type="' . esc_attr( $rule_type ) . '">';
+		$output .= '<div class="pixeccte-target-rule-selector-wrapper pixeccte-target-rule-' . esc_attr( $rule_type ) . '-on">';
+		$output .= self::generate_target_rule_selector( $rule_type, $selection_options, $input_name, $saved_values, $add_rule_label );
+		$output .= '</div>';
+
+		/* Wrapper end */
+		$output .= '</div>';
+
+		echo wp_kses( $output, self::get_target_rule_allowed_html() );
+	}
+
+	/**
+	 * Allowed HTML for target-rule admin field markup.
+	 *
+	 * @return array<string, array<string, bool>>
+	 */
+	private static function get_target_rule_allowed_html() {
+		$attrs = array(
+			'aria-hidden'    => true,
+			'class'          => true,
+			'data-rule'      => true,
+			'data-rule-id'   => true,
+			'data-rule-type' => true,
+			'data-type'      => true,
+			'href'           => true,
+			'id'             => true,
+			'label'          => true,
+			'multiple'       => true,
+			'name'           => true,
+			'selected'       => true,
+			'style'          => true,
+			'type'           => true,
+			'value'          => true,
+		);
+
+		return array(
+			'a'        => $attrs,
+			'div'      => $attrs,
+			'optgroup' => $attrs,
+			'option'   => $attrs,
+			// Admin-only Underscore templates (type="text/html"); never echo user HTML into these scripts.
+			'script'   => array(
+				'id'   => true,
+				'type' => true,
+			),
+			'select'   => $attrs,
+			'span'     => $attrs,
+		);
+	}
+
+	/**
+	 * Get target rules for generating the markup for rule selector.
+	 *
+	 * @param object $post_type post type parameter.
+	 * @param object $taxonomy taxonomy for creating the target rule markup.
+	 */
+	public static function get_post_target_rule_options( $post_type, $taxonomy ) {
+		$post_key    = str_replace( ' ', '-', strtolower( $post_type->label ) );
+		$post_label  = ucwords( $post_type->label );
+		$post_name   = $post_type->name;
+		$post_option = array();
+
+		/* translators: %s post label */
+		$all_posts                          = sprintf( __( 'All %s', 'pixels-core-creative-tools-for-elementor' ), $post_label );
+		$post_option[ $post_name . '|all' ] = $all_posts;
+
+		if ( 'pages' !== $post_key ) :
+			/* translators: %s post label */
+			$all_archive                                = sprintf( __( 'All %s Archive', 'pixels-core-creative-tools-for-elementor' ), $post_label );
+			$post_option[ $post_name . '|all|archive' ] = $all_archive;
+		endif;
+
+		if ( in_array( $post_type->name, $taxonomy->object_type, true ) ) :
+			$tax_label = ucwords( $taxonomy->label );
+			$tax_name  = $taxonomy->name;
+
+			/* translators: %s taxonomy label */
+			$tax_archive = sprintf( __( 'All %s Archive', 'pixels-core-creative-tools-for-elementor' ), $tax_label );
+
+			$post_option[ $post_name . '|all|taxarchive|' . $tax_name ] = $tax_archive;
+		endif;
+
+		$post_output['post_key'] = $post_key;
+		$post_output['label']    = $post_label;
+		$post_output['value']    = $post_option;
+
+		return $post_output;
+	}
+
+	/**
+	 * Generate markup for rendering the location selction.
+	 *
+	 * @param  String $type                 Rule type display|exclude.
+	 * @param  Array  $selection_options     Array for available selection fields.
+	 * @param  String $input_name           Input name for the settings.
+	 * @param  Array  $saved_values          Array of saved valued.
+	 * @param  String $add_rule_label       Label for the Add rule button.
+	 *
+	 * @return HTML Markup for for the location settings.
+	 */
+	public static function generate_target_rule_selector( $type, $selection_options, $input_name, $saved_values, $add_rule_label ) {
+		$output = '<div class="target_rule-builder-wrap">';
+
+		if ( ! is_array( $saved_values ) || ( is_array( $saved_values ) && empty( $saved_values ) ) ) :
+			$saved_values                = array();
+			$saved_values['rule'][0]     = '';
+			$saved_values['specific'][0] = '';
+		endif;
+
+		$index = 0;
+
+		foreach ( $saved_values['rule'] as $index => $data ) :
+			$output .= '<div class="pixeccte-target-rule-condition pixeccte-target-rule-' . esc_attr( (string) $index ) . '" data-rule="' . esc_attr( (string) $index ) . '" >';
+			/* Condition Selection */
+			$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
+			$output .= '<div class="target_rule-condition-wrap" >';
+			$output .= '<select name="' . esc_attr( $input_name ) . '[rule][' . esc_attr( (string) $index ) . ']" class="target_rule-condition form-control pixeccte-input">';
+			$output .= '<option value="">' . esc_html__( 'Select', 'pixels-core-creative-tools-for-elementor' ) . '</option>';
+
+			foreach ( $selection_options as $group => $group_data ) :
+				$output .= '<optgroup label="' . esc_attr( $group_data['label'] ) . '">';
+				foreach ( $group_data['value'] as $opt_key => $opt_value ) :
+
+					// specific rules.
+					$selected = '';
+
+					if ( $data === $opt_key ) :
+						$selected = 'selected="selected"';
+					endif;
+
+					$output .= '<option value="' . esc_attr( $opt_key ) . '" ' . $selected . '>' . esc_html( $opt_value ) . '</option>';
+				endforeach;
+				$output .= '</optgroup>';
+			endforeach;
+			$output .= '</select>';
+			$output .= '</div>';
+
+			$output .= '</div>';
+
+			/* Specific page selection */
+			$output .= '<div class="target_rule-specific-page-wrap" style="display:none">';
+			$output .= '<select name="' . esc_attr( $input_name ) . '[specific][]" class="target-rule-select2 target_rule-specific-page form-control pixeccte-input " multiple="multiple">';
+
+			if ( 'specifics' === $data && isset( $saved_values['specific'] ) && null !== $saved_values['specific'] && is_array( $saved_values['specific'] ) ) :
+				foreach ( $saved_values['specific'] as $data_key => $sel_value ) :
+					// posts.
+					if ( strpos( $sel_value, 'post-' ) !== false ) :
+						$post_id    = (int) str_replace( 'post-', '', $sel_value );
+						$post_title = get_the_title( $post_id );
+						$output    .= '<option value="post-' . esc_attr( (string) $post_id ) . '" selected="selected" >' . esc_html( $post_title ) . '</option>';
+					endif;
+
+					// taxonomy options.
+					if ( strpos( $sel_value, 'tax-' ) !== false ) :
+						$tax_data = explode( '-', $sel_value );
+
+						$tax_id    = (int) str_replace( 'tax-', '', $sel_value );
+						$term      = get_term( $tax_id );
+						$term_name = '';
+
+						if ( ! is_wp_error( $term ) && $term ) :
+							$term_taxonomy = ucfirst( str_replace( '_', ' ', $term->taxonomy ) );
+
+							if ( isset( $tax_data[2] ) && 'single' === $tax_data[2] ) :
+								$term_name = 'All singulars from ' . $term->name;
+							else :
+								$term_name = $term->name . ' - ' . $term_taxonomy;
+							endif;
+						endif;
+
+						$output .= '<option value="' . esc_attr( $sel_value ) . '" selected="selected" >' . esc_html( $term_name ) . '</option>';
+					endif;
+				endforeach;
+			endif;
+			$output .= '</select>';
+			$output .= '</div>';
+		endforeach;
+
+		$output .= '</div>';
+
+		/* Add new rule */
+		$output .= '<div class="target_rule-add-rule-wrap">';
+		$output .= '<a href="#" class="button" data-rule-id="' . absint( $index ) . '" data-rule-type="' . esc_attr( $type ) . '">' . esc_html( $add_rule_label ) . '</a>';
+		$output .= '</div>';
+
+		if ( 'display' === $type ) :
+			/* Add new rule */
+			$output .= '<div class="target_rule-add-exclusion-rule">';
+			$output .= '<a href="#" class="button">' . esc_html__( 'Add Exclusion Rule', 'pixels-core-creative-tools-for-elementor' ) . '</a>';
+			$output .= '</div>';
+		endif;
+
+		return $output;
+	}
+
+	/**
+	 * Checks for the display condition for the current page/
+	 *
+	 * @param  int   $post_id Current post ID.
+	 * @param  array $rules   Array of rules Display on | Exclude on.
+	 *
+	 * @return boolean      Returns true or false depending on if the $rules match for the current page and the layout is to be displayed.
+	 */
+	public function parse_layout_display_condition( $post_id, $rules ) {
+		$display           = false;
+		$current_post_type = get_post_type( $post_id );
+
+		if ( isset( $rules['rule'] ) && is_array( $rules['rule'] ) && ! empty( $rules['rule'] ) ) :
+			foreach ( $rules['rule'] as $key => $rule ) :
+				if ( strrpos( $rule, 'all' ) !== false ) :
+					$rule_case = 'all';
+				else :
+					$rule_case = $rule;
+				endif;
+
+				switch ( $rule_case ) :
+					case 'basic-global':
+						$display = true;
+						break;
+
+					case 'basic-singulars':
+						if ( is_singular() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'basic-archives':
+						if ( is_archive() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-404':
+						if ( is_404() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-search':
+						if ( is_search() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-blog':
+						if ( is_home() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-front':
+						if ( is_front_page() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-date':
+						if ( is_date() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-author':
+						if ( is_author() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'special-woo-shop':
+						if ( function_exists( 'is_shop' ) && is_shop() ) :
+							$display = true;
+						endif;
+						break;
+
+					case 'all':
+						$rule_data = explode( '|', $rule );
+
+						$post_type     = isset( $rule_data[0] ) ? $rule_data[0] : false;
+						$archieve_type = isset( $rule_data[2] ) ? $rule_data[2] : false;
+						$taxonomy      = isset( $rule_data[3] ) ? $rule_data[3] : false;
+						if ( false === $archieve_type ) :
+							$current_post_type = get_post_type( $post_id );
+
+							if ( false !== $post_id && $current_post_type === $post_type ) :
+								$display = true;
+							endif;
+						elseif ( is_archive() ) :
+								$current_post_type = get_post_type();
+							if ( $current_post_type === $post_type ) :
+								if ( 'archive' === $archieve_type ) :
+									$display = true;
+									elseif ( 'taxarchive' === $archieve_type ) :
+										$obj              = get_queried_object();
+										$current_taxonomy = '';
+										if ( '' !== $obj && null !== $obj ) :
+											$current_taxonomy = $obj->taxonomy;
+										endif;
+
+										if ( $current_taxonomy === $taxonomy ) :
+											$display = true;
+										endif;
+									endif;
+								endif;
+						endif;
+						break;
+
+					case 'specifics':
+						if ( isset( $rules['specific'] ) && is_array( $rules['specific'] ) ) :
+							foreach ( $rules['specific'] as $specific_page ) :
+								$specific_data = explode( '-', $specific_page );
+
+								$specific_post_type = isset( $specific_data[0] ) ? $specific_data[0] : false;
+								$specific_post_id   = isset( $specific_data[1] ) ? $specific_data[1] : false;
+								if ( 'post' === $specific_post_type ) :
+									if ( (int) $specific_post_id === (int) $post_id ) :
+										$display = true;
+									endif;
+								elseif ( isset( $specific_data[2] ) && ( 'single' === $specific_data[2] ) && 'tax' === $specific_post_type ) :
+									if ( is_singular() ) :
+										$term_details = get_term( $specific_post_id );
+
+										if ( isset( $term_details->taxonomy ) ) :
+											$has_term = has_term( (int) $specific_post_id, $term_details->taxonomy, $post_id );
+
+											if ( $has_term ) :
+												$display = true;
+											endif;
+										endif;
+									endif;
+								elseif ( 'tax' === $specific_post_type ) :
+									$tax_id = get_queried_object_id();
+									if ( (int) $specific_post_id === (int) $tax_id ) :
+										$display = true;
+									endif;
+								endif;
+							endforeach;
+						endif;
+						break;
+
+					default:
+						break;
+				endswitch;
+
+				if ( $display ) :
+					break;
+				endif;
+			endforeach;
+		endif;
+
+		return $display;
+	}
+
+
+	/**
+	 * Get current page type
+	 *
+	 * @return string Page Type.
+	 */
+	public function get_current_page_type() {
+		if ( null === self::$current_page_type ) :
+			$page_type  = '';
+			$current_id = false;
+
+			if ( is_404() ) :
+				$page_type = 'is_404';
+			elseif ( is_search() ) :
+				$page_type = 'is_search';
+			elseif ( is_archive() ) :
+				$page_type = 'is_archive';
+
+				if ( is_category() || is_tag() || is_tax() ) :
+					$page_type = 'is_tax';
+				elseif ( is_date() ) :
+					$page_type = 'is_date';
+				elseif ( is_author() ) :
+					$page_type = 'is_author';
+				elseif ( function_exists( 'is_shop' ) && is_shop() ) :
+					$page_type = 'is_woo_shop_page';
+				endif;
+			elseif ( is_home() ) :
+				$page_type = 'is_home';
+			elseif ( is_front_page() ) :
+				$page_type  = 'is_front_page';
+				$current_id = get_the_id();
+			elseif ( is_singular() ) :
+				$page_type  = 'is_singular';
+				$current_id = get_the_id();
+			else :
+				$current_id = get_the_id();
+			endif;
+
+			self::$current_page_data['ID'] = $current_id;
+			self::$current_page_type       = $page_type;
+		endif;
+
+		return self::$current_page_type;
+	}
+
+	/**
+	 * Get posts by conditions
+	 *
+	 * @param  string $post_type Post Type.
+	 * @param  array  $option meta option name.
+	 *
+	 * @return object  Posts.
+	 */
+	public function get_posts_by_conditions( $post_type, $option ) {
+		global $post;
+
+		$post_type = $post_type ? (string) $post_type : (string) $post->post_type;
+
+		if ( is_array( self::$current_page_data ) && isset( self::$current_page_data[ $post_type ] ) ) :
+			return apply_filters( 'pixeccte_get_display_posts_by_conditions', self::$current_page_data[ $post_type ], $post_type );
+		endif;
+
+		$current_page_type = $this->get_current_page_type();
+
+		self::$current_page_data[ $post_type ] = array();
+
+		$option['current_post_id'] = self::$current_page_data['ID'];
+		$meta_header               = self::get_meta_option_post( $post_type, $option );
+
+		/* Meta option is enabled */
+		if ( false === $meta_header ) :
+			$current_post_type = (string) get_post_type();
+			$current_post_id   = false;
+			$q_obj             = get_queried_object();
+
+			$location = isset( $option['location'] ) ? (string) $option['location'] : '';
+
+			/* Entire Website + page-type specific location tokens. */
+			$like_tokens = array( 'basic-global' );
+
+			switch ( $current_page_type ) :
+				case 'is_404':
+					$like_tokens[] = 'special-404';
+					break;
+				case 'is_search':
+					$like_tokens[] = 'special-search';
+					break;
+				case 'is_archive':
+				case 'is_tax':
+				case 'is_date':
+				case 'is_author':
+					$like_tokens[] = 'basic-archives';
+					$like_tokens[] = $current_post_type . '|all|archive';
+
+					if ( 'is_tax' === $current_page_type && ( is_category() || is_tag() || is_tax() ) ) :
+						if ( is_object( $q_obj ) ) :
+							$like_tokens[] = $current_post_type . '|all|taxarchive|' . $q_obj->taxonomy;
+							$like_tokens[] = 'tax-' . $q_obj->term_id;
+						endif;
+					elseif ( 'is_date' === $current_page_type ) :
+						$like_tokens[] = 'special-date';
+					elseif ( 'is_author' === $current_page_type ) :
+						$like_tokens[] = 'special-author';
+					endif;
+					break;
+				case 'is_home':
+					$like_tokens[] = 'special-blog';
+					break;
+				case 'is_front_page':
+					$current_id      = get_the_id();
+					$current_post_id = $current_id;
+					$like_tokens[]   = 'special-front';
+					$like_tokens[]   = $current_post_type . '|all';
+					$like_tokens[]   = 'post-' . $current_id;
+					break;
+				case 'is_singular':
+					$current_id      = get_the_id();
+					$current_post_id = $current_id;
+					$like_tokens[]   = 'basic-singulars';
+					$like_tokens[]   = $current_post_type . '|all';
+					$like_tokens[]   = 'post-' . $current_id;
+
+					$taxonomies = get_object_taxonomies( $q_obj->post_type );
+					$terms      = wp_get_post_terms( $q_obj->ID, $taxonomies );
+
+					foreach ( $terms as $term ) :
+						$like_tokens[] = 'tax-' . $term->term_id . '-single-' . $term->taxonomy;
+					endforeach;
+
+					break;
+				case 'is_woo_shop_page':
+					$like_tokens[] = 'special-woo-shop';
+					break;
+				case '':
+					$current_post_id = get_the_id();
+					break;
+			endswitch;
+
+			$candidate_ids = get_posts(
+				array(
+					'post_type'              => $post_type,
+					'post_status'            => 'publish',
+					'posts_per_page'         => 100,
+					'fields'                 => 'ids',
+					'no_found_rows'          => true,
+					'update_post_meta_cache' => true,
+					'update_post_term_cache' => false,
+					'orderby'                => 'date',
+					'order'                  => 'DESC',
+				)
+			);
+
+			foreach ( $candidate_ids as $matched_id ) :
+				$matched_id = (int) $matched_id;
+
+				if ( isset( self::$current_page_data[ $post_type ][ $matched_id ] ) ) :
+					continue;
+				endif;
+
+				$location_rules = get_post_meta( $matched_id, $location, true );
+				if ( ! is_array( $location_rules ) ) :
+					continue;
+				endif;
+
+				if ( ! $this->location_rules_match_tokens( $location_rules, $like_tokens ) ) :
+					continue;
+				endif;
+
+				self::$current_page_data[ $post_type ][ $matched_id ] = array(
+					'id'       => $matched_id,
+					'location' => $location_rules,
+				);
+			endforeach;
+
+			$option['current_post_id'] = $current_post_id;
+
+			$this->remove_exclusion_rule_posts( $post_type, $option );
+		endif;
+
+		return apply_filters( 'pixeccte_get_display_posts_by_conditions', self::$current_page_data[ $post_type ], $post_type );
+	}
+
+	/**
+	 * Whether location rules include any of the requested display tokens.
+	 *
+	 * @param array $location_rules Stored include/exclude location meta.
+	 * @param array $tokens         Page-type location tokens to match.
+	 * @return bool
+	 */
+	private function location_rules_match_tokens( $location_rules, $tokens ) {
+		$values = array();
+
+		if ( ! empty( $location_rules['rule'] ) && is_array( $location_rules['rule'] ) ) :
+			$values = array_merge( $values, $location_rules['rule'] );
+		endif;
+
+		if ( ! empty( $location_rules['specific'] ) && is_array( $location_rules['specific'] ) ) :
+			$values = array_merge( $values, $location_rules['specific'] );
+		endif;
+
+		if ( empty( $values ) || empty( $tokens ) ) :
+			return false;
+		endif;
+
+		foreach ( $tokens as $token ) :
+			if ( in_array( (string) $token, $values, true ) ) :
+				return true;
+			endif;
+		endforeach;
+
+		return false;
+	}
+
+	/**
+	 * Remove exclusion rule posts.
+	 *
+	 * @param  string $post_type Post Type.
+	 * @param  array  $option meta option name.
+	 */
+	public function remove_exclusion_rule_posts( $post_type, $option ) {
+		$exclusion       = isset( $option['exclusion'] ) ? $option['exclusion'] : '';
+		$current_post_id = isset( $option['current_post_id'] ) ? $option['current_post_id'] : false;
+
+		foreach ( self::$current_page_data[ $post_type ] as $c_post_id => $c_data ) :
+			$exclusion_rules = get_post_meta( $c_post_id, $exclusion, true );
+			$is_exclude      = $this->parse_layout_display_condition( $current_post_id, $exclusion_rules );
+
+			if ( $is_exclude ) :
+				unset( self::$current_page_data[ $post_type ][ $c_post_id ] );
+			endif;
+		endforeach;
+	}
+
+	/**
+	 * Meta option post.
+	 *
+	 * @param  string $post_type Post Type.
+	 * @param  array  $option meta option name.
+	 *
+	 * @return false | object
+	 */
+	public static function get_meta_option_post( $post_type, $option ) {
+		$page_meta = ( isset( $option['page_meta'] ) && '' !== $option['page_meta'] ) ? $option['page_meta'] : false;
+
+		if ( false !== $page_meta ) :
+			$current_post_id = isset( $option['current_post_id'] ) ? $option['current_post_id'] : false;
+			$meta_id         = get_post_meta( $current_post_id, $option['page_meta'], true );
+
+			if ( false !== $meta_id && '' !== $meta_id ) :
+				self::$current_page_data[ $post_type ][ $meta_id ] = array(
+					'id'       => $meta_id,
+					'location' => '',
+				);
+
+				return self::$current_page_data[ $post_type ];
+			endif;
+		endif;
+
+		return false;
+	}
+
+	/**
+	 * Formatted rule meta value to save.
+	 *
+	 * Expects already-unslashed request data. Values are sanitized for storage
+	 * (never escaped with esc_* on save).
+	 *
+	 * @param  array  $save_data Unslashed post data.
+	 * @param  string $key       Variable key.
+	 *
+	 * @return array Rule data.
+	 */
+	public static function get_format_rule_value( $save_data, $key ) {
+		$meta_value = array();
+
+		if ( ! is_array( $save_data ) || ! isset( $save_data[ $key ] ) || ! is_array( $save_data[ $key ] ) ) {
+			return $meta_value;
+		}
+
+		if ( isset( $save_data[ $key ]['rule'] ) && is_array( $save_data[ $key ]['rule'] ) ) :
+			$save_data[ $key ]['rule'] = array_unique( array_map( 'sanitize_text_field', $save_data[ $key ]['rule'] ) );
+			if ( isset( $save_data[ $key ]['specific'] ) && is_array( $save_data[ $key ]['specific'] ) ) :
+				$save_data[ $key ]['specific'] = array_unique( array_map( 'sanitize_text_field', $save_data[ $key ]['specific'] ) );
+			endif;
+
+			// Unset the specifics from rule. This will be readded conditionally in next condition.
+			$index = array_search( '', $save_data[ $key ]['rule'], true );
+			if ( false !== $index ) :
+				unset( $save_data[ $key ]['rule'][ $index ] );
+			endif;
+			$index = array_search( 'specifics', $save_data[ $key ]['rule'], true );
+			if ( false !== $index ) :
+				unset( $save_data[ $key ]['rule'][ $index ] );
+
+				// Only re-add the specifics key if there are specific rules added.
+				if ( isset( $save_data[ $key ]['specific'] ) && is_array( $save_data[ $key ]['specific'] ) ) :
+					array_push( $save_data[ $key ]['rule'], 'specifics' );
+				endif;
+			endif;
+
+			foreach ( $save_data[ $key ] as $meta_key => $value ) :
+				$meta_key = sanitize_key( (string) $meta_key );
+				if ( '' === $meta_key || ! is_array( $value ) || empty( $value ) ) :
+					continue;
+				endif;
+
+				$meta_value[ $meta_key ] = array_values( array_filter( array_map( 'sanitize_text_field', $value ) ) );
+			endforeach;
+
+			if ( ! isset( $meta_value['rule'] ) || ! in_array( 'specifics', $meta_value['rule'], true ) ) :
+				$meta_value['specific'] = array();
+			endif;
+
+			if ( empty( $meta_value['rule'] ) ) :
+				$meta_value = array();
+			endif;
+		endif;
+
+		return $meta_value;
+	}
+}
+
+/**
+ * Kicking this off by calling 'get_instance()' method
+ */
+Target_Rules_Fields::get_instance();

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Assets manager.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,6 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Assets_Manager {
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Assets_Manager $instance = null;
 
 	/**
@@ -26,7 +37,7 @@ final class Assets_Manager {
 	 *     nested?: bool
 	 * }>
 	 */
-	private array $definitions = [];
+	private array $definitions = array();
 
 	/**
 	 * Extension asset definitions keyed by slug.
@@ -38,8 +49,13 @@ final class Assets_Manager {
 	 *     style_deps?: array<int, string>
 	 * }>
 	 */
-	private array $extension_definitions = [];
+	private array $extension_definitions = array();
 
+	/**
+	 * Instance.
+	 *
+	 * @return Assets_Manager Result.
+	 */
 	public static function instance(): Assets_Manager {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -48,20 +64,26 @@ final class Assets_Manager {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
-		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'register_vendor_scripts' ], 5 );
-		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'register_frontend_scripts' ] );
-		add_action( 'elementor/frontend/after_register_styles', [ $this, 'register_frontend_styles' ] );
-		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'enqueue_editor_assets' ] );
-		add_action( 'elementor/preview/enqueue_scripts', [ $this, 'enqueue_preview_extension_assets' ] );
-		add_filter( 'script_loader_tag', [ $this, 'add_module_type_to_scripts' ], 10, 3 );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_vendor_scripts' ), 5 );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_frontend_scripts' ) );
+		add_action( 'elementor/frontend/after_register_styles', array( $this, 'register_frontend_styles' ) );
+		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_editor_assets' ) );
+		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'enqueue_preview_extension_assets' ) );
+		add_filter( 'script_loader_tag', array( $this, 'add_module_type_to_scripts' ), 10, 3 );
 	}
 
+	/**
+	 * Register vendor scripts.
+	 */
 	public function register_vendor_scripts(): void {
 		wp_register_script(
 			'pixeccte-number-flow',
 			PIXECCTE_URL . 'assets/js/vendor/number-flow.js',
-			[],
+			array(),
 			PIXECCTE_VERSION,
 			true
 		);
@@ -73,11 +95,14 @@ final class Assets_Manager {
 	}
 
 	/**
+	 * Add module type to scripts.
+	 *
 	 * @param string $tag    Script tag HTML.
 	 * @param string $handle Script handle.
 	 * @param string $src    Script source URL.
 	 */
-	public function add_module_type_to_scripts( string $tag, string $handle, string $src ): string {
+	public function add_module_type_to_scripts( string $tag, string $handle, string $src ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- script_loader_tag filter signature.
+		unset( $src );
 		if ( 'pixeccte-number-flow' !== $handle ) {
 			return $tag;
 		}
@@ -86,56 +111,79 @@ final class Assets_Manager {
 	}
 
 	/**
-	 * @param array<string, array{
-	 *     script?: string,
-	 *     style?: string,
-	 *     script_deps?: array<int, string>,
-	 *     style_deps?: array<int, string>,
-	 *     nested?: bool
-	 * }> $definitions
+	 * Set widget asset definitions.
+	 *
+	 * @param array $definitions Definitions.
 	 */
 	public function set_definitions( array $definitions ): void {
 		$this->definitions = $definitions;
 	}
 
 	/**
-	 * @param array<string, array{
-	 *     script?: string,
-	 *     style?: string,
-	 *     script_deps?: array<int, string>,
-	 *     style_deps?: array<int, string>
-	 * }> $definitions
+	 * Set extension definitions.
+	 *
+	 * @param array $definitions Definitions.
 	 */
 	public function set_extension_definitions( array $definitions ): void {
 		$this->extension_definitions = $definitions;
 	}
 
+	/**
+	 * Get script handle.
+	 *
+	 * @param string $slug Slug.
+	 * @return string Result.
+	 */
 	public function get_script_handle( string $slug ): string {
 		return 'pixeccte-' . $slug;
 	}
 
+	/**
+	 * Get style handle.
+	 *
+	 * @param string $slug Slug.
+	 * @return string Result.
+	 */
 	public function get_style_handle( string $slug ): string {
 		return 'pixeccte-' . $slug;
 	}
 
+	/**
+	 * Get extension script handle.
+	 *
+	 * @param string $slug Slug.
+	 * @return string Result.
+	 */
 	public function get_extension_script_handle( string $slug ): string {
 		return 'pixeccte-' . $slug;
 	}
 
+	/**
+	 * Get extension style handle.
+	 *
+	 * @param string $slug Slug.
+	 * @return string Result.
+	 */
 	public function get_extension_style_handle( string $slug ): string {
 		return 'pixeccte-' . $slug;
 	}
 
+	/**
+	 * Register frontend scripts.
+	 */
 	public function register_frontend_scripts(): void {
 		$this->register_vendor_scripts();
 		$this->ensure_elementor_script_dependencies();
-		$this->register_asset_group_scripts( $this->definitions, [ $this, 'get_script_handle' ] );
-		$this->register_asset_group_scripts( $this->extension_definitions, [ $this, 'get_extension_script_handle' ] );
+		$this->register_asset_group_scripts( $this->definitions, array( $this, 'get_script_handle' ) );
+		$this->register_asset_group_scripts( $this->extension_definitions, array( $this, 'get_extension_script_handle' ) );
 	}
 
+	/**
+	 * Register frontend styles.
+	 */
 	public function register_frontend_styles(): void {
-		$this->register_asset_group_styles( $this->definitions, [ $this, 'get_style_handle' ] );
-		$this->register_asset_group_styles( $this->extension_definitions, [ $this, 'get_extension_style_handle' ] );
+		$this->register_asset_group_styles( $this->definitions, array( $this, 'get_style_handle' ) );
+		$this->register_asset_group_styles( $this->extension_definitions, array( $this, 'get_extension_style_handle' ) );
 	}
 
 	/**
@@ -161,13 +209,10 @@ final class Assets_Manager {
 	}
 
 	/**
-	 * @param array<string, array{
-	 *     script?: string,
-	 *     style?: string,
-	 *     script_deps?: array<int, string>,
-	 *     style_deps?: array<int, string>
-	 * }> $definitions
-	 * @param callable(string): string $handle_callback
+	 * Register asset group scripts.
+	 *
+	 * @param array    $definitions Definitions.
+	 * @param callable $handle_callback Handle callback.
 	 */
 	private function register_asset_group_scripts( array $definitions, callable $handle_callback ): void {
 		foreach ( $definitions as $slug => $definition ) {
@@ -183,13 +228,16 @@ final class Assets_Manager {
 			wp_register_script(
 				$handle_callback( $slug ),
 				$base_url . $definition['script'],
-				$definition['script_deps'] ?? [ 'jquery', 'elementor-frontend' ],
+				$definition['script_deps'] ?? array( 'jquery', 'elementor-frontend' ),
 				$version,
 				true
 			);
 		}
 	}
 
+	/**
+	 * Ensure elementor script dependencies.
+	 */
 	private function ensure_elementor_script_dependencies(): void {
 		static $is_registering = false;
 
@@ -212,17 +260,12 @@ final class Assets_Manager {
 		}
 	}
 
-	// public function register_frontend_styles(): void {
-	// 	foreach ( $this->definitions as $slug => $definition ) {
-	// /**
-	//  * @param array<string, array{
-	//  *     script?: string,
-	//  *     style?: string,
-	//  *     script_deps?: array<int, string>,
-	//  *     style_deps?: array<int, string>
-	//  * }> $definitions
-	//  * @param callable(string): string $handle_callback
-	//  */
+	/**
+	 * Register style handles for an asset definition group.
+	 *
+	 * @param array    $definitions Definitions.
+	 * @param callable $handle_callback Handle callback.
+	 */
 	private function register_asset_group_styles( array $definitions, callable $handle_callback ): void {
 		foreach ( $definitions as $slug => $definition ) {
 			if ( empty( $definition['style'] ) ) {
@@ -237,17 +280,20 @@ final class Assets_Manager {
 			wp_register_style(
 				$handle_callback( $slug ),
 				$base_url . $definition['style'],
-				$definition['style_deps'] ?? [],
+				$definition['style_deps'] ?? array(),
 				$version
 			);
 		}
 	}
 
+	/**
+	 * Enqueue editor assets.
+	 */
 	public function enqueue_editor_assets(): void {
 		wp_enqueue_style(
 			'pixeccte-editor-panel',
 			PIXECCTE_URL . 'assets/css/editor-panel.css',
-			[],
+			array(),
 			PIXECCTE_VERSION
 		);
 
@@ -256,14 +302,14 @@ final class Assets_Manager {
 			wp_enqueue_style(
 				'pixeccte-icons',
 				PIXECCTE_URL . 'assets/icons/dist/pixeccte-icons.css',
-				[],
+				array(),
 				PIXECCTE_VERSION
 			);
 		}
 
 		$this->ensure_elementor_frontend_assets_registered();
 
-		$nested_slugs = [];
+		$nested_slugs = array();
 
 		foreach ( $this->definitions as $slug => $definition ) {
 			if ( ! empty( $definition['style'] ) ) {
@@ -296,7 +342,7 @@ final class Assets_Manager {
 		wp_enqueue_script(
 			'pixeccte-nested-widgets-editor',
 			PIXECCTE_URL . 'assets/js/editor/nested-widgets.js',
-			[ 'nested-elements' ],
+			array( 'nested-elements' ),
 			PIXECCTE_VERSION,
 			true
 		);
@@ -304,9 +350,9 @@ final class Assets_Manager {
 		wp_localize_script(
 			'pixeccte-nested-widgets-editor',
 			'pixeccteEditor',
-			[
+			array(
 				'enabledNestedWidgets' => $nested_slugs,
-			]
+			)
 		);
 	}
 

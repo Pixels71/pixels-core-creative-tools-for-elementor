@@ -1,4 +1,10 @@
 <?php
+/**
+ * Widget settings.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 use PixelsCoreCreativeToolsForElementor\Plugin;
@@ -8,13 +14,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Widget settings.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Widget_Settings {
 
 	public const OPTION_KEY       = 'pixeccte_active_widgets';
 	public const SYNCED_SLUGS_KEY = 'pixeccte_widgets_synced_slugs';
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Widget_Settings $instance = null;
 
+	/**
+	 * Instance.
+	 *
+	 * @return Widget_Settings Result.
+	 */
 	public static function instance(): Widget_Settings {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -23,6 +44,9 @@ final class Widget_Settings {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
 	}
 
@@ -62,6 +86,8 @@ final class Widget_Settings {
 	}
 
 	/**
+	 * Get active slugs.
+	 *
 	 * @return array<int, string> Enabled widget slugs.
 	 */
 	public function get_active_slugs(): array {
@@ -78,12 +104,20 @@ final class Widget_Settings {
 		return array_values( array_intersect( $saved, $all ) );
 	}
 
+	/**
+	 * Is active.
+	 *
+	 * @param string $slug Slug.
+	 * @return bool Result.
+	 */
 	public function is_active( string $slug ): bool {
 		return in_array( $slug, $this->get_active_slugs(), true );
 	}
 
 	/**
-	 * @param array<int, string> $slugs
+	 * Save active slugs.
+	 *
+	 * @param array $slugs Slugs.
 	 */
 	public function save_active_slugs( array $slugs ): void {
 		$registry  = Widget_Registry::instance();
@@ -95,6 +129,9 @@ final class Widget_Settings {
 		update_option( self::SYNCED_SLUGS_KEY, $all_slugs );
 	}
 
+	/**
+	 * Activate defaults.
+	 */
 	public static function activate_defaults(): void {
 		$slugs = Widget_Registry::instance()->get_slugs();
 
@@ -110,7 +147,7 @@ final class Widget_Settings {
 	public function get_admin_widgets(): array {
 		$registry     = Widget_Registry::instance();
 		$active_slugs = $this->get_active_slugs();
-		$widgets      = [];
+		$widgets      = array();
 		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
 
 		foreach ( $registry->get_all() as $slug => $config ) {
@@ -118,7 +155,7 @@ final class Widget_Settings {
 			$is_available    = ! $requires_nested || Plugin::is_nested_elements_active();
 			$tier            = $config['tier'] ?? 'free';
 
-			$widgets[] = [
+			$widgets[] = array(
 				'slug'            => $slug,
 				'name'            => $config['name'] ?? 'pixeccte-' . $slug,
 				'title'           => $config['title'],
@@ -130,7 +167,7 @@ final class Widget_Settings {
 				'tier'            => $tier,
 				'is_pro'          => 'pro' === $tier,
 				'upgrade_url'     => $upgrade_url,
-			];
+			);
 		}
 
 		usort(

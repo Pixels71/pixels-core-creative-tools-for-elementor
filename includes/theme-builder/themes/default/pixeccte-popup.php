@@ -1,4 +1,10 @@
 <?php
+/**
+ * Pixeccte popup.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 use Elementor\Utils;
 use PixelsCoreCreativeToolsForElementor\Theme_Builder\Theme_Elementor;
 
@@ -22,11 +28,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	wp_body_open();
 
-	do_action( 'elementor/page_templates/canvas/before_content' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Elementor core hook.
+	do_action( 'elementor/page_templates/canvas/before_content' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound,WordPress.NamingConventions.ValidHookName.UseUnderscores -- Elementor core hook.
 
 	Theme_Elementor::instance()->render_popup_editor_template();
 
-	do_action( 'elementor/page_templates/canvas/after_content' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Elementor core hook.
+	do_action( 'elementor/page_templates/canvas/after_content' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound,WordPress.NamingConventions.ValidHookName.UseUnderscores -- Elementor core hook.
 
 	wp_footer();
 	?>

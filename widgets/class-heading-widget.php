@@ -1,4 +1,10 @@
 <?php
+/**
+ * Heading widget.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
@@ -11,111 +17,157 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Heading widget.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 class Heading_Widget extends Widget_Base {
 
 	use Widget_Assets_Trait;
 
+	/**
+	 * Get name.
+	 *
+	 * @return string Result.
+	 */
 	public function get_name(): string {
 		return 'pixeccte-heading';
 	}
 
+	/**
+	 * Get title.
+	 *
+	 * @return string Result.
+	 */
 	public function get_title(): string {
 		return esc_html__( 'Heading', 'pixels-core-creative-tools-for-elementor' );
 	}
 
+	/**
+	 * Get icon.
+	 *
+	 * @return string Result.
+	 */
 	public function get_icon(): string {
 		return 'pixeccte-icon pixeccte-icon-heading';
 	}
 
+	/**
+	 * Get categories.
+	 *
+	 * @return array Result.
+	 */
 	public function get_categories(): array {
-		return [ 'pixeccte' ];
+		return array( 'pixeccte' );
 	}
 
+	/**
+	 * Get keywords.
+	 *
+	 * @return array Result.
+	 */
 	public function get_keywords(): array {
-		return [ 'heading', 'title', 'headline', 'pixeccte' ];
+		return array( 'heading', 'title', 'headline', 'pixeccte' );
 	}
 
+	/**
+	 * Get assets slug.
+	 *
+	 * @return string Result.
+	 */
 	protected function get_assets_slug(): string {
 		return 'heading';
 	}
 
+	/**
+	 * Get script depends.
+	 *
+	 * @return array Result.
+	 */
 	public function get_script_depends(): array {
-		return [];
+		return array();
 	}
 
+	/**
+	 * Register controls.
+	 */
 	protected function register_controls(): void {
 		$this->register_content_controls();
 		$this->register_style_controls();
 	}
 
+	/**
+	 * Register content controls.
+	 */
 	private function register_content_controls(): void {
 		$this->start_controls_section(
 			'section_content',
-			[
+			array(
 				'label' => esc_html__( 'Heading', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
+			)
 		);
 
 		$this->add_control(
 			'title',
-			[
+			array(
 				'label'       => esc_html__( 'Title', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'default'     => esc_html__( 'Add Your Heading Text Here', 'pixels-core-creative-tools-for-elementor' ),
 				'placeholder' => esc_html__( 'Enter your title', 'pixels-core-creative-tools-for-elementor' ),
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'link',
-			[
+			array(
 				'label'       => esc_html__( 'Link', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::URL,
 				'placeholder' => esc_html__( 'https://your-link.com', 'pixels-core-creative-tools-for-elementor' ),
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'show_subheading',
-			[
+			array(
 				'label'        => esc_html__( 'Subheading', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'pixels-core-creative-tools-for-elementor' ),
 				'label_off'    => esc_html__( 'Hide', 'pixels-core-creative-tools-for-elementor' ),
 				'return_value' => 'yes',
 				'default'      => '',
-			]
+			)
 		);
 
 		$this->add_control(
 			'subheading',
-			[
+			array(
 				'label'       => esc_html__( 'Subheading Text', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'default'     => esc_html__( 'Optional subheading text goes here.', 'pixels-core-creative-tools-for-elementor' ),
 				'placeholder' => esc_html__( 'Enter subheading', 'pixels-core-creative-tools-for-elementor' ),
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-				'condition'   => [
+				),
+				'condition'   => array(
 					'show_subheading' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'title_tag',
-			[
+			array(
 				'label'   => esc_html__( 'HTML Tag', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => Controls_Manager::SELECT,
-				'options' => [
+				'options' => array(
 					'h1'   => 'H1',
 					'h2'   => 'H2',
 					'h3'   => 'H3',
@@ -125,133 +177,139 @@ class Heading_Widget extends Widget_Base {
 					'div'  => 'div',
 					'span' => 'span',
 					'p'    => 'p',
-				],
+				),
 				'default' => 'h2',
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'align',
-			[
+			array(
 				'label'     => esc_html__( 'Alignment', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::CHOOSE,
-				'options'   => [
-					'left'    => [
+				'options'   => array(
+					'left'    => array(
 						'title' => esc_html__( 'Left', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-left',
-					],
-					'center'  => [
+					),
+					'center'  => array(
 						'title' => esc_html__( 'Center', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-center',
-					],
-					'right'   => [
+					),
+					'right'   => array(
 						'title' => esc_html__( 'Right', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-right',
-					],
-					'justify' => [
+					),
+					'justify' => array(
 						'title' => esc_html__( 'Justified', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-justify',
-					],
-				],
+					),
+				),
 				'default'   => 'left',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-heading' => 'text-align: {{VALUE}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register style controls.
+	 */
 	private function register_style_controls(): void {
 		$this->start_controls_section(
 			'section_style_title',
-			[
+			array(
 				'label' => esc_html__( 'Title', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
+			)
 		);
 
 		$this->add_control(
 			'title_color',
-			[
+			array(
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-heading__title' => 'color: {{VALUE}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			[
+			array(
 				'name'     => 'title_typography',
 				'selector' => '{{WRAPPER}} .pixeccte-heading__title',
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
-			[
+			array(
 				'name'     => 'title_text_shadow',
 				'selector' => '{{WRAPPER}} .pixeccte-heading__title',
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'title_spacing',
-			[
+			array(
 				'label'      => esc_html__( 'Spacing', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min' => 0,
 						'max' => 100,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-heading__title' => 'margin: 0 0 {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_style_subheading',
-			[
+			array(
 				'label'     => esc_html__( 'Subheading', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'show_subheading' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'subheading_color',
-			[
+			array(
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-heading__subheading' => 'color: {{VALUE}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			[
+			array(
 				'name'     => 'subheading_typography',
 				'selector' => '{{WRAPPER}} .pixeccte-heading__subheading',
-			]
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render.
+	 */
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 
@@ -292,6 +350,9 @@ class Heading_Widget extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Content template.
+	 */
 	protected function content_template(): void {
 		?>
 		<#

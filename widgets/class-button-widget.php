@@ -1,4 +1,10 @@
 <?php
+/**
+ * Button widget.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
@@ -13,54 +19,95 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Button widget.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 class Button_Widget extends Widget_Base {
 
 	use Widget_Assets_Trait;
 
+	/**
+	 * Get name.
+	 *
+	 * @return string Result.
+	 */
 	public function get_name(): string {
 		return 'pixeccte-button';
 	}
 
+	/**
+	 * Get title.
+	 *
+	 * @return string Result.
+	 */
 	public function get_title(): string {
 		return esc_html__( 'Button', 'pixels-core-creative-tools-for-elementor' );
 	}
 
+	/**
+	 * Get icon.
+	 *
+	 * @return string Result.
+	 */
 	public function get_icon(): string {
 		return 'pixeccte-icon pixeccte-icon-button';
 	}
 
+	/**
+	 * Get categories.
+	 *
+	 * @return array Result.
+	 */
 	public function get_categories(): array {
-		return [ 'pixeccte' ];
+		return array( 'pixeccte' );
 	}
 
+	/**
+	 * Get keywords.
+	 *
+	 * @return array Result.
+	 */
 	public function get_keywords(): array {
-		return [ 'button', 'cta', 'link', 'pixeccte' ];
+		return array( 'button', 'cta', 'link', 'pixeccte' );
 	}
 
+	/**
+	 * Get assets slug.
+	 *
+	 * @return string Result.
+	 */
 	protected function get_assets_slug(): string {
 		return 'button';
 	}
 
+	/**
+	 * Register controls.
+	 */
 	protected function register_controls(): void {
 		$this->register_content_controls();
 		$this->register_style_controls();
 	}
 
+	/**
+	 * Register content controls.
+	 */
 	private function register_content_controls(): void {
 		$this->start_controls_section(
 			'button_section',
-			[
+			array(
 				'label' => esc_html__( 'Button', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 
 		$this->add_control(
 			'variation',
-			[
+			array(
 				'label'   => esc_html__( 'Variation', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'variation_1',
-				'options' => [
+				'options' => array(
 					'variation_1'  => esc_html__( 'Variation 1', 'pixels-core-creative-tools-for-elementor' ),
 					'variation_2'  => esc_html__( 'Variation 2', 'pixels-core-creative-tools-for-elementor' ),
 					'variation_3'  => esc_html__( 'Variation 3', 'pixels-core-creative-tools-for-elementor' ),
@@ -71,914 +118,917 @@ class Button_Widget extends Widget_Base {
 					'variation_8'  => esc_html__( 'Variation 8', 'pixels-core-creative-tools-for-elementor' ),
 					'variation_9'  => esc_html__( 'Variation 9', 'pixels-core-creative-tools-for-elementor' ),
 					'variation_10' => esc_html__( 'Variation 10', 'pixels-core-creative-tools-for-elementor' ),
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_title',
-			[
+			array(
 				'label'       => esc_html__( 'Button Text', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Get Started', 'pixels-core-creative-tools-for-elementor' ),
 				'placeholder' => esc_html__( 'Type your title here', 'pixels-core-creative-tools-for-elementor' ),
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_url',
-			[
+			array(
 				'label'       => esc_html__( 'Link', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::URL,
-				'options'     => [ 'url', 'is_external', 'nofollow' ],
-				'default'     => [
+				'options'     => array( 'url', 'is_external', 'nofollow' ),
+				'default'     => array(
 					'url'         => '',
 					'is_external' => true,
 					'nofollow'    => false,
-				],
+				),
 				'label_block' => true,
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_size',
-			[
+			array(
 				'label'     => esc_html__( 'Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'btn-xl',
-				'options'   => [
+				'options'   => array(
 					'btn-md' => esc_html__( 'Small', 'pixels-core-creative-tools-for-elementor' ),
 					'btn-lg' => esc_html__( 'Medium', 'pixels-core-creative-tools-for-elementor' ),
 					'btn-xl' => esc_html__( 'Large (Default)', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_1',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v1_show_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Show Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_1',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v1_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'    => 'variation_1',
 					'v1_show_icon' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v1_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_1',
 					'v1_show_icon'   => 'yes',
 					'v1_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v1_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_1',
 					'v1_show_icon'   => 'yes',
 					'v1_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_show_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Show Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
-				'condition' => [
-					'variation' => [ 'variation_6', 'variation_2' ],
-				],
-			]
+				'condition' => array(
+					'variation' => array( 'variation_6', 'variation_2' ),
+				),
+			)
 		);
 
 		$this->add_control(
 			'v6_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'     => 'variation_6',
 					'btn_show_icon' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v6_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_6',
 					'btn_show_icon'  => 'yes',
 					'v6_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v6_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_6',
 					'btn_show_icon'  => 'yes',
 					'v6_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v2_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'     => 'variation_2',
 					'btn_show_icon' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v2_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_2',
 					'btn_show_icon'  => 'yes',
 					'v2_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v2_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_2',
 					'btn_show_icon'  => 'yes',
 					'v2_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v3_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_3',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v3_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_3',
 					'v3_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v3_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_3',
 					'v3_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v5_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_5',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v5_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_5',
 					'v5_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v5_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_5',
 					'v5_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'       => 'variation_10',
 					'v10_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'       => 'variation_10',
 					'v10_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v4_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
-					'variation' => [ 'variation_4', 'variation_9' ],
-				],
-			]
+				),
+				'condition' => array(
+					'variation' => array( 'variation_4', 'variation_9' ),
+				),
+			)
 		);
 
 		$this->add_control(
 			'v4_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
-					'variation'      => [ 'variation_4', 'variation_9' ],
+				),
+				'condition' => array(
+					'variation'      => array( 'variation_4', 'variation_9' ),
 					'v4_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v4_selected_icon',
-			[
+			array(
 				'label'            => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
-				'condition'        => [
-					'variation'      => [ 'variation_4', 'variation_9' ],
+				'condition'        => array(
+					'variation'      => array( 'variation_4', 'variation_9' ),
 					'v4_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v7_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v7_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_7',
 					'v7_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v7_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_7',
 					'v7_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v8_icon_source',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'default',
-				'options'   => [
+				'options'   => array(
 					'default' => esc_html__( 'Default Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'upload'  => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 					'library' => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_8',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v8_icon_upload',
-			[
+			array(
 				'label'     => esc_html__( 'Upload Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => [
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation'      => 'variation_8',
 					'v8_icon_source' => 'upload',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v8_selected_icon',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Library', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::ICONS,
-				'condition' => [
+				'condition' => array(
 					'variation'      => 'variation_8',
 					'v8_icon_source' => 'library',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register style controls.
+	 */
 	private function register_style_controls(): void {
 		$this->start_controls_section(
 			'btn_outerstyle',
-			[
+			array(
 				'label'     => esc_html__( 'Outer Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_9',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_outer_padding',
-			[
+			array(
 				'label'      => esc_html__( 'Padding', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v9-outer' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_outer_radius',
-			[
+			array(
 				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v9-outer' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_outer_background',
-			[
+			array(
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v9-outer' => 'background-color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
-			[
+			array(
 				'name'     => 'btn_outer_border',
 				'selector' => '{{WRAPPER}} .pixeccte-button__v9-outer',
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
-			[
+			array(
 				'name'     => 'btn_outer_shadow',
 				'selector' => '{{WRAPPER}} .pixeccte-button__v9-outer',
-			]
+			)
 		);
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'btn_style',
-			[
+			array(
 				'label' => esc_html__( 'Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
+			)
 		);
 
 		$this->add_control(
 			'enable_full_width',
-			[
+			array(
 				'label'        => esc_html__( 'Enable Full Width', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'pixels-core-creative-tools-for-elementor' ),
 				'label_off'    => esc_html__( 'No', 'pixels-core-creative-tools-for-elementor' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
-				'condition'    => [
+				'condition'    => array(
 					'variation' => 'variation_2',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_alignment',
-			[
+			array(
 				'label'     => esc_html__( 'Alignment', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::CHOOSE,
-				'options'   => [
-					'left'   => [
+				'options'   => array(
+					'left'   => array(
 						'title' => esc_html__( 'Left', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
+					),
+					'center' => array(
 						'title' => esc_html__( 'Center', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-center',
-					],
-					'right'  => [
+					),
+					'right'  => array(
 						'title' => esc_html__( 'Right', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-right',
-					],
-				],
-				'selectors' => [
+					),
+				),
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button' => 'text-align: {{VALUE}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			[
+			array(
 				'name'     => 'btn_typography',
 				'selector' => '{{WRAPPER}} .pixeccte-button__link, {{WRAPPER}} .pixeccte-button__link--v5, {{WRAPPER}} .pixeccte-button__v6-text, {{WRAPPER}} .pixeccte-button__v7-text, {{WRAPPER}} .pixeccte-button__v8-text, {{WRAPPER}} .pixeccte-button__v9-text, {{WRAPPER}} .pixeccte-button__v10-text, {{WRAPPER}} .pixeccte-button__v4-text',
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_padding',
-			[
+			array(
 				'label'      => esc_html__( 'Padding', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__link:not(.pixeccte-button__link--v10)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v10-body' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_margin',
-			[
+			array(
 				'label'      => esc_html__( 'Margin', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__link' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_border_radius',
-			[
+			array(
 				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__link' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v10-body' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'circle_icon_style_heading',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_circle_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Box Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v7-circle' => '--pc-v7-circle-size: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_circle_border_radius',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v7-circle-bg' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'btn_circle_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon' => '--pc-v7-icon-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_circle_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon svg' => 'stroke: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon svg path' => 'stroke: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v7-circle-icon i' => 'color: {{VALUE}}',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_circle_background',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Box Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v7-circle-bg' => 'background-color: {{VALUE}}',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_7',
-				],
-			]
+				),
+			)
 		);
 
 		$this->start_controls_tabs( 'btn_style_tabs' );
 
 		$this->start_controls_tab(
 			'btn_style_normal_tab',
-			[
+			array(
 				'label' => esc_html__( 'Normal', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			[
+			array(
 				'name'     => 'btn_normal_background',
-				'types'    => [ 'classic', 'gradient' ],
+				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .pixeccte-button__link:not(.pixeccte-button__link--v10), {{WRAPPER}} .pixeccte-button__v7-body, {{WRAPPER}} .pixeccte-button__v10-body',
-			]
+			)
 		);
 
 		$this->add_control(
 			'v10_gradient_heading',
-			[
+			array(
 				'label'     => esc_html__( 'Border Gradient', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_gradient_from',
-			[
+			array(
 				'label'     => esc_html__( 'Gradient From', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#2BC0E4',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v10' => '--pc-v10-gradient-from: {{VALUE}};',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_gradient_to',
-			[
+			array(
 				'label'     => esc_html__( 'Gradient To', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#EAECC6',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v10' => '--pc-v10-gradient-to: {{VALUE}};',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_glow_heading',
-			[
+			array(
 				'label'     => esc_html__( 'Glow', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v10_glow_width',
-			[
+			array(
 				'label'      => esc_html__( 'Glow Width', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 10,
 						'max'  => 120,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 39,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__link--v10' => '--pc-v10-glow-width: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v10_glow_height',
-			[
+			array(
 				'label'      => esc_html__( 'Glow Height', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 10,
 						'max'  => 120,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 39,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__link--v10' => '--pc-v10-glow-height: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_normal_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v6-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v6-arrow svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v6-arrow svg path' => 'fill: {{VALUE}}; stroke: {{VALUE}}',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'btn_show_icon' => 'yes',
 					'variation'     => 'variation_6',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_normal_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 10,
 						'max'  => 100,
 						'step' => 1,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v6-arrow' => '--pc-v6-icon-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v6-arrow svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v6-arrow img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v6-arrow i' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'btn_show_icon' => 'yes',
 					'variation'     => 'variation_6',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_normal_text_color',
-			[
+			array(
 				'label'     => esc_html__( 'Text Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v2-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v2-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
@@ -992,50 +1042,50 @@ class Button_Widget extends Widget_Base {
 					'{{WRAPPER}} .pixeccte-button__v8-text' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v9-text' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v10-text' => 'color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
-			[
+			array(
 				'name'     => 'btn_normal_border',
 				'selector' => '{{WRAPPER}} .pixeccte-button__link',
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
-			[
+			array(
 				'name'     => 'btn_normal_shadow',
 				'selector' => '{{WRAPPER}} .pixeccte-button__link',
-			]
+			)
 		);
 
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
 			'btn_style_hover_tab',
-			[
+			array(
 				'label' => esc_html__( 'Hover', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			[
+			array(
 				'name'     => 'btn_hover_background',
-				'types'    => [ 'classic', 'gradient' ],
+				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .pixeccte-button__link:not(.pixeccte-button__link--v10):hover, {{WRAPPER}} .pixeccte-button__link--v5:hover, {{WRAPPER}} .pixeccte-button__link--v7:hover .pixeccte-button__v7-body, {{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-body',
-			]
+			)
 		);
 
 		$this->add_control(
 			'btn_hover_text_color',
-			[
+			array(
 				'label'     => esc_html__( 'Text Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link:hover' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v2-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v2-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
@@ -1049,55 +1099,55 @@ class Button_Widget extends Widget_Base {
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v8-text' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v9-text' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v10-text' => 'color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
-			[
+			array(
 				'name'     => 'btn_hover_border',
 				'selector' => '{{WRAPPER}} .pixeccte-button__link:hover',
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
-			[
+			array(
 				'name'     => 'btn_hover_shadow',
 				'selector' => '{{WRAPPER}} .pixeccte-button__link:hover',
-			]
+			)
 		);
 
 		$this->add_control(
 			'btn_hover_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v6-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v6-arrow svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link:hover .pixeccte-button__v6-arrow svg path' => 'fill: {{VALUE}}; stroke: {{VALUE}}',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'btn_show_icon' => 'yes',
 					'variation'     => 'variation_6',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_shine_through_color',
-			[
+			array(
 				'label'     => esc_html__( 'Shine Through Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v5-shine' => 'background-image: linear-gradient(180deg, hsla(21,63%,73%,0), {{VALUE}} 50%, hsla(21,63%,73%,0));',
-				],
-				'condition' => [
+				),
+				'condition' => array(
 					'variation' => 'variation_5',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_tab();
@@ -1113,540 +1163,558 @@ class Button_Widget extends Widget_Base {
 		$this->register_v10_icon_style_controls();
 	}
 
+	/**
+	 * Register v3 icon style controls.
+	 */
 	private function register_v3_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_v3_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_3',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v3_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 64,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 24,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v3-figure' => '--pc-v3-icon-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v3-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v3-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v3-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v3_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v3-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v3-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v3-icon svg path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v3_icon_hover_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Hover Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v3:hover .pixeccte-button__v3-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v3:hover .pixeccte-button__v3-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v3:hover .pixeccte-button__v3-icon svg path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register v2 icon style controls.
+	 */
 	private function register_v2_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_v2_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation'     => 'variation_2',
 					'btn_show_icon' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v2_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 64,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 24,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v2-icon' => '--pc-v2-icon-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v2-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v2-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v2-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register v1 icon style controls.
+	 */
 	private function register_v1_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_v1_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation'    => 'variation_1',
 					'v1_show_icon' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v1_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 48,
 						'step' => 1,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__link--v1:hover .pixeccte-button__v1-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v1-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v1-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v1-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v1-icon span' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v1_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v1-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v1-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v1-icon svg path' => 'fill: {{VALUE}}; stroke: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v1_icon_hover_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Hover Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v1:hover .pixeccte-button__v1-icon' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v1:hover .pixeccte-button__v1-icon svg' => 'fill: {{VALUE}}; color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v1:hover .pixeccte-button__v1-icon svg path' => 'fill: {{VALUE}}; stroke: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register v5 icon style controls.
+	 */
 	private function register_v5_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_v5_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_5',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v5_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 64,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 18,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v5-arrow' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow i' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v5_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v5-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow i' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow svg' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow svg[fill="none"] path' => 'stroke: {{VALUE}}; fill: none',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow svg:not([fill="none"])' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v5-arrow svg:not([fill="none"]) path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v5_icon_hover_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Hover Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v5:hover .pixeccte-button__v5-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v5:hover .pixeccte-button__v5-arrow i' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v5:hover .pixeccte-button__v5-arrow svg' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v5:hover .pixeccte-button__v5-arrow svg[fill="none"] path' => 'stroke: {{VALUE}}; fill: none',
 					'{{WRAPPER}} .pixeccte-button__link--v5:hover .pixeccte-button__v5-arrow svg:not([fill="none"])' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v5:hover .pixeccte-button__v5-arrow svg:not([fill="none"]) path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register v10 icon style controls.
+	 */
 	private function register_v10_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_v10_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_10',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v10_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 64,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 18,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v10-arrow' => '--pc-v10-icon-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow i' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v10-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow i' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow svg' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow svg[fill="none"] path' => 'stroke: {{VALUE}}; fill: none',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow svg:not([fill="none"])' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v10-arrow svg:not([fill="none"]) path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v10_icon_hover_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Hover Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-arrow i' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-arrow svg' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-arrow svg[fill="none"] path' => 'stroke: {{VALUE}}; fill: none',
 					'{{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-arrow svg:not([fill="none"])' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v10:hover .pixeccte-button__v10-arrow svg:not([fill="none"]) path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register v4 icon style controls.
+	 */
 	private function register_v4_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Style', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'variation' => [ 'variation_4', 'variation_9' ],
-				],
-			]
+				'condition' => array(
+					'variation' => array( 'variation_4', 'variation_9' ),
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_gap',
-			[
+			array(
 				'label'      => esc_html__( 'Gap Between Icon & Text', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 0,
 						'max'  => 100,
 						'step' => 1,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-row' => 'gap: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-row' => 'gap: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_icon_box_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Box Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', '%' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem', '%' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 20,
 						'max'  => 200,
 						'step' => 1,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v4_custom_icon_box_size',
-			[
+			array(
 				'label'        => esc_html__( 'Custom Width/Height', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'pixels-core-creative-tools-for-elementor' ),
 				'label_off'    => esc_html__( 'No', 'pixels-core-creative-tools-for-elementor' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_icon_box_width',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Box Width', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', '%' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem', '%' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon' => 'width: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box' => 'width: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'v4_custom_icon_box_size' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_icon_box_height',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Box Height', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem', '%' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem', '%' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon' => 'height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box' => 'height: {{SIZE}}{{UNIT}};',
-				],
-				'condition'  => [
+				),
+				'condition'  => array(
 					'v4_custom_icon_box_size' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_icon_box_padding',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Box Padding', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_icon_size',
-			[
+			array(
 				'label'      => esc_html__( 'Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 10,
 						'max'  => 100,
 						'step' => 1,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v4-icon span' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v4-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon span' => 'font-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v4_icon_border_radius',
-			[
+			array(
 				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem', '%' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem', '%' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->start_controls_tabs( 'v4_icon_style_tabs' );
 
 		$this->start_controls_tab(
 			'v4_icon_normal_tab',
-			[
+			array(
 				'label' => esc_html__( 'Normal', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			[
+			array(
 				'name'     => 'v4_icon_background',
-				'types'    => [ 'classic', 'gradient' ],
+				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .pixeccte-button__v4-icon, {{WRAPPER}} .pixeccte-button__v9-icon-box',
-			]
+			)
 		);
 
 		$this->add_control(
 			'v4_icon_fill_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v4-icon' => 'color: {{VALUE}}; fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v4-icon svg path' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v9-icon-box svg path' => 'fill: {{VALUE}}; stroke: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
-			[
+			array(
 				'name'     => 'v4_icon_shadow',
 				'selector' => '{{WRAPPER}} .pixeccte-button__v4-icon, {{WRAPPER}} .pixeccte-button__v9-icon-box',
-			]
+			)
 		);
 
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
 			'v4_icon_hover_tab',
-			[
+			array(
 				'label' => esc_html__( 'Hover', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			[
+			array(
 				'name'     => 'v4_icon_hover_background',
-				'types'    => [ 'classic', 'gradient' ],
+				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .pixeccte-button__link--v4:hover .pixeccte-button__v4-icon, {{WRAPPER}} .pixeccte-button__link--v9:hover .pixeccte-button__v9-icon-box',
-			]
+			)
 		);
 
 		$this->add_control(
 			'v4_icon_hover_fill_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v4:hover .pixeccte-button__v4-icon svg path' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v9:hover .pixeccte-button__v9-icon-box svg path' => 'fill: {{VALUE}}; stroke: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_tab();
@@ -1654,151 +1722,161 @@ class Button_Widget extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Register v8 icon style controls.
+	 */
 	private function register_v8_icon_style_controls(): void {
 		$this->start_controls_section(
 			'btn_v8_icon_style',
-			[
+			array(
 				'label'     => esc_html__( 'Icon', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
+				'condition' => array(
 					'variation' => 'variation_8',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v8_circle_background',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Box Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v8-circle' => 'background-color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'v8_circle_background_hover',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Box Hover Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-circle' => 'background-color: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v8_circle_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Box Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 80,
 						'step' => 1,
-					],
-				],
-				'selectors'  => [
+					),
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v8-circle' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v8_circle_border_radius',
-			[
+			array(
 				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem', '%' ],
-				'selectors'  => [
+				'size_units' => array( 'px', 'em', 'rem', '%' ),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v8-circle' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_v8_icon_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__v8-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v8-arrow i' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v8-arrow svg' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v8-arrow svg[fill="none"] path' => 'stroke: {{VALUE}}; fill: none',
 					'{{WRAPPER}} .pixeccte-button__v8-arrow svg:not([fill="none"])' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__v8-arrow svg:not([fill="none"]) path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'btn_v8_icon_hover_color',
-			[
+			array(
 				'label'     => esc_html__( 'Icon Hover Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow i' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow svg' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow svg[fill="none"] path' => 'stroke: {{VALUE}}; fill: none',
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow svg:not([fill="none"])' => 'fill: {{VALUE}}',
 					'{{WRAPPER}} .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow svg:not([fill="none"]) path' => 'fill: {{VALUE}}',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'v8_arrow_size',
-			[
+			array(
 				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em', 'rem' ],
-				'range'      => [
-					'px' => [
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
 						'min'  => 8,
 						'max'  => 48,
 						'step' => 1,
-					],
-				],
-				'default'    => [
+					),
+				),
+				'default'    => array(
 					'unit' => 'px',
 					'size' => 16,
-				],
-				'selectors'  => [
+				),
+				'selectors'  => array(
 					'{{WRAPPER}} .pixeccte-button__v8-icon' => '--pc-v8-icon-size: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
 	/**
+	 * Get link data.
+	 *
+	 * @param array $settings Settings.
 	 * @return array{url:string,is_external:bool,nofollow:bool}
 	 */
 	private function get_link_data( array $settings ): array {
-		$link = $settings['btn_url'] ?? [];
+		$link = $settings['btn_url'] ?? array();
 
-		return [
+		return array(
 			'url'         => ! empty( $link['url'] ) ? (string) $link['url'] : '#',
 			'is_external' => ! empty( $link['is_external'] ),
 			'nofollow'    => ! empty( $link['nofollow'] ),
-		];
+		);
 	}
 
 	/**
-	 * @param array<string, string> $extra_attrs Extra HTML attributes.
+	 * Print button link open.
+	 *
+	 * @param array  $link Link.
+	 * @param string $css_class Css class.
+	 * @param array  $extra_attrs Extra attrs.
 	 */
-	private function print_button_link_open( array $link, string $class, array $extra_attrs = [] ): void {
+	private function print_button_link_open( array $link, string $css_class, array $extra_attrs = array() ): void {
 		$attrs = array_merge(
-			[
+			array(
 				'href'  => esc_url( $link['url'] ),
-				'class' => $class,
-			],
+				'class' => $css_class,
+			),
 			$extra_attrs
 		);
 
@@ -1820,6 +1898,9 @@ class Button_Widget extends Widget_Base {
 		echo '>';
 	}
 
+	/**
+	 * Render pixel icon svg.
+	 */
 	private function render_pixel_icon_svg(): void {
 		?>
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1837,6 +1918,9 @@ class Button_Widget extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Render chevron svg.
+	 */
 	private function render_chevron_svg(): void {
 		?>
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1850,6 +1934,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v3 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v3_icon( array $settings ): void {
@@ -1861,13 +1947,18 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v3_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v3_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v3_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
 		$this->render_chevron_svg();
 	}
 
+	/**
+	 * Render arrow svg.
+	 *
+	 * @param int $size Size.
+	 */
 	private function render_arrow_svg( int $size = 18 ): void {
 		?>
 		<svg xmlns="http://www.w3.org/2000/svg" width="<?php echo esc_attr( (string) $size ); ?>" height="<?php echo esc_attr( (string) $size ); ?>" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -1877,6 +1968,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v5 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v5_icon( array $settings ): void {
@@ -1888,7 +1981,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v5_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v5_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v5_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
@@ -1896,6 +1989,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v6 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v6_icon( array $settings ): void {
@@ -1907,7 +2002,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v6_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v6_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v6_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
@@ -1915,6 +2010,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v7 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v7_icon( array $settings ): void {
@@ -1926,7 +2023,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v7_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v7_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v7_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
@@ -1939,6 +2036,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v8 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v8_icon( array $settings ): void {
@@ -1950,7 +2049,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v8_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v8_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v8_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
@@ -1958,6 +2057,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v2 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v2_icon( array $settings ): void {
@@ -1969,7 +2070,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v2_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v2_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v2_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
@@ -1977,6 +2078,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v1 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v1_icon( array $settings ): void {
@@ -1988,7 +2091,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v1_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v1_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v1_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
@@ -2000,6 +2103,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v4 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v4_icon( array $settings ): void {
@@ -2011,7 +2116,7 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v4_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v4_selected_icon'], [ 'aria-hidden' => 'true' ], 'span' );
+			Icons_Manager::render_icon( $settings['v4_selected_icon'], array( 'aria-hidden' => 'true' ), 'span' );
 			return;
 		}
 
@@ -2029,6 +2134,8 @@ class Button_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Render v10 icon.
+	 *
 	 * @param array $settings Widget settings.
 	 */
 	private function render_v10_icon( array $settings ): void {
@@ -2040,13 +2147,16 @@ class Button_Widget extends Widget_Base {
 		}
 
 		if ( 'library' === $icon_source && ! empty( $settings['v10_selected_icon']['value'] ) ) {
-			Icons_Manager::render_icon( $settings['v10_selected_icon'], [ 'aria-hidden' => 'true' ] );
+			Icons_Manager::render_icon( $settings['v10_selected_icon'], array( 'aria-hidden' => 'true' ) );
 			return;
 		}
 
 		$this->render_arrow_svg();
 	}
 
+	/**
+	 * Render.
+	 */
 	protected function render(): void {
 		$settings  = $this->get_settings_for_display();
 		$variation = $settings['variation'] ?? 'variation_1';
@@ -2101,7 +2211,7 @@ class Button_Widget extends Widget_Base {
 						$this->print_button_link_open(
 							$link,
 							'pixeccte-button__link pixeccte-button__link--v4',
-							[ 'data-pixeccte-button-v4' => '' ]
+							array( 'data-pixeccte-button-v4' => '' )
 						);
 						?>
 							<span class="pixeccte-button__v4-row">
@@ -2256,12 +2366,12 @@ class Button_Widget extends Widget_Base {
 
 				case 'variation_1':
 				default:
-					$size_map  = [
+					$size_map     = array(
 						'btn-md' => 'md',
 						'btn-lg' => 'lg',
 						'btn-xl' => 'xl',
-					];
-					$size      = $size_map[ $settings['btn_size'] ?? 'btn-xl' ] ?? 'xl';
+					);
+					$size         = $size_map[ $settings['btn_size'] ?? 'btn-xl' ] ?? 'xl';
 					$v1_show_icon = ( $settings['v1_show_icon'] ?? 'yes' ) === 'yes';
 					?>
 					<div class="pixeccte-button__inner">

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Pixeccte archive.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

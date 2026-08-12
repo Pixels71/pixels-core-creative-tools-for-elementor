@@ -1,4 +1,10 @@
 <?php
+/**
+ * Site logo widget.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Widgets;
 
 use Elementor\Controls_Manager;
@@ -15,70 +21,116 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Site logo widget.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 class Site_Logo_Widget extends Widget_Base {
 
 	use Widget_Assets_Trait;
 
+	/**
+	 * Get name.
+	 *
+	 * @return string Result.
+	 */
 	public function get_name(): string {
 		return 'pixeccte-site-logo';
 	}
 
+	/**
+	 * Get title.
+	 *
+	 * @return string Result.
+	 */
 	public function get_title(): string {
 		return esc_html__( 'Site Logo', 'pixels-core-creative-tools-for-elementor' );
 	}
 
+	/**
+	 * Get icon.
+	 *
+	 * @return string Result.
+	 */
 	public function get_icon(): string {
 		return 'pixeccte-icon pixeccte-icon-site-logo';
 	}
 
+	/**
+	 * Get categories.
+	 *
+	 * @return array Result.
+	 */
 	public function get_categories(): array {
-		return [ 'pixeccte' ];
+		return array( 'pixeccte' );
 	}
 
+	/**
+	 * Get keywords.
+	 *
+	 * @return array Result.
+	 */
 	public function get_keywords(): array {
-		return [ 'logo', 'site', 'brand', 'identity', 'header', 'pixeccte' ];
+		return array( 'logo', 'site', 'brand', 'identity', 'header', 'pixeccte' );
 	}
 
+	/**
+	 * Get assets slug.
+	 *
+	 * @return string Result.
+	 */
 	protected function get_assets_slug(): string {
 		return 'site_logo';
 	}
 
+	/**
+	 * Get script depends.
+	 *
+	 * @return array Result.
+	 */
 	public function get_script_depends(): array {
-		return [];
+		return array();
 	}
 
+	/**
+	 * Register controls.
+	 */
 	protected function register_controls(): void {
 		$this->register_content_controls();
 		$this->register_style_controls();
 	}
 
+	/**
+	 * Register content controls.
+	 */
 	private function register_content_controls(): void {
 		$site_logo = $this->get_site_logo_data();
 
 		$this->start_controls_section(
 			'section_content',
-			[
+			array(
 				'label' => esc_html__( 'Logo', 'pixels-core-creative-tools-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
+			)
 		);
 
 		$this->add_control(
 			'logo_source',
-			[
+			array(
 				'label'   => esc_html__( 'Logo Source', 'pixels-core-creative-tools-for-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'site',
-				'options' => [
+				'options' => array(
 					'site'   => esc_html__( 'Site Identity', 'pixels-core-creative-tools-for-elementor' ),
 					'custom' => esc_html__( 'Custom Upload', 'pixels-core-creative-tools-for-elementor' ),
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'site_logo_notice',
-			[
+			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => sprintf(
 					/* translators: %s: Site Settings link label. */
@@ -86,324 +138,329 @@ class Site_Logo_Widget extends Widget_Base {
 					'<a href="#" onclick="elementor.panel.$el.find(\'.elementor-panel-menu-item-settings-site-identity\').trigger(\'click\'); return false;">' . esc_html__( 'Edit Site Logo', 'pixels-core-creative-tools-for-elementor' ) . '</a>'
 				),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
-				'condition'       => [
+				'condition'       => array(
 					'logo_source' => 'site',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'custom_logo',
-			[
+			array(
 				'label'     => esc_html__( 'Custom Logo', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
-				'default'   => [
+				'default'   => array(
 					'id'  => $site_logo['id'],
-					'url' => $site_logo['url'] ?: Utils::get_placeholder_image_src(),
-				],
-				'condition' => [
+					'url' => ! empty( $site_logo['url'] ) ? $site_logo['url'] : Utils::get_placeholder_image_src(),
+				),
+				'condition' => array(
 					'logo_source' => 'custom',
-				],
-				'dynamic'   => [
+				),
+				'dynamic'   => array(
 					'active' => true,
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
-			[
+			array(
 				'name'    => 'logo',
 				'default' => 'full',
-				'exclude' => [ 'custom' ], // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not a WP_Query exclude.
-			]
+				'exclude' => array( 'custom' ), // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude -- Elementor control option, not a WP_Query exclude.
+			)
 		);
 
 		$this->add_control(
 			'link_to_home',
-			[
+			array(
 				'label'        => esc_html__( 'Link to Home', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'pixels-core-creative-tools-for-elementor' ),
 				'label_off'    => esc_html__( 'No', 'pixels-core-creative-tools-for-elementor' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
-			]
+			)
 		);
 
 		$this->add_control(
 			'link',
-			[
+			array(
 				'label'       => esc_html__( 'Custom Link', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::URL,
 				'placeholder' => esc_html__( 'https://your-link.com', 'pixels-core-creative-tools-for-elementor' ),
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-				'condition'   => [
+				),
+				'condition'   => array(
 					'link_to_home!' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_control(
 			'caption',
-			[
+			array(
 				'label'        => esc_html__( 'Caption', 'pixels-core-creative-tools-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'pixels-core-creative-tools-for-elementor' ),
 				'label_off'    => esc_html__( 'Hide', 'pixels-core-creative-tools-for-elementor' ),
 				'return_value' => 'yes',
 				'default'      => '',
-			]
+			)
 		);
 
 		$this->add_control(
 			'caption_text',
-			[
+			array(
 				'label'       => esc_html__( 'Caption Text', 'pixels-core-creative-tools-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => get_bloginfo( 'name' ),
 				'placeholder' => esc_html__( 'Site name', 'pixels-core-creative-tools-for-elementor' ),
 				'label_block' => true,
-				'dynamic'     => [
+				'dynamic'     => array(
 					'active' => true,
-				],
-				'condition'   => [
+				),
+				'condition'   => array(
 					'caption' => 'yes',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'align',
-			[
+			array(
 				'label'     => esc_html__( 'Alignment', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::CHOOSE,
-				'options'   => [
-					'left'   => [
+				'options'   => array(
+					'left'   => array(
 						'title' => esc_html__( 'Left', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-left',
-					],
-					'center' => [
+					),
+					'center' => array(
 						'title' => esc_html__( 'Center', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-center',
-					],
-					'right'  => [
+					),
+					'right'  => array(
 						'title' => esc_html__( 'Right', 'pixels-core-creative-tools-for-elementor' ),
 						'icon'  => 'eicon-text-align-right',
-					],
-				],
+					),
+				),
 				'default'   => 'left',
-				'selectors' => [
+				'selectors' => array(
 					'{{WRAPPER}} .pixeccte-site-logo' => 'text-align: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-	}
-
-	private function register_style_controls(): void {
-		$this->start_controls_section(
-			'section_style_logo',
-			[
-				'label' => esc_html__( 'Logo', 'pixels-core-creative-tools-for-elementor' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_responsive_control(
-			'width',
-			[
-				'label'      => esc_html__( 'Width', 'pixels-core-creative-tools-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'vw', 'custom' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-					],
-					'%'  => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .pixeccte-site-logo__image' => 'width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'max_width',
-			[
-				'label'      => esc_html__( 'Max Width', 'pixels-core-creative-tools-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'vw', 'custom' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-					],
-					'%'  => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .pixeccte-site-logo__image' => 'max-width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'height',
-			[
-				'label'      => esc_html__( 'Height', 'pixels-core-creative-tools-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'vh', 'custom' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 500,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .pixeccte-site-logo__image' => 'height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'object_fit',
-			[
-				'label'     => esc_html__( 'Object Fit', 'pixels-core-creative-tools-for-elementor' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '',
-				'options'   => [
-					''        => esc_html__( 'Default', 'pixels-core-creative-tools-for-elementor' ),
-					'fill'    => esc_html__( 'Fill', 'pixels-core-creative-tools-for-elementor' ),
-					'cover'   => esc_html__( 'Cover', 'pixels-core-creative-tools-for-elementor' ),
-					'contain' => esc_html__( 'Contain', 'pixels-core-creative-tools-for-elementor' ),
-				],
-				'selectors' => [
-					'{{WRAPPER}} .pixeccte-site-logo__image' => 'object-fit: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Css_Filter::get_type(),
-			[
-				'name'     => 'logo_css_filters',
-				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'     => 'logo_border',
-				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
-			]
-		);
-
-		$this->add_responsive_control(
-			'logo_border_radius',
-			[
-				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em' ],
-				'selectors'  => [
-					'{{WRAPPER}} .pixeccte-site-logo__image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'logo_box_shadow',
-				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_style_caption',
-			[
-				'label'     => esc_html__( 'Caption', 'pixels-core-creative-tools-for-elementor' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'caption' => 'yes',
-				],
-			]
-		);
-
-		$this->add_control(
-			'caption_color',
-			[
-				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .pixeccte-site-logo__caption' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'caption_spacing',
-			[
-				'label'      => esc_html__( 'Spacing', 'pixels-core-creative-tools-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', 'em' ],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .pixeccte-site-logo__caption' => 'margin-top: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_style_title',
-			[
-				'label' => esc_html__( 'Site Title', 'pixels-core-creative-tools-for-elementor' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'title_color',
-			[
-				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .pixeccte-site-logo__title' => 'color: {{VALUE}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'title_typography',
-				'selector' => '{{WRAPPER}} .pixeccte-site-logo__title',
-			]
+				),
+			)
 		);
 
 		$this->end_controls_section();
 	}
 
 	/**
+	 * Register style controls.
+	 */
+	private function register_style_controls(): void {
+		$this->start_controls_section(
+			'section_style_logo',
+			array(
+				'label' => esc_html__( 'Logo', 'pixels-core-creative-tools-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_responsive_control(
+			'width',
+			array(
+				'label'      => esc_html__( 'Width', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%', 'vw', 'custom' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 1000,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'max_width',
+			array(
+				'label'      => esc_html__( 'Max Width', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%', 'vw', 'custom' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 1000,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'max-width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'height',
+			array(
+				'label'      => esc_html__( 'Height', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'vh', 'custom' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'object_fit',
+			array(
+				'label'     => esc_html__( 'Object Fit', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					''        => esc_html__( 'Default', 'pixels-core-creative-tools-for-elementor' ),
+					'fill'    => esc_html__( 'Fill', 'pixels-core-creative-tools-for-elementor' ),
+					'cover'   => esc_html__( 'Cover', 'pixels-core-creative-tools-for-elementor' ),
+					'contain' => esc_html__( 'Contain', 'pixels-core-creative-tools-for-elementor' ),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'object-fit: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			array(
+				'name'     => 'logo_css_filters',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'logo_border',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
+			)
+		);
+
+		$this->add_responsive_control(
+			'logo_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-site-logo__image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'logo_box_shadow',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__image',
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_caption',
+			array(
+				'label'     => esc_html__( 'Caption', 'pixels-core-creative-tools-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'caption' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'caption_color',
+			array(
+				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-site-logo__caption' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'caption_spacing',
+			array(
+				'label'      => esc_html__( 'Spacing', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 50,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-site-logo__caption' => 'margin-top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_title',
+			array(
+				'label' => esc_html__( 'Site Title', 'pixels-core-creative-tools-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'title_color',
+			array(
+				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-site-logo__title' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'selector' => '{{WRAPPER}} .pixeccte-site-logo__title',
+			)
+		);
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Get site logo data.
+	 *
 	 * @return array{id: int, url: string}
 	 */
 	private function get_site_logo_data(): array {
@@ -422,22 +479,24 @@ class Site_Logo_Widget extends Widget_Base {
 		}
 
 		if ( ! $logo_id ) {
-			return [
+			return array(
 				'id'  => 0,
 				'url' => '',
-			];
+			);
 		}
 
 		$src = wp_get_attachment_image_src( $logo_id, 'full' );
 
-		return [
+		return array(
 			'id'  => $logo_id,
 			'url' => $src ? $src[0] : '',
-		];
+		);
 	}
 
 	/**
-	 * @param array<string, mixed> $settings Widget settings.
+	 * Get logo render settings.
+	 *
+	 * @param array $settings Settings.
 	 * @return array<string, mixed>
 	 */
 	private function get_logo_render_settings( array $settings ): array {
@@ -449,7 +508,9 @@ class Site_Logo_Widget extends Widget_Base {
 	}
 
 	/**
-	 * @param array<string, mixed> $settings Widget settings.
+	 * Get logo link attributes.
+	 *
+	 * @param array $settings Settings.
 	 */
 	private function get_logo_link_attributes( array $settings ): void {
 		if ( 'yes' === $settings['link_to_home'] ) {
@@ -463,7 +524,9 @@ class Site_Logo_Widget extends Widget_Base {
 	}
 
 	/**
-	 * @param array{id?: int, url?: string} $logo Logo data.
+	 * Has logo image.
+	 *
+	 * @param array $logo Logo.
 	 */
 	private function has_logo_image( array $logo ): bool {
 		if ( ! empty( $logo['id'] ) ) {
@@ -474,9 +537,14 @@ class Site_Logo_Widget extends Widget_Base {
 			return false;
 		}
 
-		return $logo['url'] !== Utils::get_placeholder_image_src();
+		return Utils::get_placeholder_image_src() !== $logo['url'];
 	}
 
+	/**
+	 * Get site title.
+	 *
+	 * @return string Result.
+	 */
 	private function get_site_title(): string {
 		if ( class_exists( Plugin::class ) ) {
 			$kit = Plugin::$instance->kits_manager->get_active_kit();
@@ -494,7 +562,9 @@ class Site_Logo_Widget extends Widget_Base {
 	}
 
 	/**
-	 * @param array<string, mixed> $settings Widget settings.
+	 * Render site title markup.
+	 *
+	 * @param array $settings Settings.
 	 */
 	private function render_site_title_markup( array $settings ): void {
 		$site_title = $this->get_site_title();
@@ -526,11 +596,13 @@ class Site_Logo_Widget extends Widget_Base {
 	}
 
 	/**
-	 * @param array<string, mixed> $settings Widget settings.
+	 * Render logo markup.
+	 *
+	 * @param array $settings Settings.
 	 */
 	private function render_logo_markup( array $settings ): void {
 		$logo_settings = $this->get_logo_render_settings( $settings );
-		$logo          = $logo_settings['custom_logo'] ?? [];
+		$logo          = $logo_settings['custom_logo'] ?? array();
 
 		if ( ! $this->has_logo_image( $logo ) ) {
 			$this->render_site_title_markup( $settings );
@@ -572,6 +644,9 @@ class Site_Logo_Widget extends Widget_Base {
 		}
 	}
 
+	/**
+	 * Render.
+	 */
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 
@@ -584,6 +659,9 @@ class Site_Logo_Widget extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Content template.
+	 */
 	protected function content_template(): void {
 		?>
 		<#

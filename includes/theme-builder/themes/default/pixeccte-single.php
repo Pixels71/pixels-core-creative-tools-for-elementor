@@ -1,4 +1,10 @@
 <?php
+/**
+ * Pixeccte single.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 defined( 'ABSPATH' ) || exit; // Abort, if called directly.
 
 /**

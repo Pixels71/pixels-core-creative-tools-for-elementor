@@ -1,4 +1,10 @@
 <?php
+/**
+ * Extensions loader.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor;
 
 use PixelsCoreCreativeToolsForElementor\Admin\Extension_Settings;
@@ -7,10 +13,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Extensions loader.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Extensions_Loader {
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Extensions_Loader $instance = null;
 
+	/**
+	 * Instance.
+	 *
+	 * @return Extensions_Loader Result.
+	 */
 	public static function instance(): Extensions_Loader {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -19,6 +40,9 @@ final class Extensions_Loader {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
 		$active_slugs = Extension_Settings::instance()->get_active_slugs();
 

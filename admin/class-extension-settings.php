@@ -1,4 +1,10 @@
 <?php
+/**
+ * Extension settings.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 use PixelsCoreCreativeToolsForElementor\Extension_Registry;
@@ -7,13 +13,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Extension settings.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Extension_Settings {
 
 	public const OPTION_KEY       = 'pixeccte_active_extensions';
 	public const SYNCED_SLUGS_KEY = 'pixeccte_extensions_synced_slugs';
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Extension_Settings $instance = null;
 
+	/**
+	 * Instance.
+	 *
+	 * @return Extension_Settings Result.
+	 */
 	public static function instance(): Extension_Settings {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -22,6 +43,9 @@ final class Extension_Settings {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
 	}
 
@@ -59,6 +83,8 @@ final class Extension_Settings {
 	}
 
 	/**
+	 * Get active slugs.
+	 *
 	 * @return array<int, string> Enabled extension slugs.
 	 */
 	public function get_active_slugs(): array {
@@ -75,12 +101,20 @@ final class Extension_Settings {
 		return array_values( array_intersect( $saved, $all ) );
 	}
 
+	/**
+	 * Is active.
+	 *
+	 * @param string $slug Slug.
+	 * @return bool Result.
+	 */
 	public function is_active( string $slug ): bool {
 		return in_array( $slug, $this->get_active_slugs(), true );
 	}
 
 	/**
-	 * @param array<int, string> $slugs
+	 * Save active slugs.
+	 *
+	 * @param array $slugs Slugs.
 	 */
 	public function save_active_slugs( array $slugs ): void {
 		$registry  = Extension_Registry::instance();
@@ -92,6 +126,9 @@ final class Extension_Settings {
 		update_option( self::SYNCED_SLUGS_KEY, $all_slugs );
 	}
 
+	/**
+	 * Activate defaults.
+	 */
 	public static function activate_defaults(): void {
 		$slugs = Extension_Registry::instance()->get_slugs();
 
@@ -100,27 +137,29 @@ final class Extension_Settings {
 	}
 
 	/**
+	 * Get admin extensions.
+	 *
 	 * @return array<int, array<string, mixed>>
 	 */
 	public function get_admin_extensions(): array {
 		$registry     = Extension_Registry::instance();
 		$active_slugs = $this->get_active_slugs();
-		$extensions   = [];
+		$extensions   = array();
 		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
 
 		foreach ( $registry->get_all() as $slug => $config ) {
 			$tier = $config['tier'] ?? 'free';
 
-			$extensions[] = [
-				'slug'        => $slug,
-				'title'       => $config['title'],
-				'description' => $config['description'],
-				'is_active'   => in_array( $slug, $active_slugs, true ),
-				'is_available'=> true,
-				'tier'        => $tier,
-				'is_pro'      => 'pro' === $tier,
-				'upgrade_url' => $upgrade_url,
-			];
+			$extensions[] = array(
+				'slug'         => $slug,
+				'title'        => $config['title'],
+				'description'  => $config['description'],
+				'is_active'    => in_array( $slug, $active_slugs, true ),
+				'is_available' => true,
+				'tier'         => $tier,
+				'is_pro'       => 'pro' === $tier,
+				'upgrade_url'  => $upgrade_url,
+			);
 		}
 
 		usort(

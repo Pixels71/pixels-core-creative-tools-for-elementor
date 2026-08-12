@@ -1,14 +1,35 @@
 <?php
+/**
+ * Rest api.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Rest api.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
 final class Rest_Api {
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Rest_Api $instance = null;
 
+	/**
+	 * Instance.
+	 *
+	 * @return Rest_Api Result.
+	 */
 	public static function instance(): Rest_Api {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -17,170 +38,187 @@ final class Rest_Api {
 		return self::$instance;
 	}
 
+	/**
+	 * Construct.
+	 */
 	private function __construct() {
-		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 	}
 
+	/**
+	 * Can manage.
+	 *
+	 * @return bool Result.
+	 */
 	public function can_manage(): bool {
 		return current_user_can( 'manage_options' );
 	}
 
+	/**
+	 * Register routes.
+	 */
 	public function register_routes(): void {
-		$active_slugs_arg = [
+		$active_slugs_arg = array(
 			'required'          => false,
-			'default'           => [],
+			'default'           => array(),
 			'type'              => 'array',
-			'items'             => [
+			'items'             => array(
 				'type' => 'string',
-			],
-			'sanitize_callback' => [ $this, 'sanitize_active_slugs' ],
+			),
+			'sanitize_callback' => array( $this, 'sanitize_active_slugs' ),
 			'validate_callback' => static function ( $value ): bool {
 				return is_array( $value );
 			},
-		];
+		);
 
-		$form_settings_arg = [
+		$form_settings_arg = array(
 			'required'          => false,
-			'default'           => [],
+			'default'           => array(),
 			'type'              => 'object',
-			'sanitize_callback' => [ $this, 'sanitize_form_settings_params' ],
+			'sanitize_callback' => array( $this, 'sanitize_form_settings_params' ),
 			'validate_callback' => static function ( $value ): bool {
 				return is_array( $value );
 			},
-		];
+		);
 
 		register_rest_route(
 			'pixeccte/v1',
 			'/widgets',
-			[
-				[
+			array(
+				array(
 					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => [ $this, 'get_widgets' ],
-					'permission_callback' => [ $this, 'can_manage' ],
-				],
-				[
+					'callback'            => array( $this, 'get_widgets' ),
+					'permission_callback' => array( $this, 'can_manage' ),
+				),
+				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => [ $this, 'save_widgets' ],
-					'permission_callback' => [ $this, 'can_manage' ],
-					'args'                => [
+					'callback'            => array( $this, 'save_widgets' ),
+					'permission_callback' => array( $this, 'can_manage' ),
+					'args'                => array(
 						'active'       => $active_slugs_arg,
 						'formSettings' => $form_settings_arg,
-					],
-				],
-			]
+					),
+				),
+			)
 		);
 
 		register_rest_route(
 			'pixeccte/v1',
 			'/extensions',
-			[
-				[
+			array(
+				array(
 					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => [ $this, 'get_extensions' ],
-					'permission_callback' => [ $this, 'can_manage' ],
-				],
-				[
+					'callback'            => array( $this, 'get_extensions' ),
+					'permission_callback' => array( $this, 'can_manage' ),
+				),
+				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => [ $this, 'save_extensions' ],
-					'permission_callback' => [ $this, 'can_manage' ],
-					'args'                => [
+					'callback'            => array( $this, 'save_extensions' ),
+					'permission_callback' => array( $this, 'can_manage' ),
+					'args'                => array(
 						'active' => $active_slugs_arg,
-					],
-				],
-			]
+					),
+				),
+			)
 		);
 
 		register_rest_route(
 			'pixeccte/v1',
 			'/form-settings',
-			[
-				[
+			array(
+				array(
 					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => [ $this, 'get_form_settings' ],
-					'permission_callback' => [ $this, 'can_manage' ],
-				],
-				[
+					'callback'            => array( $this, 'get_form_settings' ),
+					'permission_callback' => array( $this, 'can_manage' ),
+				),
+				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => [ $this, 'save_form_settings' ],
-					'permission_callback' => [ $this, 'can_manage' ],
-					'args'                => [
-						'recaptchaV2SiteKey'   => [
+					'callback'            => array( $this, 'save_form_settings' ),
+					'permission_callback' => array( $this, 'can_manage' ),
+					'args'                => array(
+						'recaptchaV2SiteKey'   => array(
 							'required'          => false,
 							'type'              => 'string',
 							'default'           => '',
 							'sanitize_callback' => 'sanitize_text_field',
-						],
-						'recaptchaV2SecretKey' => [
+						),
+						'recaptchaV2SecretKey' => array(
 							'required'          => false,
 							'type'              => 'string',
 							'default'           => '',
 							'sanitize_callback' => 'sanitize_text_field',
-						],
-						'recaptchaV3SiteKey'   => [
+						),
+						'recaptchaV3SiteKey'   => array(
 							'required'          => false,
 							'type'              => 'string',
 							'default'           => '',
 							'sanitize_callback' => 'sanitize_text_field',
-						],
-						'recaptchaV3SecretKey' => [
+						),
+						'recaptchaV3SecretKey' => array(
 							'required'          => false,
 							'type'              => 'string',
 							'default'           => '',
 							'sanitize_callback' => 'sanitize_text_field',
-						],
-						'mailchimpApiKey'      => [
+						),
+						'mailchimpApiKey'      => array(
 							'required'          => false,
 							'type'              => 'string',
 							'default'           => '',
 							'sanitize_callback' => 'sanitize_text_field',
-						],
-						'mailchimpListId'      => [
+						),
+						'mailchimpListId'      => array(
 							'required'          => false,
 							'type'              => 'string',
 							'default'           => '',
 							'sanitize_callback' => 'sanitize_text_field',
-						],
-					],
-				],
-			]
+						),
+					),
+				),
+			)
 		);
 	}
 
 	/**
-	 * @param mixed                $value   Raw value.
-	 * @param \WP_REST_Request     $request Request.
-	 * @param string               $param   Param name.
+	 * Sanitize active slugs.
+	 *
+	 * @param mixed            $value   Raw value.
+	 * @param \WP_REST_Request $request Request.
+	 * @param string           $param   Param name.
 	 * @return array<int, string>
 	 */
-	public function sanitize_active_slugs( $value, $request = null, $param = '' ): array {
+	public function sanitize_active_slugs( $value, $request = null, $param = '' ): array { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- WP REST sanitize callback signature.
+		unset( $request, $param );
 		if ( ! is_array( $value ) ) {
-			return [];
+			return array();
 		}
 
 		return array_values( array_filter( array_map( 'sanitize_key', $value ) ) );
 	}
 
 	/**
-	 * @param mixed                $value   Raw value.
-	 * @param \WP_REST_Request     $request Request.
-	 * @param string               $param   Param name.
+	 * Sanitize form settings params.
+	 *
+	 * @param mixed            $value   Raw value.
+	 * @param \WP_REST_Request $request Request.
+	 * @param string           $param   Param name.
 	 * @return array<string, string>
 	 */
-	public function sanitize_form_settings_params( $value, $request = null, $param = '' ): array {
+	public function sanitize_form_settings_params( $value, $request = null, $param = '' ): array { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- WP REST sanitize callback signature.
+		unset( $request, $param );
 		if ( ! is_array( $value ) ) {
-			return [];
+			return array();
 		}
 
-		$keys = [
+		$keys = array(
 			'recaptchaV2SiteKey',
 			'recaptchaV2SecretKey',
 			'recaptchaV3SiteKey',
 			'recaptchaV3SecretKey',
 			'mailchimpApiKey',
 			'mailchimpListId',
-		];
+		);
 
-		$sanitized = [];
+		$sanitized = array();
 
 		foreach ( $keys as $key ) {
 			if ( array_key_exists( $key, $value ) ) {
@@ -192,11 +230,13 @@ final class Rest_Api {
 	}
 
 	/**
+	 * Get widgets.
+	 *
 	 * @return \WP_REST_Response
 	 */
 	public function get_widgets() {
 		$widgets = array_map(
-			[ __CLASS__, 'format_widget' ],
+			array( __CLASS__, 'format_widget' ),
 			Widget_Settings::instance()->get_admin_widgets()
 		);
 
@@ -204,13 +244,15 @@ final class Rest_Api {
 	}
 
 	/**
-	 * @param \WP_REST_Request $request
+	 * Save widgets.
+	 *
+	 * @param \WP_REST_Request $request Request.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function save_widgets( \WP_REST_Request $request ) {
 		$active = $request->get_param( 'active' );
 		if ( ! is_array( $active ) ) {
-			$active = [];
+			$active = array();
 		}
 
 		Widget_Settings::instance()->save_active_slugs( $active );
@@ -221,19 +263,21 @@ final class Rest_Api {
 		}
 
 		return rest_ensure_response(
-			[
+			array(
 				'success' => true,
 				'message' => __( 'Widget settings saved.', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 	}
 
 	/**
+	 * Get extensions.
+	 *
 	 * @return \WP_REST_Response
 	 */
 	public function get_extensions() {
 		$extensions = array_map(
-			[ __CLASS__, 'format_extension' ],
+			array( __CLASS__, 'format_extension' ),
 			Extension_Settings::instance()->get_admin_extensions()
 		);
 
@@ -241,26 +285,30 @@ final class Rest_Api {
 	}
 
 	/**
-	 * @param \WP_REST_Request $request
+	 * Save extensions.
+	 *
+	 * @param \WP_REST_Request $request Request.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function save_extensions( \WP_REST_Request $request ) {
 		$active = $request->get_param( 'active' );
 		if ( ! is_array( $active ) ) {
-			$active = [];
+			$active = array();
 		}
 
 		Extension_Settings::instance()->save_active_slugs( $active );
 
 		return rest_ensure_response(
-			[
+			array(
 				'success' => true,
 				'message' => __( 'Extension settings saved.', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 	}
 
 	/**
+	 * Get form settings.
+	 *
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function get_form_settings() {
@@ -268,7 +316,7 @@ final class Rest_Api {
 			return new \WP_Error(
 				'pixeccte_form_pro_required',
 				__( 'Form settings require Pixels Core Pro.', 'pixels-core-creative-tools-for-elementor' ),
-				[ 'status' => 404 ]
+				array( 'status' => 404 )
 			);
 		}
 
@@ -276,7 +324,9 @@ final class Rest_Api {
 	}
 
 	/**
-	 * @param \WP_REST_Request $request
+	 * Save form settings.
+	 *
+	 * @param \WP_REST_Request $request Request.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function save_form_settings( \WP_REST_Request $request ) {
@@ -284,31 +334,33 @@ final class Rest_Api {
 			return new \WP_Error(
 				'pixeccte_form_pro_required',
 				__( 'Form settings require Pixels Core Pro.', 'pixels-core-creative-tools-for-elementor' ),
-				[ 'status' => 404 ]
+				array( 'status' => 404 )
 			);
 		}
 
-		$params = [
+		$params = array(
 			'recaptchaV2SiteKey'   => (string) $request->get_param( 'recaptchaV2SiteKey' ),
 			'recaptchaV2SecretKey' => (string) $request->get_param( 'recaptchaV2SecretKey' ),
 			'recaptchaV3SiteKey'   => (string) $request->get_param( 'recaptchaV3SiteKey' ),
 			'recaptchaV3SecretKey' => (string) $request->get_param( 'recaptchaV3SecretKey' ),
 			'mailchimpApiKey'      => (string) $request->get_param( 'mailchimpApiKey' ),
 			'mailchimpListId'      => (string) $request->get_param( 'mailchimpListId' ),
-		];
+		);
 
 		$this->persist_form_settings( $params );
 
 		return rest_ensure_response(
-			[
+			array(
 				'success' => true,
 				'message' => __( 'Form settings saved.', 'pixels-core-creative-tools-for-elementor' ),
-			]
+			)
 		);
 	}
 
 	/**
-	 * @param array<string, mixed> $settings
+	 * Persist form settings.
+	 *
+	 * @param array $settings Settings.
 	 */
 	private function persist_form_settings( array $settings ): void {
 		if ( ! class_exists( '\\PixelsCoreCreativeToolsForElementor\\Form_Settings' ) ) {
@@ -316,23 +368,25 @@ final class Rest_Api {
 		}
 
 		\PixelsCoreCreativeToolsForElementor\Form_Settings::save(
-			[
+			array(
 				'recaptcha_v2_site_key'   => sanitize_text_field( $settings['recaptchaV2SiteKey'] ?? '' ),
 				'recaptcha_v2_secret_key' => sanitize_text_field( $settings['recaptchaV2SecretKey'] ?? '' ),
 				'recaptcha_v3_site_key'   => sanitize_text_field( $settings['recaptchaV3SiteKey'] ?? '' ),
 				'recaptcha_v3_secret_key' => sanitize_text_field( $settings['recaptchaV3SecretKey'] ?? '' ),
 				'mailchimp_api_key'       => sanitize_text_field( $settings['mailchimpApiKey'] ?? '' ),
 				'mailchimp_list_id'       => sanitize_text_field( $settings['mailchimpListId'] ?? '' ),
-			]
+			)
 		);
 	}
 
 	/**
-	 * @param array<string, mixed> $widget
+	 * Format widget.
+	 *
+	 * @param array $widget Widget.
 	 * @return array<string, mixed>
 	 */
 	public static function format_widget( array $widget ): array {
-		return [
+		return array(
 			'id'          => $widget['slug'],
 			'name'        => $widget['title'],
 			'description' => $widget['description'],
@@ -342,15 +396,17 @@ final class Rest_Api {
 			'tier'        => $widget['tier'] ?? 'free',
 			'isPro'       => ! empty( $widget['is_pro'] ),
 			'upgradeUrl'  => esc_url_raw( $widget['upgrade_url'] ?? ( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : '' ) ),
-		];
+		);
 	}
 
 	/**
-	 * @param array<string, mixed> $extension
+	 * Format extension.
+	 *
+	 * @param array $extension Extension.
 	 * @return array<string, mixed>
 	 */
 	public static function format_extension( array $extension ): array {
-		return [
+		return array(
 			'id'          => $extension['slug'],
 			'name'        => $extension['title'],
 			'description' => $extension['description'],
@@ -360,26 +416,34 @@ final class Rest_Api {
 			'tier'        => $extension['tier'] ?? 'free',
 			'isPro'       => ! empty( $extension['is_pro'] ),
 			'upgradeUrl'  => esc_url_raw( $extension['upgrade_url'] ?? ( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : '' ) ),
-		];
+		);
 	}
 
 	/**
-	 * @param array<string, string> $settings
+	 * Format form settings.
+	 *
+	 * @param array $settings Settings.
 	 * @return array<string, string>
 	 */
 	private static function format_form_settings( array $settings ): array {
-		return [
+		return array(
 			'recaptchaV2SiteKey'   => $settings['recaptcha_v2_site_key'],
 			'recaptchaV2SecretKey' => $settings['recaptcha_v2_secret_key'],
 			'recaptchaV3SiteKey'   => $settings['recaptcha_v3_site_key'],
 			'recaptchaV3SecretKey' => $settings['recaptcha_v3_secret_key'],
 			'mailchimpApiKey'      => $settings['mailchimp_api_key'],
 			'mailchimpListId'      => $settings['mailchimp_list_id'],
-		];
+		);
 	}
 
+	/**
+	 * Widget category.
+	 *
+	 * @param string $slug Slug.
+	 * @return string Result.
+	 */
 	public static function widget_category( string $slug ): string {
-		$map = [
+		$map = array(
 			'tabs'              => 'content',
 			'accordion'         => 'content',
 			'carousel'          => 'content',
@@ -408,13 +472,19 @@ final class Rest_Api {
 			'post_comment'      => 'content',
 			'author_box'        => 'content',
 			'table_of_content'  => 'content',
-		];
+		);
 
 		return $map[ $slug ] ?? 'content';
 	}
 
+	/**
+	 * Extension category.
+	 *
+	 * @param string $slug Slug.
+	 * @return string Result.
+	 */
 	public static function extension_category( string $slug ): string {
-		$map = [
+		$map = array(
 			'starter_animations'      => 'performance',
 			'sticky_element'          => 'performance',
 			'animation_effects'       => 'utility',
@@ -422,7 +492,7 @@ final class Rest_Api {
 			'image_animation_effects' => 'utility',
 			'cursor_hover_effect'     => 'utility',
 			'live_copy_paste'         => 'utility',
-		];
+		);
 
 		return $map[ $slug ] ?? 'utility';
 	}

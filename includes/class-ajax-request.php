@@ -1,4 +1,10 @@
 <?php
+/**
+ * Ajax request.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +28,7 @@ class Ajax_Request {
 	 *
 	 * @var array<int, string>
 	 */
-	const COPY_CONTENT_ELEMENT_KEYS = [
+	const COPY_CONTENT_ELEMENT_KEYS = array(
 		'id',
 		'elType',
 		'widgetType',
@@ -30,11 +36,14 @@ class Ajax_Request {
 		'elements',
 		'isInner',
 		'isLocked',
-	];
+	);
 
+	/**
+	 * Construct.
+	 */
 	public function __construct() {
-		add_action( 'wp_ajax_pixeccte_live_paste', [ $this, 'live_paste' ] );
-		add_action( 'wp_ajax_pixeccte_cross_cp_import', [ $this, 'cross_copy_paste_media_import' ] );
+		add_action( 'wp_ajax_pixeccte_live_paste', array( $this, 'live_paste' ) );
+		add_action( 'wp_ajax_pixeccte_cross_cp_import', array( $this, 'cross_copy_paste_media_import' ) );
 	}
 
 	/**
@@ -65,13 +74,13 @@ class Ajax_Request {
 
 		switch ( $type ) {
 			case 'pixeccte_enable_widget':
-				$widgets_name = [];
+				$widgets_name = array();
 				if ( isset( $_POST['widgets_name'] ) ) {
 					$raw_widgets = map_deep( wp_unslash( $_POST['widgets_name'] ), 'sanitize_text_field' );
 
 					if ( is_string( $raw_widgets ) ) {
 						$decoded     = json_decode( $raw_widgets, true );
-						$raw_widgets = is_array( $decoded ) ? map_deep( $decoded, 'sanitize_text_field' ) : [ $raw_widgets ];
+						$raw_widgets = is_array( $decoded ) ? map_deep( $decoded, 'sanitize_text_field' ) : array( $raw_widgets );
 					}
 
 					if ( is_array( $raw_widgets ) ) {
@@ -108,7 +117,7 @@ class Ajax_Request {
 	 * @param array<int, string> $widgets_name Sanitized widget names.
 	 * @return array{success: bool, message: string, description: string}
 	 */
-	public function enable_widget( $widgets_name = [] ) {
+	public function enable_widget( $widgets_name = array() ) {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return $this->set_response(
 				false,
@@ -125,7 +134,7 @@ class Ajax_Request {
 			);
 		}
 
-		$widgets_name = is_array( $widgets_name ) ? map_deep( $widgets_name, 'sanitize_text_field' ) : [];
+		$widgets_name = is_array( $widgets_name ) ? map_deep( $widgets_name, 'sanitize_text_field' ) : array();
 
 		/**
 		 * Allow other plugins/themes to react when Live Paste enables widgets.
@@ -134,10 +143,10 @@ class Ajax_Request {
 		 */
 		apply_filters(
 			'pixeccte_enable_selected_widgets',
-			[
+			array(
 				'widgets'    => $widgets_name,
 				'extensions' => '',
-			]
+			)
 		);
 
 		return $this->set_response( true, __( 'Widgets enabled successfully.', 'pixels-core-creative-tools-for-elementor' ), '' );
@@ -182,7 +191,7 @@ class Ajax_Request {
 			wp_send_json_error( __( 'Invalid Content.', 'pixels-core-creative-tools-for-elementor' ) );
 		}
 
-		$media_import = [ $decoded ];
+		$media_import = array( $decoded );
 		$media_import = $this->elements_id_change( $media_import );
 		$media_import = $this->import_media_copy_content( $media_import );
 
@@ -230,7 +239,7 @@ class Ajax_Request {
 			return null;
 		}
 
-		$sanitized = [];
+		$sanitized = array();
 
 		foreach ( self::COPY_CONTENT_ELEMENT_KEYS as $key ) {
 			if ( ! array_key_exists( $key, $data ) ) {
@@ -256,7 +265,7 @@ class Ajax_Request {
 
 				case 'settings':
 					if ( ! is_array( $value ) ) {
-						$sanitized[ $key ] = [];
+						$sanitized[ $key ] = array();
 						break;
 					}
 					$sanitized[ $key ] = $this->sanitize_copy_content_settings( $value );
@@ -264,7 +273,7 @@ class Ajax_Request {
 
 				case 'elements':
 					if ( ! is_array( $value ) ) {
-						$sanitized[ $key ] = [];
+						$sanitized[ $key ] = array();
 						break;
 					}
 					$sanitized[ $key ] = $this->sanitize_copy_content_elements( $value );
@@ -278,11 +287,11 @@ class Ajax_Request {
 		}
 
 		if ( ! isset( $sanitized['settings'] ) || ! is_array( $sanitized['settings'] ) ) {
-			$sanitized['settings'] = [];
+			$sanitized['settings'] = array();
 		}
 
 		if ( ! isset( $sanitized['elements'] ) || ! is_array( $sanitized['elements'] ) ) {
-			$sanitized['elements'] = [];
+			$sanitized['elements'] = array();
 		}
 
 		return $sanitized;
@@ -295,7 +304,7 @@ class Ajax_Request {
 	 * @return array<int, array<string, mixed>>
 	 */
 	protected function sanitize_copy_content_elements( array $elements ) {
-		$sanitized = [];
+		$sanitized = array();
 
 		foreach ( $elements as $element ) {
 			$clean = $this->sanitize_copy_content_tree( $element );
@@ -315,7 +324,7 @@ class Ajax_Request {
 	 */
 	protected function sanitize_copy_content_settings( $settings ) {
 		if ( is_array( $settings ) ) {
-			$sanitized = [];
+			$sanitized = array();
 
 			foreach ( $settings as $key => $value ) {
 				if ( ! is_string( $key ) && ! is_int( $key ) ) {
@@ -361,16 +370,16 @@ class Ajax_Request {
 	/**
 	 * Whether the array is a list (0..n sequential keys).
 	 *
-	 * @param array<mixed> $array Array to check.
+	 * @param array<mixed> $values Array to check.
 	 * @return bool
 	 */
-	protected function is_list_array( array $array ) {
+	protected function is_list_array( array $values ) {
 		// Polyfill only: do not call array_is_list() (WP 6.5+) while Requires at least is 6.0.
-		if ( [] === $array ) {
+		if ( array() === $values ) {
 			return true;
 		}
 
-		return array_keys( $array ) === range( 0, count( $array ) - 1 );
+		return array_keys( $values ) === range( 0, count( $values ) - 1 );
 	}
 
 	/**
@@ -449,11 +458,11 @@ class Ajax_Request {
 	 * @return array{success: bool, message: string, description: string}
 	 */
 	public function set_response( $success = false, $message = '', $description = '' ) {
-		return [
+		return array(
 			'success'     => (bool) $success,
 			'message'     => esc_html( $message ),
 			'description' => esc_html( $description ),
-		];
+		);
 	}
 }
 

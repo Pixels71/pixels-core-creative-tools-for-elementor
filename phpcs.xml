@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="Pixels Core Creative Tools for Elementor">
+	<description>WordPress Coding Standards for this plugin.</description>
+
+	<file>.</file>
+
+	<arg name="extensions" value="php"/>
+	<arg name="basepath" value="."/>
+	<arg value="ps"/>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/tools/*</exclude-pattern>
+
+	<rule ref="WordPress">
+		<!-- Plugin uses intentional class-pixeccte-* prefixes. -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+	</rule>
+</ruleset>

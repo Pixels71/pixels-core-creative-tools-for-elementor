@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       Pixels Core Creative Tools for Elementor
  * Plugin URI:        https://addons.pixels71.com
@@ -14,24 +13,26 @@
  * Requires Plugins:  elementor
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * @package PixelsCoreCreativeToolsForElementor
  */
 
-if (! defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define('PIXECCTE_VERSION', '1.0.2');
-define('PIXECCTE_FILE', __FILE__);
-define('PIXECCTE_PATH', plugin_dir_path(__FILE__));
-define('PIXECCTE_URL', plugin_dir_url(__FILE__));
-define('PIXECCTE_URL_ASSETS', PIXECCTE_URL . 'assets/');
-define('PIXECCTE_ADMIN_PATH', PIXECCTE_PATH . 'admin/');
-define('PIXECCTE_ADMIN_URL', PIXECCTE_URL . 'admin/');
-define('PIXECCTE_UPGRADE_URL', 'https://pixels71.com/pixels-core-pro/');
+define( 'PIXECCTE_VERSION', '1.0.2' );
+define( 'PIXECCTE_FILE', __FILE__ );
+define( 'PIXECCTE_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PIXECCTE_URL', plugin_dir_url( __FILE__ ) );
+define( 'PIXECCTE_URL_ASSETS', PIXECCTE_URL . 'assets/' );
+define( 'PIXECCTE_ADMIN_PATH', PIXECCTE_PATH . 'admin/' );
+define( 'PIXECCTE_ADMIN_URL', PIXECCTE_URL . 'admin/' );
+define( 'PIXECCTE_UPGRADE_URL', 'https://pixels71.com/pixels-core-pro/' );
 // Set to true when Pixels Core Pro is available for purchase/activation.
-define('PIXECCTE_SHOW_PRO_UPSSELL', false);
+define( 'PIXECCTE_SHOW_PRO_UPSSELL', false );
 
-require_once PIXECCTE_PATH . 'includes/class-pixeccte.php';
+require_once PIXECCTE_PATH . 'includes/class-plugin.php';
 
 register_activation_hook(
 	__FILE__,
@@ -45,7 +46,7 @@ register_activation_hook(
 		\PixelsCoreCreativeToolsForElementor\Admin\Extension_Settings::activate_defaults();
 		flush_rewrite_rules();
 
-		set_transient('pixeccte_activation_redirect', true, 30);
+		set_transient( 'pixeccte_activation_redirect', true, 30 );
 	}
 );
 

@@ -1,6 +1,6 @@
 (function($){
 
-	Pixels_HF_EPRO_Compatibility = {
+	Pixeccte_Theme_Elementor_Pro_Compatibility = {
 
         /**
 		 * Binds events for the Elementor Header Footer.
@@ -26,10 +26,10 @@
 	};
 
 	/**
-	 * Initialize Pixels_HF_EPRO_Compatibility
+	 * Initialize Pixeccte_Theme_Elementor_Pro_Compatibility
 	 */
 	$(function(){
-		Pixels_HF_EPRO_Compatibility.init();
+		Pixeccte_Theme_Elementor_Pro_Compatibility.init();
 	});
 
 })(jQuery);

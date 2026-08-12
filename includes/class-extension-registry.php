@@ -1,4 +1,10 @@
 <?php
+/**
+ * Extension registry.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 namespace PixelsCoreCreativeToolsForElementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,21 +16,33 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Extension_Registry {
 
+	/**
+	 * Instance.
+	 *
+	 * @var mixed
+	 */
 	private static ?Extension_Registry $instance = null;
 
 	/**
+	 * Class.
+	 *
 	 * @var array<string, array<string, mixed>>
 	 */
-	private array $extensions = [
-		'live_copy_paste' => [
+	private array $extensions = array(
+		'live_copy_paste' => array(
 			'file'        => 'extensions/class-live-copy-paste.php',
 			'class'       => 'PixelsCoreCreativeToolsForElementor\\Extensions\\Live_Copy_Paste',
 			'title'       => 'Live Copy Paste',
 			'description' => 'Paste Elementor sections, containers, and widgets from the clipboard in the editor.',
 			'tier'        => 'free',
-		],
-	];
+		),
+	);
 
+	/**
+	 * Instance.
+	 *
+	 * @return Extension_Registry Result.
+	 */
 	public static function instance(): Extension_Registry {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -34,6 +52,8 @@ final class Extension_Registry {
 	}
 
 	/**
+	 * Get all.
+	 *
 	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_all(): array {
@@ -52,28 +72,44 @@ final class Extension_Registry {
 	}
 
 	/**
+	 * Get slugs.
+	 *
 	 * @return array<int, string>
 	 */
 	public function get_slugs(): array {
 		return array_keys( $this->get_all() );
 	}
 
+	/**
+	 * Get.
+	 *
+	 * @param string $slug Slug.
+	 * @return array Result.
+	 */
 	public function get( string $slug ): ?array {
 		$all = $this->get_all();
 
 		return $all[ $slug ] ?? null;
 	}
 
+	/**
+	 * Exists.
+	 *
+	 * @param string $slug Slug.
+	 * @return bool Result.
+	 */
 	public function exists( string $slug ): bool {
 		return null !== $this->get( $slug );
 	}
 
 	/**
-	 * @param array<int, string> $slugs
+	 * Get asset definitions.
+	 *
+	 * @param array $slugs Slugs.
 	 * @return array<string, array<string, mixed>>
 	 */
 	public function get_asset_definitions( array $slugs ): array {
-		$definitions = [];
+		$definitions = array();
 
 		foreach ( $slugs as $slug ) {
 			$config = $this->get( $slug );
@@ -99,17 +135,20 @@ final class Extension_Registry {
 	}
 
 	/**
-	 * @param array<string, mixed> $config
+	 * Translate extension entry.
+	 *
+	 * @param string $slug Slug.
+	 * @param array  $config Config.
 	 * @return array<string, mixed>
 	 */
 	private function translate_extension_entry( string $slug, array $config ): array {
-		$titles = [
+		$titles = array(
 			'live_copy_paste' => __( 'Live Copy Paste', 'pixels-core-creative-tools-for-elementor' ),
-		];
+		);
 
-		$descriptions = [
+		$descriptions = array(
 			'live_copy_paste' => __( 'Paste Elementor sections, containers, and widgets from the clipboard in the editor.', 'pixels-core-creative-tools-for-elementor' ),
-		];
+		);
 
 		if ( isset( $titles[ $slug ] ) ) {
 			$config['title'] = $titles[ $slug ];

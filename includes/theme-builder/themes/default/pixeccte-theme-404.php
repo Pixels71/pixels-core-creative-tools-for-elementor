@@ -1,4 +1,10 @@
 <?php
+/**
+ * Pixeccte theme 404.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

@@ -1,5 +1,11 @@
 <?php
-defined('ABSPATH') || exit; // Abort, if called directly.
+/**
+ * Pixeccte footer.
+ *
+ * @package PixelsCoreCreativeToolsForElementor
+ */
+
+defined( 'ABSPATH' ) || exit; // Abort, if called directly.
 /**
  * Footer file in case of the elementor way
  */
