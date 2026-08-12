@@ -5,7 +5,7 @@ Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
 Requires Plugins: elementor
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,11 @@ Go to **Theme Builder**, create a Header or Footer template, design it with Elem
 3. Theme Builder for headers and footers.
 
 == Changelog ==
+
+= 1.0.3 =
+* Improved WordPress Coding Standards compliance across the plugin (PHPCS / WPCS).
+* Added and completed missing file, class, and function documentation blocks.
+* Minor code-quality and maintainability cleanups.
 
 = 1.0.2 =
 * Hardened sanitization, escaping, and validation.
