@@ -70,8 +70,10 @@ final class Assets_Manager {
 	private function __construct() {
 		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_vendor_scripts' ), 5 );
 		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_frontend_scripts' ) );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'add_preview_hooks_guard' ), 1 );
 		add_action( 'elementor/frontend/after_register_styles', array( $this, 'register_frontend_styles' ) );
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_editor_assets' ) );
+		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'add_preview_hooks_guard' ), 0 );
 		add_action( 'elementor/preview/enqueue_scripts', array( $this, 'enqueue_preview_extension_assets' ) );
 		add_filter( 'script_loader_tag', array( $this, 'add_module_type_to_scripts' ), 10, 3 );
 	}
@@ -287,7 +289,13 @@ final class Assets_Manager {
 	}
 
 	/**
-	 * Enqueue editor assets.
+	 * Enqueue editor-panel assets only.
+	 *
+	 * Frontend widget/extension scripts must not load in the editor parent.
+	 * They depend on elementor-frontend (and Pro vendors like GSAP), which
+	 * collide with the editor webpack runtime and break the canvas. Those
+	 * scripts belong in the preview iframe via get_script_depends() and
+	 * enqueue_preview_extension_assets().
 	 */
 	public function enqueue_editor_assets(): void {
 		wp_enqueue_style(
@@ -307,31 +315,11 @@ final class Assets_Manager {
 			);
 		}
 
-		$this->ensure_elementor_frontend_assets_registered();
-
 		$nested_slugs = array();
 
 		foreach ( $this->definitions as $slug => $definition ) {
-			if ( ! empty( $definition['style'] ) ) {
-				wp_enqueue_style( $this->get_style_handle( $slug ) );
-			}
-
-			if ( ! empty( $definition['script'] ) ) {
-				wp_enqueue_script( $this->get_script_handle( $slug ) );
-			}
-
 			if ( ! empty( $definition['nested'] ) && Plugin::is_nested_elements_active() ) {
 				$nested_slugs[] = $slug;
-			}
-		}
-
-		foreach ( $this->extension_definitions as $slug => $definition ) {
-			if ( ! empty( $definition['style'] ) ) {
-				wp_enqueue_style( $this->get_extension_style_handle( $slug ) );
-			}
-
-			if ( ! empty( $definition['script'] ) ) {
-				wp_enqueue_script( $this->get_extension_script_handle( $slug ) );
 			}
 		}
 
@@ -357,6 +345,29 @@ final class Assets_Manager {
 	}
 
 	/**
+	 * Isolate Elementor frontend hook callbacks so one throwing extension cannot skip widget handlers.
+	 *
+	 * Elementor's runReadyTrigger() calls doAction() for global, then widget type, with no try/catch.
+	 * Pro extensions hook frontend/element_ready/global and .../widget; a throw there leaves every
+	 * widget inert in the editor canvas while the published frontend still works.
+	 */
+	public function add_preview_hooks_guard(): void {
+		static $added = false;
+
+		if ( $added || ! wp_script_is( 'elementor-frontend', 'registered' ) ) {
+			return;
+		}
+
+		$added = true;
+
+		wp_add_inline_script(
+			'elementor-frontend',
+			'(function(){function patch(){if(!window.elementorFrontend||!elementorFrontend.hooks||elementorFrontend.hooks._pixeccteGuarded){return;}var hooks=elementorFrontend.hooks;var original=hooks.doAction.bind(hooks);hooks.doAction=function(action){try{return original.apply(null,arguments);}catch(error){if(window.console&&console.error){console.error("[Pixels] Elementor hook failed:",action,error);}}};hooks._pixeccteGuarded=true;}patch();window.addEventListener("elementor/frontend/init",patch);})();',
+			'after'
+		);
+	}
+
+	/**
 	 * Load extension assets inside the Elementor preview iframe so editor toggles work live.
 	 */
 	public function enqueue_preview_extension_assets(): void {
@@ -365,6 +376,9 @@ final class Assets_Manager {
 		}
 
 		$this->ensure_elementor_frontend_assets_registered();
+		$this->register_vendor_scripts();
+		$this->register_frontend_scripts();
+		$this->register_frontend_styles();
 
 		foreach ( $this->extension_definitions as $slug => $definition ) {
 			if ( ! empty( $definition['style'] ) ) {

@@ -156,7 +156,7 @@
 
 				if (childView?._index !== undefined) {
 					const $wrapper = containerView.$el
-						.find('.pixeccte-stack-card__card-wrapper')
+						.find('.pixels-core-stack-card__card-wrapper')
 						.eq(childView._index);
 
 					if ($wrapper.length) {
@@ -178,7 +178,7 @@
 					this.model?.config?.support_improved_repeaters &&
 					this.model?.config?.is_interlaced
 				) {
-					const $wrappers = $container.find('.pixeccte-stack-card__card-wrapper');
+					const $wrappers = $container.find('.pixels-core-stack-card__card-wrapper');
 
 					$wrappers.each(function () {
 						if (buffer.childNodes.length) {
@@ -193,13 +193,13 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('pixeccte-stack-card__card-inner');
+				childView.$el.addClass('pixels-core-stack-card__card-inner');
 			}
 		}
 
 		class PixelsStackCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixeccte-stack-card';
+				return 'pixels-stack-card';
 			}
 
 			getView() {
@@ -229,9 +229,9 @@
 
 				if (childView?._index !== undefined) {
 					const $item = containerView.$el
-						.find('.pixeccte-timeline__item')
+						.find('.pixels-core-timeline__item')
 						.eq(childView._index);
-					const $card = $item.find('.pixeccte-timeline__card');
+					const $card = $item.find('.pixels-core-timeline__card');
 
 					if ($card.length) {
 						return $card;
@@ -252,7 +252,7 @@
 					this.model?.config?.support_improved_repeaters &&
 					this.model?.config?.is_interlaced
 				) {
-					const $cards = $container.find('.pixeccte-timeline__card');
+					const $cards = $container.find('.pixels-core-timeline__card');
 
 					$cards.each(function () {
 						if (buffer.childNodes.length) {
@@ -267,13 +267,13 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('pixeccte-timeline__card-inner');
+				childView.$el.addClass('pixels-core-timeline__card-inner');
 			}
 		}
 
 		class PixelsTimelineElementType extends NestedElementBase {
 			getType() {
-				return 'pixeccte-timeline';
+				return 'pixels-timeline';
 			}
 
 			getView() {
@@ -299,13 +299,13 @@
 			}
 
 			onAddChild(childView) {
-				childView.$el.addClass('pixeccte-marquee__item');
+				childView.$el.addClass('pixels-core-marquee__item');
 			}
 		}
 
 		class PixelsMarqueeElementType extends NestedElementBase {
 			getType() {
-				return 'pixeccte-marquee';
+				return 'pixels-marquee';
 			}
 
 			getView() {
@@ -332,11 +332,11 @@
 
 			onAddChild(childView) {
 				const index = childView.model.attributes.dataIndex;
-				const $widget = childView._parent.$el.find('.pixeccte-expanding-card');
+				const $widget = childView._parent.$el.find('.pixels-expanding-card');
 				const defaultActive =
 					Math.max(0, (parseInt($widget.data('active-index'), 10) || 0));
 
-				childView.$el.addClass('pixeccte-expanding-card__item');
+				childView.$el.addClass('pixels-expanding-card__item');
 				childView.$el.attr('data-card-index', index - 1);
 
 				if (index - 1 === defaultActive) {
@@ -347,7 +347,7 @@
 
 		class PixelsExpandingCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixeccte-expanding-card';
+				return 'pixels-expanding-card';
 			}
 
 			getView() {
@@ -370,8 +370,16 @@
 
 	$(window).on('elementor/nested-element-type-loaded', () => {
 		enabledWidgets.forEach((slug) => {
-			if (typeof registry[slug] === 'function') {
+			if (typeof registry[slug] !== 'function') {
+				return;
+			}
+
+			try {
 				registry[slug]();
+			} catch (error) {
+				if (window.console && console.error) {
+					console.error('[Pixels nested widgets]', slug, error);
+				}
 			}
 		});
 	});
