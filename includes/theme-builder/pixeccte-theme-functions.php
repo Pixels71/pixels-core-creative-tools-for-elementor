@@ -376,6 +376,11 @@ function pixeccte_get_theme_builder_preview_post_types() {
 
 	unset( $post_types['attachment'], $post_types['pixeccte-theme'], $post_types['page'] );
 
+	$excluded = pixeccte_get_theme_builder_excluded_singular_post_types();
+	foreach ( $excluded as $excluded_type ) {
+		unset( $post_types[ $excluded_type ] );
+	}
+
 	/**
 	 * Filter previewable post types for theme builder templates.
 	 *
@@ -601,12 +606,32 @@ function pixeccte_get_theme_builder_preview_post_id( $template_id = 0 ) {
 }
 
 /**
+ * Post types that must keep their own singular template (not theme-builder singles).
+ *
+ * @return array<int, string>
+ */
+function pixeccte_get_theme_builder_excluded_singular_post_types() {
+	$types = array( 'pixeccte-theme' );
+
+	/**
+	 * Filter post types the theme builder should not replace on singular views.
+	 *
+	 * @param array<int, string> $types Post type slugs.
+	 */
+	$types = apply_filters( 'pixeccte_theme_builder_excluded_singular_post_types', $types );
+
+	return array_values( array_unique( array_filter( array_map( 'strval', (array) $types ) ) ) );
+}
+
+/**
  * Resolve the post ID used by single-template dynamic widgets.
  *
  * @return int
  */
 function pixeccte_get_theme_builder_post_id() {
-	if ( is_singular() && ! is_singular( 'pixeccte-theme' ) ) {
+	$excluded = pixeccte_get_theme_builder_excluded_singular_post_types();
+
+	if ( is_singular() && ! is_singular( $excluded ) ) {
 		return (int) get_queried_object_id();
 	}
 

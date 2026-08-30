@@ -2648,8 +2648,12 @@ class Theme_Elementor {
 			return $template;
 		}
 
-		// Never hijack the template post type itself.
-		if ( is_singular( 'pixeccte-theme' ) ) {
+		// Never hijack template library post types themselves.
+		$excluded = function_exists( 'pixeccte_get_theme_builder_excluded_singular_post_types' )
+			? pixeccte_get_theme_builder_excluded_singular_post_types()
+			: array( 'pixeccte-theme' );
+
+		if ( ! empty( $excluded ) && is_singular( $excluded ) ) {
 			return $template;
 		}
 
