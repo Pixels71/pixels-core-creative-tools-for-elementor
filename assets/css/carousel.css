@@ -15,6 +15,11 @@
 	--pixeccte-carousel-slide-gap: 16px;
 }
 
+.pixeccte-carousel__slides,
+.pixeccte-carousel__slides > .swiper-slide {
+	transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* Elementor containers default to width:100%, which breaks multi-slide carousels. */
 .pixeccte-carousel__slides > .swiper-slide.e-con {
 	--width: auto;
@@ -317,4 +322,49 @@
 	opacity: 0.35;
 	cursor: default;
 	pointer-events: none;
+}
+
+.pixeccte-carousel-effect--coverflow .pixeccte-carousel__wrapper.swiper,
+.pixeccte-carousel-effect--cards .pixeccte-carousel__wrapper.swiper,
+.pixeccte-carousel-effect--cube .pixeccte-carousel__wrapper.swiper,
+.pixeccte-carousel-effect--flip .pixeccte-carousel__wrapper.swiper {
+	overflow: visible;
+}
+
+.elementor-widget-pixeccte-carousel.pixeccte-carousel-effect--coverflow,
+.elementor-widget-pixeccte-carousel.pixeccte-carousel-effect--cards,
+.elementor-widget-pixeccte-carousel.pixeccte-carousel-effect--cube,
+.elementor-widget-pixeccte-carousel.pixeccte-carousel-effect--flip {
+	overflow: hidden;
+}
+
+.pixeccte-carousel-effect--coverflow .pixeccte-carousel__wrapper {
+	padding-block: 2.5rem;
+}
+
+.pixeccte-carousel-effect--cards .pixeccte-carousel__wrapper {
+	padding: 1.75rem 10%;
+}
+
+.pixeccte-carousel-effect--cube .pixeccte-carousel__wrapper {
+	padding-bottom: 3rem;
+}
+
+.pixeccte-carousel-effect--fade_scale .swiper-creative .swiper-slide,
+.pixeccte-carousel-effect--slide_over .swiper-creative .swiper-slide {
+	overflow: visible;
+}
+
+.pixeccte-carousel-effect--coverflow .pixeccte-carousel__slides > .swiper-slide,
+.pixeccte-carousel-effect--cards .pixeccte-carousel__slides > .swiper-slide,
+.pixeccte-carousel-effect--cube .pixeccte-carousel__slides > .swiper-slide,
+.pixeccte-carousel-effect--flip .pixeccte-carousel__slides > .swiper-slide {
+	border-radius: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pixeccte-carousel__slides,
+	.pixeccte-carousel__slides > .swiper-slide {
+		transition-timing-function: ease;
+	}
 }

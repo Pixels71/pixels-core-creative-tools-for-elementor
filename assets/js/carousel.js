@@ -209,6 +209,116 @@
 			return settings;
 		},
 
+		getCreativeEffectPresets(isVertical) {
+			const axisTranslate = (value) => (isVertical ? [0, value, 0] : [value, 0, 0]);
+
+			return {
+				fade_scale: {
+					perspective: true,
+					prev: {
+						translate: [0, 0, -1],
+						scale: 0.92,
+						opacity: 0,
+					},
+					next: {
+						translate: [0, 0, 0],
+						scale: 1.08,
+						opacity: 0,
+					},
+				},
+				slide_over: {
+					perspective: true,
+					prev: {
+						shadow: true,
+						translate: isVertical ? [0, '-12%', -180] : ['-12%', 0, -180],
+						scale: 0.9,
+						opacity: 0.55,
+					},
+					next: {
+						translate: axisTranslate('100%'),
+					},
+				},
+			};
+		},
+
+		applySlideEffect(settings, elementSettings, isSingleSlide) {
+			if (!isSingleSlide) {
+				return;
+			}
+
+			const effect = elementSettings.effect || 'slide';
+
+			if ('slide' === effect) {
+				return;
+			}
+
+			const isVertical = 'vertical' === elementSettings.direction;
+			const creativePresets = this.getCreativeEffectPresets(isVertical);
+
+			if (creativePresets[effect]) {
+				settings.effect = 'creative';
+				settings.creativeEffect = creativePresets[effect];
+				return;
+			}
+
+			settings.effect = effect;
+
+			if ('fade' === effect) {
+				settings.fadeEffect = {
+					crossFade: true,
+				};
+				return;
+			}
+
+			if ('coverflow' === effect) {
+				settings.slidesPerView = 1.35;
+				settings.centeredSlides = true;
+				settings.coverflowEffect = {
+					rotate: 16,
+					stretch: 0,
+					depth: 180,
+					scale: 0.88,
+					modifier: 1,
+					slideShadows: false,
+				};
+
+				Object.keys(settings.breakpoints || {}).forEach((breakpoint) => {
+					if (1 === settings.breakpoints[breakpoint].slidesPerView) {
+						settings.breakpoints[breakpoint].slidesPerView = 1.35;
+						settings.breakpoints[breakpoint].centeredSlides = true;
+					}
+				});
+				return;
+			}
+
+			if ('cards' === effect) {
+				settings.cardsEffect = {
+					slideShadows: true,
+					rotate: true,
+					perSlideRotate: 2,
+					perSlideOffset: 8,
+				};
+				return;
+			}
+
+			if ('cube' === effect) {
+				settings.cubeEffect = {
+					shadow: true,
+					slideShadows: true,
+					shadowOffset: 20,
+					shadowScale: 0.94,
+				};
+				return;
+			}
+
+			if ('flip' === effect) {
+				settings.flipEffect = {
+					slideShadows: true,
+					limitRotation: true,
+				};
+			}
+		},
+
 		getSwiperSettings() {
 			const elementSettings = this.getElementSettings();
 			const elementorBreakpoints = elementorFrontend.config.responsive.activeBreakpoints;
@@ -223,9 +333,18 @@
 				speed: parseInt(elementSettings.speed, 10) || 500,
 				direction: 'vertical' === elementSettings.direction ? 'vertical' : 'horizontal',
 				spaceBetween: this.getSpaceBetween(),
+				grabCursor: true,
 				handleElementorBreakpoints: true,
 				watchOverflow: true,
 				breakpoints: {},
+				on: {
+					init: () => {
+						this.syncEffectHeight();
+					},
+					resize: () => {
+						this.syncEffectHeight();
+					},
+				},
 			};
 
 			Object.keys(elementorBreakpoints)
@@ -250,15 +369,7 @@
 				};
 			}
 
-			if (isSingleSlide && elementSettings.effect) {
-				settings.effect = elementSettings.effect;
-
-				if ('fade' === elementSettings.effect) {
-					settings.fadeEffect = {
-						crossFade: true,
-					};
-				}
-			}
+			this.applySlideEffect(settings, elementSettings, isSingleSlide);
 
 			const showArrows = 'arrows' === elementSettings.navigation || 'both' === elementSettings.navigation;
 			const showPagination = 'dots' === elementSettings.navigation || 'both' === elementSettings.navigation;
@@ -306,6 +417,38 @@
 			return settings;
 		},
 
+		isFixedHeightEffect(effect) {
+			return ['cube', 'flip', 'cards'].indexOf(effect) !== -1;
+		},
+
+		syncEffectHeight() {
+			const $carousel = this.elements.$carousel;
+
+			if (!$carousel.length) {
+				return;
+			}
+
+			const effect = this.getElementSettings('effect') || 'slide';
+
+			if (!this.isFixedHeightEffect(effect)) {
+				$carousel.css('height', '');
+				return;
+			}
+
+			let maxHeight = 0;
+
+			this.elements.$slides.each(function () {
+				const previousHeight = this.style.height;
+				this.style.height = 'auto';
+				maxHeight = Math.max(maxHeight, this.offsetHeight);
+				this.style.height = previousHeight;
+			});
+
+			if (maxHeight) {
+				$carousel.css('height', maxHeight + 'px');
+			}
+		},
+
 		destroySwipers() {
 			if (this.swiper) {
 				this.swiper.destroy(true, true);
@@ -330,6 +473,11 @@
 
 			this.swiper = await new Swiper(this.elements.$carousel, this.getSwiperSettings());
 			this.elements.$carousel.data('swiper', this.swiper);
+			this.syncEffectHeight();
+
+			if (this.swiper) {
+				this.swiper.update();
+			}
 		},
 
 		togglePauseOnHover(enable) {

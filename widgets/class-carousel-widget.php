@@ -73,7 +73,7 @@ class Carousel_Widget extends Widget_Nested_Base {
 	 * @return array Result.
 	 */
 	public function get_keywords(): array {
-		return array( 'carousel', 'slider', 'swiper', 'slideshow', 'pixeccte', 'nested' );
+		return array( 'carousel', 'slider', 'swiper', 'slideshow', 'animation', 'transition', 'pixeccte', 'nested' );
 	}
 
 	/**
@@ -368,9 +368,17 @@ class Carousel_Widget extends Widget_Nested_Base {
 				'type'               => Controls_Manager::SELECT,
 				'default'            => 'slide',
 				'options'            => array(
-					'slide' => esc_html__( 'Slide', 'pixels-core-creative-tools-for-elementor' ),
-					'fade'  => esc_html__( 'Fade', 'pixels-core-creative-tools-for-elementor' ),
+					'slide'      => esc_html__( 'Slide', 'pixels-core-creative-tools-for-elementor' ),
+					'fade'       => esc_html__( 'Fade', 'pixels-core-creative-tools-for-elementor' ),
+					'fade_scale' => esc_html__( 'Fade Scale', 'pixels-core-creative-tools-for-elementor' ),
+					'slide_over' => esc_html__( 'Slide Over', 'pixels-core-creative-tools-for-elementor' ),
+					'coverflow'  => esc_html__( 'Coverflow', 'pixels-core-creative-tools-for-elementor' ),
+					'cards'      => esc_html__( 'Cards', 'pixels-core-creative-tools-for-elementor' ),
+					'cube'       => esc_html__( 'Cube', 'pixels-core-creative-tools-for-elementor' ),
+					'flip'       => esc_html__( 'Flip', 'pixels-core-creative-tools-for-elementor' ),
 				),
+				'description'        => esc_html__( 'Slide change animation. 3D effects work best with one slide at a time.', 'pixels-core-creative-tools-for-elementor' ),
+				'prefix_class'       => 'pixeccte-carousel-effect--',
 				'condition'          => array(
 					'slides_to_show' => '1',
 				),
@@ -383,7 +391,7 @@ class Carousel_Widget extends Widget_Nested_Base {
 			array(
 				'label'              => esc_html__( 'Animation Speed', 'pixels-core-creative-tools-for-elementor' ),
 				'type'               => Controls_Manager::NUMBER,
-				'default'            => 500,
+				'default'            => 700,
 				'min'                => 0,
 				'max'                => 10000,
 				'step'               => 50,

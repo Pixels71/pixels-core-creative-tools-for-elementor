@@ -1,7 +1,9 @@
 (function ($) {
 	'use strict';
 
-	const enabledWidgets = window.pixeccteEditor?.enabledNestedWidgets || [];
+	const enabledWidgets = Array.isArray(window.pixeccteEditor?.enabledNestedWidgets)
+		? window.pixeccteEditor.enabledNestedWidgets
+		: [];
 
 	const registerPixelsTabs = () => {
 		const NestedElementBase = elementor.modules.elements.types.NestedElementBase;
@@ -358,6 +360,79 @@
 		elementor.elementsManager.registerElementType(new PixelsExpandingCardElementType());
 	};
 
+	const registerPixelsFilterAnything = () => {
+		const NestedElementBase = elementor.modules.elements.types.NestedElementBase;
+		const NestedView = $e.components.get('nested-elements').exports.NestedView;
+
+		if (!NestedElementBase || !NestedView) {
+			return;
+		}
+
+		class PixelsFilterAnythingView extends NestedView {
+			filter(child, index) {
+				child.attributes.dataIndex = index + 1;
+				return true;
+			}
+
+			getChildViewContainer(containerView, childView) {
+				const defaults = this.model.config.defaults;
+
+				if (childView?._index !== undefined) {
+					const $wrapper = containerView.$el
+						.find('.pixels-core-filter-anything__item')
+						.eq(childView._index);
+
+					if ($wrapper.length) {
+						return $wrapper;
+					}
+				}
+
+				if (defaults.elements_placeholder_selector) {
+					return containerView.$el.find(defaults.elements_placeholder_selector);
+				}
+
+				return NestedView.prototype.getChildViewContainer.apply(this, arguments);
+			}
+
+			attachBuffer(compositeView, buffer) {
+				const $container = this.getChildViewContainer(compositeView);
+
+				if (
+					this.model?.config?.support_improved_repeaters &&
+					this.model?.config?.is_interlaced
+				) {
+					const $wrappers = $container.find('.pixels-core-filter-anything__item');
+
+					$wrappers.each(function () {
+						if (buffer.childNodes.length) {
+							this.appendChild(buffer.childNodes[0]);
+						}
+					});
+
+					return;
+				}
+
+				$container.append(buffer);
+			}
+
+			onAddChild(childView) {
+				childView.$el.addClass('pixels-core-filter-anything__item-inner');
+			}
+		}
+
+		class PixelsFilterAnythingElementType extends NestedElementBase {
+			getType() {
+				return 'pixels-filter-anything';
+			}
+
+			getView() {
+				return PixelsFilterAnythingView;
+			}
+		}
+
+		elementor.elementsManager.registerElementType(new PixelsFilterAnythingElementType());
+	};
+
 	const registry = {
 		tabs: registerPixelsTabs,
 		accordion: registerPixelsAccordion,
@@ -366,6 +441,7 @@
 		timeline: registerPixelsTimeline,
 		stack_card: registerPixelsStackCard,
 		expanding_card: registerPixelsExpandingCard,
+		filter_anything: registerPixelsFilterAnything,
 	};
 
 	$(window).on('elementor/nested-element-type-loaded', () => {
