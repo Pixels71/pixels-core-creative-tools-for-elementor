@@ -414,7 +414,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__label' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -425,7 +426,8 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__title' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -499,6 +501,20 @@ class Accordion_Widget extends Widget_Nested_Base {
 			)
 		);
 
+		$this->add_control(
+			'icon_stroke_enable',
+			array(
+				'label'        => esc_html__( 'Stroke', 'pixels-core-creative-tools-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'pixels-core-creative-tools-for-elementor' ),
+				'label_off'    => esc_html__( 'Off', 'pixels-core-creative-tools-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'separator'    => 'before',
+				'description'  => esc_html__( 'Adds an outline to SVG icons. Font icons cannot be stroked.', 'pixels-core-creative-tools-for-elementor' ),
+			)
+		);
+
 		$this->start_controls_tabs( 'icon_style_tabs' );
 
 		$this->start_controls_tab(
@@ -517,6 +533,21 @@ class Accordion_Widget extends Widget_Nested_Base {
 					'{{WRAPPER}} .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'icon_stroke_enable' => 'yes',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-accordion__icon svg'   => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__icon svg *' => 'stroke: {{VALUE}};',
 				),
 			)
 		);
@@ -558,12 +589,29 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon'       => 'color: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon svg'   => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon svg *' => 'fill: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'accordion_icon_active_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'icon_stroke_enable' => 'yes',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg'   => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon svg *' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon svg'   => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon svg *' => 'stroke: {{VALUE}};',
 				),
 			)
 		);
@@ -574,7 +622,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Background', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icons'       => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icons' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icons' => 'background-color: {{VALUE}};',
 				),
 			)
@@ -586,7 +634,7 @@ class Accordion_Widget extends Widget_Nested_Base {
 				'label'     => esc_html__( 'Border Color', 'pixels-core-creative-tools-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pixeccte-accordion__item[open] .pixeccte-accordion__icons'       => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icons' => 'border-color: {{VALUE}};',
 					'{{WRAPPER}} .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icons' => 'border-color: {{VALUE}};',
 				),
 			)

@@ -1,6 +1,11 @@
 (function ($) {
 	'use strict';
 
+	const EVENT_NS = '.pixeccteAccordion';
+
+	// Extra grace on top of the measured CSS duration before the fallback timer fires.
+	const FALLBACK_BUFFER = 120;
+
 	const AccordionHandler = elementorModules.frontend.handlers.Base.extend({
 		getDefaultSettings() {
 			return {
@@ -26,21 +31,28 @@
 		},
 
 		bindEvents() {
-			this.elements.$titles.on('click', this.onTitleClick.bind(this));
+			const selectors = this.getSettings('selectors');
+
+			this.onAtomicRepeaterBound = this.onAtomicRepeater.bind(this);
+
+			// Delegated so items added by the repeater stay clickable without re-binding.
+			this.$element.on('click' + EVENT_NS, selectors.title, this.onTitleClick.bind(this));
 
 			elementorFrontend.elements.$window.on(
 				'elementor/nested-container/atomic-repeater',
-				this.onAtomicRepeater.bind(this)
+				this.onAtomicRepeaterBound
 			);
 		},
 
 		unbindEvents() {
-			this.elements.$titles.off('click');
+			this.$element.off(EVENT_NS);
 
-			elementorFrontend.elements.$window.off(
-				'elementor/nested-container/atomic-repeater',
-				this.onAtomicRepeater.bind(this)
-			);
+			if (this.onAtomicRepeaterBound) {
+				elementorFrontend.elements.$window.off(
+					'elementor/nested-container/atomic-repeater',
+					this.onAtomicRepeaterBound
+				);
+			}
 		},
 
 		onInit() {
@@ -48,11 +60,25 @@
 
 			if (!elementorFrontend.isEditMode()) {
 				this.wrapPanels();
-				this.elements.$accordion.addClass('pixeccte-accordion--animated');
+				this.elements.$accordion.addClass(
+					'pixeccte-accordion--animated pixeccte-accordion--no-transition'
+				);
 				this.initOpenItems();
+				this.releaseInitialTransitionLock();
 			}
 
 			this.syncTitleStates();
+		},
+
+		/**
+		 * Items open by default must not animate open on page load.
+		 */
+		releaseInitialTransitionLock() {
+			window.requestAnimationFrame(() => {
+				window.requestAnimationFrame(() => {
+					this.elements.$accordion.removeClass('pixeccte-accordion--no-transition');
+				});
+			});
 		},
 
 		isAnimated() {
@@ -94,86 +120,184 @@
 			);
 		},
 
+		getContent($item) {
+			return $item.children(this.getSettings('selectors.content')).first();
+		},
+
 		onTitleClick(event) {
-			if (elementorFrontend.isEditMode() || !this.isAnimated() || this.prefersReducedMotion()) {
+			if (elementorFrontend.isEditMode() || !this.isAnimated()) {
+				return;
+			}
+
+			const selectors = this.getSettings('selectors');
+			const $item = $(event.currentTarget).closest(selectors.item);
+
+			// Ignore clicks belonging to a nested accordion; its own handler owns them.
+			if (!$item.length || $item.closest(selectors.accordion)[0] !== this.elements.$accordion[0]) {
 				return;
 			}
 
 			event.preventDefault();
 
-			const $item = $(event.currentTarget).closest(this.getSettings('selectors.item'));
-			const isOpen = $item.hasClass('is-expanded');
-
-			if (isOpen) {
+			if ($item.hasClass('is-expanded')) {
 				this.closeItem($item);
 				return;
 			}
 
 			if (!this.allowMultiple()) {
-				const closePromises = [];
-
+				// Collapse siblings alongside the opening item rather than waiting for them,
+				// so the clicked item starts moving on the same frame as the click.
 				this.elements.$items.filter('.is-expanded').each((index, element) => {
 					if (element !== $item[0]) {
-						closePromises.push(this.closeItem($(element)));
+						this.closeItem($(element));
 					}
 				});
-
-				Promise.all(closePromises).then(() => {
-					this.openItem($item);
-				});
-				return;
 			}
 
 			this.openItem($item);
 		},
 
 		openItem($item) {
+			const $content = this.getContent($item);
+
 			$item.prop('open', true);
 			$item.addClass('is-active');
+			this.updateTitleState($item, true);
 
-			window.requestAnimationFrame(() => {
-				window.requestAnimationFrame(() => {
-					$item.addClass('is-expanded');
-					this.updateTitleState($item, true);
-				});
+			if (!this.isAnimated() || this.prefersReducedMotion()) {
+				$item.addClass('is-expanded');
+				return Promise.resolve();
+			}
+
+			// Flush the collapsed state so the grid-template-rows transition has a start value.
+			if ($content.length) {
+				void $content[0].offsetHeight;
+			}
+
+			$item.addClass('is-expanded');
+
+			return new Promise((resolve) => {
+				this.whenContentSettled($content, resolve);
 			});
 		},
 
 		closeItem($item) {
-			return new Promise((resolve) => {
-				if (!$item.hasClass('is-expanded')) {
-					resolve();
+			const $content = this.getContent($item);
+
+			const settle = () => {
+				// Bail out if the item was re-opened while this collapse was running.
+				if ($item.hasClass('is-expanded')) {
 					return;
 				}
 
-				const $content = $item.find(this.getSettings('selectors.content')).first();
-				let resolved = false;
+				$item.prop('open', false);
+				$item.removeClass('is-active');
+			};
 
-				const finish = () => {
-					if (resolved) {
-						return;
-					}
+			if (!$item.hasClass('is-expanded')) {
+				settle();
+				this.updateTitleState($item, false);
+				return Promise.resolve();
+			}
 
-					resolved = true;
-					$item.prop('open', false);
-					$item.removeClass('is-active is-expanded');
-					this.updateTitleState($item, false);
+			$item.removeClass('is-expanded');
+			this.updateTitleState($item, false);
+
+			if (!this.isAnimated() || this.prefersReducedMotion()) {
+				settle();
+				return Promise.resolve();
+			}
+
+			return new Promise((resolve) => {
+				this.whenContentSettled($content, () => {
+					settle();
 					resolve();
-				};
-
-				$item.removeClass('is-expanded');
-
-				if ($content.length) {
-					$content.one('transitionend', finish);
-					window.setTimeout(finish, this.getSettings('animationDuration') + 50);
-				} else {
-					finish();
-				}
+				});
 			});
 		},
 
+		/**
+		 * Run a callback once the panel height transition has finished.
+		 *
+		 * Only the height transition on the content wrapper counts: transitionend bubbles,
+		 * so transitions on the panel itself or on any widget inside it would otherwise
+		 * end the animation early.
+		 *
+		 * @param {jQuery}   $content Content wrapper.
+		 * @param {Function} callback Invoked exactly once.
+		 */
+		whenContentSettled($content, callback) {
+			if (!$content || !$content.length) {
+				callback();
+				return;
+			}
+
+			let done = false;
+			let timer = null;
+
+			const finish = () => {
+				if (done) {
+					return;
+				}
+
+				done = true;
+				$content.off('transitionend' + EVENT_NS, onTransitionEnd);
+				window.clearTimeout(timer);
+				callback();
+			};
+
+			const onTransitionEnd = (event) => {
+				const originalEvent = event.originalEvent || event;
+
+				if (event.target !== $content[0] || 'grid-template-rows' !== originalEvent.propertyName) {
+					return;
+				}
+
+				finish();
+			};
+
+			$content.on('transitionend' + EVENT_NS, onTransitionEnd);
+
+			timer = window.setTimeout(finish, this.getContentDuration($content) + FALLBACK_BUFFER);
+		},
+
+		/**
+		 * Measured transition time of the content wrapper, so the fallback timer cannot
+		 * fire before the CSS animation is actually done.
+		 *
+		 * @param {jQuery} $content Content wrapper.
+		 * @return {number} Duration in milliseconds.
+		 */
+		getContentDuration($content) {
+			const fallback = this.getSettings('animationDuration');
+
+			if (!$content || !$content.length || !window.getComputedStyle) {
+				return fallback;
+			}
+
+			const styles = window.getComputedStyle($content[0]);
+
+			const longest = (value) =>
+				String(value || '')
+					.split(',')
+					.reduce((max, part) => {
+						const trimmed = part.trim();
+						const parsed = parseFloat(trimmed);
+
+						if (isNaN(parsed)) {
+							return max;
+						}
+
+						return Math.max(max, -1 === trimmed.indexOf('ms') ? parsed * 1000 : parsed);
+					}, 0);
+
+			const total = longest(styles.transitionDuration) + longest(styles.transitionDelay);
+
+			return total > 0 ? total : fallback;
+		},
+
 		updateTitleState($item, isOpen) {
-			const $title = $item.find(this.getSettings('selectors.title')).first();
+			const $title = $item.children(this.getSettings('selectors.title')).first();
 
 			$title.attr('aria-expanded', isOpen ? 'true' : 'false');
 			$title.attr('tabindex', isOpen ? '0' : '-1');
@@ -187,7 +311,7 @@
 				this.updateTitleState($item, isOpen);
 
 				if (index === 0) {
-					$item.find(this.getSettings('selectors.title')).attr('tabindex', '0');
+					$item.children(this.getSettings('selectors.title')).attr('tabindex', '0');
 				}
 			});
 		},

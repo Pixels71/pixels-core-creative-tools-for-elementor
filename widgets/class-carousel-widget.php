@@ -681,7 +681,7 @@ class Carousel_Widget extends Widget_Nested_Base {
 		$this->add_responsive_control(
 			'arrows_size',
 			array(
-				'label'      => esc_html__( 'Size', 'pixels-core-creative-tools-for-elementor' ),
+				'label'      => esc_html__( 'Icon Size', 'pixels-core-creative-tools-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', 'em' ),
 				'range'      => array(
@@ -692,6 +692,44 @@ class Carousel_Widget extends Widget_Nested_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .elementor-swiper-button' => 'font-size: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'arrows_box_size',
+			array(
+				'label'      => esc_html__( 'Box Size', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px'  => array(
+						'min' => 20,
+						'max' => 200,
+					),
+					'em'  => array(
+						'min' => 1,
+						'max' => 12,
+					),
+					'rem' => array(
+						'min' => 1,
+						'max' => 12,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .elementor-swiper-button' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'arrows_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .elementor-swiper-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -947,6 +985,33 @@ class Carousel_Widget extends Widget_Nested_Base {
 			)
 		);
 
+		$this->add_control(
+			'arrows_background_color',
+			array(
+				'label'     => esc_html__( 'Background Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-swiper-button' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'arrows_border',
+				'selector' => '{{WRAPPER}} .elementor-swiper-button',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'arrows_box_shadow',
+				'selector' => '{{WRAPPER}} .elementor-swiper-button',
+			)
+		);
+
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
@@ -965,6 +1030,41 @@ class Carousel_Widget extends Widget_Nested_Base {
 					'{{WRAPPER}} .elementor-swiper-button:hover' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .elementor-swiper-button:hover svg' => 'fill: {{VALUE}};',
 				),
+			)
+		);
+
+		$this->add_control(
+			'arrows_hover_background_color',
+			array(
+				'label'     => esc_html__( 'Background Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-swiper-button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-swiper-button:focus' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'arrows_hover_border_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'arrows_border_border!' => '',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-swiper-button:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-swiper-button:focus' => 'border-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'arrows_hover_box_shadow',
+				'selector' => '{{WRAPPER}} .elementor-swiper-button:hover',
 			)
 		);
 

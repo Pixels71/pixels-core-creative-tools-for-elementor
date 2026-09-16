@@ -48,7 +48,12 @@
 	transition: color 0.3s ease;
 }
 
-.pixeccte-accordion__item[open] .pixeccte-accordion__label {
+/* Open-state styling is driven by .is-expanded, never by [open].
+   [open] has to stay on the <details> for the whole collapse (the content must remain
+   rendered while it animates shut), so styling hung off it lags the height by the full
+   animation duration. [open] is kept only for the no-JS / non-animated fallback. */
+.pixeccte-accordion__item.is-expanded .pixeccte-accordion__label,
+.pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__label {
 	color: #2271b1;
 }
 
@@ -97,6 +102,15 @@
 	fill: currentColor;
 }
 
+/* fill/stroke live on the SVG itself, so they need their own transition;
+   the one on .pixeccte-accordion__icon only covers the span's own properties. */
+.pixeccte-accordion__icon svg,
+.pixeccte-accordion__icon svg * {
+	transition:
+		fill 0.3s ease,
+		stroke 0.3s ease;
+}
+
 .pixeccte-accordion__icon--expanded {
 	position: absolute;
 	inset: 0;
@@ -110,13 +124,13 @@
 }
 
 .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon--collapsed,
-.pixeccte-accordion__item[open] .pixeccte-accordion__icon--collapsed {
+.pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon--collapsed {
 	opacity: 0;
 	transform: rotate(90deg) scale(0.85);
 }
 
 .pixeccte-accordion__item.is-expanded .pixeccte-accordion__icon--expanded,
-.pixeccte-accordion__item[open] .pixeccte-accordion__icon--expanded {
+.pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__icon--expanded {
 	opacity: 1;
 	transform: rotate(0deg) scale(1);
 }
@@ -166,6 +180,28 @@
 	border-top: 1px solid #e0e0e0;
 }
 
+/* No JS: the native <details> toggle must still show the panel at full height. */
+.pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__content {
+	grid-template-rows: 1fr;
+}
+
+.pixeccte-accordion:not(.pixeccte-accordion--animated) .pixeccte-accordion__item[open] .pixeccte-accordion__content-inner > .e-con.pixeccte-accordion__panel {
+	opacity: 1;
+	transform: none;
+}
+
+/* Applied for the first two frames so default-open items do not animate on page load. */
+.pixeccte-accordion--no-transition .pixeccte-accordion__content,
+.pixeccte-accordion--no-transition .pixeccte-accordion__content-inner > .e-con.pixeccte-accordion__panel,
+.pixeccte-accordion--no-transition .pixeccte-accordion__icon,
+.pixeccte-accordion--no-transition .pixeccte-accordion__icon svg,
+.pixeccte-accordion--no-transition .pixeccte-accordion__icon svg *,
+.pixeccte-accordion--no-transition .pixeccte-accordion__icons,
+.pixeccte-accordion--no-transition .pixeccte-accordion__title,
+.pixeccte-accordion--no-transition .pixeccte-accordion__label {
+	transition: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.pixeccte-accordion__content,
 	.pixeccte-accordion__content-inner > .e-con.pixeccte-accordion__panel,
@@ -174,7 +210,8 @@
 		transition: none;
 	}
 
-	.pixeccte-accordion__item[open] .pixeccte-accordion__content {
+	.pixeccte-accordion__item[open] .pixeccte-accordion__content,
+	.pixeccte-accordion__item.is-expanded .pixeccte-accordion__content {
 		grid-template-rows: 1fr;
 	}
 
@@ -198,6 +235,14 @@
 		display: inline-flex;
 		opacity: 1;
 		transform: none;
+	}
+
+	.pixeccte-accordion__item:not([open]):not(.is-expanded) .pixeccte-accordion__icon--expanded {
+		display: none;
+	}
+
+	.pixeccte-accordion__item:not([open]):not(.is-expanded) .pixeccte-accordion__icon--collapsed {
+		display: inline-flex;
 	}
 }
 
