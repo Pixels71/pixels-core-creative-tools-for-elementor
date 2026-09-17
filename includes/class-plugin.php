@@ -95,7 +95,16 @@ final class Plugin {
 		Widget_Settings::sync_new_widgets();
 		Extension_Settings::sync_new_extensions();
 		Widgets_Loader::instance();
-		Theme_Builder\Theme_Elementor::instance();
+
+		/**
+		 * Filter whether the Theme Builder loads. Pro ties this to its "Theme Builder" feature switch.
+		 *
+		 * @param bool $enabled
+		 */
+		if ( apply_filters( 'pixeccte_theme_builder_enabled', true ) ) {
+			Theme_Builder\Theme_Elementor::instance();
+		}
+
 		Extensions_Loader::instance();
 
 		/**

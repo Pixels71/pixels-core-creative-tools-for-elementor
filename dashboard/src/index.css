@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
+@import "tailwindcss" important;
+
+@theme {
+  --font-google-sans: "Google Sans", sans-serif;
+}
+
+/*
+  Standalone Vite preview: paint the page background.
+  In wp-admin, styles are scoped to #pixeccte-dashboard-root below.
+*/
+html:not(.wp-admin) body {
+  @apply bg-[#F5F6FC] font-google-sans antialiased text-slate-900;
+}
+
+/* Toast deck: newest card in front, older cards tucked behind; fans out on hover. */
+@keyframes pc-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--pc-toast-offset, 0px) + 24px))
+      scale(var(--pc-toast-scale, 1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(var(--pc-toast-offset, 0px))
+      scale(var(--pc-toast-scale, 1));
+  }
+}
+
+@keyframes pc-toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+#pixeccte-dashboard-root .pc-toast {
+  transform: translateY(var(--pc-toast-offset, 0px))
+    scale(var(--pc-toast-scale, 1));
+  opacity: 1;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+  animation: pc-toast-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+#pixeccte-dashboard-root .pc-toast[data-hidden="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#pixeccte-dashboard-root .pc-toast[data-removing="true"] {
+  opacity: 0;
+  transform: translateY(calc(var(--pc-toast-offset, 0px) + 16px))
+    scale(calc(var(--pc-toast-scale, 1) * 0.96));
+  pointer-events: none;
+}
+
+#pixeccte-dashboard-root .pc-toast-progress {
+  transform-origin: left center;
+  animation: pc-toast-progress var(--pc-toast-duration, 4000ms) linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #pixeccte-dashboard-root .pc-toast,
+  #pixeccte-dashboard-root .pc-toast-progress {
+    animation-duration: 1ms;
+    transition-duration: 1ms;
+  }
+}
+
+#pixeccte-dashboard-root {
+  --pc-font: "Google Sans", ui-sans-serif, system-ui, sans-serif;
+  margin-left: -20px;
+  margin-top: -10px;
+  min-height: calc(100vh - 32px);
+  background: #f5f6fc;
+  color: #0f172a;
+  font-family: var(--pc-font);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Neutralize WordPress admin element styles inside the React app */
+#pixeccte-dashboard-root *,
+#pixeccte-dashboard-root *::before,
+#pixeccte-dashboard-root *::after {
+  box-sizing: border-box;
+}
+
+#pixeccte-dashboard-root h1,
+#pixeccte-dashboard-root h2,
+#pixeccte-dashboard-root h3,
+#pixeccte-dashboard-root h4,
+#pixeccte-dashboard-root h5,
+#pixeccte-dashboard-root h6,
+#pixeccte-dashboard-root p,
+#pixeccte-dashboard-root ul,
+#pixeccte-dashboard-root ol,
+#pixeccte-dashboard-root li,
+#pixeccte-dashboard-root figure,
+#pixeccte-dashboard-root figcaption,
+#pixeccte-dashboard-root blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
+}
+
+#pixeccte-dashboard-root a {
+  color: inherit;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+#pixeccte-dashboard-root a:focus,
+#pixeccte-dashboard-root a:active {
+  box-shadow: none;
+  outline: none;
+}
+
+#pixeccte-dashboard-root img,
+#pixeccte-dashboard-root svg {
+  max-width: none;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+  box-shadow: none;
+  display: inline-block;
+}
+
+#pixeccte-dashboard-root button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  vertical-align: middle;
+  height: auto;
+  min-height: 0;
+  max-width: none;
+  width: auto;
+  cursor: pointer;
+}
+
+/*
+  Unlayered + high specificity so wp-admin forms.css cannot restyle fields.
+  Use .pc-control on every text input / select / textarea in the dashboard.
+*/
+#pixeccte-dashboard-root input.pc-control,
+#pixeccte-dashboard-root select.pc-control,
+#pixeccte-dashboard-root textarea.pc-control,
+#pixeccte-dashboard-root .pc-control {
+  display: block;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0.625rem 0.75rem !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #1e293b !important;
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  line-height: 1.25rem !important;
+  letter-spacing: normal !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  vertical-align: middle;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#pixeccte-dashboard-root input.pc-control::placeholder,
+#pixeccte-dashboard-root textarea.pc-control::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+#pixeccte-dashboard-root input.pc-control:hover,
+#pixeccte-dashboard-root select.pc-control:hover,
+#pixeccte-dashboard-root textarea.pc-control:hover {
+  border-color: #cbd5e1 !important;
+  box-shadow: none !important;
+}
+
+#pixeccte-dashboard-root input.pc-control:focus,
+#pixeccte-dashboard-root input.pc-control:focus-visible,
+#pixeccte-dashboard-root select.pc-control:focus,
+#pixeccte-dashboard-root select.pc-control:focus-visible,
+#pixeccte-dashboard-root textarea.pc-control:focus,
+#pixeccte-dashboard-root textarea.pc-control:focus-visible {
+  border-color: #1e293b !important;
+  box-shadow: 0 0 0 2px #ede9fe !important;
+  outline: none !important;
+  color: #1e293b !important;
+  background-color: #ffffff !important;
+}
+
+#pixeccte-dashboard-root input.pc-control--search {
+  padding-left: 2.25rem !important;
+  padding-right: 0.75rem !important;
+  width: 100% !important;
+}
+
+#pixeccte-dashboard-root input.pc-control--search-modal {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0.75rem 4rem 0.75rem 2.25rem !important;
+  border-radius: 0.75rem !important;
+}
+
+#pixeccte-dashboard-root select.pc-control--select {
+  width: auto !important;
+  padding-right: 2.25rem !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+  cursor: pointer !important;
+}
+
+#pixeccte-dashboard-root input[type="search"].pc-control {
+  -webkit-appearance: none !important;
+}
+
+#pixeccte-dashboard-root input[type="search"].pc-control::-webkit-search-decoration,
+#pixeccte-dashboard-root input[type="search"].pc-control::-webkit-search-cancel-button,
+#pixeccte-dashboard-root input[type="search"].pc-control::-webkit-search-results-button,
+#pixeccte-dashboard-root input[type="search"].pc-control::-webkit-search-results-decoration {
+  display: none;
+}
+
+.main-container {
+  @apply mx-auto max-w-6xl px-5 xl:px-0;
+}
