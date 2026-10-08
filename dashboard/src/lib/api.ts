@@ -5,7 +5,10 @@ import type {
 } from "@/components/dashboard/widgets/form-settings-types";
 import { emptyFormSettings } from "@/components/dashboard/widgets/form-settings-types";
 import type { WidgetItem } from "@/components/dashboard/widgets/types";
-import type { PixelsCoreDashboardConfig } from "@/types/wordpress";
+import type {
+  PixelsCoreDashboardConfig,
+  PixelsCoreLicense,
+} from "@/types/wordpress";
 import { t } from "@/lib/i18n";
 
 type ApiWidget = {
@@ -270,6 +273,44 @@ export const saveFormSettings = async (
     body: JSON.stringify(settings),
   });
 };
+
+type LicenseActionResponse = {
+  message?: string;
+  license: PixelsCoreLicense;
+};
+
+/** Keep the bootstrapped config in step so other readers see the new license state. */
+const storeLicense = (response: LicenseActionResponse) => {
+  const config = ensureDashboardConfig();
+
+  if (config) {
+    config.license = response.license;
+  }
+
+  return response;
+};
+
+export const activateLicense = async (
+  key: string,
+): Promise<LicenseActionResponse> =>
+  storeLicense(
+    await apiFetch<LicenseActionResponse>("/license", {
+      method: "POST",
+      body: JSON.stringify({ key }),
+    }),
+  );
+
+export const deactivateLicense = async (): Promise<LicenseActionResponse> =>
+  storeLicense(
+    await apiFetch<LicenseActionResponse>("/license", { method: "DELETE" }),
+  );
+
+export const checkLicense = async (): Promise<LicenseActionResponse> =>
+  storeLicense(
+    await apiFetch<LicenseActionResponse>("/license/check", {
+      method: "POST",
+    }),
+  );
 
 export const fetchDashboardSearchIndex = async () => {
   const [widgets, extensions, features] = await Promise.all([

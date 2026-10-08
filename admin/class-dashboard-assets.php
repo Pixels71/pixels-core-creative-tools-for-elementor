@@ -39,11 +39,13 @@ final class Dashboard_Assets {
 			'version'              => PIXECCTE_VERSION,
 			'proActive'            => defined( 'PIXECCTE_PRO_VERSION' ),
 			'showProUpsell'        => defined( 'PIXECCTE_SHOW_PRO_UPSSELL' ) && PIXECCTE_SHOW_PRO_UPSSELL,
-			'upgradeUrl'           => esc_url_raw( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/' ),
+			'upgradeUrl'           => esc_url_raw( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://addons.pixels71.com/' ),
 			'license'              => array(
 				'active'    => false,
 				'maskedKey' => '',
 				'managedBy' => 'pro',
+				// Pro replaces this whole block via `pixeccte_dashboard_config` and serves the /license route.
+				'manageUrl' => '',
 			),
 			'links'                => array(
 				'tutorials'     => esc_url_raw( 'https://pixels71.com' ),
@@ -51,7 +53,7 @@ final class Dashboard_Assets {
 				'community'     => esc_url_raw( 'https://pixels71.com' ),
 				'knowledgeBase' => esc_url_raw( 'https://pixels71.com' ),
 				'review'        => esc_url_raw( 'https://wordpress.org/support/plugin/pixels-core-creative-tools-for-elementor/reviews/' ),
-				'pro'           => esc_url_raw( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/' ),
+				'pro'           => esc_url_raw( defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://addons.pixels71.com/' ),
 			),
 			'widgets'              => self::get_widgets_payload(),
 			'extensions'           => self::get_extensions_payload(),

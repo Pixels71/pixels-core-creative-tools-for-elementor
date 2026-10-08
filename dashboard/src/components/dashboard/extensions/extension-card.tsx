@@ -11,7 +11,7 @@ const ExtensionCard = ({ extension, onToggle }: ExtensionCardProps) => {
   const i18n = getDashboardI18n();
   const isProLocked = extension.isPro && extension.available === false;
   const upgradeUrl =
-    extension.upgradeUrl || "https://pixels71.com/pixels-core-pro/";
+    extension.upgradeUrl || "https://addons.pixels71.com/pricing/";
 
   return (
     <article className="flex min-h-[108px] flex-col justify-between rounded-xl border border-slate-100 bg-white p-5">

@@ -145,7 +145,7 @@ final class Extension_Settings {
 		$registry     = Extension_Registry::instance();
 		$active_slugs = $this->get_active_slugs();
 		$extensions   = array();
-		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
+		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://addons.pixels71.com/';
 
 		foreach ( $registry->get_all() as $slug => $config ) {
 			$tier = $config['tier'] ?? 'free';

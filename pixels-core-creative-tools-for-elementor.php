@@ -3,7 +3,7 @@
  * Plugin Name:       Pixels Core Creative Tools for Elementor
  * Plugin URI:        https://addons.pixels71.com
  * Description:       Free Elementor addon with essential widgets, Live Copy Paste, and a Header/Footer theme builder from Pixels71.
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Pixels71
  * Author URI:        https://profiles.wordpress.org/pixels71
  * Text Domain:       pixels-core-creative-tools-for-elementor
@@ -21,16 +21,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PIXECCTE_VERSION', '1.0.3' );
+define( 'PIXECCTE_VERSION', '1.0.4' );
 define( 'PIXECCTE_FILE', __FILE__ );
 define( 'PIXECCTE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PIXECCTE_URL', plugin_dir_url( __FILE__ ) );
 define( 'PIXECCTE_URL_ASSETS', PIXECCTE_URL . 'assets/' );
 define( 'PIXECCTE_ADMIN_PATH', PIXECCTE_PATH . 'admin/' );
 define( 'PIXECCTE_ADMIN_URL', PIXECCTE_URL . 'admin/' );
-define( 'PIXECCTE_UPGRADE_URL', 'https://pixels71.com/pixels-core-pro/' );
+define( 'PIXECCTE_UPGRADE_URL', 'https://addons.pixels71.com/' );
 // Set to true when Pixels Core Pro is available for purchase/activation.
-define( 'PIXECCTE_SHOW_PRO_UPSSELL', false );
+define( 'PIXECCTE_SHOW_PRO_UPSSELL', true );
 
 require_once PIXECCTE_PATH . 'includes/class-plugin.php';
 

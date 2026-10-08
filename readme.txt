@@ -5,7 +5,7 @@ Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: elementor
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,17 @@ Build and assign Elementor templates for:
 * Footer
 
 Display rules let you target templates across your site.
+
+= Pixels Core Pro =
+
+Everything above is free and stays free. [Pixels Core Pro](https://addons.pixels71.com/pricing/) is a separate paid plugin that adds:
+
+* 26 more widgets, including a Form widget with stored submissions, Chart, Data Table, Timeline, Marquee, and a full dynamic post loop and filter set
+* 12 extensions, including GSAP scroll animations, text animations, sticky/pin elements, image masking, and Global Spacing presets
+* Theme Builder support for single post, archive, 404, popup, and mega menu templates
+* A custom post type and taxonomy builder
+
+Pro is optional. The free plugin is fully functional on its own.
 
 = Requirements =
 
@@ -90,6 +101,11 @@ Enable **Live Copy Paste** in the Pixels Core dashboard. In the Elementor editor
 Go to **Theme Builder**, create a Header or Footer template, design it with Elementor, and assign display rules.
 
 == Changelog ==
+
+= 1.0.4 =
+* Added a Pixels Core Pro section to the plugin description and enabled the upgrade notice in the dashboard.
+* The dashboard license bar now links to the Pro License screen instead of rendering an inert button.
+* Fixed unreadable license bar text caused by a dark foreground colour on a dark background.
 
 = 1.0.3 =
 * Improved WordPress Coding Standards compliance across the plugin (PHPCS / WPCS).

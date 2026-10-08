@@ -10,7 +10,7 @@ type WidgetCardProps = {
 const WidgetCard = ({ widget, onToggle }: WidgetCardProps) => {
   const i18n = getDashboardI18n();
   const isProLocked = widget.isPro && widget.available === false;
-  const upgradeUrl = widget.upgradeUrl || "https://pixels71.com/pixels-core-pro/";
+  const upgradeUrl = widget.upgradeUrl || "https://addons.pixels71.com/pricing/";
 
   return (
     <article className="flex min-h-[108px] flex-col justify-between rounded-xl border border-slate-100 bg-white p-5">

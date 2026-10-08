@@ -488,6 +488,112 @@ class Nav_Menu_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
+			'menu_hover_animation_heading',
+			array(
+				'label'     => esc_html__( 'Hover Animation', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			)
+		);
+
+		$this->add_control(
+			'menu_hover_animation',
+			array(
+				'label'   => esc_html__( 'Animation', 'pixels-core-creative-tools-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => array(
+					''                 => esc_html__( 'None', 'pixels-core-creative-tools-for-elementor' ),
+					'underline'        => esc_html__( 'Underline', 'pixels-core-creative-tools-for-elementor' ),
+					'underline-center' => esc_html__( 'Underline (From Center)', 'pixels-core-creative-tools-for-elementor' ),
+					'overline'         => esc_html__( 'Overline', 'pixels-core-creative-tools-for-elementor' ),
+					'fill'             => esc_html__( 'Background Fill', 'pixels-core-creative-tools-for-elementor' ),
+					'grow'             => esc_html__( 'Grow', 'pixels-core-creative-tools-for-elementor' ),
+					'lift'             => esc_html__( 'Lift', 'pixels-core-creative-tools-for-elementor' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'menu_hover_animation_color',
+			array(
+				'label'     => esc_html__( 'Line / Fill Color', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-menu' => '--pixeccte-menu-hover-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'menu_hover_animation' => array( 'underline', 'underline-center', 'overline', 'fill' ),
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'menu_hover_animation_size',
+			array(
+				'label'      => esc_html__( 'Line Thickness', 'pixels-core-creative-tools-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 1,
+						'max' => 10,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => 2,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-menu' => '--pixeccte-menu-hover-size: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'menu_hover_animation' => array( 'underline', 'underline-center', 'overline' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'menu_hover_animation_duration',
+			array(
+				'label'     => esc_html__( 'Duration (s)', 'pixels-core-creative-tools-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 2,
+						'step' => 0.05,
+					),
+				),
+				'default'   => array(
+					'size' => 0.3,
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .pixeccte-menu' => '--pixeccte-menu-hover-duration: {{SIZE}}s;',
+				),
+				'condition' => array(
+					'menu_hover_animation!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'menu_hover_animation_active',
+			array(
+				'label'        => esc_html__( 'Keep on Active Item', 'pixels-core-creative-tools-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'pixels-core-creative-tools-for-elementor' ),
+				'label_off'    => esc_html__( 'No', 'pixels-core-creative-tools-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Show the line or fill on the current page item as well.', 'pixels-core-creative-tools-for-elementor' ),
+				'condition'    => array(
+					'menu_hover_animation' => array( 'underline', 'underline-center', 'overline', 'fill' ),
+				),
+			)
+		);
+
+		$this->add_control(
 			'menu_divider_heading',
 			array(
 				'label'     => esc_html__( 'Divider', 'pixels-core-creative-tools-for-elementor' ),
@@ -1188,6 +1294,18 @@ class Nav_Menu_Widget extends Widget_Base {
 
 		if ( 'aside' === $panel_type ) {
 			$nav_classes[] = 'pixeccte-menu--aside-' . $aside_side;
+		}
+
+		$hover_animation  = (string) ( $settings['menu_hover_animation'] ?? '' );
+		$hover_animations = array( 'underline', 'underline-center', 'overline', 'fill', 'grow', 'lift' );
+
+		if ( in_array( $hover_animation, $hover_animations, true ) ) {
+			$nav_classes[] = 'pixeccte-menu--has-hover-anim';
+			$nav_classes[] = 'pixeccte-menu--hover-' . $hover_animation;
+
+			if ( 'yes' === ( $settings['menu_hover_animation_active'] ?? 'yes' ) ) {
+				$nav_classes[] = 'pixeccte-menu--hover-active';
+			}
 		}
 
 		$this->add_render_attribute( 'nav', 'class', $nav_classes );

@@ -11,10 +11,19 @@ export type DashboardNotice = {
 export type PixelsCoreLicense = {
   key?: string;
   active?: boolean;
+  /** Whether a key is stored, valid or not. */
+  hasKey?: boolean;
   maskedKey?: string;
   managedBy?: string;
   status?: string;
+  expired?: boolean;
   expires?: string;
+  /** Expiration date formatted in the site's date format. */
+  expiresLabel?: string;
+  lifetime?: boolean;
+  daysLeft?: number;
+  /** Admin URL where the license is managed (this dashboard). Empty when Pro is not installed. */
+  manageUrl?: string;
 };
 
 export type PixelsCoreDashboardLinks = {
@@ -118,7 +127,22 @@ export type DashboardI18n = {
   noLicenseKey: string;
   activate: string;
   deactivate: string;
+  manageLicense: string;
   getPro: string;
+  licenseKeyLabel: string;
+  licenseKeyPlaceholder: string;
+  enterLicenseKey: string;
+  activating: string;
+  deactivating: string;
+  checking: string;
+  checkAgain: string;
+  confirmDeactivateLicense: string;
+  licenseActivated: string;
+  licenseDeactivated: string;
+  licenseLifetime: string;
+  licenseExpiresOn: string;
+  licenseExpiredOn: string;
+  licenseInvalidHint: string;
 
   heroTitle: string;
   heroDescription: string;

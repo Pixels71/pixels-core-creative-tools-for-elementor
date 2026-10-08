@@ -22,6 +22,8 @@ import {
 import { changelogEntries } from "@/components/shared/notifications/data";
 import { categoryStyles } from "@/components/shared/notifications/types";
 import { getDashboardI18n, t } from "@/lib/i18n";
+import type { PixelsCoreLicense } from "@/types/wordpress";
+import LicenseBar from "./license-bar";
 import type { DashboardTab } from "./sidebar";
 
 type IntroductionPanelProps = {
@@ -68,14 +70,12 @@ const IntroductionPanel = ({ onTabChange }: IntroductionPanelProps) => {
   const upgradeUrl =
     config?.upgradeUrl ??
     config?.links?.pro ??
-    "https://pixels71.com/pixels-core-pro/";
-  const licenseActive = proActive ? (config?.license?.active ?? false) : false;
-  const maskedKey = proActive
-    ? (config?.license?.maskedKey ??
-      (config?.license?.key
-        ? `px-••••-••••-••••-${config.license.key.slice(-4)}`
-        : i18n.noLicenseKey))
-    : i18n.licenseProTeaser;
+    "https://addons.pixels71.com/pricing/";
+  // Pro owns licensing and serves the /license route; this panel only renders its state.
+  const [license, setLicense] = useState<PixelsCoreLicense>(
+    () => config?.license ?? {},
+  );
+  const licenseActive = proActive ? Boolean(license.active) : false;
   const version = config?.version ?? "1.0";
   const elementorActive = config?.elementorActive ?? false;
   const nestedElementsActive = config?.nestedElementsActive ?? false;
@@ -227,33 +227,25 @@ const IntroductionPanel = ({ onTabChange }: IntroductionPanelProps) => {
             </span>
           </div>
 
-          {showLicenseBar ? (
+          {proActive ? (
+            <LicenseBar license={license} onLicenseChange={setLicense} />
+          ) : showLicenseBar ? (
             <div className="mt-5 flex items-center gap-3 rounded-xl bg-[#091146] px-4 py-3">
               <KeyRound
-                className="size-5 shrink-0 text-[#091146]"
+                className="size-5 shrink-0 text-slate-300"
                 strokeWidth={1.75}
               />
-              <span className="flex-1 truncate font-mono text-sm text-slate-600">
-                {maskedKey}
+              <span className="flex-1 truncate font-mono text-sm text-slate-200">
+                {i18n.licenseProTeaser}
               </span>
-              {proActive ? (
-                <button
-                  type="button"
-                  className="shrink-0 rounded-lg bg-rose-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-rose-600 disabled:cursor-not-allowed disabled:opacity-60"
-                  disabled={!licenseActive}
-                >
-                  {licenseActive ? i18n.deactivate : i18n.activate}
-                </button>
-              ) : (
-                <a
-                  href={upgradeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-700"
-                >
-                  {i18n.getPro}
-                </a>
-              )}
+              <a
+                href={upgradeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-700"
+              >
+                {i18n.getPro}
+              </a>
             </div>
           ) : null}
         </section>

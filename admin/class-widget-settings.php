@@ -148,7 +148,7 @@ final class Widget_Settings {
 		$registry     = Widget_Registry::instance();
 		$active_slugs = $this->get_active_slugs();
 		$widgets      = array();
-		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://pixels71.com/pixels-core-pro/';
+		$upgrade_url  = defined( 'PIXECCTE_UPGRADE_URL' ) ? PIXECCTE_UPGRADE_URL : 'https://addons.pixels71.com/pricing/';
 
 		foreach ( $registry->get_all() as $slug => $config ) {
 			$requires_nested = ! empty( $config['requires_nested'] );

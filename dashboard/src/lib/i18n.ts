@@ -100,7 +100,24 @@ const defaultI18n: DashboardI18n = {
   noLicenseKey: "No license key",
   activate: "Activate",
   deactivate: "Deactivate",
+  manageLicense: "Manage License",
   getPro: "Get Pro",
+  licenseKeyLabel: "License key",
+  licenseKeyPlaceholder: "Enter your license key",
+  enterLicenseKey: "Please enter a license key.",
+  activating: "Activating...",
+  deactivating: "Deactivating...",
+  checking: "Checking...",
+  checkAgain: "Check Again",
+  confirmDeactivateLicense:
+    "Deactivate this license? This site will stop receiving automatic updates.",
+  licenseActivated: "License activated successfully!",
+  licenseDeactivated: "License deactivated successfully.",
+  licenseLifetime: "Lifetime license",
+  licenseExpiresOn: "Expires %s",
+  licenseExpiredOn: "Expired on %s",
+  licenseInvalidHint:
+    "The saved license key is invalid or not active for this site. Enter a valid key to re-activate.",
 
   heroTitle: "Design Faster With Pixels Core Widgets",
   heroDescription:

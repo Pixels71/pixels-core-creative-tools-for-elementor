@@ -105,7 +105,26 @@ final class Dashboard_I18n {
 			'noLicenseKey'                   => __( 'No license key', 'pixels-core-creative-tools-for-elementor' ),
 			'activate'                       => __( 'Activate', 'pixels-core-creative-tools-for-elementor' ),
 			'deactivate'                     => __( 'Deactivate', 'pixels-core-creative-tools-for-elementor' ),
+			'manageLicense'                  => __( 'Manage License', 'pixels-core-creative-tools-for-elementor' ),
 			'getPro'                         => __( 'Get Pro', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseKeyLabel'                => __( 'License key', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseKeyPlaceholder'          => __( 'Enter your license key', 'pixels-core-creative-tools-for-elementor' ),
+			'enterLicenseKey'                => __( 'Please enter a license key.', 'pixels-core-creative-tools-for-elementor' ),
+			'activating'                     => __( 'Activating...', 'pixels-core-creative-tools-for-elementor' ),
+			'deactivating'                   => __( 'Deactivating...', 'pixels-core-creative-tools-for-elementor' ),
+			'checking'                       => __( 'Checking...', 'pixels-core-creative-tools-for-elementor' ),
+			'checkAgain'                     => __( 'Check Again', 'pixels-core-creative-tools-for-elementor' ),
+			'confirmDeactivateLicense'       => __( 'Deactivate this license? This site will stop receiving automatic updates.', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseActivated'               => __( 'License activated successfully!', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseDeactivated'             => __( 'License deactivated successfully.', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseLifetime'                => __( 'Lifetime license', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseExpiresOn'               =>
+				/* translators: %s: License expiration date. */
+				__( 'Expires %s', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseExpiredOn'               =>
+				/* translators: %s: License expiration date. */
+				__( 'Expired on %s', 'pixels-core-creative-tools-for-elementor' ),
+			'licenseInvalidHint'             => __( 'The saved license key is invalid or not active for this site. Enter a valid key to re-activate.', 'pixels-core-creative-tools-for-elementor' ),
 
 			'heroTitle'                      => __( 'Design Faster With Pixels Core Widgets', 'pixels-core-creative-tools-for-elementor' ),
 			'heroDescription'                => __( 'Learn how to use widgets and extensions to ship polished interfaces without reinventing common UI patterns.', 'pixels-core-creative-tools-for-elementor' ),

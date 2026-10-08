@@ -377,3 +377,77 @@ body.pixeccte-menu-aside-open {
 .pixeccte-menu.is-submenu-accordion .pixeccte-mega-menu-item.is-submenu-open > .pixeccte-mega-menu-panel {
 	display: block;
 }
+
+/* Menu item hover animation */
+.pixeccte-menu--has-hover-anim .pixeccte-menu__list > .menu-item > a {
+	position: relative;
+	z-index: 0;
+}
+
+.pixeccte-menu--hover-underline .pixeccte-menu__list > .menu-item > a::before,
+.pixeccte-menu--hover-underline-center .pixeccte-menu__list > .menu-item > a::before,
+.pixeccte-menu--hover-overline .pixeccte-menu__list > .menu-item > a::before,
+.pixeccte-menu--hover-fill .pixeccte-menu__list > .menu-item > a::before {
+	content: "";
+	position: absolute;
+	right: 0;
+	left: 0;
+	z-index: -1;
+	pointer-events: none;
+	background: var(--pixeccte-menu-hover-color, currentColor);
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform var(--pixeccte-menu-hover-duration, 0.3s) ease;
+}
+
+.pixeccte-menu--hover-underline .pixeccte-menu__list > .menu-item > a::before,
+.pixeccte-menu--hover-underline-center .pixeccte-menu__list > .menu-item > a::before {
+	bottom: 0;
+	height: var(--pixeccte-menu-hover-size, 2px);
+}
+
+.pixeccte-menu--hover-underline-center .pixeccte-menu__list > .menu-item > a::before {
+	transform-origin: center;
+}
+
+.pixeccte-menu--hover-overline .pixeccte-menu__list > .menu-item > a::before {
+	top: 0;
+	height: var(--pixeccte-menu-hover-size, 2px);
+}
+
+.pixeccte-menu--hover-fill .pixeccte-menu__list > .menu-item > a::before {
+	top: 0;
+	bottom: 0;
+	border-radius: inherit;
+	background: var(--pixeccte-menu-hover-color, rgba(0, 0, 0, 0.08));
+}
+
+.pixeccte-menu--has-hover-anim .pixeccte-menu__list > .menu-item > a:hover::before,
+.pixeccte-menu--has-hover-anim .pixeccte-menu__list > .menu-item > a:focus::before,
+.pixeccte-menu--hover-active .pixeccte-menu__list > .menu-item.current-menu-item > a::before,
+.pixeccte-menu--hover-active .pixeccte-menu__list > .menu-item.current-menu-ancestor > a::before,
+.pixeccte-menu--hover-active .pixeccte-menu__list > .menu-item.current-menu-parent > a::before {
+	transform: scaleX(1);
+}
+
+.pixeccte-menu--hover-grow .pixeccte-menu__list > .menu-item > a,
+.pixeccte-menu--hover-lift .pixeccte-menu__list > .menu-item > a {
+	transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform var(--pixeccte-menu-hover-duration, 0.3s) ease;
+}
+
+.pixeccte-menu--hover-grow .pixeccte-menu__list > .menu-item > a:hover,
+.pixeccte-menu--hover-grow .pixeccte-menu__list > .menu-item > a:focus {
+	transform: scale(1.08);
+}
+
+.pixeccte-menu--hover-lift .pixeccte-menu__list > .menu-item > a:hover,
+.pixeccte-menu--hover-lift .pixeccte-menu__list > .menu-item > a:focus {
+	transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pixeccte-menu--has-hover-anim .pixeccte-menu__list > .menu-item > a,
+	.pixeccte-menu--has-hover-anim .pixeccte-menu__list > .menu-item > a::before {
+		transition-duration: 0.01ms;
+	}
+}
