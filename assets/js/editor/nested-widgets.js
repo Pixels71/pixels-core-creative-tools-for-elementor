@@ -201,7 +201,7 @@
 
 		class PixelsStackCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-stack-card';
+				return 'pixeccte-stack-card';
 			}
 
 			getView() {
@@ -275,7 +275,7 @@
 
 		class PixelsTimelineElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-timeline';
+				return 'pixeccte-timeline';
 			}
 
 			getView() {
@@ -307,7 +307,7 @@
 
 		class PixelsMarqueeElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-marquee';
+				return 'pixeccte-marquee';
 			}
 
 			getView() {
@@ -349,7 +349,7 @@
 
 		class PixelsExpandingCardElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-expanding-card';
+				return 'pixeccte-expanding-card';
 			}
 
 			getView() {
@@ -422,7 +422,7 @@
 
 		class PixelsFilterAnythingElementType extends NestedElementBase {
 			getType() {
-				return 'pixels-filter-anything';
+				return 'pixeccte-filter-anything';
 			}
 
 			getView() {
