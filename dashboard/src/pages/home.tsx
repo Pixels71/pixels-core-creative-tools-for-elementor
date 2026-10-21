@@ -3,6 +3,7 @@ import ExtensionsPanel from "../components/dashboard/extensions/extensions-panel
 import FeaturesPanel from "../components/dashboard/features/features-panel";
 import FormSettingsTab from "../components/dashboard/form-settings/form-settings-tab";
 import IntroductionPanel from "../components/dashboard/introduction-panel";
+import McpPanel from "../components/dashboard/mcp/mcp-panel";
 import Sidebar, {
   normalizeDashboardTab,
   type DashboardTab,
@@ -35,6 +36,10 @@ const getTabTitles = () => {
     "form-settings": {
       title: i18n.tabFormSettingsTitle,
       description: i18n.tabFormSettingsDescription,
+    },
+    mcp: {
+      title: i18n.tabMcpTitle,
+      description: i18n.tabMcpDescription,
     },
   } satisfies Record<DashboardTab, { title: string; description: string }>;
 };
@@ -133,6 +138,7 @@ const Home = () => {
                 {activeTab === "introduction" && (
                   <IntroductionPanel onTabChange={handleTabChange} />
                 )}
+                {activeTab === "mcp" && <McpPanel />}
               </>
             )}
           </div>

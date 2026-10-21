@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { LucideIcon } from "lucide-react";
-import { FileText, Home, LayoutGrid, Puzzle, Sparkles } from "lucide-react";
+import { Bot, FileText, Home, LayoutGrid, Puzzle, Sparkles } from "lucide-react";
 import { hasFeatures } from "@/lib/api";
 import { getDashboardI18n } from "@/lib/i18n";
 import { cn } from "../../lib/utils";
@@ -10,7 +10,8 @@ export type DashboardTab =
   | "widgets"
   | "extension"
   | "features"
-  | "form-settings";
+  | "form-settings"
+  | "mcp";
 
 export const DASHBOARD_TABS: DashboardTab[] = [
   "introduction",
@@ -18,6 +19,7 @@ export const DASHBOARD_TABS: DashboardTab[] = [
   "extension",
   "features",
   "form-settings",
+  "mcp",
 ];
 
 export const normalizeDashboardTab = (
@@ -52,6 +54,7 @@ const getSidebarItems = (): SidebarItem[] => {
     { id: "extension", label: i18n.sidebarExtension, icon: Puzzle },
     { id: "features", label: i18n.sidebarFeatures, icon: Sparkles },
     { id: "form-settings", label: i18n.sidebarFormSettings, icon: FileText },
+    { id: "mcp", label: i18n.sidebarMcp, icon: Bot },
   ];
 };
 

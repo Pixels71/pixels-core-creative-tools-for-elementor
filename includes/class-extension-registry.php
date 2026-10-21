@@ -36,6 +36,14 @@ final class Extension_Registry {
 			'description' => 'Paste Elementor sections, containers, and widgets from the clipboard in the editor.',
 			'tier'        => 'free',
 		),
+		'mcp_server'      => array(
+			'file'        => 'extensions/class-mcp-server.php',
+			'class'       => 'PixelsCoreCreativeToolsForElementor\\Extensions\\Mcp_Server',
+			'title'       => 'MCP Server',
+			'description' => 'Connect Claude and other AI clients to build Elementor pages with your widgets.',
+			'tier'        => 'free',
+			'default'     => false,
+		),
 	);
 
 	/**
@@ -103,6 +111,25 @@ final class Extension_Registry {
 	}
 
 	/**
+	 * Slugs enabled on first activation or when first added to the codebase.
+	 *
+	 * Entries flagged `'default' => false` (such as the MCP Server) stay off until an admin enables them.
+	 *
+	 * @return array<int, string>
+	 */
+	public function get_default_slugs(): array {
+		$slugs = array();
+
+		foreach ( $this->get_all() as $slug => $config ) {
+			if ( ! isset( $config['default'] ) || false !== $config['default'] ) {
+				$slugs[] = $slug;
+			}
+		}
+
+		return $slugs;
+	}
+
+	/**
 	 * Get asset definitions.
 	 *
 	 * @param array $slugs Slugs.
@@ -144,10 +171,12 @@ final class Extension_Registry {
 	private function translate_extension_entry( string $slug, array $config ): array {
 		$titles = array(
 			'live_copy_paste' => __( 'Live Copy Paste', 'pixels-core-creative-tools-for-elementor' ),
+			'mcp_server'      => __( 'MCP Server', 'pixels-core-creative-tools-for-elementor' ),
 		);
 
 		$descriptions = array(
 			'live_copy_paste' => __( 'Paste Elementor sections, containers, and widgets from the clipboard in the editor.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcp_server'      => __( 'Connect Claude and other AI clients to build Elementor pages with your widgets.', 'pixels-core-creative-tools-for-elementor' ),
 		);
 
 		if ( isset( $titles[ $slug ] ) ) {

@@ -31,6 +31,7 @@ final class Admin_Loader {
 		Widget_Settings::instance();
 		Extension_Settings::instance();
 		Rest_Api::instance();
+		Mcp_Api::instance();
 
 		if ( ! is_admin() ) {
 			return;
@@ -66,6 +67,7 @@ final class Admin_Loader {
 		require_once PIXECCTE_ADMIN_PATH . 'class-dashboard-i18n.php';
 		require_once PIXECCTE_ADMIN_PATH . 'class-dashboard-assets.php';
 		require_once PIXECCTE_ADMIN_PATH . 'class-rest-api.php';
+		require_once PIXECCTE_ADMIN_PATH . 'class-mcp-api.php';
 		require_once PIXECCTE_ADMIN_PATH . 'class-admin.php';
 	}
 }

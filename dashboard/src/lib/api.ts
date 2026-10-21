@@ -346,3 +346,85 @@ export const fetchDashboardSearchIndex = async () => {
     })),
   ];
 };
+
+/* ---------- AI / MCP ---------- */
+
+export type McpClientKey = "claude-code" | "claude-desktop" | "cursor" | "other";
+
+export type McpConnection = {
+  uuid: string;
+  name: string;
+  user_id: number;
+  user: string;
+  client: string;
+  client_version: string;
+  created: number;
+  last_seen: number;
+  last_ip: string;
+  requests: number;
+  tool_calls: number;
+  last_tool: string;
+  state: "active" | "idle" | "never";
+};
+
+export type McpStatus = {
+  enabled: boolean;
+  endpoint: string;
+  clients: Record<McpClientKey, string>;
+  activeWindow: number;
+  appPasswordsAvailable: boolean;
+  connections: McpConnection[];
+  now: number;
+};
+
+export type McpHealthCheck = {
+  id: string;
+  status: "pass" | "warn" | "fail";
+  label: string;
+  message: string;
+};
+
+export type McpSetup = {
+  format: "shell" | "json" | "text";
+  where: string;
+  snippet: string;
+};
+
+export type McpCreatedConnection = {
+  connection: McpConnection;
+  password: string;
+  setup: McpSetup;
+};
+
+export const fetchMcpStatus = async (): Promise<McpStatus> =>
+  apiFetch<McpStatus>("/mcp-connections");
+
+export const fetchMcpHealth = async (): Promise<McpHealthCheck[]> =>
+  (await apiFetch<{ checks: McpHealthCheck[] }>("/mcp-connections/health"))
+    .checks;
+
+export const setMcpServerEnabled = async (enabled: boolean): Promise<boolean> =>
+  (
+    await apiFetch<{ enabled: boolean }>("/mcp-connections/server", {
+      method: "POST",
+      body: JSON.stringify({ enabled }),
+    })
+  ).enabled;
+
+export const createMcpConnection = async (
+  client: McpClientKey,
+): Promise<McpCreatedConnection> =>
+  apiFetch<McpCreatedConnection>("/mcp-connections", {
+    method: "POST",
+    body: JSON.stringify({ client }),
+  });
+
+export const revokeMcpConnection = async (
+  uuid: string,
+): Promise<McpConnection[]> =>
+  (
+    await apiFetch<{ connections: McpConnection[] }>(
+      `/mcp-connections/${encodeURIComponent(uuid)}`,
+      { method: "DELETE" },
+    )
+  ).connections;

@@ -1773,6 +1773,7 @@ class Button_Widget extends Widget_Base {
 					),
 				),
 				'selectors'  => array(
+					'{{WRAPPER}} .pixeccte-button__v8-icon'   => '--pc-v8-box-size: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .pixeccte-button__v8-circle' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				),
 			)

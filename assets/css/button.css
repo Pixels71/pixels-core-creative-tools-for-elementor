@@ -853,10 +853,11 @@
     border-color: var(--pc-btn-stroke-3);
   }
   
+  /* The upper copy sets the wrapper height, so it always matches the text's own line-height. */
   .pixeccte-button__v8-text-wrap {
+    position: relative;
+    display: block;
     overflow: hidden;
-    height: 100%;
-    max-height: 20px;
   }
   
   .pixeccte-button__v8-text {
@@ -868,23 +869,30 @@
   }
   
   .pixeccte-button__v8-text--upper {
-    transform: translateY(-2px);
     color: rgba(13, 13, 18, 0.9);
   }
   
+  .pixeccte-button__v8-text:not(.pixeccte-button__v8-text--upper) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+  }
+  
   .pixeccte-button__link--v8:hover .pixeccte-button__v8-text {
-    transform: translateY(-105%);
+    transform: translateY(-100%);
   }
   
   .pixeccte-button__v8-icon {
     --pc-v8-icon-size: 16px;
+    --pc-v8-box-size: 24px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    width: 24px;
-    height: 24px;
+    width: var(--pc-v8-box-size);
+    height: var(--pc-v8-box-size);
     flex-shrink: 0;
   }
   
@@ -892,8 +900,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 22px;
-    height: 22px;
+    width: calc(var(--pc-v8-box-size) - 2px);
+    height: calc(var(--pc-v8-box-size) - 2px);
     border-radius: 9999px;
     background-color: var(--pc-btn-bg-6);
     transform: translate(-50%, -50%);
@@ -940,11 +948,11 @@
   }
   
   .pixeccte-button__v8-arrow--outer {
-    transform: translate(calc(-50% - 24px), -50%);
+    transform: translate(calc(-50% - var(--pc-v8-box-size)), -50%);
   }
   
   .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow--inner {
-    transform: translate(calc(-50% + 24px), -50%);
+    transform: translate(calc(-50% + var(--pc-v8-box-size)), -50%);
   }
   
   .pixeccte-button__link--v8:hover .pixeccte-button__v8-arrow--outer {

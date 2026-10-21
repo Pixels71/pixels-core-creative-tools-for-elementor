@@ -171,6 +171,72 @@ final class Dashboard_I18n {
 			'leaveReview'                    => __( 'Leave a Review →', 'pixels-core-creative-tools-for-elementor' ),
 
 			'logoAlt'                        => __( 'Pixels Core', 'pixels-core-creative-tools-for-elementor' ),
+			'sidebarMcp'                     => __( 'AI / MCP', 'pixels-core-creative-tools-for-elementor' ),
+			'tabMcpTitle'                    => __( 'AI / MCP', 'pixels-core-creative-tools-for-elementor' ),
+			'tabMcpDescription'              => __( 'Connect Claude and other AI clients so they can build pages with your widgets.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpLoading'                     => __( 'Loading MCP status...', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpFailedLoad'                  => __( 'Could not load the MCP status.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpServerTitle'                 => __( 'MCP Server', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpServerOn'                    => __( 'On. AI clients can connect at this address.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpServerOff'                   => __( 'Off. Switch it on to let AI clients connect.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpToggleServer'                => __( 'Switch the MCP Server on or off', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpServerEnabled'               => __( 'MCP Server switched on.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpServerDisabled'              => __( 'MCP Server switched off.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpEndpointLabel'               => __( 'Endpoint', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpCopy'                        => __( 'Copy', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpCopied'                      => __( 'Copied to clipboard.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpConnectClient'               => __( 'Connect an AI client', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpSummaryActive'               => __( '%d active now', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpSummaryTotal'                => __( '%d connections', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpHealthTitle'                 => __( 'Health check', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpHealthDescription'           => __( 'Checks whether AI clients can reach this site and sign in.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpRunCheck'                    => __( 'Run check', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpRunningCheck'                => __( 'Checking...', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpHealthAllGood'               => __( 'Everything is ready for AI clients.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpHealthProblems'              => __( 'Fix the items marked below before connecting.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpConnectionsTitle'            => __( 'Connections', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpConnectionsDescription'      => __( 'Each AI client signs in with its own Application Password. Revoke one to cut that client off.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpNoConnections'               => __( 'No AI client has connected yet.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpStateActive'                 => __( 'Active', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpStateIdle'                   => __( 'Connected', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpStateNever'                  => __( 'Waiting for first use', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpLastSeen'                    => __( 'Last used %s', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpCreatedOn'                   => __( 'Created %s', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpToolCalls'                   => __( 'Tool calls: %d', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpLastTool'                    => __( 'Last tool: %s', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpUser'                        => __( 'Acts as %s', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpRevoke'                      => __( 'Revoke', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpRevokeConfirm'               => __( 'Revoke "%s"? The AI client using it stops working until you connect it again.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpRevoked'                     => __( 'Connection revoked.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardTitle'                 => __( 'Connect an AI client', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardChooseClient'          => __( 'Which app will use this site?', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardCreate'                => __( 'Create connection', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardCreating'              => __( 'Creating...', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpWizardSetupTitle'            => __( 'Add Pixels to %s', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardOnce'                  => __( 'This contains a new password and is shown only once. Keep it private.', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpWizardWaiting'               => __( 'Waiting for %s to connect...', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardWaitingHint'           => __( 'Finish the setup, then ask the AI something like "List my pages". This updates by itself.', 'pixels-core-creative-tools-for-elementor' ),
+			/* translators: %s: placeholder value. */
+			'mcpWizardConnected'             => __( 'Connected! %s is using this site.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardDone'                  => __( 'Done', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardBack'                  => __( 'Back', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpWizardCloseHint'             => __( 'You can close this window at any time; the connection keeps working.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpClientHintClaudeCode'        => __( 'Terminal and IDE', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpClientHintClaudeDesktop'     => __( 'Desktop app', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpClientHintCursor'            => __( 'Code editor', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpClientHintOther'             => __( 'Any client with Streamable HTTP', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpClaudeAiSoon'                => __( 'claude.ai on the web needs OAuth sign-in, which is coming soon.', 'pixels-core-creative-tools-for-elementor' ),
+			'mcpEnableFirst'                 => __( 'Switch on the MCP Server to connect a client.', 'pixels-core-creative-tools-for-elementor' ),
 		);
 
 		/**

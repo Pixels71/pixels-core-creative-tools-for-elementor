@@ -68,7 +68,7 @@ final class Extension_Settings {
 			return;
 		}
 
-		$brand_new = array_diff( $all_slugs, $synced_slugs );
+		$brand_new = array_intersect( array_diff( $all_slugs, $synced_slugs ), $registry->get_default_slugs() );
 
 		if ( ! empty( $brand_new ) ) {
 			update_option(
@@ -93,7 +93,7 @@ final class Extension_Settings {
 		$saved    = get_option( self::OPTION_KEY, null );
 
 		if ( null === $saved || ! is_array( $saved ) ) {
-			return $all;
+			return $registry->get_default_slugs();
 		}
 
 		$saved = array_map( 'sanitize_key', $saved );
@@ -130,10 +130,10 @@ final class Extension_Settings {
 	 * Activate defaults.
 	 */
 	public static function activate_defaults(): void {
-		$slugs = Extension_Registry::instance()->get_slugs();
+		$registry = Extension_Registry::instance();
 
-		update_option( self::OPTION_KEY, $slugs );
-		update_option( self::SYNCED_SLUGS_KEY, $slugs );
+		update_option( self::OPTION_KEY, $registry->get_default_slugs() );
+		update_option( self::SYNCED_SLUGS_KEY, $registry->get_slugs() );
 	}
 
 	/**
